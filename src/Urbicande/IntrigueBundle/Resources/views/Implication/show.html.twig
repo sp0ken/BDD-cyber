@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Implication {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    {{implication}} pour {{implication.intrigue}}
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('implication_edit', {'id': implication.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="four mobile-one columns">
+    <b>Degré</b> : {{implication.degree}} <br>
+    <b>Thème</b> : {{implication.theme}}
+  </div>
+  <div class="eight mobile-three columns">
+    <b>Implication</b> : {{implication.synopsis}}
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  {% autoescape false %}
+    <h3 class="twelve columns">Informations de rédaction</h3>
+    <div class="twelve columns">{{implication.description}}</div>
+
+    <h3 class="twelve columns">Informations pour le personnage</h3>
+    <div class="twelve columns">{{implication.information}}</div>
+
+    {% if implication.player and implication.player.type.name == 'PNJ' %}
+      <h3 class="twelve columns">Objectif(s) PNJ</h3>
+      <div class="twelve columns">{{implication.objective}}</div>
+    {% endif %}
+  {% endautoescape %}
+</div>
+{% endblock body %}

@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Nouveau commentaire{% endblock %}
+
+{% block body %}
+
+<h1>Nouveau commentaire pour {{perso.name}}</h1>
+
+<form action="{{ path('create_perso_comment', {'persoId': perso.id}) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row">
+      <div class="twelve columns">{{ form_row(form.comment, {'label': 'Commentaire'}) }}</div>
+  </div>
+
+  <div style="display:none">
+    {{ form_rest(form) }}
+  </div>
+  <input class="button green" type="submit" value="Créer"/>
+</form>
+
+{% endblock %}

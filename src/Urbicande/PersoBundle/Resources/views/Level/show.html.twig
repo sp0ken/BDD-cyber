@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - {{ level.name}} {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    {{ level }}
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('level_edit', {'id': level.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  {% autoescape false %}
+    <h3 class="twelve columns">Description</h3>
+    <div class="twelve columns">{{level.description}}</div>
+  {% endautoescape %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Liste des personnages <small>({{level.players|length}} personnages)</small></h3>
+  <table class="records_list datatable">
+    <thead>
+      <tr>
+        <th>Numero</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for perso in level.players %}
+      <tr>
+        <td>{{ perso.number }}</td>
+        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button gray">
+                <a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="icon-eye-open"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button green">
+                <a href="{{ path('perso_edit', { 'id': perso.id}) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}

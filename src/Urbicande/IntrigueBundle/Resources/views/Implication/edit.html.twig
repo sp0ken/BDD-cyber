@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Édition d'une implication {% endblock %}
+
+{% block body %}
+
+<h1>Éditer {{implication.__toString}} pour {{implication.intrigue}}</h1>
+
+<form action="{{ path('implication_update', { 'id': implication.id }) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="six mobile-two columns">
+      {{ form_row(form.player)}}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.groupe) }}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.degree)}}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.theme) }}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.synopsis) }}
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Les détails</h3>
+    <div class="twelve columns">
+        {{form_row(form.description)}}
+    </div>
+    <div class="twelve columns">
+        {{form_row(form.information)}}
+    </div>
+    <div class="twelve columns">
+        {{form_row(form.objective)}}
+    </div>
+  </div>
+
+  <div style="display:none">
+    {{ form_rest(form) }}
+  </div>
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}

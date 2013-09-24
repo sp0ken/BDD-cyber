@@ -1,0 +1,44 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Modification de {{groupe.name}} {% endblock %}
+
+{% block body %}
+
+<h1>Modifier {{groupe.name}}</h1>
+
+<form action="{{ path('groupe_update', { 'id': groupe.id }) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="six mobile-two columns">
+      {{ form_row(form.writer) }}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.name) }}
+    </div>
+  </div>
+  
+  <div class="spacer"></div>
+  
+  <div class="row block">
+    <h3 class="twelve columns">Les détails</h3>
+    <div class="six mobile-two columns">
+      {{ form_row(form.particularity) }}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.description) }}
+    </div>
+  </div>
+  
+  <div class="spacer"></div>
+  
+  <div class="row block">
+    <h3 class="twelve columns">Les relations</h3>
+    <div class="twelve columns">
+      {{ form_row(form.members) }}
+    </div>
+  </div>
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Modifier"/>
+</form>
+
+{% endblock %}

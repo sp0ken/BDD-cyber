@@ -1,0 +1,9 @@
+# src/Urbicande/HomeBundle/Resources/config/routing.yml
+
+Home:
+    pattern:  /
+    defaults: { _controller: UrbicandeHomeBundle:Home:index }
+
+log:
+    pattern: /history
+    defaults: { _controller: UrbicandeHomeBundle:Home:log }

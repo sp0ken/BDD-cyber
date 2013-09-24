@@ -1,0 +1,9 @@
+parameters:
+    urbicande.rpg_listener.class: Urbicande\RpgBundle\Listener\RpgListener
+
+services:
+  urbicande.rpg_listener:
+      class:     "%urbicande.rpg_listener.class%"
+      tags:
+            - { name: doctrine.event_listener, event: onFlush }
+      arguments: ["@service_container"]

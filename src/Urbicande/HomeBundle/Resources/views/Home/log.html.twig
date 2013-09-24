@@ -1,0 +1,8 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Log{% endblock %}
+
+{% block body %}
+  <h1>Liste des actions</h1>
+  {{ include('UrbicandeHomeBundle:Home:logList.html.twig') }}
+{% endblock %}

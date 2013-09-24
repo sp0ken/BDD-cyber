@@ -1,0 +1,69 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Personnages {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="nine columns">
+    Les personnages
+  </h1>
+  <div class="three hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('create_perso') }}">Créer un personnage</a>
+    </div>
+  </div>
+</div>
+
+<table class="records_list datatable">
+  <thead>
+    <tr>
+      <th rowspan="2">Type</th>
+      <th rowspan="2">Numero</th>
+      <th rowspan="2">Nom</th>
+      <th rowspan="2">Sexe</th>
+      <th rowspan="2">Concept</th>
+      <th rowspan="2">Statut</th>
+      <th rowspan="2">Scénariste</th>
+      <th colspan="3">Nombre d'intrigues</th>
+      <th rowspan="2">Actions</th>
+    </tr>
+    <tr>
+      <th>Principales</th>
+      <th>Secondaires</th>
+      <th>Ambiances</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for perso in persos %}
+      <tr>
+        <td><a title="Voir" href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type.name }}</a></td>
+        <td>{{ perso.number }}</td>
+        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+        <td>{{ perso.fullSex }}</td>
+        <td>{% autoescape false %}{{ perso.concept }}{% endautoescape %}</td>
+        <td>{{ perso.getFullStatus }}</td>
+        <td><a title="Voir" href="{{ path('user_by_name', { 'username': perso.writer.username }) }}">{{ perso.writer }}</a></td>
+        <td>{{ perso.countIntrigue['Principale'] }}</td>
+        <td>{{ perso.countIntrigue['Secondaire'] }}</td>
+        <td>{{ perso.countIntrigue['Ambiance'] }}</td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button green">
+                <a title="Éditer" href="{{ path('perso_edit', { 'id': perso.id }) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button red">
+                <a title="Supprimer" href="{{ path('perso_delete', { 'id': perso.id }) }}"><i class="icon-remove-sign"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock body %}

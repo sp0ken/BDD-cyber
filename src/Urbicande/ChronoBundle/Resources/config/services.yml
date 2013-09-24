@@ -1,0 +1,11 @@
+parameters:
+    urbicande.event_manager.class: Urbicande\ChronoBundle\Manager\EventManager
+    urbicande.sceno_manager.class: Urbicande\ChronoBundle\Manager\ScenoManager
+
+services:
+    urbicande.event_manager:
+        class:     "%urbicande.event_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.sceno_manager:
+        class:     "%urbicande.sceno_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]

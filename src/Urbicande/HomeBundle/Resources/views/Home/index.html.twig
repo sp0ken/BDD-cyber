@@ -1,0 +1,139 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Accueil{% endblock %}
+
+{% block body %}
+  <h1>Bienvenue {{ app.user|title}}</h1>
+
+  <div class="row" id="updates">
+    {% if app.user.setting.hasRpg %}
+      <div id="rpg" class="six mobile-four columns">
+        <h3>Mon perso</h3>
+        {% include 'UrbicandeHomeBundle:Home:rpg.html.twig' with {'user': app.user} %}
+    </div>
+    <div class="six mobile-four columns">
+      <h3>Les dernières actions</h3>
+      {% include 'UrbicandeHomeBundle:Home:logList.html.twig' %}
+    </div>
+  {% else %}
+    <div class="twelve columns">
+      <h3>Les dernières actions</h3>
+      {% include 'UrbicandeHomeBundle:Home:logList.html.twig' %}
+    </div>
+  {% endif %}
+</div>
+
+  <div class="row block">
+    <div id="my-plot">
+      <div class="header row">
+        <h3 class="nine mobile-two columns">
+          Mes intrigues
+        </h3>
+        <div class="three mobile-two columns">
+          <div class="button header">
+            <a href="{{ path('create_intrigue') }}">
+              Créer une intrigue
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul class="no-bullet twelve columns">
+        {% for intrigue in app.user.intrigues %}
+          <li><a href="{{ path('intrigue_by_id', {'id': intrigue.id}) }}">{{ intrigue }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="row">
+    <div class="six columns block" id="my-player">
+      <div class="header row">
+        <h3 class="seven mobile-two columns">
+          Mes personnages
+        </h3>
+        <div class="five mobile-two columns">
+          <div class="button header">
+            <a href="{{ path('create_perso') }}">
+              Créer un perso
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul class="no-bullet twelve columns">
+        {% for perso in app.user.persos %}
+          <li><a href="{{ path('perso_by_id', {'id': perso.id}) }}">{{ perso }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="spacer show-for-small"></div>
+
+    <div class="six columns block" id="my-groupe">
+      <div class="header row">
+        <h3 class="seven mobile-two columns">
+          Mes groupes
+        </h3>
+        <div class="five mobile-two columns">
+          <div class="button header">
+            <a href="{{ path('create_groupe') }}">
+              Créer un groupe
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul class="no-bullet twelve columns">
+        {% for groupe in app.user.groupes %}
+          <li><a href="{{ path('groupe_by_id', {'id': groupe.id}) }}">{{ groupe }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="row">
+    <div class="six columns block" id="my-rules">
+      <div class="header row">
+        <h3 class="seven mobile-two columns">
+          Mes règles
+        </h3>
+        <div class="five mobile-two columns">
+          <div class="button header">
+            <a href="{{ path('create_rule') }}">
+              Créer une règle
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul class="no-bullet twelve columns">
+        {% for rule in app.user.rules %}
+          <li><a href="{{ path('rule_by_id', {'id': rule.id}) }}">{{ rule }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="spacer show-for-small"></div>
+
+    <div class="six columns block" id="my-skills">
+      <div class="header row">
+        <h3 class="eight mobile-two columns">
+          Mes compétences
+        </h3>
+        <div class="four mobile-two columns">
+          <div class="button header">
+            <a href="{{ path('create_skill') }}">
+              Créer une compétence
+            </a>
+          </div>
+        </div>
+      </div>
+      <ul class="no-bullet twelve columns">
+        {% for skill in app.user.skills %}
+          <li><a href="{{ path('skill_by_id', {'id': skill.id}) }}">{{ skill }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

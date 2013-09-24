@@ -1,0 +1,7 @@
+addCarac:
+    pattern:  /carac/add
+    defaults: { _controller: UrbicandeRpgBundle:Rpg:addCarac }
+
+updateCarac:
+    pattern:  /carac/update
+    defaults: { _controller: UrbicandeRpgBundle:Rpg:update }

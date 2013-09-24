@@ -1,0 +1,118 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Édition de {{intrigue}}{% endblock %}
+
+{% block body %}
+<h1>Édition de {{intrigue}}</h1>
+
+<form action="{{ path('intrigue_update', {'id': intrigue.id}) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La technique</h3>
+    <div class="six mobile-two columns">
+      {{ form_row(form.writer)}}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.status) }}
+    </div>
+  </div>
+  
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="four mobile-one columns">
+      {{ form_row(form.type)}}
+    </div>
+    <div class="four mobile-one columns">
+      {{ form_row(form.number) }}
+    </div>
+    <div class="four mobile-two columns">
+      {{ form_row(form.name)}}
+    </div>
+  </div>
+  
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Synopsis</h3>
+    <div class="twelve columns">
+      {{ form_row(form.synopsis.context)}}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.synopsis.ingame) }}
+    </div>
+  </div>
+  
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Développement</h3>
+    <div class="six mobile-two columns">
+      {{ form_row(form.plot.ingame)}}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.plot.motive) }}
+    </div>
+    {{form_row(form.plot.resolution)}}
+    {{form_row(form.plot.description)}}
+  </div>
+  
+  
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Données objectives</h3>
+    <div class="row">
+      {% for data in form.plot.datas %}
+        <div class="six mobile-two columns">
+          {{form_row(data)}}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="datas" data-prototype="{{ form_widget(form.plot.datas.vars.prototype)|e }}"></div>
+  </div>
+  
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Chronologie</h3>
+    <div class="twelve columns">
+      {{ form_row(form.events)}}
+    </div>
+  </div>
+  
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Logistique</h3>
+    <div class="twelve columns">
+      {{ form_row(form.objects)}}
+    </div>
+    <label>Règles</label>
+    <div class="row">
+      {% for rule in form.rules %}
+        <div class="six mobile-two columns">
+          {{form_row(rule)}}
+        </div>
+      {% endfor %}
+    </div>
+    <div class="rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}"></div>
+  </div>
+    
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Implications</h3>
+    {% for implication in form.implications %}
+      <div class="twelve columns">
+        {{form_row(implication)}}
+      </div>
+    {% endfor %}
+    <div class="implications" data-prototype="{{ form_widget(form.implications.vars.prototype)|e }}"></div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}

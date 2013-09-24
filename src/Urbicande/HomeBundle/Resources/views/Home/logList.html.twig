@@ -1,0 +1,12 @@
+<ul class="no-bullet twelve columns">
+  {% for log in logs %}
+      <li>
+        {{log['date']|date('d-m-Y H:i')}} : {{log['author']}} 
+        {% if log['route'] is defined and log['route'] %}
+          {{log['action']}} <a href="{{path(log['route'], {'id': log['id']}) }}">{{log['object']}}</a>
+        {% else %}
+          {{log['action']}} {{log['object']}}
+        {% endif %}
+      </li>
+  {% endfor %}
+</ul>

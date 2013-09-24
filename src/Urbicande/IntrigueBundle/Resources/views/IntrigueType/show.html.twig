@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - {{ type.name}} {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    {{ type.name }}
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('intrigue_type_edit', {'id': type.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  {% autoescape false %}
+    <h3 class="twelve columns">Description</h3>
+    <div class="twelve columns">{{type.description}}</div>
+  {% endautoescape %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Liste des intrigues <small>({{type.intrigues|length}} intrigues)</small></h3>
+  <table class="records_list datatable">
+    <thead>
+      <tr>
+        <th>Numero</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for intrigue in type.intrigues %}
+      <tr>
+        <td>{{ intrigue.number }}</td>
+        <td><a title="Voir" href="{{ path('intrigue_by_id', { 'id': intrigue.id }) }}">{{ intrigue.name }}</a></td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button gray">
+                <a title="Voir" href="{{ path('intrigue_by_id', { 'id': intrigue.id }) }}"><i class="icon-eye-open"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button green">
+                <a title="Éditer" href="{{ path('intrigue_edit', { 'id': intrigue.id}) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}

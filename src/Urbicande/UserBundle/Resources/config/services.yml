@@ -1,0 +1,11 @@
+parameters:
+    urbicande.mail_manager.class: Urbicande\UserBundle\Manager\MailManager
+    urbicande.user_manager.class: Urbicande\UserBundle\Manager\UserManager
+
+services:
+  urbicande.mail_manager:
+      class:     "%urbicande.mail_manager.class%"
+      arguments: ["@mailer", "@templating"]
+  urbicande.user_manager:
+      class:     "%urbicande.user_manager.class%"
+      arguments: ["@doctrine.orm.entity_manager"]

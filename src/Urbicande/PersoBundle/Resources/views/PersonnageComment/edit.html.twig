@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Edition d'un commentaire{% endblock %}
+
+{% block body %}
+
+<h1>Editer le commentaire</h1>
+
+<form action="{{ path('perso_comment_update', {'id': persoComment.id}) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row">
+      <div class="twelve columns">{{ form_row(form.comment, {'label': 'Commentaire'}) }}</div>
+  </div>
+
+  <div style="display:none">
+    {{ form_rest(form) }}
+  </div>
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}

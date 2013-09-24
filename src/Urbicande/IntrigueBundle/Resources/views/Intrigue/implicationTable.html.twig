@@ -1,0 +1,38 @@
+<table class="records_list datatable">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Nom</th>
+      <th>Degré d'implication</th>
+      <th>Implication</th>
+      <th>Theme</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for implication in intrigue.implications %}
+      <tr>
+        <td>
+          {% if implication.groupe %}
+            Groupe
+          {% elseif implication.player %}
+            <a title="Voir" href="{{ path('perso_type_by_id', { 'id': implication.player.type.id }) }}">{{ implication.player.type}}</a>
+          {% else %}
+            Évènement
+          {% endif %}
+        </td>
+        <td>
+          {% if implication.groupe %}
+            <a title="Voir" href="{{ path('groupe_by_id', { 'id': implication.groupe.id }) }}">{{implication.groupe}}</a>
+          {% elseif implication.player %}
+            <a title="Voir" href="{{ path('perso_by_id', { 'id': implication.player.id }) }}">{{ implication.player}}</a>
+          {% else %}
+            <a title="Voir" href="{{ path('event_by_id', { 'id': implication.event.id }) }}">{{ implication.event}}</a>
+          {% endif %}
+        </td>
+        <td>{{ implication.degree }}</td>
+        <td>{{ implication.synopsis }}</td>
+        <td>{{ implication.theme }}</td>
+      </tr>
+  {% endfor %}
+  </tbody>
+</table>

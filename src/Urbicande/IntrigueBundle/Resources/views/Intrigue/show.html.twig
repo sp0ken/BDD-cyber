@@ -1,0 +1,176 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - {{ intrigue.name}} {% endblock %}
+
+{% block body %}
+<script type="text/javascript">
+  // Called when the Visualization API is loaded.
+  function drawVisualization() {
+    // Create and populate a data table.
+    var data = [];
+
+    {% for event in intrigue.events %}
+      data.push({
+        'start': new Date({{event.startDate|date('Y')}}, {{event.startDate|date('n')-1}}, {{event.startDate|date('d')}}),
+        {% if (event.endDate) and (event.endDate|date('Y-m-d') != '-0001-11-30') %}
+          'end': new Date({{event.endDate|date('Y')}}, {{event.endDate|date('n')-1}}, {{event.endDate|date('d')}}),
+        {% endif %}
+        'content': '<a href="{{path('event_by_id', {'id': event.id}) }}">{{event.name}}</a>',
+      });
+    {% endfor %}
+
+    // specify options
+    options = {
+      "width":  "100%",
+      "height": "150px",
+      "style": "box", // optional
+      "showCurrentTime": "false",
+      "showNavigation": "true",
+    }; 
+    // Instantiate our timeline object.
+    var timeline = new links.Timeline(document.getElementById('event-timeline'));
+
+    // Draw our timeline with the created data and options
+    timeline.draw(data, options);
+  }
+</script>
+
+<div class="row header">
+  <h1 class="ten columns">
+    {{ intrigue }} <small>assigné à {{intrigue.writer.username}}</small>
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('intrigue_edit', {'id': intrigue.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="row header">
+  <h3 class="nine mobile-three columns">Commentaires</h3>
+  <div class="three mobile-one columns">
+    <div class="button gray large-header">
+      <a href="{{ path('create_intrigue_comment', {'intrigueId': intrigue.id}) }}">Ajouter un commentaire</a>
+    </div>
+  </div>
+</div>
+{{ include('UrbicandeIntrigueBundle:IntrigueComment:commentList.html.twig') }}
+
+<div class="row">
+  <h3 class="twelve columns">Synopis</h3>
+  <div class="six mobile-two columns">
+    <b>Contexte</b> : {% autoescape false %}{{intrigue.synopsis.context}}{% endautoescape %} <br>
+  </div>
+  <div class="six mobile-two columns">
+    <b>Jeu</b> : {% autoescape false %}{{intrigue.synopsis.ingame}}{% endautoescape %}
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Protagonistes</h3>
+  {% include 'UrbicandeIntrigueBundle:Intrigue:implicationTable.html.twig' %}
+</div>
+
+<div class="spacer"></div>
+
+{% autoescape false %}
+  <div class="row">
+    <h3 class="twelve columns">Description de l'intrigue</h3>
+    <div class="six mobile-two columns">
+      <b>Ouvertures de jeu</b> : {{intrigue.plot.ingame}}
+    </div>
+    <div class="six mobile-two columns">
+      <b>Intentions et motivations</b> : {{intrigue.plot.motive}}
+    </div>
+  </div>
+  <br/><br/>
+  <div class="row">
+    <div class="twelve columns">
+      <b>Obstacles et resolutions</b> : {{intrigue.plot.resolution}}
+    </div>
+  </div>
+  <br><br>
+  <div class="row">
+    <div class="twelve columns">
+      <b>Description narrative</b> : {{intrigue.plot.description}}
+    </div>
+  </div>
+{% endautoescape %}
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Données objectives</h3>
+  {% include 'UrbicandeIntrigueBundle:Intrigue:dataTable.html.twig' %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Chronologie</h3>
+  <div class="twelve columns" id="event-timeline"></div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Objets</h3>
+  {% include 'UrbicandeIntrigueBundle:Intrigue:objectTable.html.twig' %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Règles</h3>
+  {% include 'UrbicandeIntrigueBundle:Intrigue:ruleTable.html.twig' %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Scénographie <small>(<a href="{{path('create_sceno', {'intrigue': intrigue.id})}}">Créer un évènement de scéno</a>)</small></h3>
+  {% include 'UrbicandeIntrigueBundle:Intrigue:scenoTable.html.twig' %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Implications</h3>
+  {% for implication in intrigue.implications %}
+    <div class="implication">
+      <div class="row header">
+        <h4 class="eleven mobile-three columns">
+          {{implication}}
+        </h4>
+        <div style="margin-top:14px;" class="one mobile-one columns">
+          <a class="green" href="{{ path('implication_edit', {'id': implication.id}) }}"><i class="icon-edit"></i></a>
+          <a class="red" href="{{ path('implication_delete', {'id': implication.id}) }}"><i class="icon-remove-sign"></i></a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="four mobile-one columns">
+          <b>Degré</b> : {{implication.degree}} <br>
+          <b>Thème</b> : {{implication.theme}}
+        </div>
+        <div class="eight mobile-three columns">
+          <b>Implication</b> : {{implication.synopsis}}
+        </div>
+      </div>
+      <br><br>
+      {% autoescape false %}
+        <div class="row">
+          <div><b>Informations de rédaction</b> : {{implication.description}}</div>
+          <div><b>Informations pour le personnage</b> : {{implication.information}}</div>
+          {% if implication.player and implication.player.type.name == 'PNJ' %}
+            <p><b>Objectifs PNJ</b> : {{implication.objective}}</div>
+          {% endif %}
+        </div>
+      {% endautoescape %}
+    </div>
+  {% endfor %}
+</div>
+
+{% endblock body %}

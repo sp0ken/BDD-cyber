@@ -1,0 +1,7 @@
+parameters:
+    urbicande.log_manager.class: Urbicande\HomeBundle\Manager\LogManager
+
+services:
+    urbicande.log_manager:
+        class:     "%urbicande.log_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]

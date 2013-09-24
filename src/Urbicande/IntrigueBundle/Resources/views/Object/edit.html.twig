@@ -1,0 +1,45 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Édition de {{object.name}} {% endblock %}
+
+{% block body %}
+
+<h1>Éditer l'objet "{{object.name}}"</h1>
+
+<form action="{{ path('object_update', { 'id': object.id }) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="four mobile-one columns">
+      {{ form_row(form.type)}}
+    </div>
+    <div class="four mobile-one columns">
+      {{ form_row(form.name) }}
+    </div>
+    <div class="four mobile-one columns">
+      {{ form_row(form.creator) }}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.description) }}
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  
+  <div class="row block">
+    <h3 class="twelve columns">Où est l'objet en début de jeu (1 choix parmi les 3)</h3>
+    <div class="four mobile-one columns">
+      {{ form_row(form.owner)}}
+    </div>
+    <div class="four mobile-one columns">
+      {{ form_row(form.place) }}
+    </div>
+    <div class="four mobile-one columns">
+      {{ form_row(form.appearance) }}
+    </div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}

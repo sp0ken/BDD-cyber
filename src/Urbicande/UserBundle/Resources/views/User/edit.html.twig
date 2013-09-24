@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Paramètres{% endblock %}
+
+{% block body %}
+
+<h1>Paramètres</h1>
+
+<form action="{{ path('user_update', {'id': user.id}) }}" method="post" {{ form_enctype(form) }}>
+  <h3>La base</h3>
+  <div class="row">
+    <div class="six mobile-two columns">
+      {{ form_row(form.username) }}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.email) }}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.plainPassword) }}
+    </div>
+  </div>
+
+  <h3>Les paramètres additionnels</h3>
+  <div class="row">
+    <div class="twelve columns">
+      {{ form_widget(form.setting.hasNotification, { 'attr': {'class': 'left'} }) }}
+      {{ form_label(form.setting.hasNotification) }}
+    </div>
+    <div class="twelve columns">
+      {{ form_widget(form.setting.hasRpg, { 'attr': {'class': 'left'} }) }}
+      {{ form_label(form.setting.hasRpg) }}
+    </div>
+
+    <h3>L'avatar</h3>
+    <div class="row">
+      {% for i in  1..16 %}
+         <div class="three columns">
+            <label for="avatar{{i}}"><img src="{{asset('bundles/urbicanderpg/images/portraits/avatar' ~ i ~ '.jpg')}}"></label>
+            <input type="radio" name="avatar" id="avatar{{i}}" value="avatar{{i}}">
+          </div>
+      {% endfor %}
+    </div>
+  </div>
+  <br>
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Valider"/>
+</form>
+
+{% endblock %}

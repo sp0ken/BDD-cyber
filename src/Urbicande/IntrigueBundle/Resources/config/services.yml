@@ -1,0 +1,43 @@
+parameters:
+    urbicande.data_manager.class: Urbicande\IntrigueBundle\Manager\DataManager
+    urbicande.implication_manager.class: Urbicande\IntrigueBundle\Manager\ImplicationManager
+    urbicande.intriguecomment_manager.class: Urbicande\IntrigueBundle\Manager\IntrigueCommentManager
+    urbicande.intriguetype_manager.class: Urbicande\IntrigueBundle\Manager\IntrigueTypeManager
+    urbicande.intrigue_manager.class: Urbicande\IntrigueBundle\Manager\IntrigueManager
+    urbicande.object_manager.class: Urbicande\IntrigueBundle\Manager\ObjectManager
+    urbicande.objecttype_manager.class: Urbicande\IntrigueBundle\Manager\ObjectTypeManager
+    urbicande.plot_manager.class: Urbicande\IntrigueBundle\Manager\PlotManager
+    urbicande.rule_manager.class: Urbicande\IntrigueBundle\Manager\RuleManager
+    urbicande.synopsis_manager.class: Urbicande\IntrigueBundle\Manager\SynopsisManager
+
+services:
+    urbicande.data_manager:
+        class:     "%urbicande.data_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.implication_manager:
+        class:     "%urbicande.implication_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.intriguecomment_manager:
+        class:     "%urbicande.intriguecomment_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.intriguetype_manager:
+        class:     "%urbicande.intriguetype_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.intrigue_manager:
+        class:     "%urbicande.intrigue_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.object_manager:
+        class:     "%urbicande.object_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.objecttype_manager:
+        class:     "%urbicande.objecttype_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.plot_manager:
+        class:     "%urbicande.plot_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.rule_manager:
+        class:     "%urbicande.rule_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.synopsis_manager:
+        class:     "%urbicande.synopsis_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]

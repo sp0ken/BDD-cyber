@@ -1,0 +1,289 @@
+intrigue_list:
+    pattern:  /intrigue/
+    defaults: { _controller: UrbicandeIntrigueBundle:Intrigue:index }
+
+create_intrigue:
+    pattern:  /intrigue/create
+    defaults: { _controller: UrbicandeIntrigueBundle:Intrigue:create }
+
+intrigue_edit:
+    pattern:  /intrigue/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Intrigue:edit }
+    requirements:
+      id:     \d+
+
+intrigue_delete:
+    pattern:  /intrigue/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Intrigue:delete }
+    requirements:
+      id:     \d+
+
+intrigue_update:
+    pattern:  /intrigue/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Intrigue:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+intrigue_by_id:
+    pattern:  /intrigue/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Intrigue:show }
+    requirements:
+      id:     \d+
+
+intrigue_remove_object:
+    pattern:  /intrigue/{intrigueId}/deleteObject/{objectId}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Intrigue:removeObject" }
+    requirements:
+      intrigueId:     \d+
+      objectId:     \d+
+
+intrigue_type_list:
+    pattern:  /intrigue/type
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueType:index }
+
+create_intrigue_type:
+    pattern:  /intrigue/type/create
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueType:create }
+
+intrigue_type_edit:
+    pattern:  /intrigue/type/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueType:edit }
+    requirements:
+      id:     \d+
+
+intrigue_type_delete:
+    pattern:  /intrigue/type/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueType:delete }
+    requirements:
+      id:     \d+
+
+intrigue_type_update:
+    pattern:  /intrigue/type/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:IntrigueType:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+intrigue_type_by_id:
+    pattern:  /intrigue/type/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueType:show }
+    requirements:
+      id:     \d+
+
+create_intrigue_comment:
+    pattern:  /intrigue/{intrigueId}/comment/create
+    defaults: { _controller: "UrbicandeIntrigueBundle:IntrigueComment:create" }
+    requirements:
+      intrigueId:     \d+
+
+intrigue_comment_edit:
+    pattern:  /intrigue/comment/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueComment:edit }
+    requirements:
+      id:     \d+
+
+intrigue_comment_delete:
+    pattern:  /intrigue/comment/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueComment:delete }
+    requirements:
+      id:     \d+
+
+intrigue_comment_update:
+    pattern:  /intrigue/comment/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:IntrigueComment:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+data_list:
+    pattern:  /intrigue/data
+    defaults: { _controller: UrbicandeIntrigueBundle:Data:index }
+
+create_data:
+    pattern:  /intrigue/data/create
+    defaults: { _controller: UrbicandeIntrigueBundle:Data:create }
+
+data_edit:
+    pattern:  /intrigue/data/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Data:edit }
+    requirements:
+      id:     \d+
+
+data_delete:
+    pattern:  /intrigue/data/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Data:delete }
+    requirements:
+      id:     \d+
+
+data_update:
+    pattern:  /intrigue/data/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Data:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+data_by_id:
+    pattern:  /intrigue/data/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Data:show }
+    requirements:
+      id:     \d+
+
+data_remove_knower:
+    pattern:  /intrigue/data/{dataId}/deleteKnow/{knowerId}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Data:removeKnower" }
+    requirements:
+      dataId:     \d+
+      knowerId:     \d+
+
+data_remove_document:
+    pattern:  /intrigue/data/{dataId}/deleteDoc/{documentId}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Data:removeDocument" }
+    requirements:
+      dataId:     \d+
+      documentId:     \d+
+
+plot_remove_data:
+    pattern:  /intrigue/plot/{plotId}/delete/{dataId}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Plot:removeData" }
+    requirements:
+      plotId:     \d+
+      dataId:     \d+
+
+object_list:
+    pattern:  /object
+    defaults: { _controller: UrbicandeIntrigueBundle:Object:index }
+
+create_object:
+    pattern:  /object/create
+    defaults: { _controller: UrbicandeIntrigueBundle:Object:create }
+
+object_edit:
+    pattern:  /object/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Object:edit }
+    requirements:
+      id:     \d+
+
+object_delete:
+    pattern:  /object/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Object:delete }
+    requirements:
+      id:     \d+
+
+object_update:
+    pattern:  /object/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Object:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+object_by_id:
+    pattern:  /object/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Object:show }
+    requirements:
+      id:     \d+
+
+object_type_list:
+    pattern:  /object/type
+    defaults: { _controller: UrbicandeIntrigueBundle:ObjectType:index }
+
+create_object_type:
+    pattern:  /object/type/create
+    defaults: { _controller: UrbicandeIntrigueBundle:ObjectType:create }
+
+object_type_edit:
+    pattern:  /object/type/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:ObjectType:edit }
+    requirements:
+      id:     \d+
+
+object_type_delete:
+    pattern:  /object/type/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:ObjectType:delete }
+    requirements:
+      id:     \d+
+
+object_type_update:
+    pattern:  /object/type/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:ObjectType:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+object_type_by_id:
+    pattern:  /object/type/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:ObjectType:show }
+    requirements:
+      id:     \d+
+
+rule_list:
+    pattern:  /rule
+    defaults: { _controller: UrbicandeIntrigueBundle:Rule:index }
+
+create_rule:
+    pattern:  /rule/create
+    defaults: { _controller: UrbicandeIntrigueBundle:Rule:create }
+
+rule_edit:
+    pattern:  /rule/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Rule:edit }
+    requirements:
+      id:     \d+
+
+rule_delete:
+    pattern:  /rule/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Rule:delete }
+    requirements:
+      id:     \d+
+
+rule_update:
+    pattern:  /rule/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Rule:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+rule_by_id:
+    pattern:  /rule/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Rule:show }
+    requirements:
+      id:     \d+
+
+download_rule:
+    pattern:  /rule/download/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Rule:generate }
+    requirements:
+      id:     \d+
+
+implication_list:
+    pattern:  /intrigue/implication
+    defaults: { _controller: UrbicandeIntrigueBundle:Implication:index }
+
+create_implication:
+    pattern:  /intrigue/implication/create
+    defaults: { _controller: UrbicandeIntrigueBundle:Implication:create }
+
+implication_edit:
+    pattern:  /intrigue/implication/edit/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Implication:edit }
+    requirements:
+      id:     \d+
+
+implication_delete:
+    pattern:  /intrigue/implication/delete/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Implication:delete }
+    requirements:
+      id:     \d+
+
+implication_update:
+    pattern:  /intrigue/implication/update/{id}
+    defaults: { _controller: "UrbicandeIntrigueBundle:Implication:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+implication_by_id:
+    pattern:  /intrigue/implication/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Implication:show }
+    requirements:
+      id:     \d+

@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - {{ skill.name}} {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    {{ skill.name }} <small>({{skill.creationPoint}} point(s) de création)</small>
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray">
+      <a href="{{ path('skill_edit', {'id': skill.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">{% autoescape false %}{{skill.description}}{% endautoescape %}</div>
+</div>
+
+<div class="row">
+  <h3 class="twelve columns">Liste des personnages <small>({{skill.players|length}} personnages)</small></h3>
+  <table class="records_list datatable">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Numero</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for perso in skill.players %}
+      <tr>
+        <td><a href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type.name }}</a></td>
+        <td>{{ perso.number }}</td>
+        <td><a href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button gray">
+                <a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="icon-eye-open"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button red">
+                <a title="Enlever" href="{{ path('perso_remove_skill', { 'persoId': perso.id, 'skillId': skill.id}) }}"><i class="icon-minus-sign"></i></a>
+              </div>
+            </li>
+          </ul>
+          
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}

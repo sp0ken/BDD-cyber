@@ -1,0 +1,27 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Édition de {{level.name}} {% endblock %}
+
+{% block body %}
+
+<h1>Éditer le niveau "{{level.name}}"</h1>
+
+<form action="{{ path('level_update', { 'id': level.id }) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+<div class="six mobile-two columns">
+      {{ form_row(form.name)}}
+    </div>
+    <div class="six mobile-two columns">
+      {{ form_row(form.level)}}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.description) }}
+    </div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}

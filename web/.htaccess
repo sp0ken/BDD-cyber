@@ -1,0 +1,6 @@
+SetEnv TZ UTC
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ app_dev.php [QSA,L]

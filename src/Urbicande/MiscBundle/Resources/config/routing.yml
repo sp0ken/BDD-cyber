@@ -1,0 +1,38 @@
+background_list:
+    pattern:  /background
+    defaults: { _controller: UrbicandeMiscBundle:Background:index }
+
+create_background:
+    pattern:  /background/create
+    defaults: { _controller: UrbicandeMiscBundle:Background:create }
+
+background_edit:
+    pattern:  /background/edit/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Background:edit }
+    requirements:
+      id:     \d+
+
+background_delete:
+    pattern:  /background/delete/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Background:delete }
+    requirements:
+      id:     \d+
+
+background_update:
+    pattern:  /background/update/{id}
+    defaults: { _controller: "UrbicandeMiscBundle:Background:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+background_by_id:
+    pattern:  /background/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Background:show }
+    requirements:
+      id:     \d+
+
+download_background:
+    pattern:  /background/download/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Background:generate }
+    requirements:
+      id:     \d+

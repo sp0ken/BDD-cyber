@@ -1,0 +1,23 @@
+parameters:
+    urbicande.perso_manager.class: Urbicande\PersoBundle\Manager\PersoManager
+    urbicande.groupe_manager.class: Urbicande\PersoBundle\Manager\GroupeManager
+    urbicande.personnagecomment_manager.class: Urbicande\PersoBundle\Manager\PersonnageCommentManager
+    urbicande.personnagetype_manager.class: Urbicande\PersoBundle\Manager\PersonnageTypeManager
+    urbicande.level_manager.class: Urbicande\PersoBundle\Manager\LevelManager
+
+services:
+    urbicande.perso_manager:
+        class:     "%urbicande.perso_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.groupe_manager:
+        class:     "%urbicande.groupe_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.personnagecomment_manager:
+        class:     "%urbicande.personnagecomment_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.personnagetype_manager:
+        class:     "%urbicande.personnagetype_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.level_manager:
+        class:     "%urbicande.level_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]

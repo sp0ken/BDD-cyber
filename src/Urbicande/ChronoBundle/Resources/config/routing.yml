@@ -1,0 +1,98 @@
+event_list:
+    pattern:  /event
+    defaults: { _controller: "UrbicandeChronoBundle:Event:index" }
+
+event_by_id:
+    pattern:  /event/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Event:show" }
+    requirements:
+      id:     \d+
+
+create_event:
+    pattern:  /event/create
+    defaults: { _controller: "UrbicandeChronoBundle:Event:create" }
+
+event_edit:
+    pattern:  /event/edit/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Event:edit" }
+    requirements:
+      id:     \d+
+
+event_update:
+    pattern:  /event/update/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Event:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+event_delete:
+    pattern:  /event/delete/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Event:delete" }
+    requirements:
+      id:     \d+
+
+sceno_list:
+    pattern:  /sceno
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:index" }
+
+sceno_by_id:
+    pattern:  /sceno/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:show" }
+    requirements:
+      id:     \d+
+
+create_sceno:
+    pattern:  /sceno/create
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:create" }
+
+sceno_edit:
+    pattern:  /sceno/edit/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:edit" }
+    requirements:
+      id:     \d+
+
+sceno_update:
+    pattern:  /sceno/update/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+sceno_delete:
+    pattern:  /sceno/delete/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:delete" }
+    requirements:
+      id:     \d+
+
+sceno_remove_object:
+    pattern:  /intrigue/{scenoId}/deleteObject/{objectId}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:removeObject" }
+    requirements:
+      scenoId:     \d+
+      objectId:     \d+
+
+timing_delete:
+    pattern:  /sceno/timing/delete/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:deleteTiming" }
+    requirements:
+      id:     \d+
+
+sceno_cal:
+    pattern:  /sceno/calendar
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:calendar", _format: json }
+    requirements:
+      _format:  json
+
+chrono_perso:
+    pattern:  /chrono/perso
+    defaults: { _controller: "UrbicandeChronoBundle:Event:persoChrono" }
+
+chrono_groupe:
+    pattern:  /chrono/groupe
+    defaults: { _controller: "UrbicandeChronoBundle:Event:groupeChrono" }
+
+chrono_intrigue:
+    pattern:  /chrono/intrigue
+    defaults: { _controller: "UrbicandeChronoBundle:Event:intrigueChrono" }
+
+# src/Urbicande/ChronoBundle/Resources/config/routing.yml

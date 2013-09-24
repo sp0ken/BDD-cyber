@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Background {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="nine columns">
+    Les documents de background
+  </h1>
+  <div class="three hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('create_background') }}">Créer un document</a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<table class="records_list datatable">
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Scénariste</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for back in backs %}
+      <tr>
+        <td><a title="Voir" href="{{ path('background_by_id', { 'id': back.id }) }}">{{ back.title }}</a></td>
+        <td><a title="Voir" href="{{ path('user_by_name', { 'username': back.writer.username }) }}">{{ back.writer }}</a></td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button green">
+                <a title="Éditer" href="{{ path('background_edit', { 'id': back.id }) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button red">
+                <a title="Supprimer" href="{{ path('background_delete', { 'id': back.id }) }}"><i class="icon-remove-sign"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock body %}

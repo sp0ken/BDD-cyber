@@ -1,0 +1,110 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Donnée {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    Donnée n°{{data.number}}
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('data_edit', {'id': data.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  {% autoescape false %}
+    <h3 class="twelve columns">Information</h3>
+    <div class="twelve columns">{{data.information}}</div>
+  {% endautoescape %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Qui la connait <small>({{data.knowers|length}} personnages)</small></h3>
+  <table class="records_list datatable">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Numero</th>
+        <th>Nom</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for perso in data.knowers %}
+      <tr>
+        <td><a title="Voir" href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type }}</a></td>
+        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+        <td>{{ perso.number }}</td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button green">
+                <a title="Éditer" href="{{ path('perso_edit', { 'id': perso.id}) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button red">
+                <a title="Enlever" href="{{ path('data_remove_knower', { 'dataId': data.id, 'knowerId': perso.id}) }}"><i class="icon-minus-sign"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Où est-elle disponible <small>({{data.documents|length}} documents)</small></h3>
+  <table class="records_list datatable">
+    <thead>
+      <tr>
+        <th>Catégorie</th>
+        <th>Nom</th>
+        <th>Possesseur</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for object in data.documents %}
+      <tr>
+        <td><a title="Voir" href="{{ path('object_type_by_id', { 'id': object.id }) }}">{{ object.type }}</a></td>
+        <td><a title="Voir" href="{{ path('object_by_id', { 'id': object.id }) }}">{{ object.name }}</a></td>
+        <td>{{ object.owner }}</td>
+        <td>
+          <ul class="button-group even three-up">
+            <li>
+              <div class="button gray">
+                <a title="Voir" href="{{ path('object_by_id', { 'id': object.id }) }}"><i class="icon-eye-open"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button green">
+                <a title="Éditer" href="{{ path('object_edit', { 'id': object.id}) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button red">
+                <a title="Enlever" href="{{ path('data_remove_document', { 'dataId': data.id, 'documentId': object.id}) }}"><i class="icon-minus-sign"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock body %}

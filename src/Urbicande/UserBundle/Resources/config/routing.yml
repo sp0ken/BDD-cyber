@@ -1,0 +1,21 @@
+user_by_name:
+    pattern:  /user/{username}
+    defaults: { _controller: UrbicandeUserBundle:User:show }
+
+user_list:
+    pattern:  /user
+    defaults: { _controller: UrbicandeUserBundle:User:index }
+
+user_edit:
+    pattern:  /user/edit/{id}
+    defaults: { _controller: UrbicandeUserBundle:User:edit }
+    requirements:
+      id:     \d+
+
+user_update:
+    pattern:  /user/update/{id}
+    defaults: { _controller: "UrbicandeUserBundle:User:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+

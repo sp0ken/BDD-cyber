@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Données {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    Les données
+  </h1>
+</div>
+
+
+<table class="records_list datatable">
+  <thead>
+    <tr>
+      <th>Numéro</th>
+      <th>Information</th>
+      <th>Nombre de personnages liés</th>
+      <th>Nombre de documents liés</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for data in datas %}
+      <tr>
+        <td>{{ data.number }}</td>
+        <td>{{ data.information }}</td>
+        <td>{{ data.knowers|length }}</td>
+        <td>{{ data.documents|length }}</td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button green">
+                <a title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button red">
+                <a title="Supprimer" href="{{ path('data_delete', { 'id': data.id }) }}"><i class="icon-remove-sign"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </a>
+  {% endfor %}
+  </tbody>
+</table>
+
+{% endblock body %}

@@ -1,0 +1,50 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Chronologie des intrigues {% endblock %}
+
+{% block body %}
+<script type="text/javascript">
+  // Called when the Visualization API is loaded.
+  function drawVisualization() {
+    // Create and populate a data table.
+    var data = [];
+    {% for intrigue in intrigues %}
+      {% for event in intrigue.events %}
+        data.push({
+          'start': new Date({{event.startDate|date('Y')}}, {{event.startDate|date('n')-1}}, {{event.startDate|date('d')}}),
+          {% if (event.endDate) and (event.endDate|date('Y-m-d') != '-0001-11-30') %}
+            'end': new Date({{event.endDate|date('Y')}}, {{event.endDate|date('n')-1}}, {{event.endDate|date('d')}}),
+          {% endif %}
+          'content': '<a href="{{path('event_by_id', {'id': event.id}) }}">{{event.name}}</a>',
+          'group': '<a href="{{path('intrigue_by_id', {'id': intrigue.id}) }}">{{intrigue}}</a>',
+        });
+      {% endfor %}
+    {% endfor %}
+
+    options = {
+      "width":  "100%",
+      "height": "auto",
+      "style": "box", // optional
+      "showCurrentTime": "false",
+      "zoomMin": 1000 * 60 * 60 *24 * 7,
+      "showNavigation": "true",
+      "cluster": "true",
+      "locale": "fr"
+    }; 
+    // Instantiate our timeline object.
+    var timeline = new links.Timeline(document.getElementById('event-timeline'));
+
+    // Draw our timeline with the created data and options
+    timeline.draw(data, options);
+  }
+</script>
+
+<div class="row">
+  <h1 class="twelve columns">
+    La chronologie générale des intrigues
+  </h1>
+
+  <div class="twelve columns" id="event-timeline"></div>
+</div>
+
+{% endblock %}

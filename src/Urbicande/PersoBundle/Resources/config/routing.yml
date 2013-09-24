@@ -1,0 +1,205 @@
+# src/Urbicande/PersoBundle/Resources/config/routing.yml
+
+perso_list:
+    pattern:  /perso
+    defaults: { _controller: UrbicandePersoBundle:Personnage:index }
+
+create_perso:
+    pattern:  /perso/create
+    defaults: { _controller: UrbicandePersoBundle:Personnage:create }
+
+perso_edit:
+    pattern:  /perso/edit/{id}
+    defaults: { _controller: UrbicandePersoBundle:Personnage:edit }
+    requirements:
+      id:     \d+
+
+perso_delete:
+    pattern:  /perso/delete/{id}
+    defaults: { _controller: UrbicandePersoBundle:Personnage:delete }
+    requirements:
+      id:     \d+
+
+perso_update:
+    pattern:  /perso/update/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Personnage:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+perso_by_id:
+    pattern:  /perso/{id}
+    defaults: { _controller: UrbicandePersoBundle:Personnage:show }
+    requirements:
+      id:     \d+
+
+perso_remove_skill:
+    pattern:  /perso/{persoId}/delete/{skillId}
+    defaults: { _controller: "UrbicandePersoBundle:Personnage:removeSkill" }
+    requirements:
+      persoId:     \d+
+      skillId:     \d+
+
+groupe_list:
+    pattern:  /groupe
+    defaults: { _controller: "UrbicandePersoBundle:Groupe:index" }
+
+groupe_by_id:
+    pattern:  /groupe/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Groupe:show" }
+    requirements:
+      id:     \d+
+
+create_groupe:
+    pattern:  /groupe/create
+    defaults: { _controller: "UrbicandePersoBundle:Groupe:create" }
+
+groupe_edit:
+    pattern:  /groupe/edit/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Groupe:edit" }
+    requirements:
+      id:     \d+
+
+groupe_update:
+    pattern:  /groupe/update/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Groupe:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+groupe_delete:
+    pattern:  /groupe/delete/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Groupe:delete" }
+    requirements:
+      id:     \d+
+
+groupe_remove_perso:
+    pattern:  /groupe/{groupeId}/delete/{memberId}
+    defaults: { _controller: "UrbicandePersoBundle:Groupe:removeMember" }
+    requirements:
+      groupeId:     \d+
+      memberId:     \d+
+
+perso_type_list:
+    pattern:  /perso/type
+    defaults: { _controller: UrbicandePersoBundle:PersonnageType:index }
+
+create_perso_type:
+    pattern:  /perso/type/create
+    defaults: { _controller: UrbicandePersoBundle:PersonnageType:create }
+
+perso_type_edit:
+    pattern:  /perso/type/edit/{id}
+    defaults: { _controller: UrbicandePersoBundle:PersonnageType:edit }
+    requirements:
+      id:     \d+
+
+perso_type_delete:
+    pattern:  /perso/type/delete/{id}
+    defaults: { _controller: UrbicandePersoBundle:PersonnageType:delete }
+    requirements:
+      id:     \d+
+
+perso_type_update:
+    pattern:  /perso/type/update/{id}
+    defaults: { _controller: "UrbicandePersoBundle:PersonnageType:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+perso_type_by_id:
+    pattern:  /perso/type/{id}
+    defaults: { _controller: UrbicandePersoBundle:PersonnageType:show }
+    requirements:
+      id:     \d+
+
+create_perso_comment:
+    pattern:  /perso/{persoId}/comment/create
+    defaults: { _controller: "UrbicandePersoBundle:PersonnageComment:create" }
+    requirements:
+      persoId:     \d+    
+
+perso_comment_edit:
+    pattern:  /perso/comment/edit/{id}
+    defaults: { _controller: UrbicandePersoBundle:PersonnageComment:edit }
+    requirements:
+      id:     \d+
+
+perso_comment_delete:
+    pattern:  /perso/comment/delete/{id}
+    defaults: { _controller: UrbicandePersoBundle:PersonnageComment:delete }
+    requirements:
+      id:     \d+
+
+perso_comment_update:
+    pattern:  /perso/comment/update/{id}
+    defaults: { _controller: "UrbicandePersoBundle:PersonnageComment:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+skill_list:
+    pattern:  /skill
+    defaults: { _controller: UrbicandePersoBundle:Skill:index }
+
+create_skill:
+    pattern:  /skill/create
+    defaults: { _controller: "UrbicandePersoBundle:Skill:create" }
+
+skill_edit:
+    pattern:  /skill/edit/{id}
+    defaults: { _controller: UrbicandePersoBundle:Skill:edit }
+    requirements:
+      id:     \d+
+
+skill_delete:
+    pattern:  /skill/delete/{id}
+    defaults: { _controller: UrbicandePersoBundle:Skill:delete }
+    requirements:
+      id:     \d+
+
+skill_update:
+    pattern:  /skill/update/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Skill:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+skill_by_id:
+    pattern:  /skill/{id}
+    defaults: { _controller: UrbicandePersoBundle:Skill:show }
+    requirements:
+      id:     \d+
+
+level_list:
+    pattern:  /perso/level
+    defaults: { _controller: UrbicandePersoBundle:Level:index }
+
+create_level:
+    pattern:  /perso/level/create
+    defaults: { _controller: UrbicandePersoBundle:Level:create }
+
+level_edit:
+    pattern:  /perso/level/edit/{id}
+    defaults: { _controller: UrbicandePersoBundle:Level:edit }
+    requirements:
+      id:     \d+
+
+level_delete:
+    pattern:  /perso/level/delete/{id}
+    defaults: { _controller: UrbicandePersoBundle:Level:delete }
+    requirements:
+      id:     \d+
+
+level_update:
+    pattern:  /perso/level/update/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Level:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+level_by_id:
+    pattern:  /perso/level/{id}
+    defaults: { _controller: UrbicandePersoBundle:Level:show }
+    requirements:
+      id:     \d+

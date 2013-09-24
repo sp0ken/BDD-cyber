@@ -1,0 +1,204 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - {{ perso.name}} {% endblock %}
+
+{% block body %}
+<script type="text/javascript">
+  // Called when the Visualization API is loaded.
+  function drawVisualization() {
+    // Create and populate a data table.
+    var data = [];
+
+    {% for event in perso.events %}
+      data.push({
+        'start': new Date({{event.startDate|date('Y')}}, {{event.startDate|date('n')-1}}, {{event.startDate|date('d')}}),
+        {% if (event.endDate) and (event.endDate|date('Y-m-d') != '-0001-11-30') %}
+          'end': new Date({{event.endDate|date('Y')}}, {{event.endDate|date('n')-1}}, {{event.endDate|date('d')}}),
+        {% endif %}
+        'content': '<a href="{{path('event_by_id', {'id': event.id}) }}">{{event.name}}</a>',
+      });
+    {% endfor %}
+
+    {% for groupe in perso.groupes %}
+      {% for event in groupe.events %}
+        data.push({
+          'start': new Date({{event.startDate|date('Y')}}, {{event.startDate|date('n')-1}}, {{event.startDate|date('d')}}),
+          {% if (event.endDate) and (event.endDate|date('Y-m-d') != '-0001-11-30') %}
+            'end': new Date({{event.endDate|date('Y')}}, {{event.endDate|date('n')-1}}, {{event.endDate|date('d')}}),
+          {% endif %}
+          'content': '<a href="{{path('event_by_id', {'id': event.id}) }}">{{event.name}}</a>',
+        });
+      {% endfor %}
+    {% endfor %}
+    
+
+    // specify options
+    options = {
+      "width":  "100%",
+      "height": "150px",
+      "style": "box", // optional
+       "zoomMin": 1000 * 60 * 60 *24 * 7,
+      "showCurrentTime": "false",
+      "showNavigation": "true",
+    }; 
+    // Instantiate our timeline object.
+    var timeline = new links.Timeline(document.getElementById('event-timeline'));
+
+    // Draw our timeline with the created data and options
+    timeline.draw(data, options);
+  }
+</script>
+
+<div class="row header">
+  <h1 class="ten mobile-three columns">
+    {{ perso.name }} ({{perso.type.name}} {{perso.number}}) <small>assigné à {{perso.writer.username}}</small>
+  </h1>
+  <div class="two mobile-one columns">
+    <div class="button gray large-header">
+      <a href="{{ path('perso_edit', {'id': perso.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="four mobile-one columns">
+    <b>Age</b> : {{perso.age}} ans <br>
+    <b>Sexe</b> : {{perso.fullSex}} <br>
+    <b>Niveau</b> : {{perso.level}}
+  </div>
+  <div class="eight mobile-three columns">
+    <b>Job</b> : {{perso.job}} ({{perso.income}}/an)<br>
+    <b>Concept</b> : {% autoescape false %}{{perso.concept}}{% endautoescape %}
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row header">
+  <h3 class="nine mobile-two columns">Commentaires</h3>
+  <div class="three mobile-two columns">
+    <div class="button gray large-header">
+      <a href="{{ path('create_perso_comment', {'persoId': perso.id}) }}">Ajouter un commentaire</a>
+    </div>
+  </div>
+</div>
+{{ include('UrbicandePersoBundle:PersonnageComment:commentList.html.twig') }}
+
+
+<div class="row">
+  <h3 class="twelve columns">Détails</h3>
+  <div class="four columns">
+    <h5>Compétences ({{perso.countCreationPoint}} points de création)</h5>
+    <ul class="no-bullet">
+      {% for skill in perso.skills %}
+        <li>
+          <a href="{{path('skill_by_id', {'id': skill.id}) }}">{{skill}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="four columns">
+    <h5>Groupes (<a href="{{path('create_groupe', {'perso': perso.id})}}">Créer un groupe</a>)</h5>
+    <ul class="no-bullet">
+      {% for groupe in perso.groupes %}
+        <li>
+          <a href="{{path('groupe_by_id', {'id': groupe.id}) }}">{{groupe}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="four columns">
+    <h5>Intrigues (<a href="{{path('create_intrigue', {'perso': perso.id})}}">Créer une intrigue</a>)</h5>
+    <ul class="no-bullet">
+      {% for implication in perso.intrigues %}
+        <li>
+          <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <p class="twelve columns">
+    <b>Costume</b> : {{perso.costume}}
+  </p>
+</div>
+
+<div class="row">
+  {% autoescape false %}
+    <h3 class="twelve columns">Histoire</h3>
+    <div class="twelve columns">{{perso.description}}</div>
+  {% endautoescape %}
+</div>
+
+<div class="row">
+  <h3 class="twelve columns">Chronologie <small>(<a href="{{path('create_event', {'perso': perso.id})}}">Créer un évènement</a>)</small></h3>
+  <div class="twelve columns" id="event-timeline"></div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Implications</h3>
+  {% for implication in perso.intrigues %}
+    <div class="row {{implication.degree}}">
+      <h4 class="twelve columns">{{implication.intrigue}} ({{implication.degree}})</h5>
+      <div class="six mobile-two columns">
+        <h5>Information rédacteur</h5>
+        <p>{{implication.description}}</p>
+      </div>
+      <div class="six mobile-two columns">
+        <h5>Information personnage</h5>
+        <p>{{implication.information}}</p>
+      </div>
+      {% if(perso.type == 'PNJ') %}
+        <div class="twelve columns">
+          <h5>Objectifs PNJ</h5>
+          <p>{{implication.objective}}</p>
+        </div>
+      {% endif %}
+    </div>
+  {% endfor %}
+  {% for groupe in perso.groupes %}
+    {% for implication in groupe.intrigues %}
+      <div class="row {{implication.degree}}">
+        <h4 class="twelve columns">{{implication.intrigue}} ({{implication.degree}})</h5>
+        <div class="six mobile-two columns">
+          <h5>Information rédacteur</h5>
+          <p>{{implication.description}}</p>
+        </div>
+        <div class="six mobile-two columns">
+          <h5>Information personnage</h5>
+          <p>{{implication.information}}</p>
+        </div>
+        {% if(perso.type == 'PNJ') %}
+          <div class="twelve columns">
+            <h5>Objectifs PNJ</h5>
+            <p>{{implication.objective}}</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+  {% for event in perso.events %}
+    {% for implication in event.implications %}
+      <div class="row {{implication.degree}}">
+        <h4 class="twelve columns">{{implication.intrigue}} ({{implication.degree}})</h5>
+        <div class="six mobile-two columns">
+          <h5>Information rédacteur</h5>
+          <p>{{implication.description}}</p>
+        </div>
+        <div class="six mobile-two columns">
+          <h5>Information personnage</h5>
+          <p>{{implication.information}}</p>
+        </div>
+        {% if(perso.type == 'PNJ') %}
+          <div class="twelve columns">
+            <h5>Objectifs PNJ</h5>
+            <p>{{implication.objective}}</p>
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endfor %}
+</div>
+
+{% endblock body %}

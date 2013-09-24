@@ -1,0 +1,91 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Accueil{% endblock %}
+
+{% block body %}
+  <h1>Le boulot de {{ user|title}} <small>(<a href="mailto:{{user.email}}?subject=La%20BDD">{{user.email}}</a>)</small></h1>
+
+  <div id="rpg">
+      <h3>Son perso</h3>
+      {% include 'UrbicandeHomeBundle:Home:rpg.html.twig' with {'user': user} %}
+  </div>
+
+  <div class="row block">
+    <div class="twelve columns" id="my-plot">
+      <div class="header row">
+        <h3 class="nine columns">
+          Ses intrigues
+        </h3>
+      </div>
+      <ul class="no-bullet">
+        {% for intrigue in user.intrigues %}
+          <li><a href="{{ path('intrigue_by_id', {'id': intrigue.id}) }}">{{ intrigue }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="row">
+    <div class="six columns block" id="my-player">
+      <div class="header row">
+        <h3 class="seven columns">
+          Ses personnages
+        </h3>
+      </div>
+      <ul class="no-bullet">
+        {% for perso in user.persos %}
+          <li><a href="{{ path('perso_by_id', {'id': perso.id}) }}">{{ perso }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="spacer show-for-small"></div>
+
+    <div class="six columns block" id="my-groupe">
+      <div class="header row">
+        <h3 class="seven columns">
+          Ses groupes
+        </h3>
+      </div>
+      <ul class="no-bullet">
+        {% for groupe in user.groupes %}
+          <li><a href="{{ path('groupe_by_id', {'id': groupe.id}) }}">{{ groupe }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+
+  <div class="row">
+    <div class="six columns block" id="my-rules">
+      <div class="header row">
+        <h3 class="seven columns">
+          Ses règles
+        </h3>
+      </div>
+      <ul class="no-bullet">
+        {% for rule in user.rules %}
+          <li><a href="{{ path('rule_by_id', {'id': rule.id}) }}">{{ rule }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="spacer show-for-small"></div>
+
+    <div class="six columns block" id="my-skills">
+      <div class="header row">
+        <h3 class="eight columns">
+          Ses compétences
+        </h3>
+      </div>
+      <ul class="no-bullet">
+        {% for skill in user.skills %}
+          <li><a href="{{ path('skill_by_id', {'id': skill.id}) }}">{{ skill }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+{% endblock %}

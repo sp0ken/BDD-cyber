@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Édition d'une règle {% endblock %}
+
+{% block body %}
+
+<h1>Éditer la règle "{{rule.name}}"</h1>
+
+<form action="{{path('rule_update', {'id': rule.id}) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="four mobile-one columns">
+      {{ form_row(form.writer)}}
+    </div>
+    <div class="four mobile-one columns">
+      {{ form_row(form.number) }}
+    </div>
+    <div class="four mobile-one columns">
+      {{ form_row(form.name) }}
+    </div>
+  </div>
+  
+  <div class="spacer"></div>
+
+  <div class="row block">
+    <h3 class="twelve columns">Les détails</h3>
+    <div class="twelve columns">
+      {{ form_row(form.description) }}
+    </div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}
