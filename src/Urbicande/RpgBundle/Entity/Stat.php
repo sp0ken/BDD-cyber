@@ -132,9 +132,13 @@ class Stat
         return $this->xp;
     }
 
+    /**
+     * Return the percentage of the current level compare to the next
+     * @return int
+     */
     public function getRelativeXp()
     {
-        return $this->xp - (($this->level-1)*100);
+        return ($this->xp*100)/(pow($this->level+1, 2)*100);
     }
 
     /**
@@ -305,8 +309,8 @@ class Stat
     public function resetStat($xp)
     {
         $this->xp = $xp;
-        $this->level = floor($xp/100)+1;
-        $this->caracPoint = $this->level;
+        $this->level = floor(sqrt($xp/100));
+        $this->caracPoint = $this->level-1;
         $this->ufologie = 1;
         $this->relecture = 1;
         $this->blague = 1;
@@ -326,9 +330,23 @@ class Stat
         }
     }
 
+    /**
+     * Add the given value to the user xp
+     * @param int $xp
+     */
     public function addXp($xp)
     {
         $this->xp += $xp;
+    }
+
+    /**
+     * Substract the given value to the user xp
+     * @param  [type] $xp
+     */
+    public function removeXp($xp)
+    {
+        $this->getXp();
+        $this->xp -= $xp;
     }
 
     /**

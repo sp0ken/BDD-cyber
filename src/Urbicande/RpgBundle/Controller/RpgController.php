@@ -56,7 +56,7 @@ class RpgController extends Controller
                 $xp = $xp + 10;
                 break;
               case 'remove':
-                $xp = $xp + 5;
+                $xp = $xp - 25;
                 break;
               default:
                 $xp = $xp;

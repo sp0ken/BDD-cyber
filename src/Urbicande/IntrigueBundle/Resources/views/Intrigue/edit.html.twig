@@ -62,14 +62,13 @@
 
   <div class="row block">
     <h3 class="twelve columns">Données objectives</h3>
-    <div class="row">
+    <div class="datas" data-prototype="{{ form_widget(form.plot.datas.vars.prototype)|e }}">
       {% for data in form.plot.datas %}
         <div class="six mobile-two columns">
           {{form_row(data)}}
         </div>
       {% endfor %}
     </div>
-    <div class="datas" data-prototype="{{ form_widget(form.plot.datas.vars.prototype)|e }}"></div>
   </div>
   
   <div class="spacer"></div>
@@ -89,26 +88,26 @@
       {{ form_row(form.objects)}}
     </div>
     <label>Règles</label>
-    <div class="row">
+    <div class="rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">
       {% for rule in form.rules %}
         <div class="six mobile-two columns">
           {{form_row(rule)}}
         </div>
       {% endfor %}
     </div>
-    <div class="rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}"></div>
   </div>
     
   <div class="spacer"></div>
 
   <div class="row block">
     <h3 class="twelve columns">Implications</h3>
-    {% for implication in form.implications %}
+    <div class="implications" data-prototype="{{ form_widget(form.implications.vars.prototype)|e }}">
+      {% for implication in form.implications %}
       <div class="twelve columns">
         {{form_row(implication)}}
       </div>
     {% endfor %}
-    <div class="implications" data-prototype="{{ form_widget(form.implications.vars.prototype)|e }}"></div>
+    </div>
   </div>
 
   {{ form_row(form._token) }}

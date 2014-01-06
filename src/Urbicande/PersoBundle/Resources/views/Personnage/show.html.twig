@@ -140,7 +140,7 @@
   <h3 class="twelve columns">Implications</h3>
   {% for implication in perso.intrigues %}
     <div class="row {{implication.degree}}">
-      <h4 class="twelve columns">{{implication.intrigue}} ({{implication.degree}})</h5>
+      <h4 class="twelve columns"><a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a></h5>
       <div class="six mobile-two columns">
         <h5>Information rédacteur</h5>
         <p>{{implication.description}}</p>
@@ -160,7 +160,7 @@
   {% for groupe in perso.groupes %}
     {% for implication in groupe.intrigues %}
       <div class="row {{implication.degree}}">
-        <h4 class="twelve columns">{{implication.intrigue}} ({{implication.degree}})</h5>
+        <h4 class="twelve columns"><a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a></h5>
         <div class="six mobile-two columns">
           <h5>Information rédacteur</h5>
           <p>{{implication.description}}</p>
@@ -181,7 +181,7 @@
   {% for event in perso.events %}
     {% for implication in event.implications %}
       <div class="row {{implication.degree}}">
-        <h4 class="twelve columns">{{implication.intrigue}} ({{implication.degree}})</h5>
+        <h4 class="twelve columns"><a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a></h5>
         <div class="six mobile-two columns">
           <h5>Information rédacteur</h5>
           <p>{{implication.description}}</p>

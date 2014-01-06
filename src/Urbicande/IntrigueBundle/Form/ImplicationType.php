@@ -5,6 +5,7 @@ namespace Urbicande\IntrigueBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class ImplicationType extends AbstractType
 {
@@ -12,7 +13,15 @@ class ImplicationType extends AbstractType
     {
         $builder
             ->add('player', null, array('label' => 'Personnage', 'required' => false))
-            ->add('groupe', null, array('label' => 'Groupe', 'required' => false))
+            ->add('groupe', 'entity', array(
+                'label' => 'Groupe',
+                'class' => 'UrbicandePersoBundle:Groupe',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('g')
+                        ->orderBy('g.name', 'ASC');
+                },
+                'required' => false
+            ))
             ->add('event', null, array('label' => 'Évènement', 'required' => false))
             ->add('degree', 'choice', array(
                 'label' => 'Degré d‘implication', 

@@ -4,7 +4,7 @@
     <span class="title">{{user.stat.title}}</span>
   </div>
   <div class="nine mobile-two columns">
-    <h4>Caractèristiques {% if user.stat.caracPoint and app.user == user %}<small>(Points restants : <span class="total">{{user.stat.caracPoint}}</span>)</small>{% endif %}</h4>
+    <h4>Caractéristiques {% if user.stat.caracPoint and app.user == user %}<small>(Points restants : <span class="total">{{user.stat.caracPoint}}</span>)</small>{% endif %}</h4>
     <ul class="no-bullet">
       <li><b>U</b>fologie : <span class="point">{{user.stat.ufologie}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="u"><i class="icon-expand-alt"></i></a>{% endif %}</li>
       <li><b>R</b>electure : <span class="point">{{user.stat.relecture}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="r"><i class="icon-expand-alt"></i></a>{% endif %}</li>

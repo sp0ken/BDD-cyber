@@ -22,7 +22,7 @@ class GroupeManager extends BaseManager
         return $this->getRepository()->findBy(array(), array('name' => 'ASC'));
     }
 
-    public function getJsonEvents(Router $router)
+    public function getJsonEvents(\Symfony\Bundle\FrameworkBundle\Routing\Router $router)
     {
       $json = array();
       foreach ($this->loadAll() as $pKey => $groupe) {

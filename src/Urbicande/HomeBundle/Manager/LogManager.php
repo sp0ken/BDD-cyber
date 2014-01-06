@@ -129,6 +129,9 @@ class LogManager extends BaseManager
             case 'Urbicande\PersoBundle\Entity\PersonnageType':
                 return 'un type de personnage';
                 break;
+            case 'Urbicande\PersoBundle\Entity\Level':
+                return 'un niveau';
+                break;
             case 'Urbicande\PersoBundle\Entity\Skill':
                 return 'une compétence';
                 break;
@@ -181,6 +184,9 @@ class LogManager extends BaseManager
                 break;
             case 'Urbicande\PersoBundle\Entity\Personnage':
                 return 'perso_by_id';
+                break;
+            case 'Urbicande\PersoBundle\Entity\Level':
+                return 'level_by_id';
                 break;
             case 'Urbicande\PersoBundle\Entity\PersonnageType':
                 return 'perso_type_by_id';

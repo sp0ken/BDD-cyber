@@ -5,6 +5,7 @@ namespace Urbicande\ChronoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class EventType extends AbstractType
 {
@@ -36,6 +37,11 @@ class EventType extends AbstractType
             ))
             ->add('groupes', 'entity', array(
                 'label' => 'Ajouter cet évènement aux groupes',
+                'class' => 'UrbicandePersoBundle:Groupe',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('g')
+                        ->orderBy('g.name', 'ASC');
+                },
                 'multiple' => true,   // Multiple selection allowed
                 'class'    => 'Urbicande\PersoBundle\Entity\Groupe',
                 'required' => false,

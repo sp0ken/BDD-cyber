@@ -5,6 +5,7 @@ namespace Urbicande\PersoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 use Urbicande\ChronoBundle\Form\ChronologyType;
 
 
@@ -55,6 +56,11 @@ class PersonnageType extends AbstractType
             ))
             ->add('writer', null, array('label' => 'Scénariste référent'))
             ->add('groupes', 'entity', array(
+                'class' => 'UrbicandePersoBundle:Groupe',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('g')
+                        ->orderBy('g.name', 'ASC');
+                },
                 'label' => 'Ajouter le personnage à des groupes',
                 'multiple' => true,   // Multiple selection allowed
                 'property' => 'name', // Assuming that the entity has a "name" property

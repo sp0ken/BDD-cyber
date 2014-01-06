@@ -19,12 +19,19 @@ class RpgListener
 {	
 
     protected $container;
+    protected $xp_minor = 10;
+    protected $xp_major = 25;
     
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
     }
 
+    /**
+     * @todo commenter
+     * @param  OnFlushEventArgs $eventArgs
+     * @return [type]
+     */
     public function onFlush(OnFlushEventArgs $eventArgs)
     {
       $securityContext = $this->container->get('security.context');
@@ -35,27 +42,27 @@ class RpgListener
       foreach ($uow->getScheduledEntityInsertions() AS $entity) {
         if(!$entity instanceof LogEntry && !$entity instanceof User && $user instanceof User) {
           if($entity instanceof IntrigueComment || $entity instanceof PersonnageComment) {
-            $user->getStat()->addXp(5);
+            $user->getStat()->addXp($this->xp_minor);
           } else {
-            $user->getStat()->addXp(25);
+            $user->getStat()->addXp($this->xp_major);
           }
         }
       }
 
       foreach ($uow->getScheduledEntityUpdates() AS $entity) {
         if(!$entity instanceof LogEntry && !$entity instanceof User && $user instanceof User && !$entity instanceof Setting  && !$entity instanceof Stat) {
-          $user->getStat()->addXp(10);
+          $user->getStat()->addXp($this->xp_minor);
         }
       }
 
       foreach ($uow->getScheduledEntityDeletions() AS $entity) {
-        $user->getStat()->addXp(5);
+        $user->getStat()->removeXp($this->xp_major);
       }
 
       if($user instanceof User) {
-        $level = floor($user->getStat()->getXp()/100)+1;
+        $level = floor(sqrt($user->getStat()->getXp()/100));
         $caracPoints = $user->getStat()->getCaracPoint();
-        if($level != $user->getStat()->getLevel()) {
+        if($level > $user->getStat()->getLevel()) {
               $user->getStat()->setLevel($level);
               $user->getStat()->setCaracPoint($caracPoints+1);
               $session->getFlashBag()->add('create', 'Félicitation, vous avez gagné un niveau !');

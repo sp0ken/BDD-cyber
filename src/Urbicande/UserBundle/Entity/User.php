@@ -111,6 +111,7 @@ class User extends BaseUser
         parent::__construct();
         $this->setting = new Setting();
         $this->stat = new Stat();
+        $this->stat->setUser($this);
         $this->intrigues = new \Doctrine\Common\Collections\ArrayCollection();
         $this->persos = new \Doctrine\Common\Collections\ArrayCollection();
     }
