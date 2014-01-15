@@ -36,3 +36,7 @@ download_background:
     defaults: { _controller: UrbicandeMiscBundle:Background:generate }
     requirements:
       id:     \d+
+
+stats:
+    pattern:  /stats
+    defaults: { _controller: UrbicandeMiscBundle:Stats:index }

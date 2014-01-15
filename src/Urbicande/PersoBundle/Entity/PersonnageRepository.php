@@ -24,9 +24,28 @@ class PersonnageRepository extends EntityRepository
     $query->leftJoin('p.writer', 'w');
 
     $query->where('w.id = :user')
-      ->setParameter('user', $userId)
-    ->orderBy('p.name', 'ASC');
+          ->setParameter('user', $userId)
+          ->orderBy('p.name', 'ASC');
 
+    return $query->getQuery()->getResult();
+  }
+
+  /**
+   * Retourne tous les personnage d'un scénariste
+   * @param  int $userId Id du scénariste
+   * @return Doctrine_Collection
+   */
+  public function countGender()
+  {
+    $em = $this->getEntityManager();
+    
+    $repository = $em->getRepository('UrbicandePersoBundle:Personnage');
+
+    $query = $repository->createQueryBuilder('p');
+    $query->select('p.sex')
+          ->addSelect('COUNT(*) as count')
+          ->groupBy('p.sex');
+    
     return $query->getQuery()->getResult();
   }
 }

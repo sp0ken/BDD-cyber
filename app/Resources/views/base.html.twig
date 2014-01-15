@@ -78,6 +78,7 @@
                 <ul class="dropdown">
                   <li><a href="{{path('user_list')}}">Scénaristes</a></li>
                   <li><a href="{{path('log')}}">Logs</a></li>
+                  <li><a href="{{path('stats')}}">Statistiques</a></li>
                   <li><a href="{{path('user_edit', {'id': app.user.id})}}">Paramètres</a></li>
                   <li><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                 </ul>
@@ -132,6 +133,7 @@
       <script src="{{ asset('/js/redactor.min.js') }}" type="text/javascript"></script>
       <script src="{{ asset('/js/redactor.fr.js') }}" type="text/javascript"></script>
       <script src="{{ asset('/js/redactor.fullscreen.js') }}" type="text/javascript"></script>
+      <script src="{{ asset('/js/canvasjs.min.js') }}" type="text/javascript"></script>
     {% endblock %}
   </body>
 </html>

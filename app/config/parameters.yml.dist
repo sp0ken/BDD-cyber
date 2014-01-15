@@ -1,0 +1,18 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: localhost
+    database_port: null
+    database_name: urbi
+    database_user: root
+    database_password: 'root'
+    mailer_transport: mail
+    mailer_host: localhost
+    mailer_user: null
+    mailer_password: null
+    locale: fr
+    secret: 25414bcb09fdd01d3476d768badd5110f64fbc05
+    database_path: null
+    supervisor_email: jeff@localhost
+    xp_small: 5
+    xp_minor: 10
+    xp_major: 25

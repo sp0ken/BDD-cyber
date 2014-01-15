@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Statistiques {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="nine columns">
+    Statistiques
+  </h1>
+</div>
+
+<div class="spacer"></div>
+
+<div id="genderChart" style="height: 400px; width: 100%;"></div>
+<div id="ideologyChart" style="height: 400px; width: 100%;"></div>
+
+{% block javascript %}
+  {{parent()}}
+  <script type="text/javascript">
+  window.onload = function () {
+    var genderChart = new CanvasJS.Chart("genderChart", {
+      theme: "theme2",
+      title:{
+        text: "Répartition des sexes"
+      },
+      legend:{
+        verticalAlign: "bottom",
+        horizontalAlign: "center"
+      },
+      data: [
+        {       
+         type: "pie",
+         showInLegend: false,
+         dataPoints: [
+           {  y: {{chart['sex']['m']}}, legendText:"H", indexLabel: "Homme" },
+           {  y: {{chart['sex']['f']}}, legendText:"F", indexLabel: "Femme" },
+           {  y: {{chart['sex']['u']}}, legendText:"I", indexLabel: "Indéterminé" },
+         ]
+       }
+     ]
+   });
+
+    chart.render();
+  }
+  </script>
+{% endblock %}
+{% endblock body %}
+

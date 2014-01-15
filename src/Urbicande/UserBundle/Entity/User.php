@@ -248,6 +248,14 @@ class User extends BaseUser
         return $this->groupes;
     }
 
+    public function hasGroupe($name)
+    {
+       foreach ($this->groupes as $key => $groupe) {
+           if ($groupe->getName() == $name) return true;
+       }
+       return false;
+    }
+
     /**
      * Add skills
      *
