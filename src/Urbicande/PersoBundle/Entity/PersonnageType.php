@@ -7,6 +7,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Urbicande\PersoBundle\Entity\PersonnageType
+ * Type de personnage
+ * 
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_PersonnageType")
  * @ORM\Entity(repositoryClass="Urbicande\PersoBundle\Entity\PersonnageTypeRepository")

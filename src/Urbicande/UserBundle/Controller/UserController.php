@@ -27,7 +27,7 @@ class UserController extends Controller
     }
 
     /**
-     * Finds and displays a Personnage entity.
+     * Finds and displays a User entity.
      *
      */
     public function showAction($username)
@@ -47,7 +47,7 @@ class UserController extends Controller
 
 
     /**
-     * Displays a form to edit an existing Personnage entity.
+     * Displays a form to edit an existing User entity.
      *
      */
     public function editAction($id)

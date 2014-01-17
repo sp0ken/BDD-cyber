@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Implication
+ * Détails d'une implication d'un personnage/groupe/évènement dans une intrigue
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Implication")
@@ -25,6 +25,7 @@ class Implication
 
     /**
      * @var Urbicande\IntrigueBundle\Entity\Intrigue $intrigue
+     * Intrigue de l'implication
      * 
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="implications", cascade={"persist"})
      */
@@ -32,6 +33,7 @@ class Implication
 
     /**
      * @var Urbicande\PersoBundle\Entity\Personnage $player
+     * Personnage de l'implication
      * 
      * @ORM\ManyToOne(targetEntity="Urbicande\PersoBundle\Entity\Personnage", inversedBy="intrigues", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
@@ -40,6 +42,7 @@ class Implication
 
     /**
      * @var Urbicande\ChronoBundle\Entity\Event $event
+     * Évènement de l'implication
      * 
      * @ORM\ManyToOne(targetEntity="Urbicande\ChronoBundle\Entity\Event", inversedBy="implications", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
@@ -48,6 +51,7 @@ class Implication
 
     /**
      * @var Urbicande\PersoBundle\Entity\Groupe $groupe
+     * Groupe de l'implication
      * 
      * @ORM\ManyToOne(targetEntity="Urbicande\PersoBundle\Entity\Groupe", inversedBy="intrigues", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
@@ -56,6 +60,7 @@ class Implication
 
     /**
      * @var string $degree
+     * Degrés de l'implication (à customiser dans ../Form/ImplicationType.php)
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="degree", type="string", length=255, nullable=true)
@@ -64,6 +69,7 @@ class Implication
 
     /**
      * @var string $synopsis
+     * Synopsis de l'implication
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="synopsis", type="text", nullable=true)
@@ -72,6 +78,7 @@ class Implication
 
     /**
      * @var string $theme
+     * Theme(s) de l'implication
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="theme", type="string", length=255, nullable=true)
@@ -80,6 +87,7 @@ class Implication
 
     /**
      * @var string $description
+     * Description de l'implication (pour le rédacteur)
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -88,6 +96,7 @@ class Implication
 
     /**
      * @var string $information
+     * Informations de l'implication (pour le personnage)
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="information", type="text", nullable=true)
@@ -96,6 +105,7 @@ class Implication
 
     /**
      * @var string $objective
+     * Objectifs de l'implication
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="objective", type="text", nullable=true)
@@ -320,6 +330,9 @@ class Implication
         return $this->groupe;
     }
 
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         if(isset($this->player)) {

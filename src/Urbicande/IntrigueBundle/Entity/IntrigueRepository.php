@@ -24,8 +24,26 @@ class IntrigueRepository extends EntityRepository
     $query->leftJoin('i.writer', 'w');
 
     $query->where('w.id = :user')
-      ->setParameter('user', $userId)
-    ->orderBy('i.name', 'ASC');
+          ->setParameter('user', $userId)
+          ->orderBy('i.name', 'ASC');
+
+    return $query->getQuery()->getResult();
+  }
+
+  /**
+   * Compte le nombre d'intrigue pour un perso et un type donné
+   * @param  int $userId Id du scénariste
+   * @return Doctrine_Collection
+   */
+  public function countByUserAndType($userName, $typeName)
+  {
+    $query = $this->createQueryBuilder('i');
+
+    $query->leftJoin('i.type', 't');
+
+    $query->where('w.id = :user')
+          ->setParameter('user', $userId)
+          ->orderBy('i.name', 'ASC');
 
     return $query->getQuery()->getResult();
   }

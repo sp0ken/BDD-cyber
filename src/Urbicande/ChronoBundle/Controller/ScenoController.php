@@ -15,8 +15,7 @@ use Urbicande\ChronoBundle\Form\ScenoType;
 class ScenoController extends Controller
 {
     /**
-     * Lists all Sceno entities.
-     *
+     * Liste les événements de scénographie
      */
     public function indexAction()
     {
@@ -28,8 +27,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Finds and displays a Sceno entity.
-     *
+     * Affiche les évènement de scénographie
      */
     public function showAction($id)
     {
@@ -45,8 +43,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Creates a new Sceno entity.
-     *
+     * Créer un évènement de scénographie
      */
     public function createAction(Request $request)
     {
@@ -70,8 +67,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Sceno entity.
-     *
+     * Page d'édition d'un évènement de scénographie
      */
     public function editAction($id)
     {
@@ -90,8 +86,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Edits an existing Sceno entity.
-     *
+     * Enregistrement de l'édition d'un évènement de scénographie
      */
     public function updateAction(Request $request, $id)
     {
@@ -120,8 +115,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Deletes a Sceno entity.
-     *
+     * Supprime un évènement de scénographie
      */
     public function deleteAction(Request $request, $id)
     {
@@ -140,8 +134,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Deletes a timing from a sceno entity.
-     *
+     * Supprime un timing d'un évènement de scénographie
      */
     public function deleteTimingAction(Request $request, $id)
     {
@@ -161,7 +154,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Ajax request to get all scenographie events in json format
+     * Requête ajax pour récupérer tous les évènements de scénographie en json
      * @return JsonReponse
      */
     public function calendarAction()
@@ -172,8 +165,7 @@ class ScenoController extends Controller
     }
 
     /**
-     * Remove a given data from a given knower.
-     *
+     * Supprime un objet de l'évènement de scénographie donné
      */
     public function removeObjectAction($scenoId, $objectId)
     {

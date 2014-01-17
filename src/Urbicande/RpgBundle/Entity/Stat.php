@@ -5,7 +5,7 @@ namespace Urbicande\RpgBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Stat
+ * Statistiques d'un scénariste
  *
  * @ORM\Table(name="cyber_Stat")
  * @ORM\Entity
@@ -23,6 +23,7 @@ class Stat
 
     /**
      * @var integer
+     * Points d'expériences totaux du scénariste
      *
      * @ORM\Column(name="xp", type="integer")
      */
@@ -30,6 +31,7 @@ class Stat
 
     /**
      * @var integer
+     * Niveau actuel du scénariste
      *
      * @ORM\Column(name="level", type="integer")
      */
@@ -37,6 +39,7 @@ class Stat
 
      /**
      * @var integer
+     * Point de caractérique restant du scénariste
      *
      * @ORM\Column(name="caracPoint", type="integer")
      */
@@ -44,6 +47,7 @@ class Stat
 
     /**
      * @var integer
+     * Nombre de points actuels en ufologie
      *
      * @ORM\Column(name="ufologie", type="integer")
      */
@@ -51,6 +55,7 @@ class Stat
 
     /**
      * @var integer
+     * Nombre de points actuels en relecture
      *
      * @ORM\Column(name="relecture", type="integer")
      */
@@ -58,6 +63,7 @@ class Stat
 
     /**
      * @var integer
+     * Nombre de points actuels en blague
      *
      * @ORM\Column(name="blague", type="integer")
      */
@@ -65,6 +71,7 @@ class Stat
 
     /**
      * @var integer
+     * Nombre de points actuels en imagination
      *
      * @ORM\Column(name="imagination", type="integer")
      */
@@ -72,6 +79,7 @@ class Stat
 
     /**
      * @var string
+     * Avatar choisi par le scénariste
      *
      * @ORM\Column(name="avatar", type="string", nullable=true)
      */
@@ -84,6 +92,10 @@ class Stat
      */
     private $user;
 
+    /**
+     * Liste des titres pour chaque niveau
+     * @var array
+     */
     private $titles = array('Squatter', 'Relecteur débutant', 'Relecteur de qualité supérieure', 'Maître Relecteur', 'Scénariste débutant', 'Maître du Sechs', 'Scénariste de qualité supérieure', 'Maître Scénariste', 
                                          'Scribe', 'Moine copiste', 'Gérard de Villier', 'Secrètaire d\'Urbicande', 'Trésorier d\'Urbicande', 'Vice-Président d\'Urbicande', 'Président d\'Urbicande',
                                         'Maître du monde débutant', 'Maître du monde de qualité supérieure', 'Majeur', 'Contributeur pour Wikipedia', 'Sage de l\'Académie Française');
@@ -91,7 +103,7 @@ class Stat
     public function __construct($xp = 0, $caracPoint = 0)
     {
         $this->xp = $xp;
-        $this->level = floor($xp/100)+1;
+        $this->level = floor(sqrt($xp/100))+1;
         $this->caracPoint = $caracPoint;
         $this->ufologie = 1;
         $this->relecture = 1;
@@ -138,7 +150,7 @@ class Stat
      */
     public function getRelativeXp()
     {
-        return ($this->xp*100)/(pow($this->level+1, 2)*100);
+        return (pow($this->level, 2)*100)/(pow($this->level+1, 2)*100);
     }
 
     /**
@@ -372,6 +384,10 @@ class Stat
         return $this->avatar;
     }
 
+    /**
+     * Returns web address of the chosen avatar
+     * @return string
+     */
     public function getFullAvatar()
     {
         return 'bundles/urbicanderpg/images/portraits/'.$this->avatar.'.jpg';

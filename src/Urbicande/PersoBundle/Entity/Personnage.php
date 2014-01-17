@@ -560,6 +560,7 @@ class Personnage
     {
         $this->intrigues->removeElement($intrigues);
     }
+    
     /**
      * Constructor
      */
@@ -817,11 +818,18 @@ class Personnage
         return $this->datas;
     }
 
-    public function countIntrigue()
+    /**
+     * Count the number of plots of specified type
+     * @param  String $name name of intrigue's type
+     * @return int
+     */
+    public function countIntrigue($name)
     {
-        $count = array('Principale' => 0, 'Secondaire' => 0, 'Ambiance' => 0);
+        $count = 0;
         foreach ($this->intrigues as $key => $intrigue) {
-            $count[$intrigue->getIntrigue()->getType()->getName()] += 1;
+            if ($intrigue->getIntrigue()->getType() == $name) {
+                $count++;
+            }
         }
         return $count;
     }
@@ -849,6 +857,11 @@ class Personnage
         return $this->sex;
     }
 
+    /**
+     * Get sex in full word
+     *
+     * @return string 
+     */
     public function getFullSex()
     {
         switch ($this->sex) {
@@ -867,6 +880,10 @@ class Personnage
         }
     }
     
+    /**
+     * Get class
+     * @return string
+     */
     public function getClass()
     {
         return 'Urbicande\PersoBundle\Entity\Personnage';

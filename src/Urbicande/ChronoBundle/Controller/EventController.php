@@ -15,8 +15,7 @@ use Urbicande\ChronoBundle\Form\EventType;
 class EventController extends Controller
 {
     /**
-     * Lists all Event entities.
-     *
+     * Liste les événements
      */
     public function indexAction()
     {
@@ -28,8 +27,7 @@ class EventController extends Controller
     }
 
     /**
-     * Finds and displays a Event entity.
-     *
+     * Affiche un événement
      */
     public function showAction($id)
     {
@@ -45,8 +43,7 @@ class EventController extends Controller
     }
 
     /**
-     * Creates a new Event entity.
-     *
+     * Créer un événement
      */
     public function createAction(Request $request)
     {
@@ -69,8 +66,7 @@ class EventController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Event entity.
-     *
+     * Page d'édition d'un événement
      */
     public function editAction($id)
     {
@@ -89,8 +85,7 @@ class EventController extends Controller
     }
 
     /**
-     * Edits an existing Event entity.
-     *
+     * Enregistrement de l'édition d'un évènement
      */
     public function updateAction(Request $request, $id)
     {
@@ -119,8 +114,7 @@ class EventController extends Controller
     }
 
     /**
-     * Deletes a Event entity.
-     *
+     * Supprime un évènement
      */
     public function deleteAction($id)
     {

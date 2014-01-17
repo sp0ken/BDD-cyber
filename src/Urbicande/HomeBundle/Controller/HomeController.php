@@ -10,6 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 class HomeController extends Controller
 {
     
+    /**
+     * Homepage
+     */
     public function indexAction()
     {
       $log_manager = $this->get('urbicande.log_manager');
@@ -20,6 +23,9 @@ class HomeController extends Controller
       ));
     }
 
+    /**
+     * Logs page
+     */
     public function logAction()
     {
       $log_manager = $this->get('urbicande.log_manager');

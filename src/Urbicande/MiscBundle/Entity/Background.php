@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Background
+ * Document de Background du jeu
  * 
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Background")
@@ -129,6 +129,9 @@ class Background
         return $this->writer;
     }
 
+    /**
+     * Overrides toString default behaviour
+     */
     public function __toString()
     {
         return $this->title;

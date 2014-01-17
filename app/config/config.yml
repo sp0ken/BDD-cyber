@@ -24,6 +24,9 @@ twig:
     form:
         resources:
             - '::fields.html.twig'
+    globals:
+        statuses: %status%
+        sexes: %sex%
 
 # Assetic Configuration
 assetic:

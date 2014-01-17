@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Rule
+ * Règle de jeu
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Rule")
@@ -62,7 +62,7 @@ class Rule
     private $description;
 
     /**
-     *
+     * Intrigues nécessitant cette règle
      * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="rules")
      * @ORM\JoinColumn(nullable=true)
@@ -147,6 +147,7 @@ class Rule
     {
         return $this->isGeneral;
     }
+    
     /**
      * Constructor
      */

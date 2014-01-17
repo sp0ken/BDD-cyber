@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\ObjectType
+ * Type d'objet
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_ObjectType")
@@ -145,6 +145,9 @@ class ObjectType
         return $this->objects;
     }
 
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         return $this->name;

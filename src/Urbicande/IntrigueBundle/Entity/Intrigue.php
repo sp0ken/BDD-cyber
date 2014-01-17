@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Intrigue
+ * Intrigue
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Intrigue")
@@ -25,6 +25,7 @@ class Intrigue
 
     /**
      * @var Urbicande\UserBundle\Entity\User $writer
+     * Scénariste référent
      *
      * @ORM\ManyToOne(targetEntity="Urbicande\UserBundle\Entity\User", inversedBy="intrigues")
      * @ORM\JoinColumn(nullable=false)
@@ -33,6 +34,7 @@ class Intrigue
 
     /**
      * @var string $name
+     * Nom
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="name", type="string", length=255)
@@ -50,6 +52,8 @@ class Intrigue
 
     /**
      * @var string $status
+     * Statut de l'écriture 
+     * A customiser dans ../Form/IntrigueType.php, app/config/parameters.yml et app/config/config.yml
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="status", type="string", length=255)
@@ -58,6 +62,8 @@ class Intrigue
 
     /**
      * @var  Urbicande\IntrigueBundle\Entity\IntrigueType $type
+     * Type de l'intrigue
+     * 
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\IntrigueType", inversedBy="intrigues")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -65,6 +71,7 @@ class Intrigue
 
     /**
      * @var Urbicande\IntrigueBundle\Entity\Synopsis $synopsis
+     * Synopsis
      *
      * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Synopsis", inversedBy="intrigue", cascade={"remove", "persist"})
      * @ORM\JoinColumn(nullable=false)
@@ -73,33 +80,38 @@ class Intrigue
 
     /**
      * @var Urbicande\IntrigueBundle\Entity\Plot $plot
-     *
+     * Détails de l'intrigue
+     * 
      * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Plot", inversedBy="intrigue", cascade={"remove", "persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $plot;
 
     /**
-     *
+     * Objets liés à l'intrigue
+     * 
      * @ORM\ManyToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Object", cascade={"persist"})
      * @ORM\JoinTable(name="cyber_intrigue_object")
      */
     private $objects;
 
     /**
-     *
+     * Régles spécifiques à cette intrigue
+     * 
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Rule", mappedBy="intrigue", cascade={"persist", "remove"})
      */
     private $rules;
 
     /**
+     * Implications dans cette intrigue
+     * 
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="intrigue", cascade={"persist", "remove"})
      */
     private $implications;
 
     /**
      * @var ArrayCollection Urbicande\ChronoBundle\Entity\Event $events
-     * Les évènements auxquels à participer le personnage
+     * Les évènements liés à cette intrigue
      * 
      * @ORM\ManyToMany(targetEntity="Urbicande\ChronoBundle\Entity\Event", mappedBy="intrigues", cascade={"persist"})
      */
@@ -124,7 +136,8 @@ class Intrigue
     private $comments;
 
     /**
-     *
+     * Évènements de scénographie nécessaire à cette intrigue
+     * 
      * @ORM\OneToMany(targetEntity="Urbicande\ChronoBundle\Entity\Sceno", mappedBy="intrigue")
      */
     private $scenos;
@@ -400,6 +413,9 @@ class Intrigue
        } 
     }
     
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         return $this->name.' ('.$this->type->getName().' '.$this->number.')';

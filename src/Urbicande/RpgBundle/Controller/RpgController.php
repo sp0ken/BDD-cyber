@@ -10,6 +10,11 @@ use Urbicande\RpgBundle\Entity\Stat;
 
 class RpgController extends Controller
 {
+    /**
+     * Ajax request to add a carac point
+     * @param Request $request
+     * @return json
+     */
     public function addCaracAction(Request $request)
     {
       if($request->isXmlHttpRequest())  {
@@ -40,6 +45,10 @@ class RpgController extends Controller
       }
     }
 
+    /**
+     * Action to reset the rpg component
+     * Accessible at http://your-site.com/carac/update
+     */
     public function updateAction()
     {
       if($this->getUser()->getEmail() == 'jcoquery@gmail.com') {

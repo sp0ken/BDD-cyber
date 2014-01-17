@@ -7,6 +7,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Urbicande\PersoBundle\Entity\Level
+ * Niveau de personnage
+ * 
  * @ORM\Table(name="cyber_Level")
  * @Gedmo\Loggable
  * @ORM\Entity(repositoryClass="Urbicande\PersoBundle\Entity\LevelRepository")
@@ -24,7 +26,8 @@ class Level
 
     /**
      * @var string
-     *
+     * Nom du niveau
+     * 
      * @Gedmo\Versioned
      * @ORM\Column(name="name", type="string", length=255)
      */
@@ -32,6 +35,7 @@ class Level
 
     /**
      * @var string
+     * Description du niveau
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="description", type="text")
@@ -40,6 +44,7 @@ class Level
 
     /**
      * @var integer
+     * Valeur numérique du niveau
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="level", type="smallint")
@@ -170,6 +175,9 @@ class Level
         return $this->players;
     }
 
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         return $this->name.' (niveau '.$this->level.')';

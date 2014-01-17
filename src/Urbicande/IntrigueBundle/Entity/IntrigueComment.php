@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Comment
+ * Commentaire d'intrigue
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_IntrigueComment")
@@ -25,6 +25,7 @@ class IntrigueComment
 
     /**
      * @var Urbicande\UserBundle\Entity\User $user
+     * Commentateur
      *
      * @ORM\ManyToOne(targetEntity="Urbicande\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
@@ -33,6 +34,7 @@ class IntrigueComment
 
     /**
      * @var string $comment
+     * Texte du commentaire
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="comment", type="text")
@@ -41,6 +43,8 @@ class IntrigueComment
 
     /**
      * @var  Urbicande\IntrigueBundle\Entity\Intrigue $intrigue
+     * Intrigue commentée
+     * 
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="comments", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -185,11 +189,17 @@ class IntrigueComment
         return $this->updated_at;
     }
 
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         return 'un commentaire sur l‘intrigue '.$this->intrigue;
     }
 
+    /**
+     * Get parent (alias for getIntrigue())
+     */
     public function getParent()
     {
         return $this->intrigue;

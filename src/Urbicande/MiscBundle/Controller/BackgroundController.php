@@ -152,6 +152,12 @@ class BackgroundController extends Controller
         return $this->redirect($this->generateUrl('background_list'));
     }
 
+    /**
+     * Generates an rtf file of the selected background entity
+     * @param  Request $request
+     * @param  int  $id      id of the Background
+     * @return File
+     */
     public function generateAction(Request $request, $id)
     {   
         $em = $this->getDoctrine()->getManager();

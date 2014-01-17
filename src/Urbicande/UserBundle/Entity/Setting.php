@@ -5,7 +5,7 @@ namespace Urbicande\UserBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Setting
+ * Paramètres d'un utilisateur
  *
  * @ORM\Table(name="cyber_Setting")
  * @ORM\Entity(repositoryClass="Urbicande\UserBundle\Entity\SettingRepository")
@@ -23,6 +23,7 @@ class Setting
 
     /**
      * @var boolean
+     * Si les notification par mail sont activées
      *
      * @ORM\Column(name="hasNotification", type="boolean")
      */
@@ -30,6 +31,7 @@ class Setting
 
     /**
      * @var boolean
+     * Si l'affichage du module RPG est activé
      *
      * @ORM\Column(name="hasRpg", type="boolean")
      */
@@ -37,6 +39,7 @@ class Setting
 
     /**
      * @var \Urbicande\UserBundle\Entity\User $user
+     * Utilisateur parent
      *
      * @ORM\OneToOne(targetEntity="Urbicande\UserBundle\Entity\User", mappedBy="setting")
      */

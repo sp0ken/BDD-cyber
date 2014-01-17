@@ -280,3 +280,10 @@ a.green i{ color: #007920; }
   -o-border-image: url('/images/chat-bubble-right-author.png') 92 168 83 76 repeat;
   border-image: url('/images/chat-bubble-right-author.png') 92 168 83 76 fill repeat;
 }
+
+.chart {
+  margin-bottom: 10px; }
+  .semi.chart {
+    height: 400px; }
+  .full.chart {
+    height: 1000px; }

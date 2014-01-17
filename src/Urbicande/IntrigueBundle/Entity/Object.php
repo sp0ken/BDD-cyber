@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Object
+ * Objet de jeu
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Object")
@@ -130,6 +130,7 @@ class Object
     {
         return $this->id;
     }
+
     /**
      * Constructor
      */
@@ -401,6 +402,10 @@ class Object
         return $this->creator;
     }
 
+    /**
+     * Sets where the object is at the beginning of a game
+     * Player/place/condition of appearance
+     */
     public function setOrigin()
     {
         $owner = $this->getOwner();
@@ -444,6 +449,9 @@ class Object
         }
     }
 
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         return $this->name.' ('.$this->type.')';

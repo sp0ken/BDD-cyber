@@ -7,6 +7,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * Urbicande\PersoBundle\Entity\PersonnageComment
+ * Commentaire sur la fiche d'un personnage
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_PersonnageComment")
@@ -25,6 +26,7 @@ class PersonnageComment
 
     /**
      * @var Urbicande\UserBundle\Entity\User $user
+     * Commentateur
      *
      * @ORM\ManyToOne(targetEntity="Urbicande\UserBundle\Entity\User")
      * @ORM\JoinColumn(nullable=false)
@@ -33,6 +35,7 @@ class PersonnageComment
 
     /**
      * @var string $comment
+     * Texte du commentaire
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="comment", type="text")
@@ -41,6 +44,8 @@ class PersonnageComment
 
     /**
      * @var  Personnage $perso
+     * Personnage commenté
+     * 
      * @ORM\ManyToOne(targetEntity="Personnage", inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -185,11 +190,19 @@ class PersonnageComment
         return $this->updated_at;
     }
 
+    /**
+     * Overrides default toString behaviour
+     * @return string
+     */
     public function __toString()
     {
         return 'un commentaire sur le personnage '.$this->perso;
     }
 
+    /**
+     * Get parent (alias for getPerso())
+     * @return Personnage
+     */
     public function getParent()
     {
         return $this->perso;

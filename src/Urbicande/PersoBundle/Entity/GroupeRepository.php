@@ -24,9 +24,10 @@ class GroupeRepository extends EntityRepository
     $query->leftJoin('g.members', 'm');
 
     $query->where('m.id = :member')
-            ->setParameter('member', $memberId)
+          ->setParameter('member', $memberId)
           ->orderBy('g.name', 'ASC');
 
     return $query->getQuery()->getResult();
   }
+
 }

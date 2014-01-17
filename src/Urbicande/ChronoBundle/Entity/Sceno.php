@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Sceno
+ * Évènement (réel) de scénographie durant le déroulement du jeu
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Sceno")
@@ -25,7 +25,7 @@ class Sceno
 
     /**
      * @var string $creator
-     * La personne s'occupant de la création de l'objet
+     * La personne s'occupant de la supervision de l'évènement
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="creator", type="string", length=255)
@@ -34,6 +34,7 @@ class Sceno
 
     /**
      * @var string
+     * Nom de l'évènement
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="name", type="string", length=255)
@@ -42,6 +43,7 @@ class Sceno
 
     /**
      * @var string
+     * Description de l'évènement
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="description", type="text")
@@ -49,20 +51,20 @@ class Sceno
     private $description;
 
     /**
-     *
+     * Objets nécessaires à l'évènement
      * @ORM\ManyToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Object", cascade={"persist"})
      * @ORM\JoinTable(name="cyber_sceno_object")
      */
     private $objects;
 
     /**
-     *
+     *  Horaire(s) de l'évènement
      * @ORM\OneToMany(targetEntity="Urbicande\ChronoBundle\Entity\Timing", mappedBy="sceno", cascade={"persist", "remove"})
      */
     private $timings;
 
     /**
-     *
+     * Évènement obligatoires précédents celui-ci
      * @ORM\ManyToMany(targetEntity="Urbicande\ChronoBundle\Entity\Sceno", inversedBy="children", cascade={"persist"})
      * @ORM\JoinTable(name="cyber_sceno_parent",
      *      joinColumns={@ORM\JoinColumn(name="sceno_id", referencedColumnName="id")},
@@ -72,13 +74,13 @@ class Sceno
     private $parents;
 
     /**
-     *
+     * Évènement découlant de celui-ci
      * @ORM\ManyToMany(targetEntity="Urbicande\ChronoBundle\Entity\Sceno", mappedBy="parents", cascade={"persist", "remove"})
      */
     private $children;
 
     /**
-     *
+     * Intrigues liées à cet évènement
      * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="scenos")
      * @ORM\JoinColumn(nullable=true)

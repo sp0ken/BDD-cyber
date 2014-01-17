@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Plot
+ * Détails d'une intrigue
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Plot")
@@ -25,6 +25,7 @@ class Plot
 
     /**
      * @var string $ingame
+     * Développement en jeu de l'intrigue
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="ingame", type="text", nullable=true)
@@ -33,6 +34,7 @@ class Plot
 
     /**
      * @var string $motive
+     * Motivation pour cette intrigue
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="motive", type="text", nullable=true)
@@ -41,6 +43,7 @@ class Plot
 
     /**
      * @var string $resolution
+     * Résolutions possible de l'intrigue
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="resolution", type="text", nullable=true)
@@ -49,6 +52,7 @@ class Plot
 
     /**
      * @var string $description
+     * Description détaillée
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="description", type="text", nullable=true)
@@ -57,12 +61,16 @@ class Plot
 
     /**
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Data $datas
+     * Données nécessaire à l'intrigue
+     * 
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Data", mappedBy="plot", cascade={"persist", "remove"})
      */
     private $datas;
 
     /**
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Intrigue $intrigue
+     * Intrigue parente
+     * 
      * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", mappedBy="plot", cascade={"persist", "remove"})
      */
     private $intrigue;
@@ -234,6 +242,10 @@ class Plot
         return $this->datas;
     }
 
+    /**
+     * Get parent (alias for getIntrigue)
+     * @return \Urbicande\IntrigueBundle\Entity\Intrigue 
+     */
     public function getParent()
     {
         return $this->intrigue;

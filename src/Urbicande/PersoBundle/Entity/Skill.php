@@ -279,6 +279,9 @@ class Skill
         return $this->writer;
     }
 
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         return $this->name;

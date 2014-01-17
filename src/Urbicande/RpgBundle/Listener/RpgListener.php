@@ -28,9 +28,9 @@ class RpgListener
     }
 
     /**
-     * @todo commenter
+     * Adds xp points to the current user whenever he performs an action on a valid entity
+     * Checks if level has changed after xp point were given
      * @param  OnFlushEventArgs $eventArgs
-     * @return [type]
      */
     public function onFlush(OnFlushEventArgs $eventArgs)
     {

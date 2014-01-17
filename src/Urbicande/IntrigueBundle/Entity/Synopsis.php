@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Synopsis
+ * Synopsis d'une intrigue
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Synopsis")
@@ -44,6 +44,7 @@ class Synopsis
 
     /**
      * @var Urbicande\IntrigueBundle\Entity\Intrigue $intrigue
+     *  Intrigue parente
      *
      * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", mappedBy="synopsis", cascade={"remove", "persist"})
      */
@@ -105,6 +106,10 @@ class Synopsis
         return $this->ingame;
     }
 
+    /**
+     * Get parent (alias for getIntrigue())
+     * @return \Urbicande\IntrigueBundle\Entity\Intrigue 
+     */
     public function getParent()
     {
         return $this->intrigue;

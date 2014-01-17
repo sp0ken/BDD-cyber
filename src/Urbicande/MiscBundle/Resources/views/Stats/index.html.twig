@@ -12,38 +12,172 @@
 
 <div class="spacer"></div>
 
-<div id="genderChart" style="height: 400px; width: 100%;"></div>
-<div id="ideologyChart" style="height: 400px; width: 100%;"></div>
+<div class="row">
+  <div id="genderChart" class="six column semi chart"></div>
+  <div id="statusChart" class="six column semi chart"></div>
+  <div id="groupChart" class="six column semi chart"></div>
+
+  <div class="spacer"></div>
+
+  <div id="intriguePersoChart" class="twelve column full chart"></div>
+  <div id="intrigueUserChart" class="twelve column semi chart"></div>
+</div>
+
+
 
 {% block javascript %}
   {{parent()}}
+  {% autoescape false %}
   <script type="text/javascript">
-  window.onload = function () {
+    window.onload = function () {
+
+    {% set fullSex = {'H': sexes.H, 'F': sexes.F, 'NA': sexes.NA} %}
     var genderChart = new CanvasJS.Chart("genderChart", {
-      theme: "theme2",
+        theme: "theme2",
+        title:{
+          text: "Répartition des sexes"
+        },
+        legend:{
+          verticalAlign: "bottom",
+          horizontalAlign: "center"
+        },
+        data: [
+          {       
+           type: "pie",
+           showInLegend: false,
+           dataPoints: [
+            {% for gender in genderChart %}
+              {  y: {{gender['nb_sex']}}, indexLabel: "{{fullSex[gender['sex']]}}", legendText:"{{fullSex[gender['sex']]}}"},
+            {% endfor %}
+           ]
+         }
+       ]
+    });
+
+    {% set fullStatus = {'C': statuses.C, 'S': statuses.S, 'D': statuses.D, 'R': statuses.R} %}
+    var statusChart = new CanvasJS.Chart("statusChart", {
+        theme: "theme2",
+        title:{
+          text: "Répartition des status d'écriture"
+        },
+        legend:{
+          verticalAlign: "bottom",
+          horizontalAlign: "center"
+        },
+        data: [
+          {       
+           type: "pie",
+           showInLegend: false,
+           dataPoints: [
+            {% for statut in statusChart %}
+                {  y: {{statut['nb_status']}}, indexLabel: "{{fullStatus[statut['status']]}}", legendText:"{{fullStatus[statut['status']]}}"},
+            {% endfor %}
+           ]
+         }
+       ]
+    });
+
+    var groupChart = new CanvasJS.Chart("groupChart", {
+        theme: "theme2",
+        title:{
+          text: "Répartition des personnages par groupe"
+        },
+        legend:{
+          verticalAlign: "bottom",
+          horizontalAlign: "center"
+        },
+        data: [
+          {       
+           type: "doughnut",
+           showInLegend: false,
+           dataPoints: [
+            {% for groupe in groupChart %}
+                {  y: {{groupe['nb_members']}}, indexLabel: '{{groupe["name"]}}' }, 
+            {% endfor %}
+           ]
+         }
+       ]
+    });
+
+    var intriguePersoChart = new CanvasJS.Chart("intriguePersoChart",
+    {
       title:{
-        text: "Répartition des sexes"
+        text: "Nombre d'intrigue par personnage",
+        fontSize: 30
+      },
+      axisX:{
+        interval: 1,
+        labelFontSize: 14,
+        lineThickness: 0
+      },
+      axisY:{
+        interval: 1,
+        labelFontSize: 20,
       },
       legend:{
-        verticalAlign: "bottom",
+        verticalAlign: "top",
         horizontalAlign: "center"
       },
       data: [
-        {       
-         type: "pie",
-         showInLegend: false,
-         dataPoints: [
-           {  y: {{chart['sex']['m']}}, legendText:"H", indexLabel: "Homme" },
-           {  y: {{chart['sex']['f']}}, legendText:"F", indexLabel: "Femme" },
-           {  y: {{chart['sex']['u']}}, legendText:"I", indexLabel: "Indéterminé" },
-         ]
-       }
-     ]
-   });
+      {% for type in persoChart %}
+        {
+          type: "stackedBar",
+          legendText: "{{type.name}}",
+          showInLegend: "true",
+          dataPoints: [
+            {% for perso in type.persos|reverse %}
+              {  y: {{perso.nb_intrigue}} , label: '{{perso.name}}'},
+            {% endfor %}
+          ]
+        },
+      {% endfor %}
+      ]
+    });
 
-    chart.render();
+    var intrigueUserChart = new CanvasJS.Chart("intrigueUserChart",
+    {
+      title:{
+        text: "Nombre d'intrigue par scénariste",
+        fontSize: 30
+      },
+      axisX:{
+        interval: 1,
+        labelFontSize: 14,
+        lineThickness: 0
+      },
+      axisY:{
+        interval: 1,
+        labelFontSize: 20,
+      },
+      legend:{
+        verticalAlign: "top",
+        horizontalAlign: "center"
+      },
+      data: [
+      {% for type in persoChart %}
+        {
+          type: "stackedBar",
+          legendText: "{{type.name}}",
+          showInLegend: "true",
+          dataPoints: [
+            {% for user in type.users|reverse %}
+              {  y: {{user.nb_intrigue}} , label: '{{user.name}}'},
+            {% endfor %}
+          ]
+        },
+      {% endfor %}
+      ]
+    });
+
+    genderChart.render();
+    statusChart.render();
+    groupChart.render();
+    intriguePersoChart.render();
+    intrigueUserChart.render();
   }
   </script>
+  {% endautoescape %}
 {% endblock %}
+
 {% endblock body %}
 

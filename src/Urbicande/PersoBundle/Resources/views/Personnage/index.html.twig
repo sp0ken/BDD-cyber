@@ -44,9 +44,9 @@
         <td>{% autoescape false %}{{ perso.concept }}{% endautoescape %}</td>
         <td>{{ perso.getFullStatus }}</td>
         <td><a title="Voir" href="{{ path('user_by_name', { 'username': perso.writer.username }) }}">{{ perso.writer }}</a></td>
-        <td>{{ perso.countIntrigue['Principale'] }}</td>
-        <td>{{ perso.countIntrigue['Secondaire'] }}</td>
-        <td>{{ perso.countIntrigue['Ambiance'] }}</td>
+        <td>{{ perso.countIntrigue('Principale') }}</td>
+        <td>{{ perso.countIntrigue('Secondaire') }}</td>
+        <td>{{ perso.countIntrigue('Ambiance') }}</td>
         <td>
           <ul class="button-group even two-up">
             <li>

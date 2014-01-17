@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\Data
+ * Pièce d'information
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Data")
@@ -25,6 +25,8 @@ class Data
 
     /**
      * @var Urbicande\IntrigueBundle\Entity\Plot $plot
+     * Intrigue dans laquelle apparait la donnée 
+     * 
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Plot", inversedBy="datas", cascade={"persist"})
      */
     private $plot;

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\ChronoBundle\Entity\Event
+ * Évènement fictif du passé/présent/futur du background du jeu
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Event")

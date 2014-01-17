@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Timing
+ * Horaire d'un évènement de scénographie
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Timing")
@@ -25,6 +25,8 @@ class Timing
 
     /**
      * @var integer
+     * Jour de départ
+     * Nombre simple en comptant à partir du début du jeu
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="start_day", type="smallint")
@@ -33,6 +35,8 @@ class Timing
 
     /**
      * @var integer
+     * Jour de fin
+     * Nombre simple en comptant à partir du début du jeu
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="end_day", type="smallint", nullable=true)
@@ -41,6 +45,7 @@ class Timing
 
     /**
      * @var \DateTime
+     * Heure de départ
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="start_hour", type="time")
@@ -49,6 +54,7 @@ class Timing
 
     /**
      * @var \DateTime
+     * Heure de fin
      *
      * @Gedmo\Versioned
      * @ORM\Column(name="end_hour", type="time", nullable=true)
@@ -56,7 +62,7 @@ class Timing
     private $end_hour;
 
     /**
-     *
+     * Évènements de scénographie à cette horaire
      * @ORM\ManyToOne(targetEntity="Urbicande\ChronoBundle\Entity\Sceno", inversedBy="timings")
      */
     private $sceno;
@@ -186,6 +192,10 @@ class Timing
         return $this->sceno;
     }
 
+    /**
+     * Overrides default toString behaviour
+     * @return string
+     */
     public function __toString()
     {
       if($this->end_hour){
@@ -195,6 +205,10 @@ class Timing
       }
     }
 
+    /**
+     * Get parent (alias for getSceno())
+     * @return \Urbicande\ChronoBundle\Entity\Sceno
+     */
     public function getParent()
     {
         return $this->sceno;

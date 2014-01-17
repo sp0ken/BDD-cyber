@@ -31,21 +31,34 @@ class PersonnageRepository extends EntityRepository
   }
 
   /**
-   * Retourne tous les personnage d'un scénariste
-   * @param  int $userId Id du scénariste
-   * @return Doctrine_Collection
+   * Compte le nombre de personnage par sexe
+   * @return Array
    */
   public function countGender()
   {
     $em = $this->getEntityManager();
+    $query = $em->createQuery('SELECT p.sex, COUNT(p.id) AS nb_sex FROM Urbicande\PersoBundle\Entity\Personnage p GROUP BY p.sex ORDER BY p.sex DESC');
     
-    $repository = $em->getRepository('UrbicandePersoBundle:Personnage');
+    $query->useResultCache(true);
+    $query->setResultCacheLifetime(3600);
 
-    $query = $repository->createQueryBuilder('p');
-    $query->select('p.sex')
-          ->addSelect('COUNT(*) as count')
-          ->groupBy('p.sex');
+    $results = $query->getResult();
+    return $results;
+  }
+
+  /**
+   * Compte le nombre de personnage par statut 
+   * @return Array
+   */
+  public function countStatus()
+  {
+    $em = $this->getEntityManager();
+    $query = $em->createQuery('SELECT p.status, COUNT(p.id) AS nb_status FROM Urbicande\PersoBundle\Entity\Personnage p GROUP BY p.status ORDER BY p.status DESC');
     
-    return $query->getQuery()->getResult();
+    $query->useResultCache(true);
+    $query->setResultCacheLifetime(3600);
+
+    $results = $query->getResult();
+    return $results;
   }
 }

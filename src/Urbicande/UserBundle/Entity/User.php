@@ -8,6 +8,7 @@ use Urbicande\RpgBundle\Entity\Stat as Stat;
 
 /**
  * Urbicande\UserBundle\Entity\User
+ * Utilisateur de la BDD
  *
  * @ORM\Table(name="cyber_User")
  * @ORM\Entity(repositoryClass="Urbicande\UserBundle\Entity\UserRepository")
@@ -23,6 +24,7 @@ class User extends BaseUser
 
     /**
      * @var \Urbicande\UserBundle\Entity\Setting $setting
+     * Paramètres de l'utilisateur
      *
      * @ORM\OneToOne(targetEntity="Urbicande\UserBundle\Entity\Setting", inversedBy="user", cascade={"persist", "remove"})
      */
@@ -30,6 +32,7 @@ class User extends BaseUser
 
     /**
      * @var \Urbicande\RpgBundle\Entity\Stat $stat
+     * Statistiques de l'utilisateur
      *
      * @ORM\OneToOne(targetEntity="\Urbicande\RpgBundle\Entity\Stat", inversedBy="user", cascade={"persist", "remove"})
      */
@@ -37,6 +40,7 @@ class User extends BaseUser
 
     /**
      * @var \Urbicande\IntrigueBundle\Entity\Intrigue $intrigue
+     * Intrigues dont il est le référent
      *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", mappedBy="writer")
      */
@@ -44,6 +48,7 @@ class User extends BaseUser
 
     /**
      * @var \Urbicande\PersoBundle\Entity\Personnage $persos
+     * Personnages dont il est le référent
      *
      * @ORM\OneToMany(targetEntity="Urbicande\PersoBundle\Entity\Personnage", mappedBy="writer")
      */
@@ -51,6 +56,7 @@ class User extends BaseUser
 
     /**
      * @var \Urbicande\IntrigueBundle\Entity\Rule $rules
+     * Règles dont il est le référent
      *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Rule", mappedBy="writer")
      */
@@ -58,6 +64,7 @@ class User extends BaseUser
 
     /**
      * @var \Urbicande\PersoBundle\Entity\Groupe $groupes
+     * Groupes dont il est le référent
      *
      * @ORM\OneToMany(targetEntity="Urbicande\PersoBundle\Entity\Groupe", mappedBy="writer")
      */
@@ -65,6 +72,7 @@ class User extends BaseUser
 
     /**
      * @var \Urbicande\PersoBundle\Entity\Skill $skills
+     * Compétences dont il est le référent
      *
      * @ORM\OneToMany(targetEntity="Urbicande\PersoBundle\Entity\Skill", mappedBy="writer")
      */
@@ -114,6 +122,9 @@ class User extends BaseUser
         $this->stat->setUser($this);
         $this->intrigues = new \Doctrine\Common\Collections\ArrayCollection();
         $this->persos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->groupes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rules = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -248,6 +259,11 @@ class User extends BaseUser
         return $this->groupes;
     }
 
+    /**
+     * Checks if the user in in the given group
+     * @param  string  $name Group name
+     * @return boolean
+     */
     public function hasGroupe($name)
     {
        foreach ($this->groupes as $key => $groupe) {
@@ -338,5 +354,21 @@ class User extends BaseUser
     public function getStat()
     {
         return $this->stat;
+    }
+
+    /**
+     * Counts the number of plots of this for the given type
+     * @param  name $name Type of plot
+     * @return int       
+     */
+    public function countIntrigue($name)
+    {
+        $count = 0;
+        foreach ($this->intrigues as $key => $intrigue) {
+            if ($intrigue->getType() == $name) {
+                $count++;
+            }
+        }
+        return $count;
     }
 }

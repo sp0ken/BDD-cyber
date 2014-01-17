@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Urbicande\IntrigueBundle\Entity\IntrigueType
+ * Type d'intrigue
  *
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_IntrigueType")
@@ -138,6 +138,9 @@ class IntrigueType
         return $this->intrigues;
     }
 
+    /**
+     * Overrides default toString behaviour
+     */
     public function __toString()
     {
         return $this->name;
