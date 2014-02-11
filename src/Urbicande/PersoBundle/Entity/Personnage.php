@@ -388,7 +388,6 @@ class Personnage
      */
     public function getAge()
     {
-        if(!$this->age) return 0;
         return $this->age;
     }
 

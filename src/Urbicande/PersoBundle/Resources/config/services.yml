@@ -4,6 +4,7 @@ parameters:
     urbicande.personnagecomment_manager.class: Urbicande\PersoBundle\Manager\PersonnageCommentManager
     urbicande.personnagetype_manager.class: Urbicande\PersoBundle\Manager\PersonnageTypeManager
     urbicande.level_manager.class: Urbicande\PersoBundle\Manager\LevelManager
+    urbicande.skill_manager.class: Urbicande\PersoBundle\Manager\SkillManager
 
 services:
     urbicande.perso_manager:
@@ -20,4 +21,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
     urbicande.level_manager:
         class:     "%urbicande.level_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.skill_manager:
+        class:     "%urbicande.skill_manager.class%"
         arguments: ["@doctrine.orm.entity_manager"]

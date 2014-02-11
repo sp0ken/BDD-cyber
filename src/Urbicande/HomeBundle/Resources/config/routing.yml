@@ -1,7 +1,7 @@
 # src/Urbicande/HomeBundle/Resources/config/routing.yml
 
 Home:
-    pattern:  /
+    pattern:  /home
     defaults: { _controller: UrbicandeHomeBundle:Home:index }
 
 log:

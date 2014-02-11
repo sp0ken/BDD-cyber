@@ -1,10 +1,10 @@
 {% extends '::base.html.twig' %}
 
-{% block title %} {{ parent() }} - Nouveau background {% endblock %}
+{% block title %} {{ parent() }} - Edition de {{back.title}} {% endblock %}
 
 {% block body %}
 
-<h1>Créer un nouveau document de background</h1>
+<h1>Edition de {{back.title}}</h1>
 
 <form action="{{path('background_update', {'id': back.id}) }}" method="post" {{ form_enctype(form) }}>
   <div class="row block">

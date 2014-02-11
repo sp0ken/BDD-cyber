@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * Background
+ * Document de Background du jeu
  * 
  * @Gedmo\Loggable
  * @ORM\Table(name="cyber_Background")
@@ -109,7 +109,7 @@ class Background
     /**
      * Set writer
      *
-     * @param \stdClass $writer
+     * @param \Urbicande\UserBundle\Entity\User $writer
      * @return Background
      */
     public function setWriter($writer)
@@ -122,10 +122,18 @@ class Background
     /**
      * Get writer
      *
-     * @return \stdClass 
+     * @return \Urbicande\UserBundle\Entity\User 
      */
     public function getWriter()
     {
         return $this->writer;
+    }
+
+    /**
+     * Overrides toString default behaviour
+     */
+    public function __toString()
+    {
+        return $this->title;
     }
 }

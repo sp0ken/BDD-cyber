@@ -74,7 +74,7 @@ class PersonnageTypeController extends Controller
      */
     public function editAction($id)
     {
-        $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($type);
+        $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($id);
 
         if (!$type) {
             throw $this->createNotFoundException('Unable to find PersonnageType entity.');
