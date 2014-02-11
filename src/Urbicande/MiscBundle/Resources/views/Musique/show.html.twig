@@ -1,0 +1,31 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - {{musique.name}} {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="nine columns">
+    {{musique}}
+  </h1>
+  <div class="three hide-for-small columns">
+    <ul class="button-group even one-up">
+        <li>
+            <div class="button gray large-header">
+              <a href="{{ path('musique_edit', {'id': musique.id}) }}">Modifier</a>
+            </div>
+        </li>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  {% autoescape false %}
+    <div class="six mobile-two columns">{{musique.description}}</div>
+    <div class="six mobile-two columns">{{musique.tde}}</div><br>
+    <div class="six mobile-two columns">{{musique.link}}</div><br>
+  {% endautoescape %}
+</div>
+
+{% endblock body %}

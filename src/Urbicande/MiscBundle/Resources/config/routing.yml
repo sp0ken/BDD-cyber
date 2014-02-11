@@ -40,3 +40,36 @@ download_background:
 stats:
     pattern:  /stats
     defaults: { _controller: UrbicandeMiscBundle:Stats:index }
+
+musique_list:
+    pattern:  /musique
+    defaults: { _controller: UrbicandeMiscBundle:Musique:index }
+
+create_musique:
+    pattern:  /musique/create
+    defaults: { _controller: UrbicandeMiscBundle:Musique:create }
+
+musique_edit:
+    pattern:  /musique/edit/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Musique:edit }
+    requirements:
+      id:     \d+
+
+musique_delete:
+    pattern:  /musique/delete/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Musique:delete }
+    requirements:
+      id:     \d+
+
+musique_update:
+    pattern:  /musique/update/{id}
+    defaults: { _controller: "UrbicandeMiscBundle:Musique:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+musique_by_id:
+    pattern:  /musique/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Musique:show }
+    requirements:
+      id:     \d+
