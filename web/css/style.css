@@ -233,6 +233,11 @@ a.green i{ color: #007920; }
   float: right;
 }
 
+form#revert {
+  display: inline; }
+  form#revert select {
+    width:  150px; }
+
 .comment p {
   margin-bottom: 0;
 }

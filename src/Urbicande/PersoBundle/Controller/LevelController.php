@@ -74,7 +74,11 @@ class LevelController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $level = $this->get('urbicande.level_manager')->loadLevel($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $levelBackup = $em->find('Urbicande\PersoBundle\Entity\Level', $id);
+        $logs = $repo->getLogEntries($levelBackup);
 
         if (!$level) {
             throw $this->createNotFoundException('Unable to find Level entity.');
@@ -83,9 +87,30 @@ class LevelController extends Controller
         $editForm = $this->createForm(new LevelType(), $level);
 
         return $this->render('UrbicandePersoBundle:Level:edit.html.twig', array(
-            'level'      => $level,
-            'form'   => $editForm->createView(),
+            'logs'    => $logs,
+            'level'   => $level,
+            'form'    => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Reverts this evel to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $level = $em->find('Urbicande\PersoBundle\Entity\Level', $id);
+        $version = $request->get('version');
+
+        $repo->revert($level, intval($version));
+        $em->persist($level);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'Le niveau a été restauré');
+        return $this->redirect($this->generateUrl('level_by_id', array('id' => $id)));
     }
 
     /**

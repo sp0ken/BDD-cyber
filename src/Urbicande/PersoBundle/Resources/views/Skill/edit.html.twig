@@ -4,7 +4,17 @@
 
 {% block body %}
 
-<h1>Édition de la compétence "{{skill.name}}"</h1>
+<h1>Édition de la compétence "{{skill.name}}" <small>(revenir à la version du : 
+   <form id="revert" action="{{ path('skill_revert', { 'id': skill.id }) }}" method="post" {{ form_enctype(form) }}>
+    <select name="version">
+      {% for log in logs %}
+          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y")}}</option>}
+      {% endfor %}
+    </select>
+     <input class="button green" type="submit" name="revert" value="Appliquer">
+     )
+  </form>
+</small></h1>
 
 <form action="{{ path('skill_update', {'id': skill.id}) }}" method="post" {{ form_enctype(form) }}>
   <h3>La base</h3>

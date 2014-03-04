@@ -90,6 +90,26 @@ class GroupeController extends Controller
     }
 
     /**
+     * Reverts this groupe to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $groupe = $em->find('Urbicande\PersoBundle\Entity\Groupe', $id);
+        $version = $request->get('version');
+
+        $repo->revert($groupe, intval($version));
+        $em->persist($groupe);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'Le groupe a été restauré');
+        return $this->redirect($this->generateUrl('groupe_by_id', array('id' => $id)));
+    }
+
+    /**
      * Edits an existing Groupe entity.
      *
      */

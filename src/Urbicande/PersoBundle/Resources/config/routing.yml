@@ -14,6 +14,12 @@ perso_edit:
     requirements:
       id:     \d+
 
+perso_revert:
+    pattern:  /perso/revert/{id}
+    defaults: { _controller: UrbicandePersoBundle:Personnage:revert }
+    requirements:
+      id:     \d+
+
 perso_delete:
     pattern:  /perso/delete/{id}
     defaults: { _controller: UrbicandePersoBundle:Personnage:delete }
@@ -60,6 +66,12 @@ groupe_edit:
     requirements:
       id:     \d+
 
+groupe_revert:
+    pattern:  /groupe/revert/{id}
+    defaults: { _controller: UrbicandePersoBundle:Groupe:revert }
+    requirements:
+      id:     \d+
+
 groupe_update:
     pattern:  /groupe/update/{id}
     defaults: { _controller: "UrbicandePersoBundle:Groupe:update" }
@@ -91,6 +103,12 @@ create_perso_type:
 perso_type_edit:
     pattern:  /perso/type/edit/{id}
     defaults: { _controller: UrbicandePersoBundle:PersonnageType:edit }
+    requirements:
+      id:     \d+
+
+perso_type_revert:
+    pattern:  /perso/type/revert/{id}
+    defaults: { _controller: UrbicandePersoBundle:PersonnageType:revert }
     requirements:
       id:     \d+
 
@@ -152,6 +170,12 @@ skill_edit:
     requirements:
       id:     \d+
 
+skill_revert:
+    pattern:  /skill/revert/{id}
+    defaults: { _controller: UrbicandePersoBundle:Skill:revert }
+    requirements:
+      id:     \d+
+
 skill_delete:
     pattern:  /skill/delete/{id}
     defaults: { _controller: UrbicandePersoBundle:Skill:delete }
@@ -182,6 +206,12 @@ create_level:
 level_edit:
     pattern:  /perso/level/edit/{id}
     defaults: { _controller: UrbicandePersoBundle:Level:edit }
+    requirements:
+      id:     \d+
+
+level_revert:
+    pattern:  /perso/level/revert/{id}
+    defaults: { _controller: UrbicandePersoBundle:Level:revert }
     requirements:
       id:     \d+
 

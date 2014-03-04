@@ -76,7 +76,11 @@ class SkillController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $skill = $this->get('urbicande.skill_manager')->loadSkill($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $skillBackup = $em->find('Urbicande\PersoBundle\Entity\Skill', $id);
+        $logs = $repo->getLogEntries($skillBackup);
 
         if (!$skill) {
             throw $this->createNotFoundException('Unable to find Skill entity.');
@@ -85,9 +89,30 @@ class SkillController extends Controller
         $editForm = $this->createForm(new SkillType(), $skill);
 
         return $this->render('UrbicandePersoBundle:Skill:edit.html.twig', array(
+            'logs' => $logs,
             'skill'      => $skill,
             'form'   => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Reverts this skill to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $skill = $em->find('Urbicande\PersoBundle\Entity\Skill', $id);
+        $version = $request->get('version');
+
+        $repo->revert($skill, intval($version));
+        $em->persist($skill);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'La compétence a été restaurée');
+        return $this->redirect($this->generateUrl('skill_by_id', array('id' => $id)));
     }
 
     /**

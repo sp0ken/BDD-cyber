@@ -79,6 +79,26 @@ class PersonnageController extends Controller
     }
 
     /**
+     * Reverts this personnage to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $perso = $em->find('Urbicande\PersoBundle\Entity\Personnage', $id);
+        $version = $request->get('version');
+
+        $repo->revert($perso, intval($version));
+        $em->persist($perso);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'Le personnage a été restauré');
+        return $this->redirect($this->generateUrl('perso_by_id', array('id' => $id)));
+    }
+
+    /**
      * Displays a form to edit an existing Personnage entity.
      *
      * @Route("/{id}/edit", name="personnage_edit")
@@ -86,7 +106,11 @@ class PersonnageController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $perso = $this->get('urbicande.perso_manager')->loadPerso($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $persoBackup = $em->find('Urbicande\PersoBundle\Entity\Personnage', $id);
+        $logs = $repo->getLogEntries($persoBackup);
 
         if (!$perso) {
             throw $this->createNotFoundException('Unable to find Personnage entity.');
@@ -95,6 +119,7 @@ class PersonnageController extends Controller
         $editForm = $this->createForm(new PersonnageType(), $perso);
 
         return array(
+            'logs' => $logs,
             'perso'      => $perso,
             'form'   => $editForm->createView(),
         );

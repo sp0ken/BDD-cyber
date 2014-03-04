@@ -74,7 +74,11 @@ class PersonnageTypeController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $typeBackup = $em->find('Urbicande\PersoBundle\Entity\PersonnageType', $id);
+        $logs = $repo->getLogEntries($typeBackup);
 
         if (!$type) {
             throw $this->createNotFoundException('Unable to find PersonnageType entity.');
@@ -83,9 +87,30 @@ class PersonnageTypeController extends Controller
         $editForm = $this->createForm(new PersonnageTypeType(), $type);
 
         return $this->render('UrbicandePersoBundle:PersonnageType:edit.html.twig', array(
+            'logs' => $logs,
             'type'      => $type,
             'form'   => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Reverts this personnage type to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $type = $em->find('Urbicande\PersoBundle\Entity\PersonnageType', $id);
+        $version = $request->get('version');
+
+        $repo->revert($type, intval($version));
+        $em->persist($type);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'Le type de personnage a été restauré');
+        return $this->redirect($this->generateUrl('perso_type_by_id', array('id' => $id)));
     }
 
     /**
