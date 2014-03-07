@@ -26,7 +26,8 @@ class Background
     /**
      * @var string
      * Titre du document de back
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="title", type="string", length=255)
      */
     private $title;
@@ -34,7 +35,8 @@ class Background
     /**
      * @var string
      * Le texte principal du document de back
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="body", type="text")
      */
     private $body;

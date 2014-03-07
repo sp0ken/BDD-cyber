@@ -12,6 +12,12 @@ background_edit:
     requirements:
       id:     \d+
 
+background_revert:
+    pattern:  /background/revert/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Background:revert }
+    requirements:
+      id:     \d+
+
 background_delete:
     pattern:  /background/delete/{id}
     defaults: { _controller: UrbicandeMiscBundle:Background:delete }
@@ -52,6 +58,12 @@ create_musique:
 musique_edit:
     pattern:  /musique/edit/{id}
     defaults: { _controller: UrbicandeMiscBundle:Musique:edit }
+    requirements:
+      id:     \d+
+
+musique_revert:
+    pattern:  /musique/revert/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Musique:revert }
     requirements:
       id:     \d+
 

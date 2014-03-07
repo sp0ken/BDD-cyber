@@ -71,7 +71,10 @@ class ScenoController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $sceno = $this->get('urbicande.sceno_manager')->loadSceno($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($sceno);
 
         if (!$sceno) {
             throw $this->createNotFoundException('Unable to find Sceno entity.');
@@ -80,9 +83,30 @@ class ScenoController extends Controller
         $editForm = $this->createForm(new ScenoType(), $sceno);
 
         return $this->render('UrbicandeChronoBundle:Sceno:edit.html.twig', array(
+            'logs' => $logs,
             'sceno'      => $sceno,
             'form'   => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Reverts this sceno to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $sceno = $em->find('Urbicande\ChronoBundle\Entity\Sceno', $id);
+        $version = $request->get('version');
+
+        $repo->revert($sceno, intval($version));
+        $em->persist($sceno);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'L\'évènement de scénographie a été restauré');
+        return $this->redirect($this->generateUrl('sceno_by_id', array('id' => $id)));
     }
 
     /**

@@ -96,6 +96,26 @@ class MusiqueController extends Controller
         ));
     }
 
+     /**
+     * Reverts this musique to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $musique = $em->find('Urbicande\MiscBundle\Entity\Musique', $id);
+        $version = $request->get('version');
+
+        $repo->revert($musique, intval($version));
+        $em->persist($musique);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'La musique a été restaurée');
+        return $this->redirect($this->generateUrl('perso_by_id', array('id' => $id)));
+    }
+
     /**
      * Edits an existing Musique entity.
      *

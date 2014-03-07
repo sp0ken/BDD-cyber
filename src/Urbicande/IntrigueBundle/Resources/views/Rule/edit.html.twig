@@ -4,7 +4,17 @@
 
 {% block body %}
 
-<h1>Éditer la règle "{{rule.name}}"</h1>
+<h1>Éditer la règle "{{rule.name}}" <small>(revenir à la version du : 
+   <form id="revert" action="{{ path('rule_revert', { 'id': rule.id }) }}" method="post" {{ form_enctype(form) }}>
+    <select name="version">
+      {% for log in logs %}
+          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y")}}</option>}
+      {% endfor %}
+    </select>
+     <input class="button green" type="submit" name="revert" value="Appliquer">
+     )
+  </form>
+</small></h1>
 
 <form action="{{path('rule_update', {'id': rule.id}) }}" method="post" {{ form_enctype(form) }}>
   <div class="row block">

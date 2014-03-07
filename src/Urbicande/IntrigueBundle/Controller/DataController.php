@@ -50,7 +50,10 @@ class DataController extends Controller
      */
     public function editAction($id)
     {
-      $data = $this->get('urbicande.data_manager')->loadData($id);
+        $em = $this->getDoctrine()->getManager();
+        $data = $this->get('urbicande.data_manager')->loadData($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($data);
 
       if (!$data) {
           throw $this->createNotFoundException('Unable to find Data entity.');
@@ -59,9 +62,30 @@ class DataController extends Controller
       $editForm = $this->createForm(new DataType(), $data);
 
       return $this->render('UrbicandeIntrigueBundle:Data:edit.html.twig', array(
+          'logs' => $logs,
           'data'      => $data,
           'form'   => $editForm->createView(),
       ));
+    }
+
+    /**
+     * Reverts this data to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $data = $em->find('Urbicande\IntrigueBundle\Entity\Data', $id);
+        $version = $request->get('version');
+
+        $repo->revert($data, intval($version));
+        $em->persist($data);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'La donnée a été restaurée');
+        return $this->redirect($this->generateUrl('data_by_id', array('id' => $id)));
     }
 
     /**

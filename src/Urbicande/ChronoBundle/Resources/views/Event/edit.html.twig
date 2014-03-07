@@ -4,7 +4,17 @@
 
 {% block body %}
 
-<h1>Édition de l'évènement {{event.name}}</h1>
+<h1>Édition de l'évènement {{event.name}} <small>(revenir à la version du : 
+   <form id="revert" action="{{ path('event_revert', { 'id': event.id }) }}" method="post" {{ form_enctype(form) }}>
+    <select name="version">
+      {% for log in logs %}
+          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y")}}</option>}
+      {% endfor %}
+    </select>
+     <input class="button green" type="submit" name="revert" value="Appliquer">
+     )
+  </form>
+</small></h1>
 
 <form action="{{ path('event_update', {'id': event.id}) }}" method="post" {{ form_enctype(form) }}>
   <div class="row block">

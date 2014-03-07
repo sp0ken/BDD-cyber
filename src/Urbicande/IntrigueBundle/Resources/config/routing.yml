@@ -12,6 +12,12 @@ intrigue_edit:
     requirements:
       id:     \d+
 
+intrigue_revert:
+    pattern:  /intrigue/revert/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Intrigue:revert }
+    requirements:
+      id:     \d+
+
 intrigue_delete:
     pattern:  /intrigue/delete/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:Intrigue:delete }
@@ -49,6 +55,12 @@ create_intrigue_type:
 intrigue_type_edit:
     pattern:  /intrigue/type/edit/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:IntrigueType:edit }
+    requirements:
+      id:     \d+
+
+intrigue_type_revert:
+    pattern:  /intrigue/type/revert/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueType:revert }
     requirements:
       id:     \d+
 
@@ -110,6 +122,12 @@ data_edit:
     requirements:
       id:     \d+
 
+data_revert:
+    pattern:  /intrigue/data/revert/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Data:revert }
+    requirements:
+      id:     \d+
+
 data_delete:
     pattern:  /intrigue/data/delete/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:Data:delete }
@@ -164,6 +182,12 @@ object_edit:
     requirements:
       id:     \d+
 
+object_revert:
+    pattern:  /object/revert/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Object:revert }
+    requirements:
+      id:     \d+
+
 object_delete:
     pattern:  /object/delete/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:Object:delete }
@@ -197,6 +221,12 @@ object_type_edit:
     requirements:
       id:     \d+
 
+object_type_revert:
+    pattern:  /object/type/revert/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:ObjectType:revert }
+    requirements:
+      id:     \d+
+
 object_type_delete:
     pattern:  /object/type/delete/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:ObjectType:delete }
@@ -227,6 +257,12 @@ create_rule:
 rule_edit:
     pattern:  /rule/edit/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:Rule:edit }
+    requirements:
+      id:     \d+
+
+rule_revert:
+    pattern:  /rule/revert/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Rule:revert }
     requirements:
       id:     \d+
 
@@ -266,6 +302,12 @@ create_implication:
 implication_edit:
     pattern:  /intrigue/implication/edit/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:Implication:edit }
+    requirements:
+      id:     \d+
+
+implication_revert:
+    pattern:  /intrigue/implication/revert/{id}
+    defaults: { _controller: UrbicandeIntrigueBundle:Implication:revert }
     requirements:
       id:     \d+
 

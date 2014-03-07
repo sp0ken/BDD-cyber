@@ -18,6 +18,12 @@ event_edit:
     requirements:
       id:     \d+
 
+event_revert:
+    pattern:  /event/revert/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Event:revert" }
+    requirements:
+      id:     \d+
+
 event_update:
     pattern:  /event/update/{id}
     defaults: { _controller: "UrbicandeChronoBundle:Event:update" }
@@ -48,6 +54,12 @@ create_sceno:
 sceno_edit:
     pattern:  /sceno/edit/{id}
     defaults: { _controller: "UrbicandeChronoBundle:Sceno:edit" }
+    requirements:
+      id:     \d+
+
+sceno_revert:
+    pattern:  /sceno/revert/{id}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:revert" }
     requirements:
       id:     \d+
 

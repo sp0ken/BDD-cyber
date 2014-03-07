@@ -79,7 +79,10 @@ class IntrigueController extends Controller
      */
     public function editAction($id)
     {
-      $intrigue = $this->get('urbicande.intrigue_manager')->loadIntrigue($id);
+        $em = $this->getDoctrine()->getManager();
+        $intrigue = $this->get('urbicande.intrigue_manager')->loadIntrigue($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($intrigue);
 
       if (!$intrigue) {
           throw $this->createNotFoundException('Unable to find Intrigue entity.');
@@ -88,9 +91,30 @@ class IntrigueController extends Controller
       $editForm = $this->createForm(new IntrigueType(), $intrigue);
 
       return $this->render('UrbicandeIntrigueBundle:Intrigue:edit.html.twig', array(
+          'logs' => $logs,
           'intrigue'      => $intrigue,
           'form'   => $editForm->createView(),
       ));
+    }
+
+     /**
+     * Reverts this intrigue to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $intrigue = $em->find('Urbicande\IntrigueBundle\Entity\Intrigue', $id);
+        $version = $request->get('version');
+
+        $repo->revert($intrigue, intval($version));
+        $em->persist($intrigue);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'L\'intrigue a été restaurée');
+        return $this->redirect($this->generateUrl('intrigue_by_id', array('id' => $id)));
     }
 
     /**

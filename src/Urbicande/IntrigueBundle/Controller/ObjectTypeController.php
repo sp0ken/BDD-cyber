@@ -74,7 +74,10 @@ class ObjectTypeController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $type = $this->get('urbicande.objecttype_manager')->loadObjectType($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($intrigue);
 
         if (!$type) {
             throw $this->createNotFoundException('Unable to find ObjectType entity.');
@@ -83,9 +86,30 @@ class ObjectTypeController extends Controller
         $editForm = $this->createForm(new ObjectTypeType(), $type);
 
         return $this->render('UrbicandeIntrigueBundle:ObjectType:edit.html.twig', array(
+            'logs' => $logs,
             'type'      => $type,
             'form'   => $editForm->createView(),
         ));
+    }
+
+     /**
+     * Reverts this object type to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $type = $em->find('Urbicande\IntrigueBundle\Entity\ObjectType', $id);
+        $version = $request->get('version');
+
+        $repo->revert($type, intval($version));
+        $em->persist($type);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'Le type d\'objet a été restauré');
+        return $this->redirect($this->generateUrl('object_type_by_id', array('id' => $id)));
     }
 
     /**

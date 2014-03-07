@@ -81,19 +81,41 @@ class BackgroundController extends Controller
     public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $back = $em->getRepository('UrbicandeMiscBundle:Background')->find($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($back);
 
-        $entity = $em->getRepository('UrbicandeMiscBundle:Background')->find($id);
-
-        if (!$entity) {
+        if (!$back) {
             throw $this->createNotFoundException('Unable to find Background entity.');
         }
 
-        $editForm = $this->createForm(new BackgroundType(), $entity);
+        $editForm = $this->createForm(new BackgroundType(), $back);
 
         return $this->render('UrbicandeMiscBundle:Background:edit.html.twig', array(
-            'back'      => $entity,
+            'logs' => $logs,
+            'back'      => $back,
             'form'   => $editForm->createView(),
         ));
+    }
+
+ /**
+     * Reverts this background to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $back = $em->find('Urbicande\MiscBundle\Entity\Background', $id);
+        $version = $request->get('version');
+
+        $repo->revert($back, intval($version));
+        $em->persist($back);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'Le document a été restauré');
+        return $this->redirect($this->generateUrl('perso_by_id', array('id' => $id)));
     }
 
     /**

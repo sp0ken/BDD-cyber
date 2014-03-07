@@ -70,7 +70,10 @@ class EventController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $event = $this->get('urbicande.event_manager')->loadEvent($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($event);
 
         if (!$event) {
             throw $this->createNotFoundException('Unable to find Event entity.');
@@ -79,9 +82,30 @@ class EventController extends Controller
         $editForm = $this->createForm(new EventType(), $event);
 
         return $this->render('UrbicandeChronoBundle:Event:edit.html.twig', array(
+            'logs' => $logs,
             'event'      => $event,
             'form'   => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Reverts this event to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $event = $em->find('Urbicande\ChronoBundle\Entity\Event', $id);
+        $version = $request->get('version');
+
+        $repo->revert($event, intval($version));
+        $em->persist($event);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'L\'évènement a été restauré');
+        return $this->redirect($this->generateUrl('event_by_id', array('id' => $id)));
     }
 
     /**

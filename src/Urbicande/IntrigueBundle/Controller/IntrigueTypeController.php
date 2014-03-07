@@ -74,7 +74,10 @@ class IntrigueTypeController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $type = $this->get('urbicande.intriguetype_manager')->loadIntrigueType($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($type);
 
         if (!$type) {
             throw $this->createNotFoundException('Unable to find IntrigueType entity.');
@@ -83,9 +86,30 @@ class IntrigueTypeController extends Controller
         $editForm = $this->createForm(new IntrigueTypeType(), $type);
 
         return $this->render('UrbicandeIntrigueBundle:IntrigueType:edit.html.twig', array(
+            'logs' => $logs,
             'type'      => $type,
             'form'   => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Reverts this intrigue type to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $type = $em->find('Urbicande\IntrigueBundle\Entity\IntrigueType', $id);
+        $version = $request->get('version');
+
+        $repo->revert($type, intval($version));
+        $em->persist($type);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'Le type d\'intrigue a été restauré');
+        return $this->redirect($this->generateUrl('intrigue_type_by_id', array('id' => $id)));
     }
 
     /**

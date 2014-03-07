@@ -79,8 +79,7 @@ class SkillController extends Controller
         $em = $this->getDoctrine()->getManager();
         $skill = $this->get('urbicande.skill_manager')->loadSkill($id);
         $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
-        $skillBackup = $em->find('Urbicande\PersoBundle\Entity\Skill', $id);
-        $logs = $repo->getLogEntries($skillBackup);
+        $logs = $repo->getLogEntries($skill);
 
         if (!$skill) {
             throw $this->createNotFoundException('Unable to find Skill entity.');

@@ -74,7 +74,10 @@ class ImplicationController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $implication = $this->get('urbicande.implication_manager')->loadImplication($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($implication);
 
         if (!$implication) {
             throw $this->createNotFoundException('Unable to find Implication entity.');
@@ -83,9 +86,30 @@ class ImplicationController extends Controller
         $editForm = $this->createForm(new ImplicationType(), $implication);
 
         return $this->render('UrbicandeIntrigueBundle:Implication:edit.html.twig', array(
+            'logs' => $logs,
             'implication'      => $implication,
             'form'   => $editForm->createView(),
         ));
+    }
+
+     /**
+     * Reverts this implication to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $implication = $em->find('Urbicande\IntrigueBundle\Entity\Implication', $id);
+        $version = $request->get('version');
+
+        $repo->revert($implication, intval($version));
+        $em->persist($implication);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'L\'implication a été restaurée');
+        return $this->redirect($this->generateUrl('implication_by_id', array('id' => $id)));
     }
 
     /**

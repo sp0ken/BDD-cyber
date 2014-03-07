@@ -74,7 +74,10 @@ class ObjectController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $object = $this->get('urbicande.object_manager')->loadObject($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($object);
 
         if (!$object) {
             throw $this->createNotFoundException('Unable to find Object entity.');
@@ -83,9 +86,30 @@ class ObjectController extends Controller
         $editForm = $this->createForm(new ObjectType(), $object);
 
         return $this->render('UrbicandeIntrigueBundle:Object:edit.html.twig', array(
+            'logs' => $logs,
             'object'      => $object,
             'form'   => $editForm->createView(),
         ));
+    }
+
+    /**
+     * Reverts this object to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $object = $em->find('Urbicande\IntrigueBundle\Entity\Object', $id);
+        $version = $request->get('version');
+
+        $repo->revert($object, intval($version));
+        $em->persist($object);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'L\'objet a été restaurée');
+        return $this->redirect($this->generateUrl('object_by_id', array('id' => $id)));
     }
 
     /**

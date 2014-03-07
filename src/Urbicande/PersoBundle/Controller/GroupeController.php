@@ -75,7 +75,10 @@ class GroupeController extends Controller
      */
     public function editAction($id)
     {
+        $em = $this->getDoctrine()->getManager();
         $groupe = $this->get('urbicande.groupe_manager')->loadGroupe($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($groupe);
 
         if (!$groupe) {
             throw $this->createNotFoundException('Unable to find Groupe entity.');

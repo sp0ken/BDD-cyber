@@ -28,7 +28,8 @@ class Musique
     /**
      * @var string
      * Nom de la musique
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
@@ -36,7 +37,8 @@ class Musique
     /**
      * @var integer
      * Numéro de la musique
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="number", type="smallint")
      */
     private $number;
@@ -45,6 +47,7 @@ class Musique
      * @var string
      * Type de la musique
      *
+     * @Gedmo\Versioned
      * @ORM\Column(name="type", type="string", length=10)
      * @Assert\Choice(choices = {"Ambiance", "TDE"}, message = "Choisissez un type valide.")
      */
@@ -54,7 +57,8 @@ class Musique
     /**
      * @var string
      * Description de la musique
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
@@ -62,7 +66,8 @@ class Musique
      /**
      * @var string
      * @todo Qu'est-ce donc ?
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="tde", type="text", nullable=true)
      */
     private $tde;
@@ -70,7 +75,8 @@ class Musique
      /**
      * @var string
      * Lien hypertext
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="link", type="string", length=255, nullable=true)
      */
     private $link;

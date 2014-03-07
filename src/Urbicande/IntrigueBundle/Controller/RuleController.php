@@ -90,6 +90,26 @@ class RuleController extends Controller
       ));
     }
 
+     /**
+     * Reverts this rule to a previous version
+     * @param  Request $request 
+     * @param  integer  $id      Id of the object
+     */
+    public function revertAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $rule = $em->find('Urbicande\IntrigueBundle\Entity\Rule', $id);
+        $version = $request->get('version');
+
+        $repo->revert($rule, intval($version));
+        $em->persist($rule);
+        $em->flush();
+        
+        $this->get('session')->getFlashBag()->add('revert', 'La règle a été restaurée');
+        return $this->redirect($this->generateUrl('rule_by_id', array('id' => $id)));
+    }
+
     /**
      * Edits an existing Rule entity.
      *

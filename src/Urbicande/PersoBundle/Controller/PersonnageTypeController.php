@@ -77,8 +77,7 @@ class PersonnageTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($id);
         $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
-        $typeBackup = $em->find('Urbicande\PersoBundle\Entity\PersonnageType', $id);
-        $logs = $repo->getLogEntries($typeBackup);
+        $logs = $repo->getLogEntries($type);
 
         if (!$type) {
             throw $this->createNotFoundException('Unable to find PersonnageType entity.');

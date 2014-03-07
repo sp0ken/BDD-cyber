@@ -77,8 +77,7 @@ class LevelController extends Controller
         $em = $this->getDoctrine()->getManager();
         $level = $this->get('urbicande.level_manager')->loadLevel($id);
         $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
-        $levelBackup = $em->find('Urbicande\PersoBundle\Entity\Level', $id);
-        $logs = $repo->getLogEntries($levelBackup);
+        $logs = $repo->getLogEntries($level);
 
         if (!$level) {
             throw $this->createNotFoundException('Unable to find Level entity.');
