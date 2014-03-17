@@ -64,7 +64,7 @@ class Groupe
     /**
      * @var ArrayCollection Urbicande\PersoBundle\Entity\Personnage $members
      * Les personnages liés au groupe
-     *
+     * 
      * @ORM\ManyToMany(targetEntity="Urbicande\PersoBundle\Entity\Personnage", mappedBy="groupes", cascade={"persist"})
      */
     private $members;
@@ -72,7 +72,7 @@ class Groupe
     /**
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Implication $intrigues
      * Les intrigues liées à ce groupe
-     *
+     * 
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="groupe", cascade={"persist", "remove"})
      */
     private $intrigues;

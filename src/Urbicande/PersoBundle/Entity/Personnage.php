@@ -191,7 +191,7 @@ class Personnage
     /**
      * @var Urbicande\IntrigueBundle\Entity\Implication $intrigues
      * Les implications dans des intrigues du personnage
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="player", cascade={"persist", "remove"})
      */
     private $intrigues;

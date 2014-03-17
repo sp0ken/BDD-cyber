@@ -27,6 +27,7 @@ class Intrigue
      * @var Urbicande\UserBundle\Entity\User $writer
      * Scénariste référent
      *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\UserBundle\Entity\User", inversedBy="intrigues")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -63,7 +64,8 @@ class Intrigue
     /**
      * @var  Urbicande\IntrigueBundle\Entity\IntrigueType $type
      * Type de l'intrigue
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\IntrigueType", inversedBy="intrigues")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -73,6 +75,7 @@ class Intrigue
      * @var Urbicande\IntrigueBundle\Entity\Synopsis $synopsis
      * Synopsis
      *
+     * @Gedmo\Versioned
      * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Synopsis", inversedBy="intrigue", cascade={"remove", "persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -81,7 +84,8 @@ class Intrigue
     /**
      * @var Urbicande\IntrigueBundle\Entity\Plot $plot
      * Détails de l'intrigue
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Plot", inversedBy="intrigue", cascade={"remove", "persist"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -97,14 +101,14 @@ class Intrigue
 
     /**
      * Régles spécifiques à cette intrigue
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Rule", mappedBy="intrigue", cascade={"persist", "remove"})
      */
     private $rules;
 
     /**
      * Implications dans cette intrigue
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="intrigue", cascade={"persist", "remove"})
      */
     private $implications;
@@ -128,7 +132,7 @@ class Intrigue
      /**
      * @var  ArrayCollection Urbicande\IntrigueBundle\Entity\IntrigueComment $comments
      * Les commentaires sur la fiche de l'intrigue
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\IntrigueComment", mappedBy="intrigue", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      * @ORM\OrderBy({"created_at" = "DESC"})
@@ -137,7 +141,7 @@ class Intrigue
 
     /**
      * Évènements de scénographie nécessaire à cette intrigue
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Urbicande\ChronoBundle\Entity\Sceno", mappedBy="intrigue")
      */
     private $scenos;

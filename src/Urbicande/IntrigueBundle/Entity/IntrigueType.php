@@ -44,7 +44,7 @@ class IntrigueType
     /**
      * @var  ArrayCollection \Urbicande\IntrigueBundle\Entity\Intrigue $players
      * Les intrigues de ce type
-     * 
+     *
      * @ORM\OneToMany(targetEntity="\Urbicande\IntrigueBundle\Entity\Intrigue", mappedBy="type")
      **/
     private $intrigues;

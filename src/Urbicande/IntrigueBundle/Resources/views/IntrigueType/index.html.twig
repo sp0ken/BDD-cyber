@@ -28,26 +28,27 @@
   </thead>
   <tbody>
   {% for type in types %}
-      <tr>
-        <td><a title="Voir" href="{{ path('intrigue_type_by_id', { 'id': type.id }) }}">{{ type.name }}</a></td>
-        <td>{{ type.description }}</td>
-        <td>{{ type.intrigues|length }}</td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('intrigue_type_edit', { 'id': type.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('intrigue_type_delete', { 'id': type.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </a>
+      {% autoescape false %}
+        <tr>
+          <td><a title="Voir" href="{{ path('intrigue_type_by_id', { 'id': type.id }) }}">{{ type.name }}</a></td>
+          <td>{{ type.description }}</td>
+          <td>{{ type.intrigues|length }}</td>
+          <td>
+            <ul class="button-group even two-up">
+              <li>
+                <div class="button green">
+                  <a title="Éditer" href="{{ path('intrigue_type_edit', { 'id': type.id }) }}"><i class="icon-pencil"></i></a>
+                </div>
+              </li>
+              <li>
+                <div class="button red">
+                  <a title="Supprimer" href="{{ path('intrigue_type_delete', { 'id': type.id }) }}"><i class="icon-remove-sign"></i></a>
+                </div>
+              </li>
+            </ul>
+          </td>
+        </tr>
+      {% endautoescape %}
   {% endfor %}
   </tbody>
 </table>

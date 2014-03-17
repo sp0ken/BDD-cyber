@@ -8,7 +8,7 @@
    <form id="revert" action="{{ path('level_revert', { 'id': level.id }) }}" method="post" {{ form_enctype(form) }}>
     <select name="version">
       {% for log in logs %}
-          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y")}}</option>}
+          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
       {% endfor %}
     </select>
      <input class="button green" type="submit" name="revert" value="Appliquer">

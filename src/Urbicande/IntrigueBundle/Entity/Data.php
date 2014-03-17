@@ -26,7 +26,8 @@ class Data
     /**
      * @var Urbicande\IntrigueBundle\Entity\Plot $plot
      * Intrigue dans laquelle apparait la donnée 
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Plot", inversedBy="datas", cascade={"persist"})
      */
     private $plot;

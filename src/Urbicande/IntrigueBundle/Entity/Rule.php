@@ -63,6 +63,7 @@ class Rule
 
     /**
      * Intrigues nécessitant cette règle
+     * 
      * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="rules")
      * @ORM\JoinColumn(nullable=true)

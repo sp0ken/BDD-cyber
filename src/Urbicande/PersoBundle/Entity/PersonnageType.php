@@ -45,7 +45,7 @@ class PersonnageType
     /**
      * @var  ArrayCollection \Urbicande\PersoBundle\Entity\Personnage $players
      * Les personnages de ce type
-     * 
+     *
      * @ORM\OneToMany(targetEntity="\Urbicande\PersoBundle\Entity\Personnage", mappedBy="type")
      **/
     private $players;

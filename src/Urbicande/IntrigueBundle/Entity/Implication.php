@@ -26,7 +26,8 @@ class Implication
     /**
      * @var Urbicande\IntrigueBundle\Entity\Intrigue $intrigue
      * Intrigue de l'implication
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="implications", cascade={"persist"})
      */
     private $intrigue;
@@ -34,7 +35,8 @@ class Implication
     /**
      * @var Urbicande\PersoBundle\Entity\Personnage $player
      * Personnage de l'implication
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\PersoBundle\Entity\Personnage", inversedBy="intrigues", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -43,7 +45,8 @@ class Implication
     /**
      * @var Urbicande\ChronoBundle\Entity\Event $event
      * Évènement de l'implication
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\ChronoBundle\Entity\Event", inversedBy="implications", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */
@@ -52,7 +55,8 @@ class Implication
     /**
      * @var Urbicande\PersoBundle\Entity\Groupe $groupe
      * Groupe de l'implication
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\PersoBundle\Entity\Groupe", inversedBy="intrigues", cascade={"persist"})
      * @ORM\JoinColumn(nullable=true)
      */

@@ -73,7 +73,8 @@ class Object
     /**
      * @var boolean $is_owned
      * Si l'objet est possédé en début de jeu
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="is_owned", type="boolean")
      */
     private $is_owned;
@@ -90,7 +91,8 @@ class Object
     /**
      * @var boolean $is_placed
      * Si l'objet est placé en début de jeu
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="is_placed", type="boolean")
      */
     private $is_placed;
@@ -107,7 +109,8 @@ class Object
     /**
      * @var boolean $is_appear
      * Si l'objet à des conditions d'apparition
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\Column(name="is_appear", type="boolean")
      */
     private $is_appear;

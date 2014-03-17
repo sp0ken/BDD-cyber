@@ -63,6 +63,8 @@ class Timing
 
     /**
      * Évènements de scénographie à cette horaire
+     *
+     * @Gedmo\Versioned
      * @ORM\ManyToOne(targetEntity="Urbicande\ChronoBundle\Entity\Sceno", inversedBy="timings")
      */
     private $sceno;

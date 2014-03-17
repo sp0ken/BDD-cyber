@@ -44,7 +44,7 @@ class ObjectType
     /**
      * @var  ArrayCollection \Urbicande\IntrigueBundle\Entity\Object $objects
      * Les objets de ce type
-     * 
+     *
      * @ORM\OneToMany(targetEntity="\Urbicande\IntrigueBundle\Entity\Object", mappedBy="type")
      **/
     private $objects;

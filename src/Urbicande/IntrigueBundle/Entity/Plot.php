@@ -62,7 +62,7 @@ class Plot
     /**
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Data $datas
      * Données nécessaire à l'intrigue
-     * 
+     *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Data", mappedBy="plot", cascade={"persist", "remove"})
      */
     private $datas;
@@ -70,7 +70,8 @@ class Plot
     /**
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Intrigue $intrigue
      * Intrigue parente
-     * 
+     *
+     * @Gedmo\Versioned
      * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", mappedBy="plot", cascade={"persist", "remove"})
      */
     private $intrigue;
