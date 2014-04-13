@@ -63,8 +63,12 @@
     <div class="six mobile-two columns">
       {{ form_row(form.plot.motive) }}
     </div>
-    {{form_row(form.plot.resolution)}}
-    {{form_row(form.plot.description)}}
+    <div class="twelve columns">
+      {{form_row(form.plot.resolution)}}
+    </div>
+    <div class="twelve columns">
+      {{form_row(form.plot.description)}}
+    </div>
   </div>
   
   
@@ -109,13 +113,14 @@
     
   <div class="spacer"></div>
 
-  <div class="row block">
+  <div class="row">
     <h3 class="twelve columns">Implications</h3>
     <div class="implications" data-prototype="{{ form_widget(form.implications.vars.prototype)|e }}">
       {% for implication in form.implications %}
-      <div class="twelve columns">
+      <div class="twelve columns block">
         {{form_row(implication)}}
       </div>
+      <div class="spacer"></div>
     {% endfor %}
     </div>
   </div>

@@ -7,7 +7,7 @@ use Urbicande\IntrigueBundle\Manager\BaseManager;
 
 class DataManager extends BaseManager
 {
-    private $em;
+    public $em;
 
     public function __construct(EntityManager $entityManager)
     {

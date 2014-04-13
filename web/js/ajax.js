@@ -249,6 +249,6 @@ function addTagForm(collectionHolder, $newLinkLi) {
     var newForm = prototype.replace(/__name__/g, collectionHolder.children().length);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var $newFormLi = $('<div class="twelve columns"></div>').append(newForm);
+    var $newFormLi = $('<div class="twelve columns block"></div>').append(newForm);
     $newLinkLi.before($newFormLi);
 }

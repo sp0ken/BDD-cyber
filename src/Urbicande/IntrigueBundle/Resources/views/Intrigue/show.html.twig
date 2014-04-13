@@ -138,8 +138,9 @@
 
 <div class="row">
   <h3 class="twelve columns">Implications</h3>
+
   {% for implication in intrigue.implications %}
-    <div class="implication">
+    <div class="implication block">
       <div class="row header">
         <h4 class="eleven mobile-three columns">
           {{implication}}
@@ -170,6 +171,7 @@
         </div>
       {% endautoescape %}
     </div>
+    <div class="spacer"></div>
   {% endfor %}
 </div>
 
