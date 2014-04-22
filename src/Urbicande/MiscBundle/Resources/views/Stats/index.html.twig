@@ -15,7 +15,7 @@
 <div class="row">
   <div id="genderChart" class="six column semi chart"></div>
   <div id="statusChart" class="six column semi chart"></div>
-  <div id="groupChart" class="six column semi chart"></div>
+  <div id="groupChart" class="twelve column full chart"></div>
 
   <div class="spacer"></div>
 
@@ -80,7 +80,15 @@
     var groupChart = new CanvasJS.Chart("groupChart", {
         theme: "theme2",
         title:{
-          text: "Répartition des personnages par groupe"
+          text: "Répartition des personnages par groupe",
+          fontSize: 30
+        },     
+        toolTip:{             
+          content: function(e){
+            var content;
+            content = e.entries[0].dataPoint.indexLabel + " : "+e.entries[0].dataPoint.y + " membre(s)"  ;
+            return content;
+          }
         },
         legend:{
           verticalAlign: "bottom",
@@ -88,9 +96,10 @@
         },
         data: [
           {       
-           type: "doughnut",
-           showInLegend: false,
-           dataPoints: [
+            type: "doughnut",
+            indexLabelFontSize: 20,
+            showInLegend: false,
+            dataPoints: [
             {% for groupe in groupChart %}
                 {  y: {{groupe['nb_members']}}, indexLabel: '{{groupe["name"]}}' }, 
             {% endfor %}
@@ -105,6 +114,13 @@
         text: "Nombre d'intrigue par personnage",
         fontSize: 30
       },
+      toolTip:{             
+          content: function(e){
+            var content;
+            content = e.entries[0].dataPoint.y+' intrigue(s) de type '+ e.entries[0].dataSeries.legendText;
+            return content;
+          }
+        },
       axisX:{
         interval: 1,
         labelFontSize: 14,
@@ -140,6 +156,13 @@
         text: "Nombre d'intrigue par scénariste",
         fontSize: 30
       },
+      toolTip:{             
+          content: function(e){
+            var content;
+            content = e.entries[0].dataPoint.y+' intrigue(s) de type '+ e.entries[0].dataSeries.legendText;
+            return content;
+          }
+        },
       axisX:{
         interval: 1,
         labelFontSize: 14,
@@ -154,7 +177,7 @@
         horizontalAlign: "center"
       },
       data: [
-      {% for type in persoChart %}
+      {% for type in userChart %}
         {
           type: "stackedBar",
           legendText: "{{type.name}}",

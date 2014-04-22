@@ -819,14 +819,30 @@ class Personnage
 
     /**
      * Count the number of plots of specified type
-     * @param  String $name name of intrigue's type
+     * @param  String $type name of intrigue's type
      * @return int
      */
-    public function countIntrigue($name)
+    public function countIntrigueByType($type)
     {
         $count = 0;
         foreach ($this->intrigues as $key => $intrigue) {
-            if ($intrigue->getIntrigue()->getType() == $name) {
+            if ($intrigue->getIntrigue()->getType() == $type) {
+                $count++;
+            }
+        }
+        return $count;
+    }
+
+     /**
+     * Count the number of plots of specified degree
+     * @param  String $name degree of intrigue's implication
+     * @return int
+     */
+    public function countIntrigueByDegree($degree)
+    {
+        $count = 0;
+        foreach ($this->intrigues as $key => $intrigue) {
+            if ($intrigue->getDegree() == $degree) {
                 $count++;
             }
         }
