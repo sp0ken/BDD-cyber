@@ -88,6 +88,7 @@ class GroupeController extends Controller
 
         return $this->render('UrbicandePersoBundle:Groupe:edit.html.twig', array(
             'groupe'      => $groupe,
+            'logs'        => $logs,
             'form'   => $editForm->createView(),
         ));
     }

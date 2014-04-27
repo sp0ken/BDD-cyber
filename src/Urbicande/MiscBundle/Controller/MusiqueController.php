@@ -82,16 +82,19 @@ class MusiqueController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UrbicandeMiscBundle:Musique')->find($id);
+        $musique = $em->getRepository('UrbicandeMiscBundle:Musique')->find($id);
+        $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+        $logs = $repo->getLogEntries($musique);
 
-        if (!$entity) {
+        if (!$musique) {
             throw $this->createNotFoundException('Unable to find Musique entity.');
         }
 
-        $editForm = $this->createForm(new MusiqueType(), $entity);
+        $editForm = $this->createForm(new MusiqueType(), $musique);
 
         return $this->render('UrbicandeMiscBundle:Musique:edit.html.twig', array(
-            'musique'      => $entity,
+            'musique'      => $musique,
+            'logs'         => $logs,
             'form'   => $editForm->createView(),
         ));
     }
@@ -113,7 +116,7 @@ class MusiqueController extends Controller
         $em->flush();
         
         $this->get('session')->getFlashBag()->add('revert', 'La musique a été restaurée');
-        return $this->redirect($this->generateUrl('perso_by_id', array('id' => $id)));
+        return $this->redirect($this->generateUrl('musique_by_id', array('id' => $id)));
     }
 
     /**
