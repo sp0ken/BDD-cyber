@@ -61,17 +61,14 @@ class StatsController extends Controller
      */
     private function countPersoIntrigue($em)
     {
-        $persos = $em->getRepository('UrbicandePersoBundle:Personnage')->getByType('PJ');
+        $persos = $em->getRepository('UrbicandePersoBundle:Personnage')->getByTypes(array('PJ'));
 
         $degrees = array();
         $degrees['Héros']['persos'] = array();
-        $degrees['Héros']['users'] = array();
         $degrees['Héros']['name'] = 'Héros';
         $degrees['Actif']['persos'] = array();
-        $degrees['Actif']['users'] = array();
         $degrees['Actif']['name'] = 'Actif';
         $degrees['Réactif']['persos'] = array();
-        $degrees['Réactif']['users'] = array();
         $degrees['Réactif']['name'] = 'Réactif';
         foreach ($persos as $key => $perso) {
             $degrees['Héros']['persos'][$perso->getName()] = array();

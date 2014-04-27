@@ -32,18 +32,22 @@ class PersonnageRepository extends EntityRepository
 
   /**
    * Retourne tous les personnage du type spécifié
-   * @param  int $type Type de personnage voulu
+   * @param  array $types Types de personnage voulu
    * @return Doctrine_Collection
    */
-  public function getByType($type)
+  public function getByTypes($types)
   {
     $query = $this->createQueryBuilder('p');
 
     $query->leftJoin('p.type', 't');
-
-    $query->where('t.name = :type')
-                  ->setParameter('type', $type)
-                  ->orderBy('p.name', 'ASC');
+    $query->where('t.id IS NOT NULL');
+    
+    foreach ($types as $key => $type) {
+      $query->orWhere('t.name = :type')
+            ->setParameter('type', $type);
+    }
+    
+    $query->orderBy('p.name', 'ASC');
 
     return $query->getQuery()->getResult();
   }
