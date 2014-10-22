@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Relation entre {{relation.knower}} et {{relation.knowee}} {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    Relation entre {{relation.knower}} et {{relation.knowee}} 
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('relation_edit', {'id': relation.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  {% autoescape false %}
+    <h3 class="twelve columns">Description</h3>
+    <div class="twelve columns">
+      {{ relation.knower}} est {{ relation.type}} de  {{ relation.knowee}}
+    </div>
+    <div class="twelve columns">
+    <h5>Détail</h5>
+      {{ relation.detail }}
+    </div>
+  {% endautoescape %}
+</div>
+
+{% endblock body %}

@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Édition d'une relation' {% endblock %}
+
+{% block body %}
+
+<h1>Éditer la relation entre {{relation.knower}} et {{relation.knowee}} <small>(revenir à la version du : 
+   <form id="revert" action="{{ path('relation_revert', { 'id': relation.id }) }}" method="post" {{ form_enctype(form) }}>
+    <select name="version">
+      {% for log in logs %}
+          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
+      {% endfor %}
+    </select>
+     <input class="button green" type="submit" name="revert" value="Appliquer">
+     )
+  </form>
+</small></h1>
+
+<form action="{{ path('relation_update', { 'id': relation.id }) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="three mobile-four columns">
+      {{ form_row(form.knower)}}
+    </div>
+    <div class="one mobile-four columns">
+        est
+    </div>
+    <div class="four mobile-four columns">
+      {{ form_row(form.type)}}
+    </div>
+     <div class="one mobile-four columns">
+        de
+    </div>
+    <div class="three mobile-four columns">
+      {{ form_row(form.knowee)}}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.detail) }}
+    </div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}

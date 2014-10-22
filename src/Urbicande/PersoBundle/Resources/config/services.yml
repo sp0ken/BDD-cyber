@@ -6,6 +6,7 @@ parameters:
     urbicande.level_manager.class: Urbicande\PersoBundle\Manager\LevelManager
     urbicande.skill_manager.class: Urbicande\PersoBundle\Manager\SkillManager
     urbicande.relationtype_manager.class: Urbicande\PersoBundle\Manager\RelationTypeManager
+    urbicande.relation_manager.class: Urbicande\PersoBundle\Manager\RelationManager
 
 services:
     urbicande.perso_manager:
@@ -28,4 +29,7 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
     urbicande.relationtype_manager:
         class:     "%urbicande.relationtype_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.relation_manager:
+        class:     "%urbicande.relation_manager.class%"
         arguments: ["@doctrine.orm.entity_manager"]

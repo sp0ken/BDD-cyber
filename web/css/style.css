@@ -239,6 +239,11 @@ form#revert {
   form#revert select {
     width:  150px; }
 
+span.form_text {
+    height: 32px;
+    line-height: 32px;
+    font-size: 25px; }
+
 .comment p {
   margin-bottom: 0;
 }

@@ -150,7 +150,10 @@ class Stat
      */
     public function getRelativeXp()
     {
-        return (($this->xp-(pow($this->level, 2)*100))/((pow($this->level+1, 2)*100)-(pow($this->level, 2)*100))*100);
+        $currentLevel = pow($this->level, 2)*100;
+        $nextLevel = pow($this->level+1, 2)*100;
+
+        return $this->xp*100/$nextLevel;
     }
 
     /**

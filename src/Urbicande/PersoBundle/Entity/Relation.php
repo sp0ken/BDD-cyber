@@ -161,4 +161,9 @@ class Relation
     {
         return $this->knowee;
     }
+
+    public function __toString()
+    {
+        return $this->knower.' est '.$this->type.' de '.$this->knowee;
+    }
 }

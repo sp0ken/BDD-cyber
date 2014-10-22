@@ -272,3 +272,42 @@ relation_type_by_id:
     defaults: { _controller: UrbicandePersoBundle:RelationType:show }
     requirements:
       id:     \d+
+
+relation_list:
+    pattern:  /relation
+    defaults: { _controller: UrbicandePersoBundle:Relation:index }
+
+create_relation:
+    pattern:  /relation/create
+    defaults: { _controller: UrbicandePersoBundle:Relation:create }
+
+relation_edit:
+    pattern:  /relation/edit/{id}
+    defaults: { _controller: UrbicandePersoBundle:Relation:edit }
+    requirements:
+      id:     \d+
+
+relation_revert:
+    pattern:  /relation/revert/{id}
+    defaults: { _controller: UrbicandePersoBundle:Relation:revert }
+    requirements:
+      id:     \d+
+
+relation_delete:
+    pattern:  /relation/delete/{id}
+    defaults: { _controller: UrbicandePersoBundle:Relation:delete }
+    requirements:
+      id:     \d+
+
+relation_update:
+    pattern:  /relation/update/{id}
+    defaults: { _controller: "UrbicandePersoBundle:Relation:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
+
+relation_by_id:
+    pattern:  /relation/{id}
+    defaults: { _controller: UrbicandePersoBundle:Relation:show }
+    requirements:
+      id:     \d+
