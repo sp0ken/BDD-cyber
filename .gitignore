@@ -6,3 +6,6 @@
 app/log
 php_errors.log
 web/bundles
+bin/
+composer.phar
+composer.lock
