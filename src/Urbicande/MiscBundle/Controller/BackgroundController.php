@@ -155,22 +155,15 @@ class BackgroundController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        $back = $this->get('urbicande.background_manager')->loadBackground($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UrbicandeMiscBundle:Background')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Background entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$back) {
+          throw $this->createNotFoundException('Unable to find Background entity.');
         }
 
-        $this->get('session')->getFlashBag()->add('update', 'Le document de background a été supprimé');
+        $this->get('urbicande.background_manager')->removeBackground($back);
+
+        $this->get('session')->getFlashBag()->add('delete', 'Le document de background a été supprimé');
         return $this->redirect($this->generateUrl('background_list'));
     }
 

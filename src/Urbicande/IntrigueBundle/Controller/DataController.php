@@ -124,7 +124,7 @@ class DataController extends Controller
     public function deleteAction(Request $request, $id)
     {
       $data = $this->get('urbicande.data_manager')->loadData($id);
-      $plot = $entity->getPlot();
+      $plot = $data->getPlot();
 
       if (!$data) {
           throw $this->createNotFoundException('Unable to find Data entity.');

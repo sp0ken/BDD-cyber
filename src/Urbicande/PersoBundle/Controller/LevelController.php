@@ -153,7 +153,7 @@ class LevelController extends Controller
           throw $this->createNotFoundException('Unable to find Level entity.');
       }
 
-      $this->get('urbicande.level_manager')->removeLevel($type);
+      $this->get('urbicande.level_manager')->removeLevel($level);
 
       $this->get('urbicande.mail_manager')->sendAlertMail($this->getUser(), 'a supprimé un niveau', $this->container->getParameter('supervisor_email'));
       $this->get('session')->getFlashBag()->add('delete', 'Le niveau a été supprimé');
