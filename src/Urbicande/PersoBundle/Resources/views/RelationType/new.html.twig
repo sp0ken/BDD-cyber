@@ -1,0 +1,24 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Création d'un type de relation{% endblock %}
+
+{% block body %}
+
+<h1>Créer un nouveau type de relation</h1>
+
+<form action="{{ path('create_relation_type') }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="twelve columns">
+      {{ form_row(form.name)}}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.description) }}
+    </div>
+  </div>
+
+    {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Créer"/>
+</form>
+
+{% endblock %}

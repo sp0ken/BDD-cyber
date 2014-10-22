@@ -37,7 +37,7 @@ class RpgListener
       $securityContext = $this->container->get('security.context');
       $session = $this->container->get('session');
       $user = $securityContext->getToken()->getUser();
-	    $em = $eventArgs->getEntityManager();
+      $em = $eventArgs->getEntityManager();
       $uow = $em->getUnitOfWork();
       foreach ($uow->getScheduledEntityInsertions() AS $entity) {
         if(!$entity instanceof LogEntry && !$entity instanceof User && $user instanceof User) {
@@ -60,7 +60,7 @@ class RpgListener
       }
 
       if($user instanceof User) {
-        $level = floor(sqrt($user->getStat()->getXp()/100));
+        $level = floor(sqrt($user->getStat()->getXp()/100))+1;
         $caracPoints = $user->getStat()->getCaracPoint();
         if($level > $user->getStat()->getLevel()) {
               $user->getStat()->setLevel($level);

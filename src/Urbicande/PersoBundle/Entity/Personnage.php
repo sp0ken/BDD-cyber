@@ -171,6 +171,22 @@ class Personnage
     private $groupes;
 
     /**
+     * @var Urbicande\PersoBundle\Entity\Relation $relationsTo
+     * Les relations de ce personnage avec d'autres
+     *
+     * @ORM\OneToMany(targetEntity="Urbicande\PersoBundle\Entity\Relation", mappedBy="knower", cascade={"persist", "remove"})
+     */
+    private $relationsTo;
+
+    /**
+     * @var Urbicande\PersoBundle\Entity\Relation $relationsFrom
+     * Les relations de ce personnage par d'autres
+     *
+     * @ORM\OneToMany(targetEntity="Urbicande\PersoBundle\Entity\Relation", mappedBy="knowee", cascade={"persist", "remove"})
+     */
+    private $relationsFrom;
+
+    /**
      * @var ArrayCollection Urbicande\PersoBundle\Entity\Skill $skills
      * Les compétence du personnage
      * 
@@ -925,5 +941,71 @@ class Personnage
     public function getLevel()
     {
         return $this->level;
+    }
+
+    /**
+     * Add relationsTo
+     *
+     * @param \Urbicande\PersoBundle\Entity\Relation $relationsTo
+     * @return Personnage
+     */
+    public function addRelationsTo(\Urbicande\PersoBundle\Entity\Relation $relationsTo)
+    {
+        $this->relationsTo[] = $relationsTo;
+    
+        return $this;
+    }
+
+    /**
+     * Remove relationsTo
+     *
+     * @param \Urbicande\PersoBundle\Entity\Relation $relationsTo
+     */
+    public function removeRelationsTo(\Urbicande\PersoBundle\Entity\Relation $relationsTo)
+    {
+        $this->relationsTo->removeElement($relationsTo);
+    }
+
+    /**
+     * Get relationsTo
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelationsTo()
+    {
+        return $this->relationsTo;
+    }
+
+    /**
+     * Add relationsFrom
+     *
+     * @param \Urbicande\PersoBundle\Entity\Relation $relationsFrom
+     * @return Personnage
+     */
+    public function addRelationsFrom(\Urbicande\PersoBundle\Entity\Relation $relationsFrom)
+    {
+        $this->relationsFrom[] = $relationsFrom;
+    
+        return $this;
+    }
+
+    /**
+     * Remove relationsFrom
+     *
+     * @param \Urbicande\PersoBundle\Entity\Relation $relationsFrom
+     */
+    public function removeRelationsFrom(\Urbicande\PersoBundle\Entity\Relation $relationsFrom)
+    {
+        $this->relationsFrom->removeElement($relationsFrom);
+    }
+
+    /**
+     * Get relationsFrom
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getRelationsFrom()
+    {
+        return $this->relationsFrom;
     }
 }

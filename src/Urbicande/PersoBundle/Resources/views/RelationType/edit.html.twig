@@ -1,0 +1,34 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Édition de {{type.name}} {% endblock %}
+
+{% block body %}
+
+<h1>Éditer le type "{{type.name}}" <small>(revenir à la version du : 
+   <form id="revert" action="{{ path('relation_type_revert', { 'id': type.id }) }}" method="post" {{ form_enctype(form) }}>
+    <select name="version">
+      {% for log in logs %}
+          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
+      {% endfor %}
+    </select>
+     <input class="button green" type="submit" name="revert" value="Appliquer">
+     )
+  </form>
+</small></h1>
+
+<form action="{{ path('relation_type_update', { 'id': type.id }) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row block">
+    <h3 class="twelve columns">La base</h3>
+    <div class="twelve columns">
+      {{ form_row(form.name)}}
+    </div>
+    <div class="twelve columns">
+      {{ form_row(form.description) }}
+    </div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <input class="button green" type="submit" value="Éditer"/>
+</form>
+
+{% endblock %}

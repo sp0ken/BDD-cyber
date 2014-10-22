@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - {{ type.name}} {% endblock %}
+
+{% block body %}
+
+<div class="row">
+  <h1 class="ten columns">
+    {{ type.name }}
+  </h1>
+  <div class="two hide-for-small columns">
+    <div class="button gray large-header">
+      <a href="{{ path('relation_type_edit', {'id': type.id}) }}">Modifier</a>
+    </div>
+  </div>
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  {% autoescape false %}
+    <h3 class="twelve columns">Description</h3>
+    <div class="twelve columns">{{type.description}}</div>
+  {% endautoescape %}
+</div>
+
+<div class="spacer"></div>
+
+<div class="row">
+  <h3 class="twelve columns">Liste des relations <small>({{type.relations|length}} relations)</small></h3>
+  <table class="records_list datatable">
+    <thead>
+      <tr>
+        <th>Personnage connaissant</th>
+        <th>Personnage connu</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for relation in type.relations %}
+      <tr>
+        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knower.id }) }}">{{ relation.knower.name }}</a></td>
+        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knowee.id }) }}">{{ relation.knowee.name }}</a></td>
+        <td>
+          <ul class="button-group even two-up">
+            <li>
+              <div class="button gray">
+                <a title="Voir" href="{{ path('relation_by_id', { 'id': relation.id }) }}"><i class="icon-eye-open"></i></a>
+              </div>
+            </li>
+            <li>
+              <div class="button green">
+                <a href="{{ path('relation_edit', { 'id': relation.id}) }}"><i class="icon-pencil"></i></a>
+              </div>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock body %}

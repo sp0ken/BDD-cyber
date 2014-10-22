@@ -118,7 +118,7 @@ class PersonnageTypeController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($type);
+        $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($id);
 
         if (!$type) {
             throw $this->createNotFoundException('Unable to find PersonnageType entity.');
@@ -132,7 +132,7 @@ class PersonnageTypeController extends Controller
 
             $this->get('urbicande.mail_manager')->sendAlertMail($this->getUser(), 'a édité un type de personnage', $this->container->getParameter('supervisor_email'));
             $this->get('session')->getFlashBag()->add('update', 'Le type de personnage a été mis à jour');
-            return $this->redirect($this->generateUrl('personnagetype_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('perso_type_edit', array('id' => $id)));
         }
 
         return $this->render('UrbicandePersoBundle:PersonnageType:edit.html.twig', array(
@@ -147,7 +147,7 @@ class PersonnageTypeController extends Controller
      */
     public function deleteAction($id)
     {
-      $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($type);
+      $type = $this->get('urbicande.personnagetype_manager')->loadPersonnageType($id);
 
       if (!$type) {
           throw $this->createNotFoundException('Unable to find PersonnageType entity.');
