@@ -7,8 +7,4 @@ app/log
 php_errors.log
 web/bundles
 bin/
-<<<<<<< HEAD
-composer.phar
-composer.lock
-=======
->>>>>>> 8a6bc84be7e42e50f1e34a58e0caf61efbfb8a48
+composer.*
