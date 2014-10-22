@@ -6,3 +6,4 @@
 app/log
 php_errors.log
 web/bundles
+bin/
