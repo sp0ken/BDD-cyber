@@ -101,8 +101,6 @@ class PersonnageController extends Controller
     /**
      * Displays a form to edit an existing Personnage entity.
      *
-     * @Route("/{id}/edit", name="personnage_edit")
-     * @Template()
      */
     public function editAction($id)
     {
@@ -117,11 +115,11 @@ class PersonnageController extends Controller
 
         $editForm = $this->createForm(new PersonnageType(), $perso);
 
-        return array(
+        return $this->render('UrbicandePersoBundle:Personnage:edit.html.twig', array(
             'logs' => $logs,
             'perso'      => $perso,
             'form'   => $editForm->createView(),
-        );
+        ));
     }
 
     /**
@@ -149,8 +147,8 @@ class PersonnageController extends Controller
         }
 
         return array(
-            'perso'      => $perso,
-            'form'   => $editForm->createView(),
+            'perso' => $perso,
+            'form' => $editForm->createView(),
         );
     }
 

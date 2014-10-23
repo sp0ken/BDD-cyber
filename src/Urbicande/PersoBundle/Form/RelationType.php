@@ -5,20 +5,29 @@ namespace Urbicande\PersoBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Doctrine\ORM\EntityRepository;
 
 class RelationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type')
-            ->add('detail', null, array(
-                'label' => 'Détail',
-                'required' => false,
-                'attr' => array('placeholder' => 'Les détails de cette relation particulière', 'class' => 'rte')
+            ->add('knower', null, array('label' => 'Personnage qui connait', 'required' => true))
+            ->add('type', 'entity', array(
+                'label' => 'Type',
+                'class' => 'UrbicandePersoBundle:RelationType',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('r')
+                        ->orderBy('r.name', 'ASC');
+                },
+                'required' => false
             ))
-            ->add('knower')
-            ->add('knowee')
+            ->add('knowee', null, array('label' => 'Personnage connu', 'required' => true))
+            ->add('detail', null, array(
+                'label' => 'Détail de cette relation en particulier', 
+                'required' => false,
+                'attr' => array('placeholder' => 'Les détails de cette relation en particulier', 'class' => 'rte')
+            ))
         ;
     }
 

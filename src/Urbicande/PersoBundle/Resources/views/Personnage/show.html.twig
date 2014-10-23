@@ -214,4 +214,25 @@
   {% endfor %}
 </div>
 
+  <div class="row">
+    <h3 class="twelve columns">Relations</h3>
+    <div class="six mobile-two columns">
+        <h5>Personnages connus</h5>
+          {% for relation in perso.relationsTo %}
+            <div class="row">
+                <a href="{{path('relation_by_id', {'id': relation.id})}}" title="{{relation.type}}"> {{relation.type}} de {{relation.knowee}}</a>
+            </div>
+         {% endfor %}
+    </div>
+    <div class="six mobile-two columns">
+        <h5>Personnages qui le connaissent</h5>
+          {% for relation in perso.relationsFrom %}
+            <div class="row">
+                <a href="{{path('relation_by_id', {'id': relation.id})}}" title="{{relation.type}}">{{relation.knower}} ({{relation.type}})</a>
+            </div>
+         {% endfor %}
+    </div>
+
+  </div>
+
 {% endblock body %}

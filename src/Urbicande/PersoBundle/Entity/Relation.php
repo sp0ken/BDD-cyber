@@ -29,26 +29,26 @@ class Relation
      * Le type de relation entre personnages (parent, ennemi, etc.)
      *
      * @Gedmo\Versioned
-     * @ORM\ManyToOne(targetEntity="Urbicande\PersoBundle\Entity\RelationType", inversedBy="relations")
+     * @ORM\manyToOne(targetEntity="Urbicande\PersoBundle\Entity\RelationType", inversedBy="relations")
      * @ORM\JoinColumn(nullable=false)
      */
     private $type;
 
      /**
-     * @var  ArrayCollection \Urbicande\PersoBundle\Entity\Personnage $knower
+     * @var  \Urbicande\PersoBundle\Entity\Personnage $knower
      * Le personnage qui connait
      *
      * @Gedmo\Versioned
-     * @ORM\ManyToOne(targetEntity="\Urbicande\PersoBundle\Entity\Personnage", inversedBy="relationsTo")
+     * @ORM\manyToOne(targetEntity="\Urbicande\PersoBundle\Entity\Personnage", inversedBy="relationsTo")
      **/
     private $knower;
 
      /**
-     * @var  ArrayCollection \Urbicande\PersoBundle\Entity\Personnage $knowee
+     * @var  \Urbicande\PersoBundle\Entity\Personnage $knowee
      * Le personnage qui est connu
      *
      * @Gedmo\Versioned
-     * @ORM\ManyToOne(targetEntity="\Urbicande\PersoBundle\Entity\Personnage", inversedBy="relationsFrom")
+     * @ORM\manyToOne(targetEntity="\Urbicande\PersoBundle\Entity\Personnage", inversedBy="relationsFrom")
      **/
     private $knowee;
 
@@ -56,7 +56,7 @@ class Relation
      * @var string
      *
      * @Gedmo\Versioned
-     * @ORM\Column(name="detail", type="text")
+     * @ORM\Column(name="detail", type="text", nullable=true)
      */
     private $detail;
 
@@ -125,7 +125,6 @@ class Relation
     public function setKnower(\Urbicande\PersoBundle\Entity\Personnage $knower = null)
     {
         $this->knower = $knower;
-    
         return $this;
     }
 

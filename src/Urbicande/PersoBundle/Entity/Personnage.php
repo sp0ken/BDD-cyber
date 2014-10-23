@@ -584,6 +584,8 @@ class Personnage
         $this->groupes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->intrigues = new \Doctrine\Common\Collections\ArrayCollection();
         $this->skills = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->relationsTo = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->relationsFrom = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**

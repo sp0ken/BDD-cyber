@@ -79,12 +79,15 @@
 
    <div class="row block">
     <h3 class="twelve columns">Les relations</h3>
-    <div class="five mobile-two columns">
-      {{ form_row(form.groupes) }}
+    <div class="row">
+      <div class="five mobile-two columns">
+        {{ form_row(form.groupes) }}
+      </div>
+      <div class="six mobile-two columns">
+        {{ form_row(form.intrigues) }}
+      </div>
     </div>
-    <div class="five mobile-two columns">
-      {{ form_row(form.intrigues) }}
-    </div>
+
   </div>
 
   <div class="spacer"></div>
