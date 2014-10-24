@@ -15,6 +15,7 @@
     <tr>
       <th>Numéro</th>
       <th>Informations</th>
+      <th>Intrigue</th>
       <th>Joueurs informés</th>
       <th>Documents concernés</th>
       <th>Actions</th>
@@ -26,6 +27,7 @@
         <td>{{data.number}}</td>
         <td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
         <td>
+        <td><a href="{{path('intrigue_by_id', {'id': data.plot.intrigue.id})}}">{{data.plot.intrigue}}</a></td>
           {% for perso in data.knowers %}
             <a href="{{path('perso_by_id', {'id': perso.id}) }}">{{perso.name}}</a>/
           {% endfor %}
