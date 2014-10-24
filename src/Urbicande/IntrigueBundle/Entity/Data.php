@@ -251,7 +251,6 @@ class Data
      */
     public function setPlot(\Urbicande\IntrigueBundle\Entity\Plot $plot = null)
     {
-        error_log('setPlot');
         $this->plot = $plot;
     
         return $this;
@@ -264,7 +263,11 @@ class Data
      */
     public function getPlot()
     {
-        error_log('getPlot');
         return $this->plot;
+    }
+
+    public function __toString()
+    {
+        return 'Donnée n°'.$this->getNumber();
     }
 }
