@@ -21,9 +21,11 @@ class RelationController extends Controller
     public function indexAction()
     {
         $relations = $this->get('urbicande.relation_manager')->loadAll();
+        $json = $this->get('urbicande.perso_manager')->getJsonRelations();
 
         return $this->render('UrbicandePersoBundle:Relation:index.html.twig', array(
             'relations' => $relations,
+            'json' => $json
         ));
     }
 
