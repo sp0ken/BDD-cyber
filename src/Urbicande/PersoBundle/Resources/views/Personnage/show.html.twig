@@ -214,6 +214,8 @@
   {% endfor %}
 </div>
 
+  <div class="spacer"></div>
+
   <div class="row">
     <h3 class="twelve columns">Relations</h3>
     <div class="six mobile-two columns">
@@ -232,7 +234,49 @@
             </div>
          {% endfor %}
     </div>
+  </div>
+    
+  <div class="spacer"></div>
 
+  <div class="row">
+    <h3 class="twelve columns">Données connues</h3>
+    <table class="records_list datatable">
+      <thead>
+        <tr>
+          <th>Numéro</th>
+          <th>Informations</th>
+          <th>Documents concernés</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for data in perso.datas %}
+          <tr>
+            <td>{{data.number}}</td>
+            <td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
+            <td>
+              {% for document in data.documents %}
+                <a href="{{path('object_by_id', {'id': document.id}) }}">{{document.name}}</a>
+              {% endfor %}
+            </td>
+            <td>
+              <ul class="button-group even two-up">
+                <li>
+                  <div class="button green">
+                    <a title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="icon-pencil"></i></a>
+                  </div>
+                </li>
+                <li>
+                  <div class="button red">
+                    <a title="Supprimer" href="{{ path('data_delete', { 'id': data.id }) }}"><i class="icon-remove-sign"></i></a>
+                  </div>
+                </li>
+              </ul>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
   </div>
 
 {% endblock body %}

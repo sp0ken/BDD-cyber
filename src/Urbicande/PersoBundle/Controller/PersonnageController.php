@@ -20,23 +20,19 @@ class PersonnageController extends Controller
     /**
      * Lists all Personnage entities.
      *
-     * @Route("/", name="personnage")
-     * @Template()
      */
     public function indexAction()
     {
         $persos = $this->get('urbicande.perso_manager')->loadAll();
         
-        return array(
+       return $this->render('UrbicandePersoBundle:Personnage:index.html.twig', array(
             'persos' => $persos
-        );
+        ));
     }
 
     /**
      * Finds and displays a Personnage entity.
      *
-     * @Route("/{id}/show", name="personnage_show")
-     * @Template()
      */
     public function showAction($id)
     {
@@ -46,9 +42,9 @@ class PersonnageController extends Controller
             throw $this->createNotFoundException('Unable to find Personnage entity.');
         }
 
-        return array(
+        return $this->render('UrbicandePersoBundle:Personnage:show.html.twig', array(
             'perso'      => $perso,
-        );
+        ));
     }
 
 
@@ -72,10 +68,10 @@ class PersonnageController extends Controller
             return $this->redirect($this->generateUrl('perso_by_id', array('id' => $perso->getId())));
         }
 
-        return array(
+       return $this->render('UrbicandePersoBundle:Personnage:new.html.twig', array(
             'entity' => $perso,
             'form'   => $form->createView(),
-        );
+        ));
     }
 
     /**
@@ -146,10 +142,10 @@ class PersonnageController extends Controller
             return $this->redirect($this->generateUrl('perso_by_id', array('id' => $id)));
         }
 
-        return array(
+        return $this->render('UrbicandePersoBundle:Personnage:edit.html.twig', array(
             'perso' => $perso,
             'form' => $editForm->createView(),
-        );
+        ));
     }
 
     /**

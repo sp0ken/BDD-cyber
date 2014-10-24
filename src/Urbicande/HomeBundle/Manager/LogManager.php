@@ -22,7 +22,7 @@ class LogManager extends BaseManager
     }
 
     public function loadAll() {
-       return $this->getRepository()->findBy(array(), array('loggedAt' => 'DESC'));
+       return $this->getRepository()->findBy(array(), array('loggedAt' => 'DESC'), 200);
     }
 
     public function loadHome() {

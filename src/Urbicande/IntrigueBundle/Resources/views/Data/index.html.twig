@@ -10,24 +10,31 @@
   </h1>
 </div>
 
-
 <table class="records_list datatable">
   <thead>
     <tr>
       <th>Numéro</th>
-      <th>Information</th>
-      <th>Nombre de personnages liés</th>
-      <th>Nombre de documents liés</th>
+      <th>Informations</th>
+      <th>Joueurs informés</th>
+      <th>Documents concernés</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-  {% for data in datas %}
+    {% for data in datas %}
       <tr>
-        <td>{{ data.number }}</td>
-        <td>{{ data.information }}</td>
-        <td>{{ data.knowers|length }}</td>
-        <td>{{ data.documents|length }}</td>
+        <td>{{data.number}}</td>
+        <td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
+        <td>
+          {% for perso in data.knowers %}
+            <a href="{{path('perso_by_id', {'id': perso.id}) }}">{{perso.name}}</a>/
+          {% endfor %}
+        </td>
+        <td>
+          {% for document in data.documents %}
+            <a href="{{path('object_by_id', {'id': document.id}) }}">{{document.name}}</a>
+          {% endfor %}
+        </td>
         <td>
           <ul class="button-group even two-up">
             <li>
@@ -43,9 +50,7 @@
           </ul>
         </td>
       </tr>
-    </a>
-  {% endfor %}
+    {% endfor %}
   </tbody>
 </table>
-
 {% endblock body %}

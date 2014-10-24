@@ -24,7 +24,7 @@
   {% autoescape false %}
     <div class="six mobile-two columns">{{musique.description}}</div>
     <div class="six mobile-two columns">{{musique.tde}}</div><br>
-    <div class="six mobile-two columns">{{musique.link}}</div><br>
+    <div class="six mobile-two columns"><a href="{{musique.link}}" title="">{{musique.link}}</a></div><br>
   {% endautoescape %}
 </div>
 

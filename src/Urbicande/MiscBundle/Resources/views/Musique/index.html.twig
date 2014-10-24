@@ -33,7 +33,7 @@
         <td><a title="Voir" href="{{ path('musique_by_id', { 'id': musique.id }) }}">{{ musique.number }}</a></td>
         <td><a title="Voir" href="{{ path('musique_by_id', { 'id': musique.id }) }}">{{ musique.name }}</a></td>
         <td>{{ musique.type }}</td>
-        <td>{{ musique.link }}</td>
+        <td><a href="{{musique.link}}">{{ musique.link }}</a></td>
         <td>
           <ul class="button-group even two-up">
             <li>

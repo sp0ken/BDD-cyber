@@ -12,7 +12,7 @@
     {% for data in intrigue.plot.datas %}
       <tr>
         <td>{{data.number}}</td>
-        <td>{{data.information}}</td>
+        <td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
         <td>
           {% for perso in data.knowers %}
             <a href="{{path('perso_by_id', {'id': perso.id}) }}">{{perso.name}}</a>/
@@ -24,12 +24,7 @@
           {% endfor %}
         </td>
         <td>
-          <ul class="button-group even three-up">
-            <li>
-              <div class="button gray">
-                <a title="Voir" href="{{ path('data_by_id', { 'id': data.id }) }}"><i class="icon-eye-open"></i></a>
-              </div>
-            </li>
+          <ul class="button-group even two-up">
             <li>
               <div class="button green">
                 <a title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="icon-pencil"></i></a>
