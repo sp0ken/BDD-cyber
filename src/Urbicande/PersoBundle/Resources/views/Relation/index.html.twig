@@ -4,218 +4,211 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="ten columns">
-    Les relations
-  </h1>
-  <div class="two hide-for-small columns">
-    <div class="button gray large-header">
-      <a href="{{ path('create_relation') }}">Créer une relation</a>
-    </div>
-  </div>
+<div class="row page-header">
+	<h1 class="small-12 medium-9 columns">
+		Les relations
+	</h1>
+	<div class="medium-3 hide-for-small columns">
+		<a class="button blue flat" href="{{ path('create_relation') }}">Créer une relation</a>
+	</div>
 </div>
 
 
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>id</th>
-      <th>Personne qui connait</th>
-      <th>Type</th>
-      <th>Personne connue</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for relation in relations %}
-      <tr>
-        <td><a title="Voir" href="{{ path('relation_by_id', { 'id': relation.id }) }}">{{ relation.id }}</a></td>
-        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knower.id }) }}">{{ relation.knower }}</a></td>
-        <td><a title="Voir" href="{{ path('relation_type_by_id', { 'id': relation.type.id }) }}">{{ relation.type }}</a></td>
-        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knowee.id }) }}">{{ relation.knowee }}</a></td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('relation_edit', { 'id': relation.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('relation_delete', { 'id': relation.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </a>
-  {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>id</th>
+			<th>Personne qui connait</th>
+			<th>Type</th>
+			<th>Personne connue</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for relation in relations %}
+			<tr>
+				<td><a title="Voir" href="{{ path('relation_by_id', { 'id': relation.id }) }}">{{ relation.id }}</a></td>
+				<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knower.id }) }}">{{ relation.knower }}</a></td>
+				<td><a title="Voir" href="{{ path('relation_type_by_id', { 'id': relation.type.id }) }}">{{ relation.type }}</a></td>
+				<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knowee.id }) }}">{{ relation.knowee }}</a></td>
+				<td>
+					<ul class="button-group">
+						<li><a class="button flat green" title="Éditer" href="{{ path('relation_edit', { 'id': relation.id }) }}"><i class="fa fa-edit"></i></a></li>
+						<li><a class="button flat red" title="Supprimer" href="{{ path('relation_delete', { 'id': relation.id }) }}"><i class="fa fa-times-circle"></i></a></div>
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</a>
+	{% endfor %}
+	</tbody>
 </table>
 
-<div class="spacer"></div>
-
 <div class="row">
-  <h1 class="ten columns">
-    Graphique des relations <small>(PJ: Ronds rouges, PNJ: Carrés verts)</small>
-  </h1>
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Graphique des relations <small>(PJ: Ronds rouges, PNJ: Carrés verts)</small>
+				</h3>
+			</div>
+			<div class="row">
+				<div id="relationChart" class="small-12 column full chart"></div>
+			</div>
+		</div>
+	</div>
 </div>
-
-<div class="row">
-  <div id="relationChart" class="twelve column full chart"></div>
-</div>
-
 
 
 {% block javascript %}
-  {{parent()}}
-  {% autoescape false %}
-  <script type="text/javascript">
-    var labelType, useGradients, nativeTextSupport, animate;
+	{{parent()}}
+	{% autoescape false %}
+	<script type="text/javascript">
+		var labelType, useGradients, nativeTextSupport, animate;
 
-    (function() {
-      var ua = navigator.userAgent,
-          iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
-          typeOfCanvas = typeof HTMLCanvasElement,
-          nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
-          textSupport = nativeCanvasSupport 
-            && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
-      //I'm setting this based on the fact that ExCanvas provides text support for IE
-      //and that as of today iPhone/iPad current text support is lame
-      labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
-      nativeTextSupport = labelType == 'Native';
-      useGradients = nativeCanvasSupport;
-      animate = !(iStuff || !nativeCanvasSupport);
-    })();
+		(function() {
+			var ua = navigator.userAgent,
+					iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
+					typeOfCanvas = typeof HTMLCanvasElement,
+					nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
+					textSupport = nativeCanvasSupport 
+						&& (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
+			//I'm setting this based on the fact that ExCanvas provides text support for IE
+			//and that as of today iPhone/iPad current text support is lame
+			labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
+			nativeTextSupport = labelType == 'Native';
+			useGradients = nativeCanvasSupport;
+			animate = !(iStuff || !nativeCanvasSupport);
+		})();
 
-    window.onload = function () {
+		window.onload = function () {
 
-      var json = {{json}};
+			var json = {{json}};
 
-      var fd = new $jit.ForceDirected({  
-        //id of the visualization container  
-        injectInto: 'relationChart',  
-        //Enable zooming and panning  
-        //by scrolling and DnD  
-        Navigation: {  
-          enable: true,  
-          //Enable panning events only if we're dragging the empty  
-          //canvas (and not a node).  
-          panning: 'avoid nodes',  
-          zooming: 10 //zoom speed. higher is more sensible  
-        },  
-        // Change node and edge styles such as  
-        // color and width.  
-        // These properties are also set per node  
-        // with dollar prefixed data-properties in the  
-        // JSON structure.  
-        Node: {  
-          overridable: true,
-        },  
-        Edge: {  
-          overridable: false,
-          type : 'arrow',
-          color: '#000',
-          lineWidth: 1
-        },  
-        //Native canvas text styling  
-        Label: {  
-          type: labelType, //Native or HTML  
-          size: 15,  
-          style: 'bold',
-          color: '#333'
-        },  
-        //Add Tips  
-        Tips: {  
-          enable: true,  
-          onShow: function(tip, node) {  
-            //count connections  
-            var count = 0;  
-            node.eachAdjacency(function() { count++; });  
-            //display node info in tooltip  
-            tip.innerHTML = "<div class=\"tip-title\">" + node.name + "</div>"  
-              + "<div class=\"tip-text\"><b>connections:</b> " + count + "</div>";  
-          }  
-        },  
-        // Add node events  
-        Events: {  
-          enable: true,
-          type: 'Native',
-          //Change cursor style when hovering a node  
-          onMouseEnter: function() {  
-            fd.canvas.getElement().style.cursor = 'move';  
-          },  
-          onMouseLeave: function() {  
-            fd.canvas.getElement().style.cursor = '';  
-          },  
-          //Update node positions when dragged  
-          onDragMove: function(node, eventInfo, e) {  
-              var pos = eventInfo.getPos();  
-              node.pos.setc(pos.x, pos.y);  
-              fd.plot();  
-          },  
-          //Implement the same handler for touchscreens  
-          onTouchMove: function(node, eventInfo, e) {  
-            $jit.util.event.stop(e); //stop default touchmove event  
-            this.onDragMove(node, eventInfo, e);  
-          },  
-          //Add also a click handler to nodes  
-          onClick: function(node) {  
-            if(!node) return;  
-            // Build the right column relations list.  
-            // This is done by traversing the clicked node connections.  
-            var html = "<h4>" + node.name + "</h4><b> connections:</b><ul><li>",  
-                list = [];  
-            node.eachAdjacency(function(adj){  
-              list.push(adj.nodeTo.name);  
-            });  
-          }  
-        },  
-        //Number of iterations for the FD algorithm  
-        iterations: 200,
-        //Edge length  
-        levelDistance: 200,
-        // Add text to the labels. This method is only triggered  
-        // on label creation and only for DOM labels (not native canvas ones).  
-        onCreateLabel: function(domElement, node){  
-          domElement.innerHTML = node.name;  
-          var style = domElement.style;  
-          style.fontSize = "1em";  
-          style.color = "#ddd";  
-        },  
-        // Change node styles when DOM labels are placed  
-        // or moved.  
-        onPlaceLabel: function(domElement, node){  
-          var style = domElement.style;  
-          var left = parseInt(style.left);  
-          var top = parseInt(style.top);  
-          var w = domElement.offsetWidth;  
-          style.left = (left - w / 2) + 'px';  
-          style.top = (top + 10) + 'px';  
-          style.display = '';  
-        }  
-      });  
-      // load JSON data.  
-      fd.loadJSON(json);  
-      // compute positions incrementally and animate.  
-      fd.computeIncremental({  
-        iter: 40,  
-        property: 'end',
-        onStep: function(perc){  
-          console.log(perc + '% loaded...');  
-        },  
-        onComplete: function(){  
-          console.log('done');  
-          fd.animate({  
-            modes: ['linear'],  
-            transition: $jit.Trans.Elastic.easeOut,  
-            duration: 2500  
-          });  
-        }  
-    });
-  }
-  </script>
-  {% endautoescape %}
+			var fd = new $jit.ForceDirected({  
+				//id of the visualization container  
+				injectInto: 'relationChart',  
+				//Enable zooming and panning  
+				//by scrolling and DnD  
+				Navigation: {  
+					enable: true,  
+					//Enable panning events only if we're dragging the empty  
+					//canvas (and not a node).  
+					panning: 'avoid nodes',  
+					zooming: 10 //zoom speed. higher is more sensible  
+				},  
+				// Change node and edge styles such as  
+				// color and width.  
+				// These properties are also set per node  
+				// with dollar prefixed data-properties in the  
+				// JSON structure.  
+				Node: {  
+					overridable: true,
+				},  
+				Edge: {  
+					overridable: false,
+					type : 'arrow',
+					color: '#000',
+					lineWidth: 1
+				},  
+				//Native canvas text styling  
+				Label: {  
+					type: labelType, //Native or HTML  
+					size: 15,  
+					style: 'bold',
+					color: '#333'
+				},  
+				//Add Tips  
+				Tips: {  
+					enable: true,  
+					onShow: function(tip, node) {  
+						//count connections  
+						var count = 0;  
+						node.eachAdjacency(function() { count++; });  
+						//display node info in tooltip  
+						tip.innerHTML = "<div class=\"tip-title\">" + node.name + "</div>"  
+							+ "<div class=\"tip-text\"><b>connections:</b> " + count + "</div>";  
+					}  
+				},  
+				// Add node events  
+				Events: {  
+					enable: true,
+					type: 'Native',
+					//Change cursor style when hovering a node  
+					onMouseEnter: function() {  
+						fd.canvas.getElement().style.cursor = 'move';  
+					},  
+					onMouseLeave: function() {  
+						fd.canvas.getElement().style.cursor = '';  
+					},  
+					//Update node positions when dragged  
+					onDragMove: function(node, eventInfo, e) {  
+							var pos = eventInfo.getPos();  
+							node.pos.setc(pos.x, pos.y);  
+							fd.plot();  
+					},  
+					//Implement the same handler for touchscreens  
+					onTouchMove: function(node, eventInfo, e) {  
+						$jit.util.event.stop(e); //stop default touchmove event  
+						this.onDragMove(node, eventInfo, e);  
+					},  
+					//Add also a click handler to nodes  
+					onClick: function(node) {  
+						if(!node) return;  
+						// Build the right column relations list.  
+						// This is done by traversing the clicked node connections.  
+						var html = "<h4>" + node.name + "</h4><b> connections:</b><ul><li>",  
+								list = [];  
+						node.eachAdjacency(function(adj){  
+							list.push(adj.nodeTo.name);  
+						});  
+					}  
+				},  
+				//Number of iterations for the FD algorithm  
+				iterations: 200,
+				//Edge length  
+				levelDistance: 200,
+				// Add text to the labels. This method is only triggered  
+				// on label creation and only for DOM labels (not native canvas ones).  
+				onCreateLabel: function(domElement, node){  
+					domElement.innerHTML = node.name;  
+					var style = domElement.style;  
+					style.fontSize = "1em";  
+					style.color = "#ddd";  
+				},  
+				// Change node styles when DOM labels are placed  
+				// or moved.  
+				onPlaceLabel: function(domElement, node){  
+					var style = domElement.style;  
+					var left = parseInt(style.left);  
+					var top = parseInt(style.top);  
+					var w = domElement.offsetWidth;  
+					style.left = (left - w / 2) + 'px';  
+					style.top = (top + 10) + 'px';  
+					style.display = '';  
+				}  
+			});  
+			// load JSON data.  
+			fd.loadJSON(json);  
+			// compute positions incrementally and animate.  
+			fd.computeIncremental({  
+				iter: 40,  
+				property: 'end',
+				onStep: function(perc){  
+					console.log(perc + '% loaded...');  
+				},  
+				onComplete: function(){  
+					console.log('done');  
+					fd.animate({  
+						modes: ['linear'],  
+						transition: $jit.Trans.Elastic.easeOut,  
+						duration: 2500  
+					});  
+				}  
+		});
+	}
+	</script>
+	{% endautoescape %}
 {% endblock %}
 
 

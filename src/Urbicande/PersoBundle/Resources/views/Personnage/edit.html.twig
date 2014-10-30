@@ -5,101 +5,131 @@
 {% block body %}
 
 <h1>Éditer {{perso.name}} <small>(revenir à la version du : 
-   <form id="revert" action="{{ path('perso_revert', { 'id': perso.id }) }}" method="post" {{ form_enctype(form) }}>
-    <select name="version">
-      {% for log in logs %}
-          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
-      {% endfor %}
-    </select>
-     <input class="button green" type="submit" name="revert" value="Appliquer">
-     )
-  </form>
+	 <form id="revert" action="{{ path('perso_revert', { 'id': perso.id }) }}" method="post" {{ form_enctype(form) }}>
+		<select name="version">
+			{% for log in logs %}
+					<option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
+			{% endfor %}
+		</select>
+		 <input class="button flat green" type="submit" name="revert" value="Appliquer">
+		 )
+	</form>
 </small></h1>
 
 <form action="{{ path('perso_update', { 'id': perso.id }) }}" method="post" {{ form_enctype(form) }}>
-  <div class="row block">
-    <h3 class="twelve columns">La technique</h3>
-    <div class="six mobile-two columns">
-      {{ form_row(form.writer)}}
-    </div>
-    <div class="six mobile-two columns">
-      {{ form_row(form.status) }}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La technique</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.writer)}}
+					</div>
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.status) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La base</h3>
+				</div>
+				<div class="row">
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.type)}}
+					</div>
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.number) }}
+					</div>
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.name)}}
+					</div>
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.sex, {'attr': {'selected': perso.sex}})}}
+					</div>
+					<div class="small-12 columns">
+						{{ form_row(form.concept)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Les détails</h3>
+				</div>
+				<div class="row">
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.age) }}
+					</div>
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.level) }}
+					</div>
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.job)}}
+					</div>
+					<div class="small-6 medium-3 columns">
+						{{ form_row(form.income)}}
+					</div>
+					<div class="small-12 columns">
+						{{ form_row(form.description)}}
+					</div>
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.skills)}}
+					</div>
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.costume)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
-  
-  <div class="row block">
-    <h3 class="twelve columns">La base</h3>
-    <div class="three mobile-one columns">
-      {{ form_row(form.type)}}
-    </div>
-    <div class="three mobile-one columns">
-      {{ form_row(form.number) }}
-    </div>
-    <div class="three mobile-one columns">
-      {{ form_row(form.name)}}
-    </div>
-    <div class="three mobile-one columns">
-      {{ form_row(form.sex, {'attr': {'selected': perso.sex}})}}
-    </div>
-    <div class="twelve columns">
-      {{ form_row(form.concept)}}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Les relations</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.groupes) }}
+					</div>
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.intrigues) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
-  
-  <div class="row block">
-    <h3 class="twelve columns">Les détails</h3>
-<div class="three mobile-one columns">
-      {{ form_row(form.age) }}
-    </div>
-    <div class="three mobile-one columns">
-      {{ form_row(form.level) }}
-    </div>
-    <div class="three mobile-one columns">
-      {{ form_row(form.job)}}
-    </div>
-    <div class="three mobile-one columns">
-      {{ form_row(form.income)}}
-    </div>
-    <div class="twelve columns">
-      {{ form_row(form.description)}}
-    </div>
-    <div class="five mobile-two columns">
-      {{ form_row(form.skills)}}
-    </div>
-    <div class="six mobile-two columns">
-      {{ form_row(form.costume)}}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La chronologie</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						{{ form_row(form.events)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
-
-   <div class="row block">
-    <h3 class="twelve columns">Les relations</h3>
-    <div class="row">
-      <div class="five mobile-two columns">
-        {{ form_row(form.groupes) }}
-      </div>
-      <div class="six mobile-two columns">
-        {{ form_row(form.intrigues) }}
-      </div>
-    </div>
-
-  </div>
-
-  <div class="spacer"></div>
-
-  <div class="row block">
-    <h3 class="twelve columns">Chronologie</h3>
-    <div class="twelve columns">
-      {{ form_row(form.events)}}
-    </div>
-  </div>
-  {{ form_row(form._token) }}
-  <input class="button green" type="submit" value="Éditer"/>
+	{{ form_row(form._token) }}
+	<input class="button flat green" type="submit" value="Éditer"/>
 </form>
 
 {% endblock %}

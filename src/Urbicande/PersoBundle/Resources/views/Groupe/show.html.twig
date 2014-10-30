@@ -4,141 +4,157 @@
 
 {% block body %}
 <script type="text/javascript">
-  // Called when the Visualization API is loaded.
-  function drawVisualization() {
-    // Create and populate a data table.
-    var data = [];
+	// Called when the Visualization API is loaded.
+	function drawVisualization() {
+		// Create and populate a data table.
+		var data = [];
 
-    {% for event in groupe.events %}
-      data.push({
-        'start': new Date({{event.startDate|date('Y')}}, {{event.startDate|date('n')-1}}, {{event.startDate|date('d')}}),
-        {% if (event.endDate) and (event.endDate|date('Y-m-d') != '-0001-11-30') %}
-          'end': new Date({{event.endDate|date('Y')}}, {{event.endDate|date('n')-1}}, {{event.endDate|date('d')}}),
-        {% endif %}
-        'content': '<a href="{{path('event_by_id', {'id': event.id}) }}">{{event.name}}</a>',
-      });
-    {% endfor %}
+		{% for event in groupe.events %}
+			data.push({
+				'start': new Date({{event.startDate|date('Y')}}, {{event.startDate|date('n')-1}}, {{event.startDate|date('d')}}),
+				{% if (event.endDate) and (event.endDate|date('Y-m-d') != '-0001-11-30') %}
+					'end': new Date({{event.endDate|date('Y')}}, {{event.endDate|date('n')-1}}, {{event.endDate|date('d')}}),
+				{% endif %}
+				'content': '<a href="{{path('event_by_id', {'id': event.id}) }}">{{event.name}}</a>',
+			});
+		{% endfor %}
 
-    // specify options
-    options = {
-      "width":  "100%",
-      "height": "150px",
-      "style": "box", // optional
-       "zoomMin": 1000 * 60 * 60 *24 * 7,
-      "showCurrentTime": "false",
-      "showNavigation": "true",
-    }; 
-    // Instantiate our timeline object.
-    var timeline = new links.Timeline(document.getElementById('event-timeline'));
+		// specify options
+		options = {
+			"width":  "100%",
+			"height": "150px",
+			"style": "box", // optional
+			 "zoomMin": 1000 * 60 * 60 *24 * 7,
+			"showCurrentTime": "false",
+			"showNavigation": "true",
+		}; 
+		// Instantiate our timeline object.
+		var timeline = new links.Timeline(document.getElementById('event-timeline'));
 
-    // Draw our timeline with the created data and options
-    timeline.draw(data, options);
-  }
+		// Draw our timeline with the created data and options
+		timeline.draw(data, options);
+	}
 </script>
 
-<div class="row">
-  <h1 class="ten columns">
-    {{ groupe.name }}
-  </h1>
-  <div class="two hide-for-small columns">
-    <div class="button gray">
-      <a href="{{ path('groupe_edit', {'id': groupe.id}) }}">Modifier</a>
-    </div>
-  </div>
+<div class="row page-header">
+	<h1 class="small-6 medium-9 columns">
+		{{ groupe.name }}
+	</h1>
+	<div class="small-6 medium-3 columns">
+		<a class="button flat green"  href="{{ path('groupe_edit', {'id': groupe.id}) }}">Modifier</a>
+	</div>
 </div>
 
-<div class="spacer"></div>
-
+<!-- Description -->
 <div class="row">
-  {% autoescape false %}
-    <h3 class="twelve columns">Description</div>
-    <div class="twelve columns">{{groupe.description}}</div>
-  {% endautoescape %}
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Description
+				</h3>
+			</div>
+			{% autoescape false %}
+				<div>{{groupe.description}}</div>
+			{% endautoescape %}
+		</div>
+	</div>
 </div>
 
-<div class="spacer"></div>
-
+<!-- Description -->
 <div class="row">
-  <h3 class="twelve columns">Chronologie</h3>
-  <div class="twelve columns" id="event-timeline"></div>
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Particularité
+				</h3>
+			</div>
+			{% autoescape false %}
+				<div>{{groupe.particularity}}</div>
+			{% endautoescape %}
+		</div>
+	</div>
 </div>
 
-<div class="spacer"></div>
+<!--- Chronologie -->
+<div class="row">
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 large-9 columns">
+					Chronologie
+				</h3>
+				<div class="small-6 medium-4 large-3 columns">
+					<a class="button flat blue"  href="{{path('create_event', {'groupe': groupe.id})}}">
+						Créer un évènement
+					</a>
+				</div>
+			</div>
+			<div id="event-timeline"></div>
+		</div>
+	</div>
+</div>
+
 
 <div class="row">
-  <div class="six columns">
-    <h3>Liste des personnages <small>({{groupe.members|length}} personnages)</small></h3>
-    <table class="records_list datatable">
-      <thead>
-        <tr>
-          <th>Type</th>
-          <th>Numero</th>
-          <th>Nom</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for perso in groupe.members %}
-        <tr>
-          <td><a title="Voir" href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type.name }}</a></td>
-          <td>{{ perso.number }}</td>
-          <td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
-          <td>
-            <ul class="button-group even two-up">
-              <li>
-                <div class="button gray">
-                  <a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="icon-eye-open"></i></a>
-                </div>
-              </li>
-              <li>
-                <div class="button red">
-                  <a title="Enlever du groupe" href="{{ path('groupe_remove_perso', { 'memberId': perso.id, 'groupeId': groupe.id }) }}"><i class="icon-remove-sign"></i></a>
-                </div>
-              </li>
-            </ul>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
+	<div class="small-12 medium-6 columns">
+		<h3>Liste des personnages <small>({{groupe.members|length}} personnages)</small></h3>
+		<table class="records_list datatable">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Numero</th>
+					<th>Nom</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for perso in groupe.members %}
+				<tr>
+					<td><a title="Voir" href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type.name }}</a></td>
+					<td>{{ perso.number }}</td>
+					<td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+					<td>
+						<ul class="button-group">
+							<li><a class="button flat gray" title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="fa fa-eye"></i></a></li>
+							<li><a class="button flat red" title="Enlever du groupe" href="{{ path('groupe_remove_perso', { 'memberId': perso.id, 'groupeId': groupe.id }) }}"><i class="fa fa-minus-circle"></i></a></li>
+						</ul>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
 
-  <div class="six columns">
-    <h3>Liste des implications <small>({{groupe.intrigues|length}} implications)</small></h3>
-    <table class="records_list datatable">
-      <thead>
-        <tr>
-          <th>Intrigue</th>
-          <th>Degré</th>
-          <th>Thème</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-      {% for implication in groupe.intrigues %}
-        <tr>
-          <td><a title="Voir" href="{{ path('implication_by_id', { 'id': implication.id }) }}">{{ implication.intrigue }}</a></td>
-          <td>{{ implication.degree }}</td>
-          <td>{{ implication.theme }}</td>
-          <td>
-            <ul class="button-group even two-up">
-              <li>
-                <div class="button gray">
-                  <a title="Voir" href="{{ path('implication_by_id', { 'id': implication.id }) }}"><i class="icon-eye-open"></i></a>
-                </div>
-              </li>
-              <li>
-                <div class="button red">
-                  <a title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id}) }}"><i class="icon-remove-sign"></i></a>
-                </div>
-              </li>
-            </ul>
-          </td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
-  </div>
+	<div class="small-12 medium-6  columns">
+		<h3>Liste des implications <small>({{groupe.intrigues|length}} implications)</small></h3>
+		<table class="records_list datatable">
+			<thead>
+				<tr>
+					<th>Intrigue</th>
+					<th>Degré</th>
+					<th>Thème</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+			{% for implication in groupe.intrigues %}
+				<tr>
+					<td><a title="Voir" href="{{ path('implication_by_id', { 'id': implication.id }) }}">{{ implication.intrigue }}</a></td>
+					<td>{{ implication.degree }}</td>
+					<td>{{ implication.theme }}</td>
+					<td>
+						<ul class="button-group">
+							<li><a title="Voir" href="{{ path('implication_by_id', { 'id': implication.id }) }}"><i class="fa fa-eye"></i></a></li>
+							<li><a title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id}) }}"><i class="fa fa-minus-circle"></i></a></li>
+						</ul>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
 </div>
 
 {% endblock body %}

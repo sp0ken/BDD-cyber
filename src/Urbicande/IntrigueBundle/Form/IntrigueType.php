@@ -47,12 +47,6 @@ class IntrigueType extends AbstractType
                 'by_reference' => false,
                 'label' => 'Règles'
             ))
-            ->add('implications', 'collection', array(
-                'type' => new ImplicationType(),
-                'allow_add' => true,
-                'by_reference' => false,
-                'label' => 'Implication'
-            ))
         ;
     }
 

@@ -1,20 +1,20 @@
 <div class="row">
-  <div class="three mobile-two columns">
-    <img src="{{asset(user.stat.fullAvatar)}}" /><br />
-    <span class="title">{{user.stat.title}}</span>
-  </div>
-  <div class="nine mobile-two columns">
-    <h4>Caractéristiques {% if user.stat.caracPoint and app.user == user %}<small>(Points restants : <span class="total">{{user.stat.caracPoint}}</span>)</small>{% endif %}</h4>
-    <ul class="no-bullet">
-      <li><b>U</b>fologie : <span class="point">{{user.stat.ufologie}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="u"><i class="icon-expand-alt"></i></a>{% endif %}</li>
-      <li><b>R</b>electure : <span class="point">{{user.stat.relecture}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="r"><i class="icon-expand-alt"></i></a>{% endif %}</li>
-      <li><b>B</b>lague : <span class="point">{{user.stat.blague}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="b"><i class="icon-expand-alt"></i></a>{% endif %}</li>
-      <li><b>I</b>magination : <span class="point">{{user.stat.imagination}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="i"><i class="icon-expand-alt"></i></a>{% endif %}</li>
-    </ul>
-  </div>
-  <div class="twelve mobile-four columns xp-bar">
-    <span class="left level hide-for-small">{{user.stat.level}}</span> 
-    <div class="progress ten left"><span class="meter" style="width:{{user.stat.relativeXp}}%;"><span class="xp">{{user.stat.xp}} xp</span></span></div> 
-    <span class="left level hide-for-small">{{user.stat.level +1}}</span>
-  </div>
+	<div class="hide-for-medium large-3 columns">
+		<img src="{{asset(user.stat.fullAvatar)}}" /><br />
+		<span class="title">{{user.stat.title}}</span>
+	</div>
+	<div class="medium-12 large-9 columns">
+		<h4>Caractéristiques {% if user.stat.caracPoint and app.user == user %}<small>(Points restants : <span class="total">{{user.stat.caracPoint}}</span>)</small>{% endif %}</h4>
+		<ul class="no-bullet">
+			<li><b>U</b>fologie : <span class="point">{{user.stat.ufologie}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="u"><i class="icon-expand-alt"></i></a>{% endif %}</li>
+			<li><b>R</b>electure : <span class="point">{{user.stat.relecture}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="r"><i class="icon-expand-alt"></i></a>{% endif %}</li>
+			<li><b>B</b>lague : <span class="point">{{user.stat.blague}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="b"><i class="icon-expand-alt"></i></a>{% endif %}</li>
+			<li><b>I</b>magination : <span class="point">{{user.stat.imagination}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="i"><i class="icon-expand-alt"></i></a>{% endif %}</li>
+		</ul>
+	</div>
+	<div class="medium-12 columns xp-bar">
+		<span class="left level">{{user.stat.level}}</span> 
+		<div class="progress medium-10 left"><span class="meter" style="width:{{user.stat.relativeXp}}%;"><span class="xp">{{user.stat.xp}} xp</span></span></div> 
+		<span class="left level">{{user.stat.level +1}}</span>
+	</div>
 </div>

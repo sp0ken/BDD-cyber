@@ -7,30 +7,38 @@
 <h1>Créer une nouvelle relation</h1>
 
 <form action="{{ path('create_relation') }}" method="post" {{ form_enctype(form) }}>
-  <div class="row block">
-    <h3 class="twelve columns">La base</h3>
-    <div class="three mobile-four columns">
-      {{ form_widget(form.knower)}}
-    </div>
-    <div class="one mobile-four columns">
-        <span class="form_text">est</span>
-    </div>
-    <div class="four mobile-four columns">
-      {{ form_widget(form.type)}}
-    </div>
-     <div class="one mobile-four columns">
-        <span class="form_text">de</span>
-    </div>
-    <div class="three mobile-four columns">
-      {{ form_widget(form.knowee)}}
-    </div>
-    <div class="twelve columns">
-      {{ form_row(form.detail) }}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La base</h3>
+				</div>
+				<div class="row">
+					<div class="small-10 medium-3 columns">
+						{{ form_widget(form.knower)}}
+					</div>
+					<div class="small-2 medium-1 columns">
+							<span class="form_text">est</span>
+					</div>
+					<div class="small-12 medium-4 columns">
+						{{ form_widget(form.type)}}
+					</div>
+					 <div class="small-2 medium-1 columns">
+							<span class="form_text">de</span>
+					</div>
+					<div class="small-10 medium-3 columns">
+						{{ form_widget(form.knowee)}}
+					</div>
+					<div class="small-12 columns">
+						{{ form_row(form.detail) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  {{ form_row(form._token) }}
-  <input class="button green" type="submit" value="Créer"/>
+	{{ form_row(form._token) }}
+	<input class="button flat green" type="submit" value="Créer"/>
 </form>
 
 {% endblock %}

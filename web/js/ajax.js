@@ -16,7 +16,7 @@ $(document).ready(function() {
   $('#urbicande_chronobundle_eventtype_players').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');
   $('#urbicande_chronobundle_scenotype_intrigue').children('option[value="'+getParameterByName('intrigue')+'"]').attr('selected', 'selected');
 
-  $('.button:not(input[type="submit"])').live('click', function(){
+  $('.button:not(input[type="submit"])').on('click', function(){
     window.location = $(this).find('a').attr('href');
   });
 
@@ -27,15 +27,11 @@ $(document).ready(function() {
   });
 
   //jQuery multiselect initialization
-  $('select[multiple="multiple"]').multiselect({
-    noneSelectedText: 'Selectionner des options',
-    checkAllText: 'Tous',
-    uncheckAllText: 'Aucun',
-    selectedList: 4,
-  }).multiselectfilter({
-    label: '',
-    placeholder: 'Rechercher',
-  });
+  $('select[multiple="multiple"]').chosen({
+    placeholder_text_multiple: 'Selectionner des options',
+    disable_search_threshold: 8,
+    no_results_text: 'Pas de résultat'
+  })
 
   //jQuery datatables initialization
   TableTools.DEFAULTS.aButtons = [
@@ -109,7 +105,7 @@ $(document).ready(function() {
   })
 
   //Adding points to caracteristic on homepage
-  $('#rpg li a').live('click', function(event){
+  $('#rpg li a').on('click', function(event){
     event.preventDefault();
     var value = $(this).parent().children('.point');
     var total = parseInt($('.total').html());
@@ -149,6 +145,7 @@ $(document).ready(function() {
   var $newTimingLink = $('<div class=""></div>').append($addTimingLink);
   var $newImplicationLink = $('<div class=""></div>').append($addImplicationLink);
   
+
   // add the "add a" anchor and li to the tags ul
   dataHolder.append($newDataLink);
   ruleHolder.append($newRuleLink);

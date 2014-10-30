@@ -4,60 +4,57 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="ten columns">
-    {{ level }}
-  </h1>
-  <div class="two hide-for-small columns">
-    <div class="button gray large-header">
-      <a href="{{ path('level_edit', {'id': level.id}) }}">Modifier</a>
-    </div>
-  </div>
+<div class="row page-header">
+	<h1 class="small-12 medium-9 columns">
+		{{ level }}
+	</h1>
+	<div class="medium-3 hide-for-small columns">
+		<a class="button green flat" href="{{ path('level_edit', {'id': level.id}) }}">Modifier</a>
+	</div>
 </div>
 
-<div class="spacer"></div>
-
+<!-- Description -->
 <div class="row">
-  {% autoescape false %}
-    <h3 class="twelve columns">Description</h3>
-    <div class="twelve columns">{{level.description}}</div>
-  {% endautoescape %}
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Description
+				</h3>
+			</div>
+			{% autoescape false %}
+				<div>{{level.description}}</div>
+			{% endautoescape %}
+		</div>
+	</div>
 </div>
 
-<div class="spacer"></div>
 
 <div class="row">
-  <h3 class="twelve columns">Liste des personnages <small>({{level.players|length}} personnages)</small></h3>
-  <table class="records_list datatable">
-    <thead>
-      <tr>
-        <th>Numero</th>
-        <th>Nom</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for perso in level.players %}
-      <tr>
-        <td>{{ perso.number }}</td>
-        <td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button gray">
-                <a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="icon-eye-open"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button green">
-                <a href="{{ path('perso_edit', { 'id': perso.id}) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+	<h3 class="twelve columns">Liste des personnages <small>({{level.players|length}} personnages)</small></h3>
+	<table class="records_list datatable">
+		<thead>
+			<tr>
+				<th>Numero</th>
+				<th>Nom</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+		{% for perso in level.players %}
+			<tr>
+				<td>{{ perso.number }}</td>
+				<td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+				<td>
+					<ul class="button-group">
+						<li><a class="button flat gray" title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="fa fa-eye"></i></a></div>
+						</li>
+						<li><a class="button flat green" href="{{ path('perso_edit', { 'id': perso.id}) }}"><i class="fa fa-edit"></i></a></li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
 </div>
 {% endblock body %}
