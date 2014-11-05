@@ -1,45 +1,31 @@
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Timing</th>
-      <th>Parents</th>
-      <th>Référent</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for sceno in intrigue.scenos %}
-      <tr>
-        <td><a title="Voir" href="{{ path('sceno_by_id', { 'id': sceno.id }) }}">{{ sceno.name }}</a></td>
-        <td>{{ sceno.fullTiming }}</td>
-        <td>
-          {% for parent in sceno.parents %}
-            <a title="Voir" href="{{ path('sceno_by_id', { 'id': parent.id }) }}">{{parent.name}}</a>/
-          {% endfor %}
-        </td>
-        <td>{{ sceno.creator }}</td>
-        <td>
-          <ul class="button-group even three-up">
-            <li>
-              <div class="button gray">
-                <a title="Voir" href="{{ path('sceno_by_id', { 'id': sceno.id }) }}"><i class="icon-eye-open"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('sceno_edit', { 'id': sceno.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('sceno_delete', { 'id': sceno.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </a>
-  {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Timing</th>
+			<th>Parents</th>
+			<th>Référent</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for sceno in intrigue.scenos %}
+		<tr>
+			<td><a title="Voir" href="{{ path('sceno_by_id', { 'id': sceno.id }) }}">{{ sceno.name }}</a></td>
+			<td>{{ sceno.fullTiming }}</td>
+			<td>
+				{% for parent in sceno.parents %}
+					<a title="Voir" href="{{ path('sceno_by_id', { 'id': parent.id }) }}">{{parent.name}}</a>/
+				{% endfor %}
+			</td>
+			<td>{{ sceno.creator }}</td>
+			<td>
+				<ul class="button-group">
+					<li><a class="button flat green" title="Éditer" href="{{ path('sceno_edit', { 'id': sceno.id }) }}"><i class="fa fa-edit"></i></a></li>
+					<li><a class="button flat red" title="Supprimer" href="{{ path('sceno_delete', { 'id': sceno.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+				</ul>
+			</td>
+		</tr>
+	{% endfor %}
+	</tbody>
 </table>

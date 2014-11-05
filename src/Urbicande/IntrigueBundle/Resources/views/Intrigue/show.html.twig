@@ -44,7 +44,7 @@
 	</div>
 </div>
 
-<div class="row page-header">
+<div class="row page-header hide-for-small">
 	<h3 class="small-6 medium-9 columns">Commentaires</h3>
 	<div class="small-6 medium-3 columns">
 		<a class="button flat blue" href="{{ path('create_intrigue_comment', {'intrigueId': intrigue.id}) }}">Ajouter un commentaire</a>
@@ -159,10 +159,10 @@
 	<div class="small-12 columns">
 		<div id="description" class="card">
 			<div class="header row">
-				<h3 class="small-6 medium-8 large-9 columns">Chronologie</h3>
-				<div class="small-6 medium-4 large-3 columns">
+				<h3 class="small-6 medium-8 large-10 columns">Chronologie</h3>
+				<div class="small-6 medium-4 large-2 columns">
 					<a class="button flat blue"  href="{{path('create_event', {'intrigue': intrigue.id})}}">
-						Créer un évènement
+						Créer
 					</a>
 				</div>
 			</div>
@@ -224,9 +224,9 @@
 	<div class="small-12 columns">
 		<div id="description" class="card">
 			<div class="header row">
-				<h3 class="small-6 medium-8 large-9 columns">Scénographie</h3>
-				<div class="small-6 medium-4 large-3 columns">
-					<a class="button flat blue" href="{{path('create_sceno', {'intrigue': intrigue.id})}}">Créer une scéno</a>
+				<h3 class="small-6 medium-8 large-10 columns">Scénographie</h3>
+				<div class="small-6 medium-4 large-2 columns">
+					<a class="button flat blue" href="{{path('create_sceno', {'intrigue': intrigue.id})}}">Créer</a>
 				</div>
 			</div>
 			<div class="row">

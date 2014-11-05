@@ -14,13 +14,13 @@
 </div>
 
 <div class="row">
-	<div class="small-4 columns">
+	<div class="small-6 medium-4 columns">
 		<b>Référent</b> : {{sceno.creator}}<br>
 		{% if sceno.intrigue %}
 			<b>Intrigue</b> : {{sceno.intrigue}}<br>
 		{% endif %}
 	</div>
-	<div class="small-8 columns">
+	<div class="small-6 medium-8 columns">
 		{% if sceno.parents|length > 0 %}
 			<b>Dépend de</b> : 
 			{% for parent in sceno.parents %}

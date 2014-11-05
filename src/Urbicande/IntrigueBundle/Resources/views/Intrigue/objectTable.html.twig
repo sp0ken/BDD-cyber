@@ -1,40 +1,27 @@
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Catégorie</th>
-      <th>Nom</th>
-      <th>Possesseur</th>
-      <th>Référent</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for object in intrigue.objects %}
-      <tr>
-        <td><a title="Voir" href="{{ path('object_type_by_id', { 'id': object.id }) }}">{{object.type}}</a></td>
-        <td><a title="Voir" href="{{ path('object_by_id', { 'id': object.id }) }}">{{object.name}}</a></td>
-        <td>{{object.origin}}</td>
-        <td>{{object.creator}}</td>
-        <td>
-          <ul class="button-group even three-up">
-            <li>
-              <div class="button gray">
-                <a title="Voir" href="{{ path('object_by_id', { 'id': object.id }) }}"><i class="icon-eye-open"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('object_edit', { 'id': object.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Enlever" href="{{ path('intrigue_remove_object', { 'intrigueId': intrigue.id, 'objectId': object.id }) }}"><i class="icon-minus-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Catégorie</th>
+			<th>Nom</th>
+			<th>Possesseur</th>
+			<th>Référent</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for object in intrigue.objects %}
+			<tr>
+				<td><a title="Voir" href="{{ path('object_type_by_id', { 'id': object.id }) }}">{{object.type}}</a></td>
+				<td><a title="Voir" href="{{ path('object_by_id', { 'id': object.id }) }}">{{object.name}}</a></td>
+				<td>{{object.origin}}</td>
+				<td>{{object.creator}}</td>
+				<td>
+					<ul class="button-group">
+						<li><a class="button flat green" title="Éditer" href="{{ path('object_edit', { 'id': object.id }) }}"><i class="fa fa-edit"></i></a></li>
+						<li><a class="button flat red" title="Enlever" href="{{ path('intrigue_remove_object', { 'intrigueId': intrigue.id, 'objectId': object.id }) }}"><i class="fa fa-minus-circle"></i></a></li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
 </table>

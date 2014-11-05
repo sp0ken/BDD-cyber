@@ -1,43 +1,35 @@
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Numéro</th>
-      <th>Informations</th>
-      <th>Joueurs informés</th>
-      <th>Documents concernés</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for data in intrigue.plot.datas %}
-      <tr>
-        <td>{{data.number}}</td>
-        <td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
-        <td>
-          {% for perso in data.knowers %}
-            <a href="{{path('perso_by_id', {'id': perso.id}) }}">{{perso.name}}</a>/
-          {% endfor %}
-        </td>
-        <td>
-          {% for document in data.documents %}
-            <a href="{{path('object_by_id', {'id': document.id}) }}">{{document.name}}</a>
-          {% endfor %}
-        </td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('data_delete', { 'id': data.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Numéro</th>
+			<th>Informations</th>
+			<th>Joueurs informés</th>
+			<th>Documents concernés</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for data in intrigue.plot.datas %}
+			<tr>
+				<td>{{data.number}}</td>
+				<td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
+				<td>
+					{% for perso in data.knowers %}
+						<a href="{{path('perso_by_id', {'id': perso.id}) }}">{{perso.name}}</a>/
+					{% endfor %}
+				</td>
+				<td>
+					{% for document in data.documents %}
+						<a href="{{path('object_by_id', {'id': document.id}) }}">{{document.name}}</a>
+					{% endfor %}
+				</td>
+				<td>
+					<ul class="button-group">
+						<li><a class="button flat green" title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="fa fa-edit"></i></a></li>
+						<li><a class="button flat red" title="Supprimer" href="{{ path('data_delete', { 'id': data.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
 </table>

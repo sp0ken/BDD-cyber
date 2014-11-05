@@ -16,7 +16,7 @@ class PersonnageType extends AbstractType
         $builder
             ->add('type')
             ->add('number', null, array(
-                'label' => 'Numéro du personnage',
+                'label' => 'Numéro',
                 'attr' => array('min' => 1)
             ))
             ->add('status', 'choice', array(

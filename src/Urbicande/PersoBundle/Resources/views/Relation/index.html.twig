@@ -5,10 +5,10 @@
 {% block body %}
 
 <div class="row page-header">
-	<h1 class="small-12 medium-9 columns">
+	<h1 class="small-12 medium-8 columns">
 		Les relations
 	</h1>
-	<div class="medium-3 hide-for-small columns">
+	<div class="medium-4 hide-for-small columns">
 		<a class="button blue flat" href="{{ path('create_relation') }}">Créer une relation</a>
 	</div>
 </div>
@@ -26,25 +26,24 @@
 	</thead>
 	<tbody>
 	{% for relation in relations %}
-			<tr>
-				<td><a title="Voir" href="{{ path('relation_by_id', { 'id': relation.id }) }}">{{ relation.id }}</a></td>
-				<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knower.id }) }}">{{ relation.knower }}</a></td>
-				<td><a title="Voir" href="{{ path('relation_type_by_id', { 'id': relation.type.id }) }}">{{ relation.type }}</a></td>
-				<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knowee.id }) }}">{{ relation.knowee }}</a></td>
-				<td>
-					<ul class="button-group">
-						<li><a class="button flat green" title="Éditer" href="{{ path('relation_edit', { 'id': relation.id }) }}"><i class="fa fa-edit"></i></a></li>
-						<li><a class="button flat red" title="Supprimer" href="{{ path('relation_delete', { 'id': relation.id }) }}"><i class="fa fa-times-circle"></i></a></div>
-						</li>
-					</ul>
-				</td>
-			</tr>
-		</a>
+		<tr>
+			<td><a title="Voir" href="{{ path('relation_by_id', { 'id': relation.id }) }}">{{ relation.id }}</a></td>
+			<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knower.id }) }}">{{ relation.knower }}</a></td>
+			<td><a title="Voir" href="{{ path('relation_type_by_id', { 'id': relation.type.id }) }}">{{ relation.type }}</a></td>
+			<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knowee.id }) }}">{{ relation.knowee }}</a></td>
+			<td>
+				<ul class="button-group">
+					<li><a class="button flat green" title="Éditer" href="{{ path('relation_edit', { 'id': relation.id }) }}"><i class="fa fa-edit"></i></a></li>
+					<li><a class="button flat red" title="Supprimer" href="{{ path('relation_delete', { 'id': relation.id }) }}"><i class="fa fa-times-circle"></i></a></div>
+					</li>
+				</ul>
+			</td>
+		</tr>
 	{% endfor %}
 	</tbody>
 </table>
 
-<div class="row">
+<div class="row hide-for-small">
 	<div class="small-12 columns">
 		<div id="description" class="card">
 			<div class="header row">

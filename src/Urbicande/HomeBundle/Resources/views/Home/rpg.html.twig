@@ -12,7 +12,7 @@
 			<li><b>I</b>magination : <span class="point">{{user.stat.imagination}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="i"><i class="icon-expand-alt"></i></a>{% endif %}</li>
 		</ul>
 	</div>
-	<div class="medium-12 columns xp-bar">
+	<div class="hide-for-small medium-12 columns xp-bar">
 		<span class="left level">{{user.stat.level}}</span> 
 		<div class="progress medium-10 left"><span class="meter" style="width:{{user.stat.relativeXp}}%;"><span class="xp">{{user.stat.xp}} xp</span></span></div> 
 		<span class="left level">{{user.stat.level +1}}</span>

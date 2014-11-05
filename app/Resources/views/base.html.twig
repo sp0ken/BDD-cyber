@@ -32,61 +32,59 @@
 					</ul>
 					<section class="top-bar-section">
 						<ul class="left">
-								<li class="has-dropdown">
-									<a href="{{path('perso_list')}}">Personnages</a>
-									<ul class="dropdown">
-										<li><a href="{{path('groupe_list')}}">Groupes</a></li>
-										<li><a href="{{path('relation_list')}}">Relations</a></li>
-										<li><a href="{{path('perso_type_list')}}">Types de personnage</a></li>
-										<li><a href="{{path('relation_type_list')}}">Types de relation</a></li>
-									</ul>
-								</li>
-								<li class="has-dropdown">
-									<a href="{{path('intrigue_list')}}">Intrigues</a>
-									<ul class="dropdown">
-										<li><a href="{{path('implication_list')}}">Implications</a></li>
-										<li><a href="{{path('intrigue_type_list')}}">Types d'intrigue</a></li>
-									</ul>
-								</li>
-								<li class="has-dropdown">
-									<a href="#">Informations</a>
-									<ul class="dropdown">
-										<li><a href="{{path('data_list')}}">Données</a></li>
-										<li><a href="{{path('object_list')}}">Objets</a></li>
-										<li><a href="{{path('object_type_list')}}">Types d'objet</a></li>
-									</ul>
-								</li>
-								<li class="has-dropdown">
-									<a href="{{path('rule_list')}}">Règles</a>
-									<ul class="dropdown">
-										<li><a href="{{path('skill_list')}}">Compétences</a></li>
-										<li><a href="{{path('level_list')}}">Niveaux</a></li>
-										<li><a href="{{path('chrono_intrigue')}}">Chronologie des intrigues</a></li>
-									</ul>
-								</li>
-
-								<li class="has-dropdown">
-									<a href="{{path('event_list')}}">Chronologie</a>
-									<ul class="dropdown">
-										<li><a href="{{path('chrono_perso')}}">Chronologie des personnages</a></li>
-										<li><a href="{{path('chrono_groupe')}}">Chronologie des groupes</a></li>
-										<li><a href="{{path('chrono_intrigue')}}">Chronologie des intrigues</a></li>
-									</ul>
-								</li>
-								<li class="has-dropdown">
-									<a href="#">Evenementiel</a>
-									<ul class="dropdown">
-										<li><a href="{{path('sceno_list')}}">Scénographies</a></li>
-										<li><a href="{{path('musique_list')}}">Musiques</a></li>
-									</ul>
-								</li>
-								<li>
-									<a href="{{path('background_list')}}">Background</a>
-								</li>
-							</ul>
+							<li class="has-dropdown">
+								<a href="{{path('perso_list')}}">Personnages</a>
+								<ul class="dropdown">
+									<li><a href="{{path('groupe_list')}}">Groupes</a></li>
+									<li><a href="{{path('relation_list')}}">Relations</a></li>
+									<li><a href="{{path('perso_type_list')}}">Types de personnage</a></li>
+									<li><a href="{{path('relation_type_list')}}">Types de relation</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown">
+								<a href="{{path('intrigue_list')}}">Intrigues</a>
+								<ul class="dropdown">
+									<li><a href="{{path('implication_list')}}">Implications</a></li>
+									<li><a href="{{path('intrigue_type_list')}}">Types d'intrigue</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown hide-for-medium">
+								<a href="#">Informations</a>
+								<ul class="dropdown">
+									<li><a href="{{path('data_list')}}">Données</a></li>
+									<li><a href="{{path('object_list')}}">Objets</a></li>
+									<li><a href="{{path('object_type_list')}}">Types d'objet</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown">
+								<a href="{{path('rule_list')}}">Règles</a>
+								<ul class="dropdown">
+									<li><a href="{{path('skill_list')}}">Compétences</a></li>
+									<li><a href="{{path('level_list')}}">Niveaux</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown hide-for-medium">
+								<a href="{{path('event_list')}}">Chronologie</a>
+								<ul class="dropdown">
+									<li><a href="{{path('chrono_perso')}}">Chronologie des personnages</a></li>
+									<li><a href="{{path('chrono_groupe')}}">Chronologie des groupes</a></li>
+									<li><a href="{{path('chrono_intrigue')}}">Chronologie des intrigues</a></li>
+								</ul>
+							</li>
+							<li class="has-dropdown">
+								<a href="#">Evenementiel</a>
+								<ul class="dropdown">
+									<li><a href="{{path('sceno_list')}}">Scénographies</a></li>
+									<li><a href="{{path('musique_list')}}">Musiques</a></li>
+								</ul>
+							</li>
+							<li>
+								<a href="{{path('background_list')}}">Background</a>
+							</li>
+						</ul>
 
 						<ul class="right">
-							<li class="has-dropdown">
+							<li class="has-dropdown hide-for-medium">
 								<a href="#">Paramètres</a>
 								<ul class="dropdown">
 									<li><a href="{{path('user_list')}}">Scénaristes</a></li>
@@ -153,7 +151,7 @@
 			<script src="{{ asset('/js/redactor.fullscreen.js') }}" type="text/javascript"></script>
 			<script src="{{ asset('/js/canvasjs.min.js') }}" type="text/javascript"></script>
 			<script src="{{ asset('/js/jit.min.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('/js/ajax.js') }}" type="text/javascript"></script>    
+			<script src="{{ asset('/js/ajax.js') }}" type="text/javascript"></script>
 			<script>
 				$(document).foundation();
 			</script>

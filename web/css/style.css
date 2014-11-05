@@ -107,12 +107,16 @@ button.gray:hover, .button.gray:hover{ background: #949494; }
   position: absolute;
   right: 0.9375rem;
   top: 15px; }
+  .header.row .button.flat.blue {
+    position: absolute;    right: 0.9375rem;    
+}
 
 button.DTTT_button, div.DTTT_button, a.DTTT_button { display: inline-block !important ;}
 
 /** Template **/
 .sticky.contain-to-grid { box-shadow: 0 0 5px; background: #F09C38;}
 .top-bar { background: #F09C38; }
+.top-bar.expanded .title-area { background: #F09C38; }
 .top-bar-section ul li  { background: #F09C38; }
 .top-bar-section ul li:hover:not(.has-form)>a { background: #F09C38; }
 .top-bar-section li:not(.has-form) a:not(.button)  { background: #F09C38; }

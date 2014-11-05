@@ -7,7 +7,7 @@
 <h1>Créer un nouvel évènement</h1>
 
 <form action="{{ path('create_event') }}" method="post" {{ form_enctype(form) }}>
-	<div class="row">
+<div class="row">
 		<div class="small-12 columns">
 			<div class="card">
 				<div class="header row">
@@ -17,17 +17,17 @@
 					<div class="small-12 columns">
 						{{ form_row(form.name)}}
 					</div>
-					<div class="small-6 columns">
+					<div class="small-12 medium-6 columns">
 						{{ form_row(form.start_date)}}
 					</div>
-					<div class="small-6 columns">
+					<div class="small-12 medium-6 columns">
 						{{ form_row(form.end_date)}}
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	 
 	<div class="row">
 		<div class="small-12 columns">
 			<div class="card">

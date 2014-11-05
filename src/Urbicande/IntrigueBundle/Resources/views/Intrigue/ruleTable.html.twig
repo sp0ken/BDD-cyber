@@ -1,36 +1,23 @@
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Numéro</th>
-      <th>Nom</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for rule in intrigue.rules %}
-      <tr>
-        <td>{{rule.number}}</td>
-        <td><a title="Voir" href="{{ path('rule_by_id', { 'id': rule.id }) }}">{{rule.name}}</a></td>
-        <td>
-          <ul class="button-group even three-up">
-            <li>
-              <div class="button gray">
-                <a title="Voir" href="{{ path('rule_by_id', { 'id': rule.id }) }}"><i class="icon-eye-open"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('rule_edit', { 'id': rule.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('rule_delete', { 'id': rule.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Numéro</th>
+			<th>Nom</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for rule in intrigue.rules %}
+			<tr>
+				<td>{{rule.number}}</td>
+				<td><a title="Voir" href="{{ path('rule_by_id', { 'id': rule.id }) }}">{{rule.name}}</a></td>
+				<td>
+					<ul class="button-group">
+						<li><a class="button flat green" title="Éditer" href="{{ path('rule_edit', { 'id': rule.id }) }}"><i class="fa fa-edit"></i></a></li>
+						<li><a class="button flat red" title="Supprimer" href="{{ path('rule_delete', { 'id': rule.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
 </table>
