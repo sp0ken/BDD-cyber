@@ -7,18 +7,26 @@
 <h1>Créer un nouveau type d'objet</h1>
 
 <form method="post" {{ form_enctype(form) }}>
-  <div class="row">
-    <h3 class="twelve columns">La base</h3>
-    <div class="twelve columns columns">
-      {{ form_row(form.name)}}
-    </div>
-    <div class="twelve columns columns">
-      {{ form_row(form.description) }}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La base</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns columns">
+						{{ form_row(form.name)}}
+					</div>
+					<div class="small-12 columns columns">
+						{{ form_row(form.description) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  {{ form_row(form._token) }}
-  <input class="button green" type="submit" value="Créer"/>
+	{{ form_row(form._token) }}
+	<input class="button green" type="submit" value="Créer"/>
 </form>
 
 {% endblock %}

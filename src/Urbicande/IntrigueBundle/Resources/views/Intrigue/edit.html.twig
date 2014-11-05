@@ -15,7 +15,7 @@
 	</form>
 </small></h1>
 
-<form action="{{ path('intrigue_update', {'id': intrigue.id}) }}" method="post" {{ form_enctype(form) }}>
+<form id="edit_intrigue" action="{{ path('intrigue_update', {'id': intrigue.id}) }}" method="post" {{ form_enctype(form) }}>
 	<!-- Technique -->
 	<div class="row">
 		<div class="small-12 columns">

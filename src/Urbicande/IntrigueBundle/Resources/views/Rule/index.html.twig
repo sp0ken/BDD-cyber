@@ -4,51 +4,39 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="ten columns">
-    Les règles
-  </h1>
-  <div class="two hide-for-small columns">
-    <div class="button gray large-header">
-      <a href="{{ path('create_rule') }}">Créer une règle</a>
-    </div>
-  </div>
+<div class="row page-header">
+	<h1 class="small-12 medium-9 columns">
+		Les règles
+	</h1>
+	<div class="medium-3 hide-for-small columns">
+		<a class="button blue flat" href="{{ path('create_rule') }}">Créer une règle</a>
+	</div>
 </div>
 
-<div class="spacer"></div>
-
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Numéro</th>
-      <th>Nom</th>
-      <th>Référent</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for rule in rules %}
-      <tr>
-        <td>{{ rule.number }}</td>
-        <td><a title="Voir" href="{{ path('rule_by_id', { 'id': rule.id }) }}">{{ rule.name }}</a></td>
-        <td><a title="Voir" href="{{ path('user_by_name', { 'username': rule.writer.username }) }}">{{ rule.writer }}</a></td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('rule_edit', { 'id': rule.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('rule_delete', { 'id': rule.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Numéro</th>
+			<th>Nom</th>
+			<th>Référent</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for rule in rules %}
+			<tr>
+				<td>{{ rule.number }}</td>
+				<td><a title="Voir" href="{{ path('rule_by_id', { 'id': rule.id }) }}">{{ rule.name }}</a></td>
+				<td><a title="Voir" href="{{ path('user_by_name', { 'username': rule.writer.username }) }}">{{ rule.writer }}</a></td>
+				<td>
+					<ul class="button-group">
+						<li><a class="button flat green" title="Éditer" href="{{ path('rule_edit', { 'id': rule.id }) }}"><i class="fa fa-edit"></i></a></li>
+						<li><a class="button flat red" title="Supprimer" href="{{ path('rule_delete', { 'id': rule.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
 </table>
 
 {% endblock body %}

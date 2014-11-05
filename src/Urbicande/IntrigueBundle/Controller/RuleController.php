@@ -76,16 +76,21 @@ class RuleController extends Controller
      */
     public function editAction($id)
     {
+      $em = $this->getDoctrine()->getManager();
       $rule = $this->get('urbicande.rule_manager')->loadRule($id);
+      $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
+      $logs = $repo->getLogEntries($rule);
 
       if (!$rule) {
         throw $this->createNotFoundException('Unable to find Rule entity.');
       }
 
+
       $editForm = $this->createForm(new RuleType(), $rule);
 
       return $this->render('UrbicandeIntrigueBundle:Rule:edit.html.twig', array(
         'rule'      => $rule,
+        'logs'      => $logs,
         'form'   => $editForm->createView(),
       ));
     }

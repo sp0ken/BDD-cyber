@@ -13,7 +13,10 @@ class MusiqueType extends AbstractType
         $builder
             ->add('number', null, array('label' => 'Numéro'))
             ->add('name', null, array('label' => 'Titre'))
-            ->add('link', null, array('label' => 'Lien'))
+            ->add('link', 'url', array(
+                'label' => 'Lien',
+                'required' => false
+            ))
             ->add('type', 'choice', array(
                 'label' => 'Type',
                 'choices'   => array('Ambiance' => 'Ambiance', 'TDE' => 'TDE'),

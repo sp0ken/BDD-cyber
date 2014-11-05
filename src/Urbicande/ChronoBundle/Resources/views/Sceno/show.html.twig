@@ -4,123 +4,128 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="ten columns">
-    {{ sceno.name }}
-  </h1>
-  <div class="two hide-for-small columns">
-    <div class="button gray large-header">
-      <a href="{{ path('sceno_edit', {'id': sceno.id}) }}">Modifier</a>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="four mobile-one columns">
-    <b>Référent</b> : {{sceno.creator}}<br>
-    {% if sceno.intrigue %}
-      <b>Intrigue</b> : {{sceno.intrigue}}<br>
-    {% endif %}
-  </div>
-  <div class="eight mobile-three columns">
-    {% if sceno.parents|length > 0 %}
-      <b>Dépend de</b> : 
-      {% for parent in sceno.parents %}
-        <a href="{{path('sceno_by_id', {'id': parent.id}) }}">{{parent}}</a>/
-      {% endfor %}
-    {% endif %}
-    <br>
-  </div>
+<div class="row page-header">
+	<h1 class="small-6 medium-9 columns">
+		{{ sceno.name }}
+	</h1>
+	<div class="small-6 medium-3 columns">
+		<a class="button flat green" href="{{ path('sceno_edit', {'id': sceno.id}) }}">Modifier</a>
+	</div>
 </div>
 
-<div class="spacer"></div>
-
 <div class="row">
-  {% autoescape false %}
-    <h3 class="twelve columns">Description</h3>
-    <div class="twelve columns">{{ sceno.description }}</div>
-  {% endautoescape %}
+	<div class="small-4 columns">
+		<b>Référent</b> : {{sceno.creator}}<br>
+		{% if sceno.intrigue %}
+			<b>Intrigue</b> : {{sceno.intrigue}}<br>
+		{% endif %}
+	</div>
+	<div class="small-8 columns">
+		{% if sceno.parents|length > 0 %}
+			<b>Dépend de</b> : 
+			{% for parent in sceno.parents %}
+				<a href="{{path('sceno_by_id', {'id': parent.id}) }}">{{parent}}</a>/
+			{% endfor %}
+		{% endif %}
+		<br>
+	</div>
 </div>
 
-<div class="spacer"></div>
-
+<!-- Description -->
 <div class="row">
-  <h3 class="twelve columns">Timings</h3>
-  <table class="records_list datatable">
-    <thead>
-      <tr>
-        <th>Jour de début</th>
-        <th>Heure de début</th>
-        <th>Jour de fin</th>
-        <th>Heure de fin</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for timing in sceno.timings %}
-        <tr>
-          <td>Jour {{timing.startDay}}</td>
-          <td>{{timing.startHour|date('H:i')}}</td>
-          <td>
-            {% if timing.endDay %}
-              Jour {{timing.endDay}}
-            {% endif %}
-          </td>
-          <td>
-            {% if timing.endHour and timing.endHour|date('H:i:s') != '00:00:00'%}
-              {{timing.endHour|date('H:i')}}
-            {% endif %}
-          </td>
-          <td>
-            <div class="button red">
-              <a title="Supprimer" href="{{ path('timing_delete', { 'id': timing.id }) }}"><i class="icon-remove-sign"></i></a>
-            </div>
-        </td>
-        </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">Description</h3>
+			</div>
+			{% autoescape false %}
+				<div>{{sceno.description}}</div>
+			{% endautoescape %}
+		</div>
+	</div>
 </div>
 
-<div class="spacer"></div>
+<div class="row">
+	<div class="small-12 columns">
+		<div class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Timings
+				</h3>
+			</div>
+			<table class="records_list datatable">
+				<thead>
+					<tr>
+						<th>Jour de début</th>
+						<th>Heure de début</th>
+						<th>Jour de fin</th>
+						<th>Heure de fin</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for timing in sceno.timings %}
+						<tr>
+							<td>Jour {{timing.startDay}}</td>
+							<td>{{timing.startHour|date('H:i')}}</td>
+							<td>
+								{% if timing.endDay %}
+									Jour {{timing.endDay}}
+								{% endif %}
+							</td>
+							<td>
+								{% if timing.endHour and timing.endHour|date('H:i:s') != '00:00:00'%}
+									{{timing.endHour|date('H:i')}}
+								{% endif %}
+							</td>
+							<td>
+								<a class="button flat red" title="Supprimer" href="{{ path('timing_delete', { 'id': timing.id }) }}"><i class="fa fa-times-circle"></i></a>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
 
 <div class="row">
-  <h3 class="twelve columns">Objets nécessaires</h3>
-  <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Nom</th>
-      <th>Position de départ</th>
-      <th>Référent</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for object in sceno.objects %}
-      <tr>
-        <td><a title="Voir" href="{{ path('object_type_by_id', { 'id': object.type.id }) }}">{{ object.type }}</a></td>
-        <td><a title="Voir" href="{{ path('object_by_id', { 'id': object.id }) }}">{{ object.name }}</a></td>
-        <td>{{ object.origin }}</td>
-        <td>{{ object.creator }}</td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('object_edit', { 'id': object.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Enlever l‘objet" href="{{ path('sceno_remove_object', { 'scenoId': sceno.id, 'objectId': object.id }) }}"><i class="icon-minus-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
-</table>
-
+	<div class="small-12 columns">
+		<div class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Objets nécessaires
+				</h3>
+			</div>
+			<table class="records_list datatable">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Nom</th>
+						<th>Position de départ</th>
+						<th>Référent</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for object in sceno.objects %}
+						<tr>
+							<td><a title="Voir" href="{{ path('object_type_by_id', { 'id': object.type.id }) }}">{{ object.type }}</a></td>
+							<td><a title="Voir" href="{{ path('object_by_id', { 'id': object.id }) }}">{{ object.name }}</a></td>
+							<td>{{ object.origin }}</td>
+							<td>{{ object.creator }}</td>
+							<td>
+								<ul class="button-group">
+									<li><a class="button flat green" title="Éditer" href="{{ path('object_edit', { 'id': object.id }) }}"><i class="fa fa-edit"></i></a></li>
+									<li><a class="button flat red" title="Enlever l‘objet" href="{{ path('sceno_remove_object', { 'scenoId': sceno.id, 'objectId': object.id }) }}"><i class="fa fa-minus-circle"></i></a></li>
+								</ul>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
 {% endblock body %}

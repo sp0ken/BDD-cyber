@@ -7,27 +7,41 @@
 <h1>Créer un nouveau document de background</h1>
 
 <form method="post" {{ form_enctype(form) }}>
-  <div class="row block">
-    <h3 class="twelve columns">La base</h3>
-    <div class="six mobile-two columns">
-      {{ form_row(form.writer)}}
-    </div>
-    <div class="six mobile-two columns">
-      {{ form_row(form.title) }}
-    </div>
-  </div>
-  
-  <div class="spacer"></div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La base</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.writer)}}
+					</div>
+					<div class="small-12 medium-6 columns">
+						{{ form_row(form.title) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="row block">
-    <h3 class="twelve columns">Les détails</h3>
-    <div class="twelve columns">
-      {{ form_row(form.body) }}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Les détails</h3>
+				</div>
+				<div class="row">
+					<div class="twelve columns">
+						{{ form_row(form.body) }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  {{ form_row(form._token) }}
-  <input class="button green" type="submit" value="Créer"/>
+	{{ form_row(form._token) }}
+	<input class="button flat green" type="submit" value="Créer"/>
 </form>
 
 {% endblock %}

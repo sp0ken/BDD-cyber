@@ -4,43 +4,37 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="ten columns">
-    Les scénaristes
-  </h1>
+<div class="row page-header">
+	<h1 class="small-12 columns">
+		Les scénaristes
+	</h1>
 </div>
 
-<div class="spacer"></div>
-
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Niveau</th>
-      <th>Titre</th>
-      <th>Nombre d'intrigues</th>
-      <th>Nombre de personnages</th>
-      <th>Nombre de groupes</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for user in users %}
-      <tr>
-        <td><a title="Voir" href="{{ path('user_by_name', { 'username': user.username }) }}">{{ user }}</a></td>
-        <td>{{ user.stat.level }}</td>
-        <td>{{ user.stat.title }}</td>
-        <td>{{ user.intrigues|length }}</td>
-        <td>{{ user.persos|length }}</td>
-        <td>{{ user.groupes|length }}</td>
-        <td>
-          <div class="button gray">
-            <a title="Voir" href="{{ path('user_by_name', { 'username': user.username }) }}"><i class="icon-eye-open"></i></a>
-          </div>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Niveau</th>
+			<th>Titre</th>
+			<th>Nombre d'intrigues</th>
+			<th>Nombre de personnages</th>
+			<th>Nombre de groupes</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for user in users %}
+			<tr>
+				<td><a title="Voir" href="{{ path('user_by_name', { 'username': user.username }) }}">{{ user }}</a></td>
+				<td>{{ user.stat.level }}</td>
+				<td>{{ user.stat.title }}</td>
+				<td>{{ user.intrigues|length }}</td>
+				<td>{{ user.persos|length }}</td>
+				<td>{{ user.groupes|length }}</td>
+				<td><a class="button flat gray" title="Voir" href="{{ path('user_by_name', { 'username': user.username }) }}"><i class="fa fa-eye"></i></a></td>
+			</tr>
+		{% endfor %}
+	</tbody>
 </table>
 
 {% endblock body %}

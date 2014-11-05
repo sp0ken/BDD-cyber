@@ -20,7 +20,7 @@ class SkillType extends AbstractType
                 'label' => 'Points de création',
                 'attr' => array('value' => 0)
             ))
-            ->add('writer', null, array('label' => 'Scénariste référent'))
+            ->add('writer', null, array('label' => 'Scénariste référent', 'required' => true))
             ->add('players', 'entity', array(
                 'label' => 'Personnages ayant la compétence',
                 'multiple' => true,   // Multiple selection allowed

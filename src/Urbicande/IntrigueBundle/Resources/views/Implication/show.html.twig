@@ -4,41 +4,73 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="ten columns">
-    {{implication}} pour {{implication.intrigue}}
-  </h1>
-  <div class="two hide-for-small columns">
-    <div class="button gray large-header">
-      <a href="{{ path('implication_edit', {'id': implication.id}) }}">Modifier</a>
-    </div>
-  </div>
+<div class="row page-header">
+	<h1 class="small-6 medium-9 columns">
+		{{implication}} pour {{implication.intrigue}}
+	</h1>
+	<div class="small-6 medium-3 columns">
+		<a class="button flat green" href="{{ path('implication_edit', {'id': implication.id}) }}">Modifier</a>
+	</div>
 </div>
 
 <div class="row">
-  <div class="four mobile-one columns">
-    <b>Degré</b> : {{implication.degree}} <br>
-    <b>Thème</b> : {{implication.theme}}
-  </div>
-  <div class="eight mobile-three columns">
-    <b>Implication</b> : {{implication.synopsis}}
-  </div>
+	<div class="small-6 medium-4 columns">
+		<b>Degré</b> : {{implication.degree}} <br>
+		<b>Thème</b> : {{implication.theme}}
+	</div>
+	<div class="small-6 medium-8 columns">
+		<b>Implication</b> : {{implication.synopsis}}
+	</div>
 </div>
 
-<div class="spacer"></div>
-
+<!--- Rédaction -->
 <div class="row">
-  {% autoescape false %}
-    <h3 class="twelve columns">Informations de rédaction</h3>
-    <div class="twelve columns">{{implication.description}}</div>
-
-    <h3 class="twelve columns">Informations pour le personnage</h3>
-    <div class="twelve columns">{{implication.information}}</div>
-
-    {% if implication.player and implication.player.type.name == 'PNJ' %}
-      <h3 class="twelve columns">Objectif(s) PNJ</h3>
-      <div class="twelve columns">{{implication.objective}}</div>
-    {% endif %}
-  {% endautoescape %}
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 large-9 columns">Informations de rédaction</h3>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					{% autoescape false %}{{implication.description}}{% endautoescape %} <br>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
+<!--- Info -->
+<div class="row">
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 large-9 columns">Informations pour le personnage</h3>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					{% autoescape false %}{{implication.information}}{% endautoescape %} <br>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% if implication.player and implication.player.type.name == 'PNJ' %}
+	<!--- PNJ -->
+	<div class="row">
+		<div class="small-12 columns">
+			<div id="description" class="card">
+				<div class="header row">
+					<h3 class="small-6 medium-8 large-9 columns">Objectif(s) PNJ</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						{% autoescape false %}{{implication.objective}}{% endautoescape %} <br>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}
+
 {% endblock body %}

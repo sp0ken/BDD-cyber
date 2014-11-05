@@ -4,56 +4,47 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="twelve columns">
-    Les implications
-  </h1>
+<div class="row page-header">
+	<h1 class="small-12  columns">
+		Les types de personnage
+	</h1>
 </div>
 
-<div class="spacer"></div>
-
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Impliqué</th>
-      <th>Intrigue</th>
-      <th>Degré</th>
-      <th>Thème</th>
-      <th>Synopsis</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for implication in implications %}
-      <tr>
-        <td>
-          {% if implication.player %}
-            <a title="Voir" href="{{ path('perso_by_id', { 'id': implication.player.id }) }}">{{ implication.player }}</a>
-          {% else %}
-            <a title="Voir" href="{{ path('groupe_by_id', { 'id': implication.groupe.id }) }}">{{ implication.groupe }}</a>
-          {% endif %}
-        </td>
-        <td><a title="Voir" href="{{ path('intrigue_by_id', { 'id': implication.intrigue.id }) }}">{{ implication.intrigue }}</a></td>
-        <td>{{ implication.degree }}</td>
-        <td>{{ implication.theme }}</td>
-        <td>{{ implication.synopsis }}</td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('implication_edit', { 'id': implication.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Impliqué</th>
+			<th>Intrigue</th>
+			<th>Degré</th>
+			<th>Thème</th>
+			<th>Synopsis</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for implication in implications %}
+			<tr>
+				<td>
+					{% if implication.player %}
+						<a title="Voir" href="{{ path('perso_by_id', { 'id': implication.player.id }) }}">{{ implication.player }}</a>
+					{% else %}
+						<a title="Voir" href="{{ path('groupe_by_id', { 'id': implication.groupe.id }) }}">{{ implication.groupe }}</a>
+					{% endif %}
+				</td>
+				<td><a title="Voir" href="{{ path('intrigue_by_id', { 'id': implication.intrigue.id }) }}">{{ implication.intrigue }}</a></td>
+				<td>{{ implication.degree }}</td>
+				<td>{{ implication.theme }}</td>
+				<td>{{ implication.synopsis }}</td>
+				<td>
+					<ul class="button-group">
+						<li><a class="button flat gray" title="Voir" href="{{ path('implication_by_id', { 'id': implication.id }) }}"><i class="fa fa-eye"></i></a></li>
+						<li><a class="button flat green" title="Éditer" href="{{ path('implication_edit', { 'id': implication.id }) }}"><i class="fa fa-edit"></i></a></li>
+						<li><a class="button flat red" title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					</ul>
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
 </table>
 
 {% endblock body %}

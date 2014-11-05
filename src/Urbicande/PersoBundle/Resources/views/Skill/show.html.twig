@@ -4,56 +4,89 @@
 
 {% block body %}
 
+<div class="row page-header">
+	<h1 class="small-6 medium-9 columns">
+		{{ skill.name }} <small>({{skill.creationPoint}} point(s) de création)</small>
+	</h1>
+	<div class="small-6 medium-3 columns">
+		<a class="button flat green" href="{{ path('skill_edit', {'id': skill.id}) }}">Modifier</a>
+	</div>
+</div>
+
+<!-- Description -->
 <div class="row">
-  <h1 class="ten columns">
-    {{ skill.name }} <small>({{skill.creationPoint}} point(s) de création)</small>
-  </h1>
-  <div class="two hide-for-small columns">
-    <div class="button gray">
-      <a href="{{ path('skill_edit', {'id': skill.id}) }}">Modifier</a>
-    </div>
-  </div>
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">Description</h3>
+			</div>
+			{% autoescape false %}
+				<div>{{skill.description}}</div>
+			{% endautoescape %}
+		</div>
+	</div>
 </div>
 
 <div class="row">
-  <div class="twelve columns">{% autoescape false %}{{skill.description}}{% endautoescape %}</div>
+	<div class="small-12 columns">
+		<div class="card">
+			<div class="header row">
+				<h3 class="twelve columns">Liste des personnages <small>({{skill.players|length}} personnages)</small></h3>
+			</div>
+			<table class="records_list datatable">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Numero</th>
+						<th>Nom</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for perso in skill.players %}
+					<tr>
+						<td><a href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type.name }}</a></td>
+						<td>{{ perso.number }}</td>
+						<td><a href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+						<td>
+							<ul class="button-group">
+								<li><a class="button flat gray" title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="fa fa-eye"></i></a</li>
+								<li><a class="button flat red" title="Enlever" href="{{ path('perso_remove_skill', { 'persoId': perso.id, 'skillId': skill.id}) }}"><i class="fa fa-minus-circle"></i></a></li>
+							</ul>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
 <div class="row">
-  <h3 class="twelve columns">Liste des personnages <small>({{skill.players|length}} personnages)</small></h3>
-  <table class="records_list datatable">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Numero</th>
-        <th>Nom</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for perso in skill.players %}
-      <tr>
-        <td><a href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type.name }}</a></td>
-        <td>{{ perso.number }}</td>
-        <td><a href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button gray">
-                <a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="icon-eye-open"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Enlever" href="{{ path('perso_remove_skill', { 'persoId': perso.id, 'skillId': skill.id}) }}"><i class="icon-minus-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-          
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+	<div class="small-12 columns">
+		<div class="card">
+			<div class="header row">
+				<h3 class="twelve columns">Liste des intrigues <small>({{skill.intrigues|length}} personnages)</small></h3>
+			</div>
+			<table class="records_list datatable">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Numero</th>
+						<th>Nom</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for intrigue in skill.intrigues %}
+					<tr>
+						<td><a href="{{ path('intrigue_type_by_id', { 'id': intrigue.type.id }) }}">{{ intrigue.type.name }}</a></td>
+						<td>{{ intrigue.number }}</td>
+						<td><a href="{{ path('intrigue_by_id', { 'id': intrigue.id }) }}">{{ intrigue.name }}</a></td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 {% endblock body %}

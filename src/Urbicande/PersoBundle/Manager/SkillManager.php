@@ -27,7 +27,7 @@ class SkillManager extends BaseManager
      *
      * @param Skill $skill 
      */
-    public function saveSkill(Skill $skill)
+    public function saveSkill(\Urbicande\PersoBundle\Entity\Skill $skill)
     {
         $this->persistAndFlush($skill);
     }
@@ -37,7 +37,7 @@ class SkillManager extends BaseManager
      *
      * @param Skill $skill 
      */
-    public function removeSkill(Skill $skill)
+    public function removeSkill(\Urbicande\PersoBundle\Entity\Skill $skill)
     {
         $this->removeAndFlush($skill);
     }

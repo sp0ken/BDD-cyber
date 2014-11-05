@@ -5,66 +5,87 @@
 {% block body %}
 
 <h1>Édition de {{sceno.name}} <small>(revenir à la version du : 
-   <form id="revert" action="{{ path('sceno_revert', { 'id': sceno.id }) }}" method="post" {{ form_enctype(form) }}>
-    <select name="version">
-      {% for log in logs %}
-          <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
-      {% endfor %}
-    </select>
-     <input class="button green" type="submit" name="revert" value="Appliquer">
-     )
-  </form>
+	 <form id="revert" action="{{ path('sceno_revert', { 'id': sceno.id }) }}" method="post" {{ form_enctype(form) }}>
+		<select name="version">
+			{% for log in logs %}
+					<option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
+			{% endfor %}
+		</select>
+		 <input class="button green" type="submit" name="revert" value="Appliquer">
+		 )
+	</form>
 </small></h1>
 
 <form action="{{path('sceno_update', {'id': sceno.id}) }}" method="post" {{ form_enctype(form) }}>
-  <div class="row block">
-    <h3 class="twelve columns">La base</h3>
-    <div class="four mobile-one columns">
-      {{ form_row(form.creator)}}
-    </div>
-    <div class="four mobile-one columns">
-      {{ form_row(form.intrigue)}}
-    </div>
-    <div class="four mobile-one columns">
-      {{ form_row(form.name)}}
-    </div>
-    <div class="twelve columns">
-      {{ form_row(form.description)}}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La base</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 medium-4 columns">
+						{{ form_row(form.creator)}}
+					</div>
+					<div class="small-12 medium-4 columns">
+						{{ form_row(form.intrigue)}}
+					</div>
+					<div class="small-12 medium-4 columns">
+						{{ form_row(form.name)}}
+					</div>
+					<div class="small-12 columns">
+						{{ form_row(form.description)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
 
-  <div class="row block">
-    <h3 class="twelve columns">Le timing</h3>
-    <div class="twelve columns">
-      <div class="row">
-        {% for timing in form.timings %}
-          <div class="six mobile-two columns">
-            {{form_row(timing)}}
-          </div>
-        {% endfor %}
-      </div>
-      <div class="timings" data-prototype="{{ form_widget(form.timings.vars.prototype)|e }}"></div>
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Le timing</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="row">
+							{% for timing in form.timings %}
+								<div class="small-12 columns">
+									{{form_row(timing)}}
+								</div>
+							{% endfor %}
+						</div>
+						<div class="timings" data-prototype="{{ form_widget(form.timings.vars.prototype)|e }}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
-
-  <div class="row block">
-    <h3 class="twelve columns">Les relations</h3>
-    <div class="five columns">
-      {{ form_row(form.objects)}}
-    </div>
-     <div class="five columns">
-      {{ form_row(form.parents)}}
-    </div>
-  </div>
-
-  <div style="display:none">
-    {{ form_rest(form) }}
-  </div>
-  <input class="button green" type="submit" value="Éditer"/>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Les relations</h3>
+				</div>
+				<div class="row">
+					<div class="five columns">
+						{{ form_row(form.objects)}}
+					</div>
+					 <div class="five columns">
+						{{ form_row(form.parents)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div style="display:none">
+		{{ form_rest(form) }}
+	</div>
+	<input class="button green" type="submit" value="Éditer"/>
 </form>
 
 {% endblock %}

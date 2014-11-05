@@ -77,7 +77,7 @@ class ObjectTypeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $type = $this->get('urbicande.objecttype_manager')->loadObjectType($id);
         $repo = $em->getRepository('Gedmo\Loggable\Entity\LogEntry'); // we use default log entry class
-        $logs = $repo->getLogEntries($intrigue);
+        $logs = $repo->getLogEntries($type);
 
         if (!$type) {
             throw $this->createNotFoundException('Unable to find ObjectType entity.');

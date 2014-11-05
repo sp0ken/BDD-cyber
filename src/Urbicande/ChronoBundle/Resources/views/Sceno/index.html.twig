@@ -4,66 +4,53 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="nine columns">
-    La scénographie
-  </h1>
-  <div class="three hide-for-small columns">
-    <div class="button gray large-header">
-      <a href="{{ path('create_sceno') }}">Créer un évènement de scéno</a>
-    </div>
-  </div>
+<div class="row page-header">
+	<h1 class="small-12 medium-9 columns">
+		La scénographie
+	</h1>
+	<div class="medium-3 hide-for-small columns">
+		<a class="button blue flat" href="{{ path('create_sceno') }}">Créer une scénographie</a>
+	</div>
 </div>
 
 <div id='calendar' data-urbi-url="{{path('sceno_cal')}}"></div>
 
-<div class="spacer"></div>
-
 <table class="records_list datatable">
-  <thead>
-    <tr>
-      <th>Nom</th>
-      <th>Timing</th>
-      <th>Intrigue</th>
-      <th>Parents</th>
-      <th>Référent</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for sceno in scenos %}
-      <tr>
-        <td><a title="Voir" href="{{ path('sceno_by_id', { 'id': sceno.id }) }}">{{ sceno.name }}</a></td>
-        <td>{{ sceno.fullTiming }}</td>
-        <td>
-          {% if sceno.intrigue %}
-            <a href="{{path('intrigue_by_id', {'id': sceno.intrigue.id})}}">{{ sceno.intrigue }}</a>
-          {% endif %}
-        </td>
-        <td>
-          {% for parent in sceno.parents %}
-            <a href="{{path('sceno_by_id', {'id': parent.id})}}">{{parent.name}}</a>/
-          {% endfor %}
-        </td>
-        <td>{{ sceno.creator }}</td>
-        <td>
-          <ul class="button-group even two-up">
-            <li>
-              <div class="button green">
-                <a title="Éditer" href="{{ path('sceno_edit', { 'id': sceno.id }) }}"><i class="icon-pencil"></i></a>
-              </div>
-            </li>
-            <li>
-              <div class="button red">
-                <a title="Supprimer" href="{{ path('sceno_delete', { 'id': sceno.id }) }}"><i class="icon-remove-sign"></i></a>
-              </div>
-            </li>
-          </ul>
-        </td>
-      </tr>
-    </a>
-  {% endfor %}
-  </tbody>
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Timing</th>
+			<th>Intrigue</th>
+			<th>Parents</th>
+			<th>Référent</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+	{% for sceno in scenos %}
+		<tr>
+			<td><a title="Voir" href="{{ path('sceno_by_id', { 'id': sceno.id }) }}">{{ sceno.name }}</a></td>
+			<td>{{ sceno.fullTiming }}</td>
+			<td>
+				{% if sceno.intrigue %}
+					<a href="{{path('intrigue_by_id', {'id': sceno.intrigue.id})}}">{{ sceno.intrigue }}</a>
+				{% endif %}
+			</td>
+			<td>
+				{% for parent in sceno.parents %}
+					<a href="{{path('sceno_by_id', {'id': parent.id})}}">{{parent.name}}</a>/
+				{% endfor %}
+			</td>
+			<td>{{ sceno.creator }}</td>
+			<td>
+				<ul class="button-group">
+					<li><a class="button flat green" title="Éditer" href="{{ path('sceno_edit', { 'id': sceno.id }) }}"><i class="fa fa-edit"></i></a></li>
+					<li><a class="button flat red" title="Supprimer" href="{{ path('sceno_delete', { 'id': sceno.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+				</ul>
+			</td>
+		</tr>
+	{% endfor %}
+	</tbody>
 </table>
 
 {% endblock body %}

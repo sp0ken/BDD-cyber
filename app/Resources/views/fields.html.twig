@@ -21,13 +21,13 @@
         {{ block('form_widget_simple') }}
     {% else %}
         <div class="row">
-          <div class="four mobile-one columns">
+          <div class="small-4 columns">
             {{ form_widget(form.day, {'attr' : {'placeholder': 'Jour'}}) }}
           </div>
-          <div class="four mobile-one columns">
+          <div class="small-4 columns">
             {{ form_widget(form.month, {'attr' : {'placeholder': 'Mois'}}) }}
           </div>
-          <div class="four mobile-one columns">
+          <div class="small-4 columns">
             {{ form_widget(form.year, {'attr' : {'placeholder': 'Année'}}) }}
           </div>
         </div>
@@ -65,20 +65,20 @@
     {% else %}
       <div {{ block('widget_container_attributes') }}>
         {% if with_seconds %}
-          <div class="four mobile-one columns">
+          <div class="small-4 columns">
             {{ form_widget(form.hour, { 'attr': { 'size': '1' } }) }}
           </div>
-          <div class="four mobile-one columns">
+          <div class="small-4 columns">
             {{ form_widget(form.minute, { 'attr': { 'size': '1' } }) }}
           </div>
-          <div class="four mobile-one columns">
+          <div class="small-4 columns">
             {{ form_widget(form.second, { 'attr': { 'size': '1' } }) }}
           </div>
         {% else %}
-          <div class="six mobile-two columns">
+          <div class="small-6 columns">
             {{ form_widget(form.hour, { 'attr': { 'size': '1' } }) }}
           </div>
-          <div class="six mobile-two columns">
+          <div class="small-6 columns">
             {{ form_widget(form.minute, { 'attr': { 'size': '1' } }) }}
           </div>
         {% endif %}

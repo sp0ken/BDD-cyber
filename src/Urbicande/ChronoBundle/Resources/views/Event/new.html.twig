@@ -7,47 +7,67 @@
 <h1>Créer un nouvel évènement</h1>
 
 <form action="{{ path('create_event') }}" method="post" {{ form_enctype(form) }}>
-  <div class="row block">
-    <h3 class="twelve columns">La base</h3>
-    <div class="twelve columns">
-      {{ form_row(form.name)}}
-    </div>
-    <div class="six mobile-two columns">
-      {{ form_row(form.start_date)}}
-    </div>
-    <div class="six mobile-two columns">
-      {{ form_row(form.end_date)}}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La base</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						{{ form_row(form.name)}}
+					</div>
+					<div class="small-6 columns">
+						{{ form_row(form.start_date)}}
+					</div>
+					<div class="small-6 columns">
+						{{ form_row(form.end_date)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Les détails</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						{{ form_row(form.description)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="row block">
-    <h3 class="twelve columns">Les détails</h3>
-    <div class="twelve columns">
-      {{ form_row(form.description)}}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Les participants</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						{{ form_row(form.players)}}
+					</div>
+					 <div class="small-12 columns">
+						{{ form_row(form.groupes)}}
+					</div>
+					 <div class="small-12 columns">
+						{{ form_row(form.intrigues)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
-
-  <div class="row block">
-    <h3 class="twelve columns">Les participants</h3>
-    <div class="twelve columns">
-      {{ form_row(form.players)}}
-    </div>
-     <div class="twelve columns">
-      {{ form_row(form.groupes)}}
-    </div>
-     <div class="twelve columns">
-      {{ form_row(form.intrigues)}}
-    </div>
-  </div>
-
-  <div style="display:none">
-    {{ form_rest(form) }}
-  </div>
-  <input class="button green" type="submit" value="Créer"/>
+	<div style="display:none">
+		{{ form_rest(form) }}
+	</div>
+	<input class="button flat green" type="submit" value="Créer"/>
 </form>
 
 {% endblock %}

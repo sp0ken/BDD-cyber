@@ -26,6 +26,8 @@ $(document).ready(function() {
     plugins: ['fullscreen'], 
   });
 
+  $('.rte').sisyphus();
+
   //jQuery multiselect initialization
   $('select[multiple="multiple"]').chosen({
     placeholder_text_multiple: 'Selectionner des options',
@@ -49,36 +51,37 @@ $(document).ready(function() {
   ];
   TableTools.DEFAULTS.sSwfPath = "/swf/copy_csv_xls_pdf.swf";
 
-  $('.datatable').dataTable({
-    "bPaginate": false,
-    "bLengthChange": false,
-    "bStateSave": true,
-    "bFilter": true,
-    "bSort": true,
-    "bInfo": false,
-    "bAutoWidth": false,
-    "aaSorting": [ [0,'asc'], [1,'asc'] ],
-    "sDom": '<"left"T>Rl<"hide-for-small"f>rtip',
-    "oLanguage": {
-      "sProcessing":     "Traitement en cours...",
-      "sSearch":         "Rechercher&nbsp;:",
-      "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-      "sInfo":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-      "sInfoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
-      "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-      "sInfoPostFix":    "",
-      "sLoadingRecords": "Chargement en cours...",
-      "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-      "sEmptyTable":     "Aucune donnée disponible dans le tableau",
-      "oPaginate": {
-          "sFirst":      "Premier",
-          "sPrevious":   "Pr&eacute;c&eacute;dent",
-          "sNext":       "Suivant",
-          "sLast":       "Dernier"
+  $('.datatable').DataTable({
+    responsive: true,
+    "searching": true,
+    stateSave: true,
+  "ordering": true,
+    "order": [[ 0, 'asc' ], [ 1, 'asc' ]],
+    paging: false,
+    "info": false,
+    "lengthChange": false,
+    "autoWidth": false,
+    "dom": '<"left hide-for-small"T>Rl<f>rtip',
+    "language": {
+      "processing":     "Traitement en cours...",
+      "search":         "Rechercher&nbsp;:",
+      "lengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+      "info":           "Affichage de l'&eacute;lement _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+      "infoEmpty":      "Affichage de l'&eacute;lement 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+      "infoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+      "infoPostFix":    "",
+      "loadingRecords": "Chargement en cours...",
+      "zeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+      "emptyTable":     "Aucune donnée disponible dans le tableau",
+      "paginate": {
+          "first":      "Premier",
+          "previous":   "Pr&eacute;c&eacute;dent",
+          "next":       "Suivant",
+          "last":       "Dernier"
       },
-      "oAria": {
-          "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
-          "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+      "aria": {
+          "sortAscending":  ": activer pour trier la colonne par ordre croissant",
+          "sortDescending": ": activer pour trier la colonne par ordre décroissant"
       }
     },
   });

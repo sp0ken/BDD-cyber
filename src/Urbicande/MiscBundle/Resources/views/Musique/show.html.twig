@@ -4,28 +4,48 @@
 
 {% block body %}
 
-<div class="row">
-  <h1 class="nine columns">
-    {{musique}}
-  </h1>
-  <div class="three hide-for-small columns">
-    <ul class="button-group even one-up">
-        <li>
-            <div class="button gray large-header">
-              <a href="{{ path('musique_edit', {'id': musique.id}) }}">Modifier</a>
-            </div>
-        </li>
-  </div>
+<div class="row page-header">
+	<h1 class="small-6 medium-9 columns">
+		Musique {{ musique }}
+	</h1>
+	<div class="small-6 medium-3 columns">
+		<a class="button flat green" href="{{ path('musique_edit', {'id': musique.id}) }}">Modifier</a>
+	</div>
 </div>
 
-<div class="spacer"></div>
-
 <div class="row">
-  {% autoescape false %}
-    <div class="six mobile-two columns">{{musique.description}}</div>
-    <div class="six mobile-two columns">{{musique.tde}}</div><br>
-    <div class="six mobile-two columns"><a href="{{musique.link}}" title="">{{musique.link}}</a></div><br>
-  {% endautoescape %}
+	<div class="small-12 columns">
+		<b>Ambiance</b> : {{musique.type}}</a><br>
+		<b>Lien</b> : <a href="{{musique.link}}" title="">{{musique.link}}</a>
+	</div>
+</div>
+
+<!-- Description -->
+<div class="row">
+	<div class="small-12 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">Description</h3>
+			</div>
+			{% autoescape false %}
+				<div>{{musique.description}}</div>
+			{% endautoescape %}
+		</div>
+	</div>
+</div>
+
+<!-- TDE -->
+<div class="row">
+	<div class="small-12 columns">
+		<div id="TDE" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">TDE</h3>
+			</div>
+			{% autoescape false %}
+				<div>{{musique.tde}}</div>
+			{% endautoescape %}
+		</div>
+	</div>
 </div>
 
 {% endblock body %}

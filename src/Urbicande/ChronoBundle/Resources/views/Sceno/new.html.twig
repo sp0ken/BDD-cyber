@@ -7,47 +7,68 @@
 <h1>Créer un nouvel évènement de scénographie</h1>
 
 <form method="post" {{ form_enctype(form) }}>
-  <div class="row block">
-    <h3 class="twelve columns">La base</h3>
-    <div class="four mobile-one columns">
-      {{ form_row(form.creator)}}
-    </div>
-    <div class="four mobile-one columns">
-      {{ form_row(form.intrigue)}}
-    </div>
-    <div class="four mobile-one columns">
-      {{ form_row(form.name)}}
-    </div>
-    <div class="twelve columns">
-      {{ form_row(form.description)}}
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">La base</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 medium-4 columns">
+						{{ form_row(form.creator)}}
+					</div>
+					<div class="small-12 medium-4 columns">
+						{{ form_row(form.intrigue)}}
+					</div>
+					<div class="small-12 medium-4 columns">
+						{{ form_row(form.name)}}
+					</div>
+					<div class="small-12 columns">
+						{{ form_row(form.description)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
 
-  <div class="row block">
-    <h3 class="twelve columns">Le timing</h3>
-    <div class="twelve columns">
-      <div class="timings" data-prototype="{{ form_widget(form.timings.vars.prototype)|e }}"></div>
-    </div>
-  </div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Le timing</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						<div class="timings" data-prototype="{{ form_widget(form.timings.vars.prototype)|e }}"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="spacer"></div>
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Les relations</h3>
+				</div>
+				<div class="row">
+					<div class="five columns">
+						{{ form_row(form.objects)}}
+					</div>
+					 <div class="five columns">
+						{{ form_row(form.parents)}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
-  <div class="row block">
-    <h3 class="twelve columns">Les relations</h3>
-    <div class="five columns">
-      {{ form_row(form.objects)}}
-    </div>
-     <div class="five columns">
-      {{ form_row(form.parents)}}
-    </div>
-  </div>
-
-  <div style="display:none">
-    {{ form_rest(form) }}
-  </div>
-  <input class="button green" type="submit" value="Créer"/>
+	<div style="display:none">
+		{{ form_rest(form) }}
+	</div>
+	<input class="button flat green" type="submit" value="Créer"/>
 </form>
 
 {% endblock %}

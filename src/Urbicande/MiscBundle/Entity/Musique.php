@@ -232,6 +232,6 @@ class Musique
 
     public function __toString()
     {
-        return 'n°'.$this->number.' '.$this->name.' - '.$this->type;
+        return 'n°'.$this->number.' '.$this->name;
     }
 }
