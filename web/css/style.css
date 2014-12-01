@@ -118,11 +118,12 @@ button.DTTT_button, div.DTTT_button, a.DTTT_button { display: inline-block !impo
 .top-bar { background: #F09C38; }
 .top-bar.expanded .title-area { background: #F09C38; }
 .top-bar-section ul li  { background: #F09C38; }
-.top-bar-section ul li:hover:not(.has-form)>a { background: #F09C38; }
-.top-bar-section li:not(.has-form) a:not(.button)  { background: #F09C38; }
-.top-bar-section li:not(.has-form) a:not(.button):hover { background: #F3AF5F; }
+.top-bar-section ul li:hover:not(.has-form)>a { background-color: #F3AF5F; }
+.top-bar-section li.hover > a:not(.button) { background-color: #F3AF5F; }
+.top-bar-section li:not(.has-form) a:not(.button) { background: #F09C38; }
+.top-bar-section li:not(.has-form) a:not(.button):hover { background-color: #F3AF5F; }
 .top-bar-section .dropdown li:not(.has-form):not(.active)>a:not(.button) { background: #F09C38; }
-.top-bar-section .dropdown li:not(.has-form):not(.active):hover > a:not(.button) { background: #F3AF5F; }
+.top-bar-section .dropdown li:not(.has-form):not(.active):hover>a:not(.button) { background-color: #F3AF5F; }
 button.ui-multiselect:hover { color: #007095; }
 input[required="required"] { border-left-color: #FF4F4F; }
 input[required="required"]:focus { box-shadow: 0 0 5px #FF4F4F; }

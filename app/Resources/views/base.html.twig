@@ -25,7 +25,7 @@
 	<body class="container">
 		{% if is_granted("ROLE_USER") %}
 			<div class="sticky contain-to-grid">
-				<nav class="top-bar" data-topbar role="navigation">
+				<nav class="top-bar" data-topbar role="navigation" data-options="{back_text: 'Retour'}">
 					<ul class="title-area">
 						<li class="name"><h1><a href="{{ path('Home')}}">Accueil</a></h1></li>
 						<li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
@@ -153,7 +153,13 @@
 			<script src="{{ asset('/js/jit.min.js') }}" type="text/javascript"></script>
 			<script src="{{ asset('/js/ajax.js') }}" type="text/javascript"></script>
 			<script>
-				$(document).foundation();
+				$(document).foundation({
+					topbar : {
+						 custom_back_text: true,
+						 back_text: 'Retour'
+					}
+
+				});
 			</script>
 		{% endblock %}
 	</body>
