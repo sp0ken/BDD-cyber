@@ -209,6 +209,7 @@ class Personnage
      * Les implications dans des intrigues du personnage
      *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="player", cascade={"persist", "remove"})
+     * @ORM\OrderBy({"type" = "ASC"})
      */
     private $intrigues;
 
@@ -844,8 +845,22 @@ class Personnage
     {
         $count = 0;
         foreach ($this->intrigues as $key => $intrigue) {
-            if ($intrigue->getIntrigue()->getType() == $type) {
+            if ($intrigue->getIntrigues()->getType() == $type) {
                 $count++;
+            }
+        }
+        foreach ($this->groupes as $key => $groupe) {
+            foreach ($groupe->getIntrigues() as $key => $intrigue) {
+                if ($intrigue->getIntrigues()->getType() == $type) {
+                    $count++;
+                }
+            }
+        }
+        foreach ($this->events as $key => $event) {
+            foreach ($event->getIntrigues() as $key => $intrigue) {
+                if ($intrigue->getIntrigues()->getType() == $type) {
+                    $count++;
+                }
             }
         }
         return $count;
@@ -862,6 +877,20 @@ class Personnage
         foreach ($this->intrigues as $key => $intrigue) {
             if ($intrigue->getDegree() == $degree) {
                 $count++;
+            }
+        }
+        foreach ($this->groupes as $key => $groupe) {
+            foreach ($groupe->getIntrigues() as $key => $intrigue) {
+                if ($intrigue->getDegree() == $degree) {
+                    $count++;
+                }
+            }
+        }
+        foreach ($this->events as $key => $event) {
+            foreach ($event->getIntrigues() as $key => $intrigue) {
+                if ($intrigue->getDegree() == $degree) {
+                    $count++;
+                }
             }
         }
         return $count;

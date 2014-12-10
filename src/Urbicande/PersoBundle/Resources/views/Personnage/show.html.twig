@@ -167,8 +167,18 @@
 				</div>
 			</div>
 			<ul class="no-bullet">
-				{% for intrigue in perso.intrigues %}
-					<li><a href="{{ path('intrigue_by_id', {'id': intrigue.id}) }}">{{ intrigue }}</a></li>
+				{% for implication in perso.intrigues %}
+					<li><i class="fa fa-user" title="Personnage"></i> <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
+				{% endfor %}
+				{% for groupe in perso.groupes %}
+					{% for implication in groupe.intrigues %}
+						<li><i class="fa fa-users" title="Groupe"></i> <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
+					{% endfor %}
+				{% endfor %}
+				{% for event in perso.events %}
+					{% for implication in event.implications %}
+						<li><i class="fa fa-calendar" title="Evènement"></i> <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
+					{% endfor %}
 				{% endfor %}
 			</ul>
 		</div>
@@ -191,9 +201,10 @@
 						<div class="card plot">
 							<div class="header row">
 								<h4 class="small-6 medium-8 columns">
-									<a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
+									<i class="fa fa-user"></i> <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
 								</h4>
 							</div>
+							{% autoescape false %}
 							<div>
 								{{implication.theme}}<br>
 								{{implication.synopsis}}
@@ -212,6 +223,7 @@
 									<p>{{implication.objective}}</p>
 								</div>
 							{% endif %}
+							{% endautoescape %}
 						</div>
 					</div>
 				</div>
@@ -223,7 +235,7 @@
 							<div class="card plot">
 								<div class="header row">
 									<h4 class="small-6 medium-8 columns">
-										<a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
+										<i class="fa fa-users"></i> <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
 									</h4>
 								</div>
 								<div>
@@ -256,7 +268,7 @@
 							<div class="card plot">
 								<div class="header row">
 									<h4 class="small-6 medium-8 columns">
-										<a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
+										<i class="fa fa-calendar"></i> <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
 									</h4>
 								</div>
 								<div>
