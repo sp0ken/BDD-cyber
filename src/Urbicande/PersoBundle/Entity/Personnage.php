@@ -209,7 +209,6 @@ class Personnage
      * Les implications dans des intrigues du personnage
      *
      * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="player", cascade={"persist", "remove"})
-     * @ORM\OrderBy({"type" = "ASC"})
      */
     private $intrigues;
 

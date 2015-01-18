@@ -8,3 +8,4 @@ php_errors.log
 web/bundles
 bin/
 composer.*
+web/dev.log

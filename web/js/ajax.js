@@ -161,12 +161,11 @@ $(document).ready(function() {
 
       // add a new tag form (see next code block)
       addTagForm(dataHolder, $newDataLink);
-      $('select[multiple="multiple"]').multiselect({
-        noneSelectedText: 'Selectionner des options',
-        checkAllText: 'Tous',
-        uncheckAllText: 'Aucun',
-        selectedList: 4,
-      });
+      $('select[multiple="multiple"]').chosen({
+        placeholder_text_multiple: 'Selectionner des options',
+        disable_search_threshold: 8,
+        no_results_text: 'Pas de résultat'
+      })
       
       $('.rte').wysiwyg({
         'initialContent': 'À toi de le remplir',
