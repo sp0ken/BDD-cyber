@@ -844,20 +844,20 @@ class Personnage
     {
         $count = 0;
         foreach ($this->intrigues as $key => $intrigue) {
-            if ($intrigue->getIntrigues()->getType() == $type) {
+            if ($intrigue->getIntrigue()->getType() == $type) {
                 $count++;
             }
         }
         foreach ($this->groupes as $key => $groupe) {
             foreach ($groupe->getIntrigues() as $key => $intrigue) {
-                if ($intrigue->getIntrigues()->getType() == $type) {
+                if ($intrigue->getIntrigue()->getType() == $type) {
                     $count++;
                 }
             }
         }
         foreach ($this->events as $key => $event) {
             foreach ($event->getIntrigues() as $key => $intrigue) {
-                if ($intrigue->getIntrigues()->getType() == $type) {
+                if ($intrigue->getType() == $type) {
                     $count++;
                 }
             }
