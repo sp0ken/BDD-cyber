@@ -77,11 +77,18 @@ sceno_delete:
       id:     \d+
 
 sceno_remove_object:
-    pattern:  /intrigue/{scenoId}/deleteObject/{objectId}
+    pattern:  /sceno/{scenoId}/deleteObject/{objectId}
     defaults: { _controller: "UrbicandeChronoBundle:Sceno:removeObject" }
     requirements:
       scenoId:     \d+
       objectId:     \d+
+
+sceno_remove_perso:
+    pattern:  /sceno/{scenoId}/deletePerso/{persoId}
+    defaults: { _controller: "UrbicandeChronoBundle:Sceno:removePerso" }
+    requirements:
+      scenoId:     \d+
+      persoId:     \d+
 
 timing_delete:
     pattern:  /sceno/timing/delete/{id}

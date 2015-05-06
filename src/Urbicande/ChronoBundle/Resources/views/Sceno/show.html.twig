@@ -50,6 +50,43 @@
 		<div class="card">
 			<div class="header row">
 				<h3 class="small-6 medium-8 columns">
+					Joueurs concernés
+				</h3>
+			</div>
+			<table class="records_list datatable">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Numero</th>
+						<th>Nom</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for perso in sceno.players %}
+						<tr>
+							<td><a title="Voir" href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type }}</a></td>
+							<td>{{ perso.number }}</td>
+							<td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+							<td>
+								<ul class="button-group">
+									<li><a class="button flat green" title="Éditer" href="{{ path('perso_edit', { 'id': perso.id }) }}"><i class="fa fa-edit"></i></a></li>
+									<li><a class="button flat red" title="Enlever l‘objet" href="{{ path('sceno_remove_perso', { 'scenoId': sceno.id, 'persoId': perso.id }) }}"><i class="fa fa-minus-circle"></i></a></li>
+								</ul>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
 					Timings
 				</h3>
 			</div>

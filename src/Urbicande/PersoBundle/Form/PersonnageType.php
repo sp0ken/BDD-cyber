@@ -36,7 +36,6 @@ class PersonnageType extends AbstractType
             ->add('level', null, array(
                 'label' => 'Niveau ',
                 'required' => false,
-                'attr' => array('min' => 0)
             ))
             ->add('job', null, array('required' => false))
             ->add('income', null, array('label' => 'Revenus (/an)', 'required' => false))

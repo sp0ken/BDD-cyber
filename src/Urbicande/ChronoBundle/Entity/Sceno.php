@@ -58,6 +58,14 @@ class Sceno
      */
     private $objects;
 
+     /**
+     * Personnages liés à l'évènement 
+     * 
+     * @ORM\ManyToMany(targetEntity="Urbicande\PersoBundle\Entity\Personnage", cascade={"persist"})
+     * @ORM\JoinTable(name="cyber_sceno_perso")
+     */
+    private $players;
+
     /**
      *  Horaire(s) de l'évènement
      *  
@@ -353,5 +361,38 @@ class Sceno
     public function getClass()
     {
         return 'Urbicande\ChronoBundle\Entity\Sceno';
+    }
+
+    /**
+     * Add players
+     *
+     * @param \Urbicande\PersoBundle\Entity\Personnage $players
+     * @return Sceno
+     */
+    public function addPlayer(\Urbicande\PersoBundle\Entity\Personnage $players)
+    {
+        $this->players[] = $players;
+    
+        return $this;
+    }
+
+    /**
+     * Remove players
+     *
+     * @param \Urbicande\PersoBundle\Entity\Personnage $players
+     */
+    public function removePlayer(\Urbicande\PersoBundle\Entity\Personnage $players)
+    {
+        $this->players->removeElement($players);
+    }
+
+    /**
+     * Get players
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getPlayers()
+    {
+        return $this->players;
     }
 }

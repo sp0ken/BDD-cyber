@@ -203,10 +203,32 @@ class ScenoController extends Controller
           throw $this->createNotFoundException('Unable to find Object entity.');
       }
 
-      $entity->removeObject($object);
+      $sceno->removeObject($object);
       $this->get('urbicande.sceno_manager')->saveSceno($sceno);
       
       $this->get('session')->getFlashBag()->add('delete', $object.' n‘est plus requis pour la scéno');
+      return $this->redirect($this->generateUrl('sceno_by_id', array('id' => $sceno->getId())));
+    }
+
+     /**
+     * Supprime un objet de l'évènement de scénographie donné
+     */
+    public function removePersoAction($scenoId, $persoId)
+    {
+      $sceno = $this->get('urbicande.sceno_manager')->loadSceno($scenoId);
+      $perso = $this->get('urbicande.perso_manager')->loadperso($persoId);
+
+      if (!$sceno) {
+          throw $this->createNotFoundException('Unable to find Data entity.');
+      }
+      if (!$perso) {
+          throw $this->createNotFoundException('Unable to find perso entity.');
+      }
+
+      $sceno->removePlayer($perso);
+      $this->get('urbicande.sceno_manager')->saveSceno($sceno);
+      
+      $this->get('session')->getFlashBag()->add('delete', $perso.' n‘est plus requis pour la scéno');
       return $this->redirect($this->generateUrl('sceno_by_id', array('id' => $sceno->getId())));
     }
 }

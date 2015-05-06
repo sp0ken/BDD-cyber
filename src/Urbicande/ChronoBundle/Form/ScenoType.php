@@ -17,12 +17,22 @@ class ScenoType extends AbstractType
                 'label' => 'Description',
                 'attr' => array('class' => 'rte')
             ))
-            ->add('intrigue', null, array('label' => 'Intrigue', 'required' => false))
+            ->add('intrigue', null, array(
+                'label' => 'Intrigue', 
+                'required' => false,
+            ))
             ->add('objects', 'entity', array(
                 'label' => 'Objets liés',
                 'multiple' => true,   // Multiple selection allowed
                 'property' => 'name', // Assuming that the entity has a "name" property
                 'class'    => 'Urbicande\IntrigueBundle\Entity\Object',
+                'required' => false,
+            ))
+            ->add('players', 'entity', array(
+                'label' => 'Personnages liés',
+                'multiple' => true,   // Multiple selection allowed
+                'property' => 'name', // Assuming that the entity has a "name" property
+                'class'    => 'Urbicande\PersoBundle\Entity\Personnage',
                 'required' => false,
             ))
             ->add('parents', 'entity', array(
