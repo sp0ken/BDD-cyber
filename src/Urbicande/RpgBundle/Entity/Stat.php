@@ -97,7 +97,7 @@ class Stat
      * @var array
      */
     private $titles = array('Squatter', 'Relecteur débutant', 'Relecteur de qualité supérieure', 'Maître Relecteur', 'Scénariste débutant', 'Maître du Sechs', 'Scénariste de qualité supérieure', 'Maître Scénariste', 
-                                         'Scribe', 'Moine copiste', 'Gérard de Villier', 'Secrètaire d\'Urbicande', 'Trésorier d\'Urbicande', 'Vice-Président d\'Urbicande', 'Président d\'Urbicande',
+                                         'Scribe', 'Moine copiste', 'Gérard de Villiers', 'Secrètaire d\'Urbicande', 'Trésorier d\'Urbicande', 'Vice-Président d\'Urbicande', 'Président d\'Urbicande',
                                         'Maître du monde débutant', 'Maître du monde de qualité supérieure', 'Majeur', 'Contributeur pour Wikipedia', 'Sage de l\'Académie Française');
 
     public function __construct($xp = 0, $caracPoint = 0)
