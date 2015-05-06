@@ -886,7 +886,7 @@ class Personnage
             }
         }
         foreach ($this->events as $key => $event) {
-            foreach ($event->getIntrigues() as $key => $intrigue) {
+            foreach ($event->getImplications() as $key => $intrigue) {
                 if ($intrigue->getDegree() == $degree) {
                     $count++;
                 }

@@ -6,10 +6,10 @@
 	<div class="medium-12 large-9 columns">
 		<h4>Caractéristiques {% if user.stat.caracPoint and app.user == user %}<small>(Points restants : <span class="total">{{user.stat.caracPoint}}</span>)</small>{% endif %}</h4>
 		<ul class="no-bullet">
-			<li><b>U</b>fologie : <span class="point">{{user.stat.ufologie}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="u"><i class="icon-expand-alt"></i></a>{% endif %}</li>
-			<li><b>R</b>electure : <span class="point">{{user.stat.relecture}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="r"><i class="icon-expand-alt"></i></a>{% endif %}</li>
-			<li><b>B</b>lague : <span class="point">{{user.stat.blague}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="b"><i class="icon-expand-alt"></i></a>{% endif %}</li>
-			<li><b>I</b>magination : <span class="point">{{user.stat.imagination}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="i"><i class="icon-expand-alt"></i></a>{% endif %}</li>
+			<li><b>U</b>fologie : <span class="point">{{user.stat.ufologie}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="u"><i class="fa fa-plus"></i></a>{% endif %}</li>
+			<li><b>R</b>electure : <span class="point">{{user.stat.relecture}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="r"><i class="fa fa-plus"></i></a>{% endif %}</li>
+			<li><b>B</b>lague : <span class="point">{{user.stat.blague}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="b"><i class="fa fa-plus"></i></a>{% endif %}</li>
+			<li><b>I</b>magination : <span class="point">{{user.stat.imagination}}</span> {% if user.stat.caracPoint and app.user == user %}<a href="#" data-url="{{path('addCarac')}}" data-carac="i"><i class="fa fa-plus"></i></a>{% endif %}</li>
 		</ul>
 	</div>
 	<div class="hide-for-small medium-12 columns xp-bar">
