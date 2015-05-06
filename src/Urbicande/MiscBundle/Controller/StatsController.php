@@ -18,10 +18,13 @@ class StatsController extends Controller
      */
     public function indexAction()
     {
+        $includePNJ = (boolean) $this->container->getParameter('stat_include_pnj');
+        $pnjName = $this->container->getParameter('stat_pnj_name');
+
         $em = $this->getDoctrine()->getManager();
 
-        $genderChart = $em->getRepository('UrbicandePersoBundle:Personnage')->countGender();
-        $statusChart = $em->getRepository('UrbicandePersoBundle:Personnage')->countStatus();
+        $genderChart = $em->getRepository('UrbicandePersoBundle:Personnage')->countGender($includePNJ, $pnjName);
+        $statusChart = $em->getRepository('UrbicandePersoBundle:Personnage')->countStatus($includePNJ, $pnjName);
         $groupChart = $this->countGroupMember($em);
         $persoChart = $this->countPersoIntrigue($em);
         $userChart = $this->countUserIntrigue($em);
@@ -61,7 +64,14 @@ class StatsController extends Controller
      */
     private function countPersoIntrigue($em)
     {
-        $persos = $em->getRepository('UrbicandePersoBundle:Personnage')->getByTypes(array('PJ'));
+        $includePNJ = (boolean) $this->container->getParameter('stat_include_pnj');
+        $pnjName = $this->container->getParameter('stat_pnj_name');
+
+        if ($includePNJ) {
+            $persos = $em->getRepository('UrbicandePersoBundle:Personnage')->findAll();
+        } else {
+            $persos = $em->getRepository('UrbicandePersoBundle:Personnage')->getAllButType($pnjName);
+        }
 
         $degrees = array();
         $degrees['Héros']['persos'] = array();
@@ -71,6 +81,7 @@ class StatsController extends Controller
         $degrees['Réactif']['persos'] = array();
         $degrees['Réactif']['name'] = 'Réactif';
         foreach ($persos as $key => $perso) {
+
             $degrees['Héros']['persos'][$perso->getName()] = array();
             $degrees['Héros']['persos'][$perso->getName()]['nb_intrigue'] = $perso->countIntrigueByDegree('Héros');
             $degrees['Héros']['persos'][$perso->getName()]['name'] = addslashes(html_entity_decode($perso->getName(), ENT_QUOTES, 'UTF-8'));

@@ -25,3 +25,5 @@ parameters:
         H: Homme
         F: Femme
         NA: Indéterminé
+    stat_include_pnj: true
+    stat_pnj_name: PNJ
