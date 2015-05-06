@@ -9,3 +9,5 @@ web/bundles
 bin/
 composer.*
 web/dev.log
+*.php~
+*.sql

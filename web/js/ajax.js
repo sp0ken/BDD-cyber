@@ -10,13 +10,37 @@ function getParameterByName(name)
     return decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+function createTask(url) {
+  var writer = document.getElementById('urbicande_miscbundle_tasktype_writer');
+  var text = document.getElementById('urbicande_miscbundle_tasktype_text');
+  var endDay = document.getElementById('urbicande_miscbundle_tasktype_endDate_day');
+  var endMonth = document.getElementById('urbicande_miscbundle_tasktype_endDate_month');
+  var endYear = document.getElementById('urbicande_miscbundle_tasktype_endDate_year');
+  console.log(url);
+  $.ajax({
+    url: url,
+    data: {writer: writer.value, text: text.value, endDay: endDay.value, endMonth: endMonth.value, endYear: endYear.value},
+  })
+  .done(function(data, textStatus, xhr) {
+    console.log("success");
+    console.log(data);
+  })
+  .fail(function(data, textStatus, xhr) {
+    console.log("error");
+    console.log(data);
+  })
+  .always(function() {
+    console.log("complete");
+  });
+  
+}
+
 $(document).ready(function() {
 
   $('#urbicande_persobundle_groupetype_members').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');
   $('#urbicande_chronobundle_eventtype_players').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');
-  $('#urbicande_chronobundle_scenotype_intrigue').children('option[value="'+getParameterByName('intrigue')+'"]').attr('selected', 'selected');
 
-  $('.button:not(input[type="submit"])').on('click', function(){
+  $('.button:not(input[type="submit"]):not([href="#"])').on('click', function(){
     window.location = $(this).find('a').attr('href');
   });
 

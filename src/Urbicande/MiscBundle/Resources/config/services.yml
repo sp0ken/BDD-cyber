@@ -1,7 +1,11 @@
 parameters:
     urbicande.background_manager.class: Urbicande\MiscBundle\Manager\BackgroundManager
+    urbicande.task_manager.class: Urbicande\MiscBundle\Manager\TaskManager
 
 services:
     urbicande.background_manager:
         class:     "%urbicande.background_manager.class%"
+        arguments: ["@doctrine.orm.entity_manager"]
+    urbicande.task_manager:
+        class:     "%urbicande.task_manager.class%"
         arguments: ["@doctrine.orm.entity_manager"]

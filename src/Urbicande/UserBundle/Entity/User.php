@@ -78,6 +78,14 @@ class User extends BaseUser
      */
     private $skills;
 
+     /**
+     * @var \Urbicande\MiscBundle\Entity\Task $task
+     * Tache qu'il a à faire
+     *
+     * @ORM\OneToMany(targetEntity="Urbicande\MiscBundle\Entity\Task", mappedBy="writer")
+     */
+    private $tasks;
+
     /**
      * Get id
      *
@@ -370,5 +378,38 @@ class User extends BaseUser
             }
         }
         return $count;
+    }
+
+    /**
+     * Add tasks
+     *
+     * @param \Urbicande\MiscBundle\Entity\Task $tasks
+     * @return User
+     */
+    public function addTask(\Urbicande\MiscBundle\Entity\Task $tasks)
+    {
+        $this->tasks[] = $tasks;
+    
+        return $this;
+    }
+
+    /**
+     * Remove tasks
+     *
+     * @param \Urbicande\MiscBundle\Entity\Task $tasks
+     */
+    public function removeTask(\Urbicande\MiscBundle\Entity\Task $tasks)
+    {
+        $this->tasks->removeElement($tasks);
+    }
+
+    /**
+     * Get tasks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTasks()
+    {
+        return $this->tasks;
     }
 }

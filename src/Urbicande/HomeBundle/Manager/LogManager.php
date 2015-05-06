@@ -141,6 +141,9 @@ class LogManager extends BaseManager
             case 'Urbicande\PersoBundle\Entity\Skill':
                 return 'une compétence';
                 break;
+            case 'Urbicande\MiscBundle\Entity\Task':
+                return 'une tache';
+                break;
             default:
                 return 'un truc mystère';
                 break;

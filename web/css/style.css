@@ -241,4 +241,7 @@ span.form_text {
   .full.chart {
     height: 1000px; }
 
-.implications .block { margin-top: 20px; }
+.implications .block { 
+  margin-top: 20px; 
+  border-radius: 0;
+  border-bottom: 2px dashed #F09C38;}
