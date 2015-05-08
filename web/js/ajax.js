@@ -16,7 +16,7 @@ function createTask(url) {
   var endDay = document.getElementById('urbicande_miscbundle_tasktype_endDate_day');
   var endMonth = document.getElementById('urbicande_miscbundle_tasktype_endDate_month');
   var endYear = document.getElementById('urbicande_miscbundle_tasktype_endDate_year');
-  console.log(url);
+
   $.ajax({
     url: url,
     data: {writer: writer.value, text: text.value, endDay: endDay.value, endMonth: endMonth.value, endYear: endYear.value},
@@ -24,13 +24,12 @@ function createTask(url) {
   .done(function(data, textStatus, xhr) {
     console.log("success");
     console.log(data);
+    $('#my-tasks ul').append('<li><a href="#"><i class="fa fa-square-o"></i> '+data.tache+' </a></li>')
+    $('#task').foundation('reveal', 'close');
   })
   .fail(function(data, textStatus, xhr) {
     console.log("error");
     console.log(data);
-  })
-  .always(function() {
-    console.log("complete");
   });
   
 }
@@ -153,6 +152,23 @@ $(document).ready(function() {
       error: function(xhr, textStatus, errorThrown) {
         //called when there is an error
       }
+    });
+    
+  });
+
+  $('#my-tasks ul').on('click', 'li', function(event) {
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr('data-url'),
+      context: $(this)
+    })
+    .done(function(data, textStatus, xhr) {
+      console.log("success");
+      $(this).children('a').children('i').removeClass('fa-square-o').addClass('fa-check-square');
+    })
+    .fail(function(data, textStatus, xhr) {
+      console.log("error");
+      console.log(data);
     });
     
   });

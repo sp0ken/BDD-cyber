@@ -60,14 +60,26 @@ class HomeController extends Controller
         $task->setEndDate($endDate);
         $task->setIsDone(false);
 
-         $task_manager = $this->get('urbicande.task_manager');
-         $task_manager->saveTask($task);
+        $task_manager = $this->get('urbicande.task_manager');
+        $task_manager->saveTask($task);
          //
         $response = new JsonResponse();
-        $response->setData(array('data' => 'ok'));
+        $response->setData(array('tache' => $task->__toString()));
         return $response;
       } else {
         return $this->redirect($this->generateUrl('Home'));
       }
+    }
+
+    public function completeTaskAction($id)
+    {
+      $task_manager = $this->get('urbicande.task_manager');
+      $task = $task_manager->loadTask($id);
+      $task->setIsDone(true);
+      $task_manager->saveTask($task);
+
+      $response = new JsonResponse();
+      $response->setData(array('result' => 'ok'));
+      return $response;
     }
 }

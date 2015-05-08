@@ -144,31 +144,31 @@
 				</div>
 				<ul class="no-bullet">
 					{% for task in app.user.tasks %}
-						<li><a href="#">{% if task.isDone == false %}<i class="fa fa-square-o"></i>{% else %}<i class="fa fa-check-square"></i>{% endif %} {{ task }}</a></li>
+						<li data-id="{{task.id}}" data-url="{{ path('complete_task', {id: task.id}) }}"><a href="#">{% if task.isDone == false %}<i class="fa fa-square-o"></i>{% else %}<i class="fa fa-check-square"></i>{% endif %} {{ task }}</a></li>
 					{% endfor %}
 				</ul>
 			</div>
 		</div>
 
-                <div id="task" class="row reveal-modal task-modal" data-reveal="true">
-                        <h3 class="small-12 column title">Nouvelle tache</h3>
+    <div id="task" class="row reveal-modal task-modal" data-reveal="true">
+      <h3 class="small-12 column title">Nouvelle tache</h3>
 
-                        <div class="small-12 column">
-                                <div class="row">
-                                	<div class="small-12 medium-4 column">
-                                		{{ form_row(taskForm.writer)}}
-                                	</div>
-                                	<div class="small-12 medium-4 column">
-                                		{{ form_row(taskForm.text)}}
-                                	</div>
-                                	<div class="small-12 medium-4 column">
-                                		{{ form_row(taskForm.endDate)}}
-                                	</div>
-                                </div>
-                        </div>
+      <div class="small-12 column">
+	      <div class="row">
+	      	<div class="small-12 medium-4 column">
+	      		{{ form_row(taskForm.writer)}}
+	      	</div>
+	      	<div class="small-12 medium-4 column">
+	      		{{ form_row(taskForm.text)}}
+	      	</div>
+	      	<div class="small-12 medium-4 column">
+	      		{{ form_row(taskForm.endDate)}}
+	      	</div>
+	      </div>
+      </div>
 
-                        <a href="#" class="flat button green hide-for-print small-12 medium-3 large-2" onclick="event.preventDefault();createTask('{{path('create_task')}}')">Créer</a>
-                        <a class="close-reveal-modal modal-dismiss hide-for-print"><i class="fa fa-minus"></i></a>
-                </div>
+      <a href="#" class="flat button green hide-for-print small-12 medium-3 large-2" onclick="event.preventDefault();createTask('{{path('create_task')}}')">Créer</a>
+      <a class="close-reveal-modal modal-dismiss hide-for-print"><i class="fa fa-minus"></i></a>
+    </div>
 	</div>
 {% endblock %}

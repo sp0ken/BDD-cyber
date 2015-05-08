@@ -89,3 +89,9 @@ musique_by_id:
 create_task:
     pattern:  /task/create
     defaults: { _controller: UrbicandeHomeBundle:Home:createTask }
+
+complete_task:
+    pattern:  /task/complete/{id}
+    defaults: { _controller: UrbicandeHomeBundle:Home:completeTask }
+    requirements:
+      id:     \d+
