@@ -157,6 +157,7 @@ class Personnage
      * Les évènements auxquels à participer le personnage
      * 
      * @ORM\ManyToMany(targetEntity="Urbicande\ChronoBundle\Entity\Event", mappedBy="players", cascade={"persist"})
+     * @ORM\OrderBy({"start_date" = "ASC"})
      */
     private $events;
 

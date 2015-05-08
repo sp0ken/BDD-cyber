@@ -27,6 +27,8 @@ twig:
     globals:
         statuses: %status%
         sexes: %sex%
+        export_include_groups: %export_include_groups%
+        export_include_events: %export_include_events%
 
 # Assetic Configuration
 assetic:

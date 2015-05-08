@@ -3,6 +3,7 @@
 namespace Urbicande\PersoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -189,5 +190,23 @@ class PersonnageController extends Controller
         
         $this->get('session')->getFlashBag()->add('delete', $perso.' n‘a plus la compétence '.$skill->getName());
         return $this->redirect($this->generateUrl('perso_by_id', array('id' => $perso->getId())));
+    }
+
+    public function exportAction($id)
+    {
+      $perso = $this->get('urbicande.perso_manager')->loadPerso($id);
+      if (!$perso) {
+        throw $this->createNotFoundException('Unable to find Personnage entity.');
+      }
+      $filename = $this->container->getParameter('export_filename').' '.addslashes($perso);
+
+      $response = new Response(
+        $this->renderView('UrbicandePersoBundle:Personnage:export.html.twig', array('perso'=>$perso)),
+        200
+      );
+      $response->headers->set('Content-Type', 'application/msword; charset=iso-8859-1');
+      $response->headers->set('Content-disposition', 'attachment; filename="'.$filename.'.doc"');
+
+      return $response;
     }
 }
