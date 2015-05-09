@@ -38,7 +38,7 @@ intrigue_by_id:
       id:     \d+
 
 intrigue_remove_object:
-    pattern:  /intrigue/{intrigueId}/deleteObject/{objectId}
+    pattern:  /intrigue/{intrigueId}/delete/object/{objectId}
     defaults: { _controller: "UrbicandeIntrigueBundle:Intrigue:removeObject" }
     requirements:
       intrigueId:     \d+
@@ -148,21 +148,21 @@ data_by_id:
       id:     \d+
 
 data_remove_knower:
-    pattern:  /intrigue/data/{dataId}/deleteKnow/{knowerId}
+    pattern:  /intrigue/data/{dataId}/delete/perso/{knowerId}
     defaults: { _controller: "UrbicandeIntrigueBundle:Data:removeKnower" }
     requirements:
       dataId:     \d+
       knowerId:     \d+
 
 data_remove_document:
-    pattern:  /intrigue/data/{dataId}/deleteDoc/{documentId}
+    pattern:  /intrigue/data/{dataId}/delete/object/{documentId}
     defaults: { _controller: "UrbicandeIntrigueBundle:Data:removeDocument" }
     requirements:
       dataId:     \d+
       documentId:     \d+
 
 plot_remove_data:
-    pattern:  /intrigue/plot/{plotId}/delete/{dataId}
+    pattern:  /intrigue/plot/{plotId}/delete/data/{dataId}
     defaults: { _controller: "UrbicandeIntrigueBundle:Plot:removeData" }
     requirements:
       plotId:     \d+
