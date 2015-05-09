@@ -204,7 +204,7 @@ class PersonnageController extends Controller
         $this->renderView('UrbicandePersoBundle:Personnage:export.html.twig', array('perso'=>$perso)),
         200
       );
-      $response->headers->set('Content-Type', 'application/msword; charset="windows-1252"');
+      $response->headers->set('Content-Type', 'application/msword; charset="utf-8"');
       $response->headers->set('Content-disposition', 'attachment; filename="'.$filename.'.doc"');
 
       return $response;
