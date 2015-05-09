@@ -1,0 +1,124 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+  <head><title>Fiche de personnage {{perso}}</title>
+  <!--[if gte mso 9]>
+    <xml>
+    <w:WordDocument>
+    <w:View>Print</w:View>
+    <w:Zoom>100</w:Zoom>
+    <w:DoNotOptimizeForBrowser/>
+    </w:WordDocument>
+    </xml>
+  <![endif]-->
+  <meta charset="windows-1252">
+  <style> 
+  <!-- 
+  @page
+  {
+      size: 21cm 29.7cm;  /* A4 */
+      margin: 2cm 2cm 2cm 2cm; /* Margins: 2 cm on each side */
+      mso-page-orientation: portrait;  
+  }
+  td { page-break-inside:avoid; }
+  tr { page-break-after:avoid; }
+  -->
+  </style>
+    <body>
+      <h1>
+        {{ perso.name }} ({{perso.type.name}} {{perso.number}})
+      </h1>
+      <div class="base">
+        <b>Age</b> : {{perso.age}} ans <b>Sexe</b> : {{perso.fullSex}} <br>
+        <b>Job</b> : {{perso.job}} ({{perso.income}}/an)<br>
+        <b>Niveau</b> : {{perso.level}}
+      </div>
+      {% if perso.costume is not empty %}
+        <div class="small-4 columns">
+          <b>Costume</b> : {{perso.costume}}
+        </div>
+      {% endif %}
+      {% if export_include_groups %}
+        <div class="groupes">
+          <h3 class="small-6 medium-7 columns">
+            Groupes :
+          </h3>
+          {% for groupe in perso.groupes %}
+            {{ groupe }} / 
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% if export_include_groups %}
+        <div class="events">
+          <h3 class="small-6 medium-7 columns">
+            Chronologie :
+          </h3>
+          {% for event in perso.events %}
+            {{ event }} ({{event.startDate|date('d/m/Y')}}) / 
+          {% endfor %}
+        </div>
+      {% endif %}
+      <br clear=all style='mso-special-character:line-break;page-break-before:always'>
+      <h2>Partie technique</h2>
+      <div class="technique">
+        {% autoescape false %}
+          {% for implication in perso.intrigues %}
+            {% if implication.description is not empty or implication.objective is not empty %}
+              <h3>{{implication.intrigue}} ({{implication.degree}})</h3>
+              {{implication.description}}
+              {% if(perso.type == 'PNJ') %}
+                {{implication.objective}}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+          {% for groupe in perso.groupes %}
+            {% for implication in groupe.intrigues %}
+              {% if implication.description is not empty or implication.objective is not empty %}
+                <h3>{{implication.intrigue}} ({{implication.degree}})</h3>
+                {{implication.description}}
+                {% if(perso.type == 'PNJ') %}
+                  {{implication.objective}}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% for event in perso.events %}
+            {% for implication in event.intrigues %}
+              {% if implication.description is not empty or implication.objective is not empty %}
+                <h3>{{implication.intrigue}} ({{implication.degree}})</h3>
+                {{implication.description}}
+                {% if(perso.type == 'PNJ') %}
+                  {{implication.objective}}
+                {% endif %}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        {% endautoescape %}
+      </div>
+      <br clear=all style='mso-special-character:line-break;page-break-before:always'>
+      <div class="narration">
+        {% autoescape false %}
+          <div>{{perso.description}}</div>
+          {% for implication in perso.intrigues %}
+            {% if implication.information is not empty %}
+              {{implication.information}}
+            {% endif %}
+          {% endfor %}
+          {% for groupe in perso.groupes %}
+            {% for implication in groupe.intrigues %}
+              {% if implication.information is not empty %}
+                  {{implication.information}}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+          {% for event in perso.events %}
+            {% for implication in event.intrigues %}
+              {% if implication.information is not empty %}
+                  {{implication.information}}
+              {% endif %}
+            {% endfor %}
+          {% endfor %}
+        {% endautoescape %}
+      </div>
+
+    </div>
+  </body>
+</html>

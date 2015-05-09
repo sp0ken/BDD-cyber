@@ -39,8 +39,14 @@ perso_by_id:
     requirements:
       id:     \d+
 
+perso_export:
+    pattern:  /perso/export/{id}
+    defaults: { _controller: UrbicandePersoBundle:Personnage:export }
+    requirements:
+      id:     \d+
+
 perso_remove_skill:
-    pattern:  /perso/{persoId}/delete/{skillId}
+    pattern:  /perso/{persoId}/delete/skill/{skillId}
     defaults: { _controller: "UrbicandePersoBundle:Personnage:removeSkill" }
     requirements:
       persoId:     \d+
@@ -86,7 +92,7 @@ groupe_delete:
       id:     \d+
 
 groupe_remove_perso:
-    pattern:  /groupe/{groupeId}/delete/{memberId}
+    pattern:  /groupe/{groupeId}/delete/perso/{memberId}
     defaults: { _controller: "UrbicandePersoBundle:Groupe:removeMember" }
     requirements:
       groupeId:     \d+
