@@ -1,13 +1,20 @@
 body {
   background: url('/images/pattern.png');
   padding-bottom: 12px;
-}
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;}
 table {
   width: 100%;
 }
+p { 
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;}
 h1 { color: #F09C38; margin-top: 0; }
-a { color: #F09C38; }
+a { 
+  color: #F09C38; 
+  font-weight: 400;}
 a:hover { color: #E8BC88; }
+a:focus { color: #E8BC88; }
 form h3 { margin-top: 0; }
 input[type="submit"] {
   border: 0;
@@ -24,27 +31,30 @@ input[type="checkbox"] { margin: 0 10px 12px 0; }
   border-radius: 0 0 3px 3px;
 }
 
-.flash { margin-top: 10px; }
+.flash { 
+  padding: 0.5rem 1.5rem; }
 .spacer { border-top: 1px solid #E7E7E7; margin:12px 0;}
 
 .back-color, .highlight-back, .blue, .highlight-blue:hover, .blue-event { 
   background: #428BCA; 
   color: white; }
 .blue-border { border:1px solid #428BCA; }
-.blue-font { color: #54A4E9; }
+.blue-font { color: #54A4E9 !important; }
 .hover .highlight-blue { background: none; }
 .green, .highlight-green:hover, .green-event { 
   background:  #42CA99; 
   color: white; }
   button.green:hover, .button.green:hover{ background: #1EA775; }
+  button.green:focus, .button.green:focus{ background: #1EA775; }
 .green-event { border: none;}
-.green-font { color: #42CA99;}
+.green-font { color: #42CA99 !important; }
 .green-border { border:1px solid #42CA99; }
 .hover .highlight-green { background: none; }
 .orange, .highlight-orange:hover, .orange-event { 
   background:  #F09C38; 
   color: white; }
   button.orange:hover, .button.orange:hover{ background: #E8BC88; }
+  button.orange:focus, .button.orange:focus{ background: #E8BC88; }
 .orange-event { border: none;}
 .orange-font { color: #F09C38;}
 .orange-border { border:1px solid #F09C38; }
@@ -52,7 +62,8 @@ input[type="checkbox"] { margin: 0 10px 12px 0; }
 .red, .highlight-red:hover, .red-event {
   background: #FF4F4F;
   color: white; }
-button.red:hover, .button.red:hover{ background: #E42626; }
+  button.red:hover, .button.red:hover{ background: #E42626; }
+  button.red:focus, .button.red:focus{ background: #E42626; }
 .red-event {border: none;}
 .red-border { border: 1px solid #FF4F4F; }
 .hover .highlight-red { background: none; }
@@ -60,8 +71,10 @@ button.red:hover, .button.red:hover{ background: #E42626; }
 .gray, .highlight-gray:hover, .gray-event {
   background: #B8B8B8;
   color: white;}
-button.gray:hover, .button.gray:hover{ background: #949494; }
+  button.gray:hover, .button.gray:hover{ background: #949494; }
+  button.gray:focus, .button.gray:focus{ background: #949494; }
 .gray-event { border: none; }
+.gray-font { color: #B8B8B8 !important; }
 .hover .highlight-gray { background: none; }
 .black { 
   background: black;
@@ -104,12 +117,11 @@ button.gray:hover, .button.gray:hover{ background: #949494; }
   right: 0.9375rem;
   top: 15px; }
 .page-header .button-group { 
-  position: absolute;
-  right: 0.9375rem;
-  top: 15px; }
+  float: right;
+  margin-top: 15px; }
   .header.row .button.flat.blue {
-    position: absolute;    right: 0.9375rem;    
-}
+    position: absolute;    
+    right: 0.9375rem; }
 
 button.DTTT_button, div.DTTT_button, a.DTTT_button { display: inline-block !important ;}
 
@@ -174,7 +186,7 @@ label.required::after {
 #my-objects .card { min-height: 150px; }
 
 
-#site { padding: 0 10px 10px 10px; }
+#site { padding: 0.5rem 1.5rem 1.5rem 1.5rem; }
 
 form#revert {
   display: inline; }
@@ -241,7 +253,16 @@ span.form_text {
   .full.chart {
     height: 1000px; }
 
-.implications .block { 
+.implications .block, .timings .block { 
   margin-top: 20px; 
   border-radius: 0;
   border-bottom: 2px dashed #F09C38;}
+
+/** overwrite Foundation styles **/
+.row { 
+  max-width: none;
+  margin: 0;}
+.contain-to-grid .top-bar { 
+  max-width: none;
+  margin: 0;
+  padding: 0 1.5rem}
