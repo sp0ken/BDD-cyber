@@ -27,8 +27,10 @@
 				<td>
 					{% if implication.player %}
 						<a title="Voir" href="{{ path('perso_by_id', { 'id': implication.player.id }) }}">{{ implication.player }}</a>
-					{% else %}
+					{% elseif implication.groupe %}
 						<a title="Voir" href="{{ path('groupe_by_id', { 'id': implication.groupe.id }) }}">{{ implication.groupe }}</a>
+					{% else %}
+						on-ne-sait-pas-trop-qui
 					{% endif %}
 				</td>
 				<td><a title="Voir" href="{{ path('intrigue_by_id', { 'id': implication.intrigue.id }) }}">{{ implication.intrigue }}</a></td>
@@ -36,10 +38,11 @@
 				<td>{{ implication.theme }}</td>
 				<td>{{ implication.synopsis }}</td>
 				<td>
-					<ul class="button-group">
-						<li><a class="button flat gray" title="Voir" href="{{ path('implication_by_id', { 'id': implication.id }) }}"><i class="fa fa-eye"></i></a></li>
-						<li><a class="button flat green" title="Éditer" href="{{ path('implication_edit', { 'id': implication.id }) }}"><i class="fa fa-edit"></i></a></li>
-						<li><a class="button flat red" title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					<button href="#" data-dropdown="drop-actions-{{implication.id}}" aria-controls="drop-actions-{{implication.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+					<ul id="drop-actions-{{implication.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+						<li><a class="gray-font" title="Détails" href="{{ path('implication_by_id', { 'id': implication.id }) }}"><i class="fa fa-eye"></i> Détails</a></li>
+						<li><a class="green-font" title="Éditer" href="{{ path('implication_edit', { 'id': implication.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+						<li><a class="red-font" title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 					</ul>
 				</td>
 			</tr>

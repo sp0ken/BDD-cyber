@@ -31,7 +31,11 @@
 				<td>{{ user.intrigues|length }}</td>
 				<td>{{ user.persos|length }}</td>
 				<td>{{ user.groupes|length }}</td>
-				<td><a class="button flat gray" title="Voir" href="{{ path('user_by_name', { 'username': user.username }) }}"><i class="fa fa-eye"></i></a></td>
+				<td>
+					<button href="#" data-dropdown="drop-actions-{{user.id}}" aria-controls="drop-actions-{{user.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+					<ul id="drop-actions-{{user.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+						<li><a class="gray-font" title="Détails" href="{{ path('user_by_name', { 'username': user.username }) }}"><i class="fa fa-eye"></i> Détails</a></li>
+					</ul>
 			</tr>
 		{% endfor %}
 	</tbody>

@@ -54,7 +54,9 @@
 								<td>{{intrigue.implications|length}}</td>
 								<td>{{intrigue.writer}}</td>
 								<td>
-									<a class="button flat green" title="Éditer" href="{{ path('intrigue_edit', { 'id': intrigue.id}) }}"><i class="fa fa-edit"></i></a>
+									<button href="#" data-dropdown="drop-actions-intrigue-{{intrigue.id}}" aria-controls="drop-actions-intrigue-{{intrigue.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+									<ul id="drop-actions-intrigue-{{intrigue.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+										<li><a class="green-font" title="Éditer" href="{{ path('intrigue_edit', { 'id': intrigue.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
 									</ul>
 								</td>
 							</tr>

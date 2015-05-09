@@ -120,9 +120,10 @@
 						<td>{{ perso.number }}</td>
 						<td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
 						<td>
-							<ul class="button-group">
-								<li><a class="button flat gray" title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="fa fa-eye"></i></a></li>
-								<li><a class="button flat red" title="Enlever du groupe" href="{{ path('groupe_remove_perso', { 'memberId': perso.id, 'groupeId': groupe.id }) }}"><i class="fa fa-minus-circle"></i></a></li>
+							<button href="#" data-dropdown="drop-actions-perso-{{perso.id}}" aria-controls="drop-actions-perso-{{perso.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+							<ul id="drop-actions-perso-{{perso.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+								<li><a class="gray-font" title="Détails" href="{{ path('perso_by_id', { 'id': perso.id }) }}"><i class="fa fa-eye"></i> Détails</a></li>
+								<li><a class="red-font" title="Retirer" href="{{ path('groupe_remove_perso', { 'memberId': perso.id, 'groupeId': groupe.id }) }}"><i class="fa fa-minus-circle"></i> Retirer</a></li>
 							</ul>
 						</td>
 					</tr>
@@ -153,9 +154,10 @@
 						<td>{{ implication.degree }}</td>
 						<td>{{ implication.theme }}</td>
 						<td>
-							<ul class="button-group">
-								<li><a title="Voir" href="{{ path('implication_by_id', { 'id': implication.id }) }}"><i class="fa fa-eye"></i></a></li>
-								<li><a title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id}) }}"><i class="fa fa-minus-circle"></i></a></li>
+							<button href="#" data-dropdown="drop-actions-implication-{{implication.id}}" aria-controls="drop-actions-implication-{{implication.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+							<ul id="drop-actions-implication-{{implication.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+								<li><a class="gray-font" title="Détails" href="{{ path('implication_by_id', { 'id': implication.id }) }}"><i class="fa fa-eye"></i> Détails</a></li>
+								<li><a class="red-font" title="Supprimer" href="{{ path('implication_delete', { 'id': implication.id}) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 							</ul>
 						</td>
 					</tr>

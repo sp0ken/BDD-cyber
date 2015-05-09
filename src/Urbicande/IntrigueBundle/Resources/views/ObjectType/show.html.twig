@@ -49,9 +49,10 @@
 						<td>{{ object.origin }}</td>
 						<td>{{ object.creator }}</td>
 						<td>
-							<ul class="button-group even two-up">
-								<li><a class="button flat gray" href="{{ path('object_by_id', { 'id': object.id }) }}"><i class="fa fa-eye"></i></a</li>
-								<li><a class="button flat green" href="{{ path('object_edit', { 'id': object.id}) }}"><i class="fa fa-edit"></i></a></li>
+							<button href="#" data-dropdown="drop-actions-{{object.id}}" aria-controls="drop-actions-{{object.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+							<ul id="drop-actions-{{object.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+								<li><a class="gray-font" title="Détails" href="{{ path('object_by_id', { 'id': object.id }) }}"><i class="fa fa-eye"></i> Détails</a></li>
+								<li><a class="green-font" title="Éditer" href="{{ path('object_edit', { 'id': object.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
 							</ul>
 						</td>
 					</tr>

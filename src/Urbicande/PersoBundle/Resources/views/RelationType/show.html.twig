@@ -50,9 +50,10 @@
 						<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knower.id }) }}">{{ relation.knower.name }}</a></td>
 						<td><a title="Voir" href="{{ path('perso_by_id', { 'id': relation.knowee.id }) }}">{{ relation.knowee.name }}</a></td>
 						<td>
-							<ul class="button-group">
-								<li><a class="button flat gray" title="Voir" href="{{ path('relation_by_id', { 'id': relation.id }) }}"><i class="fa fa-eye"></i></a></li>
-								<li><a class="button flat green" href="{{ path('relation_edit', { 'id': relation.id}) }}"><i class="fa fa-edit"></i></a></li>
+							<button href="#" data-dropdown="drop-actions-{{relation.id}}" aria-controls="drop-actions-{{relation.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+							<ul id="drop-actions-{{relation.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+								<li><a class="gray-font" title="Détails" href="{{ path('relation_by_id', { 'id': relation.id }) }}"><i class="fa fa-eye"></i> Détails</a></li>
+								<li><a class="green-font" title="Éditer" href="{{ path('relation_edit', { 'id': relation.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
 							</ul>
 						</td>
 					</tr>

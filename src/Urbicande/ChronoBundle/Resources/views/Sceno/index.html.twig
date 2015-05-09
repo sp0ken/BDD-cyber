@@ -43,9 +43,10 @@
 			</td>
 			<td>{{ sceno.creator }}</td>
 			<td>
-				<ul class="button-group">
-					<li><a class="button flat green" title="Éditer" href="{{ path('sceno_edit', { 'id': sceno.id }) }}"><i class="fa fa-edit"></i></a></li>
-					<li><a class="button flat red" title="Supprimer" href="{{ path('sceno_delete', { 'id': sceno.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+				<button href="#" data-dropdown="drop-actions-{{sceno.id}}" aria-controls="drop-actions-{{sceno.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+				<ul id="drop-actions-{{sceno.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+					<li><a class="green-font" title="Éditer" href="{{ path('sceno_edit', { 'id': sceno.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+					<li><a class="red-font" title="Supprimer" href="{{ path('sceno_delete', { 'id': sceno.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 				</ul>
 			</td>
 		</tr>

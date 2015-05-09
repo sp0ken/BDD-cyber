@@ -16,8 +16,10 @@
 						Groupe
 					{% elseif implication.player %}
 						<a title="Voir" href="{{ path('perso_type_by_id', { 'id': implication.player.type.id }) }}">{{ implication.player.type}}</a>
-					{% else %}
+					{% elseif implication.event %}
 						Évènement
+					{% else %}
+						on-ne-sait-pas-trop-quoi
 					{% endif %}
 				</td>
 				<td>
@@ -25,8 +27,10 @@
 						<a title="Voir" href="{{ path('groupe_by_id', { 'id': implication.groupe.id }) }}">{{implication.groupe}}</a>
 					{% elseif implication.player %}
 						<a title="Voir" href="{{ path('perso_by_id', { 'id': implication.player.id }) }}">{{ implication.player}}</a>
-					{% else %}
+					{% elseif implication.event %}
 						<a title="Voir" href="{{ path('event_by_id', { 'id': implication.event.id }) }}">{{ implication.event}}</a>
+					{% else %}
+						on-ne-sait-pas-trop-qui
 					{% endif %}
 				</td>
 				<td>{{ implication.degree }}</td>

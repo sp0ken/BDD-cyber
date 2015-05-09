@@ -46,9 +46,11 @@
 				<td>{{ perso.countIntrigueByDegree('Actif') }}</td>
 				<td>{{ perso.countIntrigueByDegree('Réactif') }}</td>
 				<td>
-					<ul class="button-group">
-						<li><a class="button flat green" title="Éditer" href="{{ path('perso_edit', { 'id': perso.id }) }}"><i class="fa fa-edit"></i></a></li>
-						<li><a class="button flat red" title="Supprimer" href="{{ path('perso_delete', { 'id': perso.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					<button href="#" data-dropdown="drop-actions-{{perso.id}}" aria-controls="drop-actions-{{perso.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+					<ul id="drop-actions-{{perso.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+						<li><a class="green-font" title="Éditer" href="{{ path('perso_edit', { 'id': perso.id }) }}"><i class="fa fa-edit"></i> Editer</a></li>
+						<li><a class="gray-font" title="Exporter" href="{{ path('perso_export', { 'id': perso.id }) }}"><i class="fa fa-download"></i> Exporter</a></li>
+						<li><a class="red-font" title="Supprimer" href="{{ path('perso_delete', { 'id': perso.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 					</ul>
 				</td>
 			</tr>

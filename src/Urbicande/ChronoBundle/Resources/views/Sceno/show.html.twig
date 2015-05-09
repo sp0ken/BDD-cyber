@@ -50,43 +50,6 @@
 		<div class="card">
 			<div class="header row">
 				<h3 class="small-6 medium-8 columns">
-					Joueurs concernés
-				</h3>
-			</div>
-			<table class="records_list datatable">
-				<thead>
-					<tr>
-						<th>Type</th>
-						<th>Numero</th>
-						<th>Nom</th>
-						<th>Actions</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for perso in sceno.players %}
-						<tr>
-							<td><a title="Voir" href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type }}</a></td>
-							<td>{{ perso.number }}</td>
-							<td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
-							<td>
-								<ul class="button-group">
-									<li><a class="button flat green" title="Éditer" href="{{ path('perso_edit', { 'id': perso.id }) }}"><i class="fa fa-edit"></i></a></li>
-									<li><a class="button flat red" title="Enlever l‘objet" href="{{ path('sceno_remove_perso', { 'scenoId': sceno.id, 'persoId': perso.id }) }}"><i class="fa fa-minus-circle"></i></a></li>
-								</ul>
-							</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
-
-<div class="row">
-	<div class="small-12 columns">
-		<div class="card">
-			<div class="header row">
-				<h3 class="small-6 medium-8 columns">
 					Timings
 				</h3>
 			</div>
@@ -116,7 +79,10 @@
 								{% endif %}
 							</td>
 							<td>
-								<a class="button flat red" title="Supprimer" href="{{ path('timing_delete', { 'id': timing.id }) }}"><i class="fa fa-times-circle"></i></a>
+								<button href="#" data-dropdown="drop-actions-timing-{{timing.id}}" aria-controls="drop-actions-timing-{{timing.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+								<ul id="drop-actions-timing-{{timing.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+									<li><a class="red-font" title="Supprimer" href="{{ path('timing_delete', { 'id': timing.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
+								</ul>
 							</td>
 						</tr>
 					{% endfor %}
@@ -125,6 +91,45 @@
 		</div>
 	</div>
 </div>
+
+<div class="row">
+	<div class="small-12 columns">
+		<div class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Joueurs concernés
+				</h3>
+			</div>
+			<table class="records_list datatable">
+				<thead>
+					<tr>
+						<th>Type</th>
+						<th>Numero</th>
+						<th>Nom</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for perso in sceno.players %}
+						<tr>
+							<td><a title="Voir" href="{{ path('perso_type_by_id', { 'id': perso.type.id }) }}">{{ perso.type }}</a></td>
+							<td>{{ perso.number }}</td>
+							<td><a title="Voir" href="{{ path('perso_by_id', { 'id': perso.id }) }}">{{ perso.name }}</a></td>
+							<td>
+								<button href="#" data-dropdown="drop-actions-perso-{{perso.id}}" aria-controls="drop-actions-perso-{{perso.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+								<ul id="drop-actions-perso-{{perso.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+									<li><a class="green-font" title="Éditer" href="{{ path('perso_edit', { 'id': perso.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+									<li><a class="red-font" title="Retirer" href="{{ path('sceno_remove_perso', { 'scenoId': sceno.id, 'persoId': perso.id }) }}"><i class="fa fa-minus-circle"></i> Retirer</a></li>
+								</ul>
+							</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
 
 <div class="row">
 	<div class="small-12 columns">
@@ -152,9 +157,10 @@
 							<td>{{ object.origin }}</td>
 							<td>{{ object.creator }}</td>
 							<td>
-								<ul class="button-group">
-									<li><a class="button flat green" title="Éditer" href="{{ path('object_edit', { 'id': object.id }) }}"><i class="fa fa-edit"></i></a></li>
-									<li><a class="button flat red" title="Enlever l‘objet" href="{{ path('sceno_remove_object', { 'scenoId': sceno.id, 'objectId': object.id }) }}"><i class="fa fa-minus-circle"></i></a></li>
+								<button href="#" data-dropdown="drop-actions-object-{{object.id}}" aria-controls="drop-actions-object-{{object.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+								<ul id="drop-actions-object-{{object.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+									<li><a class="green-font" title="Éditer" href="{{ path('object_edit', { 'id': object.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+									<li><a class="red-font" title="Retirer" href="{{ path('sceno_remove_object', { 'scenoId': sceno.id, 'objectId': object.id }) }}"><i class="fa fa-minus-circle"></i> Retirer</a></li>
 								</ul>
 							</td>
 						</tr>

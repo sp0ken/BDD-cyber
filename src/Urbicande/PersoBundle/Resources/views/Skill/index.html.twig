@@ -32,9 +32,10 @@
 			<td>{{ skill.players|length }}</td>
 			<td>{{ skill.intrigues|length }}</td>
 			<td>
-				<ul class="button-group">
-					<li><a class="button flat green" title="Editer" href="{{ path('skill_edit', { 'id': skill.id }) }}"><i class="fa fa-edit"></i></a></li>
-					<li><a class="button flat red" title="Supprimer" href="{{ path('skill_delete', { 'id': skill.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+				<button href="#" data-dropdown="drop-actions-{{skill.id}}" aria-controls="drop-actions-{{skill.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+				<ul id="drop-actions-{{skill.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+					<li><a class="green-font" title="Éditer" href="{{ path('skill_edit', { 'id': skill.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+					<li><a class="red-font" title="Supprimer" href="{{ path('skill_delete', { 'id': skill.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 				</ul>
 			</td>
 		</tr>

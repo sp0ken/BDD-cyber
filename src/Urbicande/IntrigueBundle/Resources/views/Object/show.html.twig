@@ -56,11 +56,12 @@
 					<tr>
 						<td>{{ data.number }}</td>
 						<td><a title="Voir" href="{{ path('data_by_id', { 'id': data.id }) }}">{{ data.information }}</a></td>
-						<td><a href="{{path('intrigue_by_id', {'id': data.plot.intrigue}) }}">{{ data.plot.intrigue.id }}</a></td>
+						<td><a href="{{path('intrigue_by_id', {'id': data.plot.intrigue.id}) }}">{{ data.plot.intrigue }}</a></td>
 						<td>
-							<ul class="button-group">
-								<li><a title="Éditer" href="{{ path('data_edit', { 'id': data.id}) }}"><i class="icon-pencil"></i></a></li>
-								<li><a title="Enlever" href="{{ path('data_remove_document', { 'dataId': data.id, 'documentId': object.id}) }}"><i class="icon-remove-sign"></i></a></li>
+							<button href="#" data-dropdown="drop-actions-data-{{data.id}}" aria-controls="drop-actions-data-{{data.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+							<ul id="drop-actions-data-{{data.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+								<li><a class="green-font" title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+								<li><a class="red-font" title="Retirer" href="{{ path('data_remove_document', { 'dataId': data.id, 'documentId': object.id}) }}"><i class="fa fa-minus-circle"></i> Retirer</a></li>
 							</ul>
 						</td>
 					</tr>

@@ -32,9 +32,10 @@
 				<td>{{ groupe.intrigues|length }}</td>
 				<td>{{ groupe.events|length }}</td>
 				<td>
-					<ul class="button-group">
-						<li><a class="button flat green" href="{{ path('groupe_edit', { 'id': groupe.id }) }}"><i class="fa fa-edit"></i></a></li>
-						<li><a class="button flat red" href="{{ path('groupe_delete', { 'id': groupe.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					<button href="#" data-dropdown="drop-actions-{{groupe.id}}" aria-controls="drop-actions-{{groupe.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+					<ul id="drop-actions-{{groupe.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+						<li><a class="green-font" title="Éditer" href="{{ path('groupe_edit', { 'id': groupe.id }) }}"><i class="fa fa-edit"></i> Editer</a></li>
+						<li><a class="red-font" title="Supprimer" href="{{ path('groupe_delete', { 'id': groupe.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 					</ul>
 				</td>
 			</tr>

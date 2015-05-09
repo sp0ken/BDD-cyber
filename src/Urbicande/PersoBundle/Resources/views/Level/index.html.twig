@@ -30,9 +30,10 @@
 				<td>{% autoescape false %}{{ level.description|slice(0,60) }}{% endautoescape %}</td>
 				<td>{{ level.players|length }}</td>
 				<td>
-					<ul class="button-group">
-						<li><a class="button flat green" title="Éditer" href="{{ path('level_edit', { 'id': level.id }) }}"><i class="fa fa-edit"></i></a></li>
-						<li><a class="button flat red" title="Supprimer" href="{{ path('level_delete', { 'id': level.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					<button href="#" data-dropdown="drop-actions-{{level.id}}" aria-controls="drop-actions-{{level.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+					<ul id="drop-actions-{{level.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+						<li><a class="green-font" title="Éditer" href="{{ path('level_edit', { 'id': level.id }) }}"><i class="fa fa-edit"></i> Editer</a></li>
+						<li><a class="red-font" title="Supprimer" href="{{ path('level_delete', { 'id': level.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 					</ul>
 				</td>
 			</tr>

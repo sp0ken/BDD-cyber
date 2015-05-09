@@ -31,9 +31,10 @@
 			<td>{% autoescape false %}{{ type.description|slice(0,60) }}{% endautoescape %}</td>
 			<td>{{ type.relations|length }}</td>
 			<td>
-				<ul class="button-group">
-					<li><a class="button flat green" title="Éditer" href="{{ path('relation_type_edit', { 'id': type.id }) }}"><i class="fa fa-edit"></i></a></li>
-					<li><a class="button flat red" title="Supprimer" href="{{ path('relation_type_delete', { 'id': type.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+				<button href="#" data-dropdown="drop-actions-{{type.id}}" aria-controls="drop-actions-{{type.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+				<ul id="drop-actions-{{type.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+					<li><a class="green-font" title="Éditer" href="{{ path('relation_type_edit', { 'id': type.id }) }}"><i class="fa fa-edit"></i> Editer</a></li>
+					<li><a class="red-font" title="Supprimer" href="{{ path('relation_type_delete', { 'id': type.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 				</ul>
 			</td>
 		</tr>

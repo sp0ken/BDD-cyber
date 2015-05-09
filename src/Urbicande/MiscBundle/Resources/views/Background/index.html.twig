@@ -27,9 +27,10 @@
 				<td><a title="Voir" href="{{ path('background_by_id', { 'id': back.id }) }}">{{ back.title }}</a></td>
 				<td><a title="Voir" href="{{ path('user_by_name', { 'username': back.writer.username }) }}">{{ back.writer }}</a></td>
 				<td>
-					<ul class="button-group">
-						<li><a  class="button flat green" title="Éditer" href="{{ path('background_edit', { 'id': back.id }) }}"><i class="fa fa-edit"></i></a></li>
-						<li><a  class="button flat red" title="Supprimer" href="{{ path('background_delete', { 'id': back.id }) }}"><i class="fa fa-times-circle"></i></a></li>
+					<button href="#" data-dropdown="drop-actions-{{back.id}}" aria-controls="drop-actions-{{back.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+					<ul id="drop-actions-{{back.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+						<li><a class="green-font" title="Éditer" href="{{ path('background_edit', { 'id': back.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+						<li><a class="red-font" title="Supprimer" href="{{ path('background_delete', { 'id': back.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 					</ul>
 				</td>
 			</tr>
