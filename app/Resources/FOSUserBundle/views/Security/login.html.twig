@@ -1,24 +1,36 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-<h1>Connexion</h1>
-{% if error %}
-    <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
-{% endif %}
+  <h1>Connexion</h1>
+  {% if error %}
+      <div class="alert-box alert">{{ error|trans({}, 'FOSUserBundle') }}</div>
+  {% endif %}
 
-<form class="no-autosave" action="{{ path("fos_user_security_check") }}" method="post">
+  <form class="no-autosave" action="{{ path("fos_user_security_check") }}" method="post">
     <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-    <label for="username">Nom</label>
-    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-
-    <label for="password">Mot de passe</label>
-    <input type="password" id="password" name="_password" required="required" />
-
-    <input class="left" type="checkbox" id="remember_me" name="_remember_me" value="on" />
-    <label class="left" for="remember_me">Se souvenir de moi</label>
-    <div class="clear"></div><br>
+    <div class="row collapse">
+      <div class="small-4 medium-2 large-1 columns">
+        <label class="prefix required" for="username">Nom</label>
+      </div>
+      <div class="small-8 medium-10 large-11 columns">
+        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-4 medium-2 large-1 columns">
+        <label for="password" class="prefix required">Mot de passe</label>
+      </div>
+      <div class="small-8 medium-10 large-11 columns">
+        <input type="password" id="password" name="_password" required="required" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-8 columns">
+        <label for="remember_me">Se souvenir de moi</label>
+        <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+      </div>
+    </div>
     <input class="button flat green" type="submit" id="_submit" name="_submit" value="Valider" />
     <a href="{{path('fos_user_resetting_request')}}">Mot de passe oublié ?</a> ou <a href="{{path('fos_user_registration_register')}}">Inscription</a>
-</form>
+  </form>
 {% endblock fos_user_content %}

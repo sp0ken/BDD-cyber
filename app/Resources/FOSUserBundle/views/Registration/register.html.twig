@@ -1,5 +1,47 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 {% block fos_user_content %}
   <h1>Inscription</h1>
-  {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+  {{form_errors(form.username)}}
+  {{form_errors(form.email)}}
+  {{form_errors(form.plainPassword.first)}}
+  {{form_errors(form.plainPassword.second)}}
+
+  <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+
+    <div class="row collapse">
+      <div class="small-4 medium-2 large-1 columns">
+        <label class="prefix required" for="username">Nom d'utilisateur</label>
+      </div>
+      <div class="small-8 medium-10 large-11 columns">
+        {{form_widget(form.username)}}
+      </div>
+
+    </div>
+    <div class="row collapse">
+      <div class="small-4 medium-2 large-1 columns">
+        <label for="password" class="prefix required">Adresse e-mail</label>
+      </div>
+      <div class="small-8 medium-10 large-11 columns">
+        {{form_widget(form.email)}}
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-4 medium-2 large-1 columns">
+        <label for="password" class="prefix required">Mot de passe</label>
+      </div>
+      <div class="small-8 medium-10 large-11 columns">
+        {{form_widget(form.plainPassword.first)}}
+      </div>
+    </div>
+    <div class="row collapse">
+      <div class="small-4 medium-2 large-1 columns">
+        <label for="password" class="prefix required">Vérification</label>
+      </div>
+      <div class="small-8 medium-10 large-11 columns">
+        {{form_widget(form.plainPassword.second)}}
+      </div>
+    </div>
+    {{form_rest(form)}}
+    <input class="button flat green" type="submit" id="_submit" name="_submit" value="{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}"  />
+  </form>
 {% endblock fos_user_content %}
