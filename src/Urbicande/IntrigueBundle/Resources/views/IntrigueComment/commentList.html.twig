@@ -1,6 +1,6 @@
 <div class="comments hide-for-small">
 	{% for comment in intrigue.comments %}
-			{% if loop.index%2 %}
+			{% if(intrigue.writer != comment.user) %}
 			<div class="comment-box">
 				<div class="row">
 					<div class="left">
@@ -15,7 +15,7 @@
 				</div>
 				<div class="row">
 					{% autoescape false %}
-						<div class="small-7 columns columns comment {% if comment.user == intrigue.writer %}author{% endif %}">{{ comment.comment}}</div>
+						<div class="small-7 columns columns comment">{{ comment.comment}}</div>
 					{% endautoescape %}
 				</div>
 			</div>
@@ -34,7 +34,7 @@
 					</div>
 					<div class="row">
 						{% autoescape false %}
-							<div class="push-5 small-7 columns comment {% if comment.user == intrigue.writer %}author{% endif %}">{{ comment.comment}}</div>
+							<div class="push-5 small-7 columns comment author">{{ comment.comment}}</div>
 						{% endautoescape %}
 					</div>
 				</div>

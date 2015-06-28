@@ -1,24 +1,24 @@
 <div class="comments hide-for-small">
 	{% for comment in perso.comments %}
-			{% if loop.index%2 %}
-			<div class="comment-box">
-				<div class="row">
-					<div class="left">
-						Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
+			{% if comment.user != perso.writer %}
+				<div class="comment-box">
+					<div class="row">
+						<div class="left">
+							Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
+						</div>
+						<div class="left" style="margin-left:10px;">
+							{% if(app.user == comment.user) %}
+								<a class="green-font" href="{{ path('perso_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
+								<a class="red-font" href="{{ path('perso_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
+							{% endif %}
+						</div>
 					</div>
-					<div class="left" style="margin-left:10px;">
-						{% if(app.user == comment.user) %}
-							<a class="green-font" href="{{ path('perso_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
-							<a class="red-font" href="{{ path('perso_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
-						{% endif %}
+					<div class="row">
+						{% autoescape false %}
+							<div class="small-7 columns comment">{{ comment.comment}}</div>
+						{% endautoescape %}
 					</div>
 				</div>
-				<div class="row">
-					{% autoescape false %}
-						<div class="small-7 columns comment {% if comment.user == perso.writer %}author{% endif %}">{{ comment.comment}}</div>
-					{% endautoescape %}
-				</div>
-			</div>
 			{% else %}
 				<div class="comment-box">
 					<div class="row">
@@ -34,7 +34,7 @@
 					</div>
 					<div class="row">
 						{% autoescape false %}
-							<div class="push-5 small-7 columns comment {% if comment.user == perso.writer %}author{% endif %}">{{ comment.comment}}</div>
+							<div class="push-5 small-7 columns comment author">{{ comment.comment}}</div>
 						{% endautoescape %}
 					</div>
 				</div>
