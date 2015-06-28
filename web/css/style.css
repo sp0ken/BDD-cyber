@@ -112,10 +112,11 @@ input[type="checkbox"] { margin: 0 10px 12px 0; }
   padding: 0.5rem; 
   font-size: 0.9rem; }
 
-.page-header div > a.button { 
+.page-header div { 
   position: absolute;
-  right: 0.9375rem;
-  top: 15px; }
+  right: 0.5rem; }
+  .page-header div > a.button {
+    float: right;}
 .page-header .button-group { 
   float: right;
   margin-top: 15px; }
@@ -257,6 +258,17 @@ span.form_text {
   margin-top: 20px; 
   border-radius: 0;
   border-bottom: 2px dashed #F09C38;}
+.plot { word-wrap: break-word;}
+.avatar img { width: 100%; }
+
+/** Mobile css specific **/
+@media only screen and (max-width: 40em) {
+  #site { padding: 0.5rem; }
+  .card { margin: 0.5rem 0;}
+}
+@media only screen and (min-width: 40.063em) and (max-width: 64em) {
+  #site { padding: 0.5rem 1rem 1rem; }
+}
 
 /** overwrite Foundation styles **/
 .row { 
