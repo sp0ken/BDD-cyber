@@ -4,6 +4,7 @@ namespace Urbicande\PersoBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,6 +12,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Urbicande\PersoBundle\Entity\Personnage;
 use Urbicande\ChronoBundle\Entity\Chronology;
 use Urbicande\PersoBundle\Form\PersonnageType;
+use ZipArchive;
 
 /**
  * Personnage controller.
@@ -192,6 +194,10 @@ class PersonnageController extends Controller
         return $this->redirect($this->generateUrl('perso_by_id', array('id' => $perso->getId())));
     }
 
+    /**
+     * Creates a word file of the selected character.
+     *
+     */
     public function exportAction($id)
     {
       $perso = $this->get('urbicande.perso_manager')->loadPerso($id);
@@ -208,5 +214,35 @@ class PersonnageController extends Controller
       $response->headers->set('Content-disposition', 'attachment; filename="'.$filename.'.doc"');
 
       return $response;
+    }
+
+    /**
+     * Creates a zip file of all exported characters files.
+     *
+     */
+    public function exportAllAction() {
+      $persos = array();
+      $persos = $this->get('urbicande.perso_manager')->loadAll();
+      
+      $zip = new \ZipArchive();
+      $zipName = 'Fiches-'.time().'.zip';
+      $file = $this->get('kernel')->getRootDir() . '/../web/resources/'.$zipName;
+      $zip->open($this->get('kernel')->getRootDir() . '/../web/resources/'.$zipName,  \ZipArchive::CREATE);
+      foreach ($persos as $perso) {
+        $filename = $this->container->getParameter('export_filename').' '.$perso;
+        $zip->addFromString($filename.'.doc',  $this->renderView('UrbicandePersoBundle:Personnage:export.html.twig', array('perso'=>$perso))); 
+      }
+      $zip->close();
+
+      chmod($file, 0755);
+      $zipOpen=fopen($file, "r");//astuce ici
+      $content=stream_get_contents($zipOpen);// et ici
+      //$response = new BinaryFileResponse($file);
+      return new Response($content, 200, array(
+        'Content-Transfert-encoding: binary',
+        'Content-Type' => 'application/zip',
+        'Content-Disposition' => 'attachment; filename="'.$zipName.'"',
+        'Content-Length: '.filesize($zipName)
+      ));
     }
 }

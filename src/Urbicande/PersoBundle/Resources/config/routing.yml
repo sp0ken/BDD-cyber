@@ -45,6 +45,10 @@ perso_export:
     requirements:
       id:     \d+
 
+perso_export_all:
+    pattern:  /perso/export/all
+    defaults: { _controller: UrbicandePersoBundle:Personnage:exportAll }
+
 perso_remove_skill:
     pattern:  /perso/{persoId}/delete/skill/{skillId}
     defaults: { _controller: "UrbicandePersoBundle:Personnage:removeSkill" }
