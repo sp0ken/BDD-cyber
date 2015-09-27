@@ -39,7 +39,7 @@ $(document).ready(function() {
   $('#urbicande_persobundle_groupetype_members').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');
   $('#urbicande_chronobundle_eventtype_players').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');
 
-  $('.button:not(input[type="submit"]):not([href="#"])').on('click', function(){
+  $('.button:not(.popup):not(input[type="submit"]):not([href="#"])').on('click', function(){
     window.location = $(this).find('a').attr('href');
   });
 
@@ -75,12 +75,12 @@ $(document).ready(function() {
   TableTools.DEFAULTS.sSwfPath = "/swf/copy_csv_xls_pdf.swf";
 
   $('.datatable').DataTable({
-    responsive: true,
+    "responsive": true,
     "searching": true,
-    stateSave: true,
-  "ordering": true,
+    "stateSave": true,
+    "ordering": true,
     "order": [[ 0, 'asc' ], [ 1, 'asc' ]],
-    paging: false,
+    "paging": false,
     "info": false,
     "lengthChange": false,
     "autoWidth": false,
