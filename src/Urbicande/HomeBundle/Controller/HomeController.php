@@ -82,4 +82,51 @@ class HomeController extends Controller
       $response->setData(array('result' => 'ok'));
       return $response;
     }
+
+    public function saveResizeAction(Request $request)
+    {
+      if($request->isXmlHttpRequest())  {
+        $response = new JsonResponse();
+        try {
+          $userManager = $this->container->get('fos_user.user_manager');
+          $user = $this->getUser();
+          $setting = $user->getSetting();
+
+          switch ($request->get('block')) {
+            case 'rpg':
+              $setting->setRpgSize($request->get('size'));
+              break;
+            case 'log':
+              $setting->setLogSize($request->get('size'));
+              break;
+            case 'my-plots':
+              $setting->setPlotSize($request->get('size'));
+              break;
+            case 'my-players':
+              $setting->setPersoSize($request->get('size'));
+              break;
+            case 'my-groups':
+              $setting->setGroupSize($request->get('size'));
+              break;
+            case 'my-rules':
+              $setting->setRuleSize($request->get('size'));
+              break;
+            case 'my-skills':
+              $setting->setSkillSize($request->get('size'));
+              break;
+            case 'my-tasks':
+              $setting->setTaskSize($request->get('size'));
+              break;
+          }
+
+          $userManager->updateUser($user);
+          $response->setData(array('result' => 'ok'));
+        } catch (Exception $e) {
+          $response->setData(array('result' => $e));
+        }
+
+        return $response;
+      }
+    }
+
 }

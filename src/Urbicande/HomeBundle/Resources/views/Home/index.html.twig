@@ -5,35 +5,45 @@
 {% block body %}
 	<h1>Bienvenue {{ app.user|title}}</h1>
 
-	<div class="row" id="updates">
+	<div id="sortable" class="row" data-equalizer>
 		{% if app.user.setting.hasRpg %}
-			<div id="rpg" class="hide-for-small medium-6  columns home-block">
-				<div class="card">
-					<h3>Mon perso</h3>
+			<div class="hide-for-small medium-{{app.user.setting.rpgSize}} columns home-block" data-size="medium-{{app.user.setting.rpgSize}}" html-data-id="1">
+				<div id="rpg" class="card" data-equalizer-watch>
+					<h3 class="handle">Mon perso</h3>
 					{% include 'UrbicandeHomeBundle:Home:rpg.html.twig' with {'user': app.user} %}
+          <div class="resize-control">
+            <a href="#" onclick="event.preventDefault(); resize('rpg', 'larger','{{path('size_update')}}')">+</a>
+            <a href="#" onclick="event.preventDefault(); resize('rpg', 'smaller','{{path('size_update')}}')">-</a>
+          </div>
 				</div>
 			</div>
-			<div class="hide-for-small medium-6 columns home-block">
-				<div class="card">
-					<h3>Les dernières actions</h3>
+			<div home-block class="hide-for-small medium-{{app.user.setting.logSize}} columns home-block" data-size="medium-{{app.user.setting.logSize}}" html-data-id="2">
+				<div id="log" class="card" data-equalizer-watch>
+					<h3 class="handle">Les dernières actions</h3>
 					{% include 'UrbicandeHomeBundle:Home:logList.html.twig' %}
+          <div class="resize-control">
+            <a href="#" onclick="event.preventDefault(); resize('log', 'larger','{{path('size_update')}}')">+</a>
+            <a href="#" onclick="event.preventDefault(); resize('log', 'smaller','{{path('size_update')}}')">-</a>
+          </div>
 				</div>
 			</div>
 		{% else %}
-			<div class="hide-for-small medium-12 columns home-block">
-				<div class="card">
-					<h3>Les dernières actions</h3>
+			<div class="hide-for-small medium-{{app.user.setting.logSize}} columns home-block" data-size="medium-{{app.user.setting.logSize}}" html-data-id="2">
+				<div id="log" class="card" data-equalizer-watch>
+					<h3 class="handle">Les dernières actions</h3>
 					{% include 'UrbicandeHomeBundle:Home:logList.html.twig' %}
+          <div class="resize-control">
+            <a href="#" onclick="event.preventDefault(); resize('log', 'larger','{{path('size_update')}}')">+</a>
+            <a href="#" onclick="event.preventDefault(); resize('log', 'smaller','{{path('size_update')}}')">-</a>
+          </div>
 				</div>
 			</div>
 		{% endif %}
-	</div>
 
-	<div class="row" id="my-objects" data-equalizer>
-		<div class="small-12 medium-6 xlarge-3 columns">
-			<div id="my-plot" class="card" data-equalizer-watch>
+		<div class="small-12 medium-{{app.user.setting.plotSize}} xlarge-3 columns home-block" data-size="medium-{{app.user.setting.plotSize}}" html-data-id="3">
+			<div id="my-plots" class="card" data-equalizer-watch>
 				<div class="header row">
-					<h3 class="small-6 medium-7 large-9 columns">
+					<h3 class="small-6 medium-7 large-9 columns handle">
 						Mes intrigues
 					</h3>
 					<div class="small-6 medium-5 large-3 columns">
@@ -47,13 +57,17 @@
 						<li><a href="{{ path('intrigue_by_id', {'id': intrigue.id}) }}">{{ intrigue }}</a></li>
 					{% endfor %}
 				</ul>
+        <div class="resize-control">
+          <a href="#" onclick="event.preventDefault(); resize('my-plots', 'larger','{{path('size_update')}}')">+</a>
+          <a href="#" onclick="event.preventDefault(); resize('my-plots', 'smaller','{{path('size_update')}}')">-</a>
+        </div>
 			</div>
 		</div>
 
-		<div class="small-12 medium-6 xlarge-3 columns">
-			<div class="card" id="my-player" data-equalizer-watch>
+		<div class="small-12 medium-{{app.user.setting.persoSize}} xlarge-3 columns home-block" data-size="medium-{{app.user.setting.persoSize}}" html-data-id="4">
+			<div id="my-players" class="card" data-equalizer-watch>
 				<div class="header row">
-					<h3 class="small-6 medium-7 large-9 columns">
+					<h3 class="small-6 medium-7 large-9 columns handle">
 						Mes personnages
 					</h3>
 					<div class="small-6 medium-5 large-3 columns">
@@ -67,13 +81,17 @@
 						<li><a href="{{ path('perso_by_id', {'id': perso.id}) }}">{{ perso }}</a></li>
 					{% endfor %}
 				</ul>
+        <div class="resize-control">
+          <a href="#" onclick="event.preventDefault(); resize('my-players', 'larger','{{path('size_update')}}')">+</a>
+          <a href="#" onclick="event.preventDefault(); resize('my-players', 'smaller','{{path('size_update')}}')">-</a>
+        </div>
 			</div>
 		</div>
 
-		<div class="small-12 medium-6 xlarge-3 columns">
-			<div class="card" id="my-groups" data-equalizer-watch>
+		<div class="small-12 medium-{{app.user.setting.groupeSize}} xlarge-3 columns home-block" data-size="medium-{{app.user.setting.groupeSize}}" html-data-id="5">
+			<div id="my-groups" class="card" data-equalizer-watch>
 				<div class="header row">
-					<h3 class="small-6 medium-7 large-9 columns">
+					<h3 class="small-6 medium-7 large-9 columns handle">
 						Mes groupes
 					</h3>
 					<div class="small-6 medium-5 large-3 columns">
@@ -87,13 +105,17 @@
 						<li><a href="{{ path('groupe_by_id', {'id': groupe.id}) }}">{{ groupe }}</a></li>
 					{% endfor %}
 				</ul>
+        <div class="resize-control">
+          <a href="#" onclick="event.preventDefault(); resize('my-groups', 'larger','{{path('size_update')}}')">+</a>
+          <a href="#" onclick="event.preventDefault(); resize('my-groups', 'smaller','{{path('size_update')}}')">-</a>
+        </div>
 			</div>
 		</div>
 
-		<div class="small-12 medium-6 xlarge-3 columns">
-			<div class="card" id="my-rules" data-equalizer-watch>
+		<div class="small-12 medium-{{app.user.setting.ruleSize}} xlarge-3 columns home-block" data-size="medium-{{app.user.setting.ruleSize}}" html-data-id="6">
+			<div id="my-rules" class="card" data-equalizer-watch>
 				<div class="header row">
-					<h3 class="small-6 medium-7 large-9 columns">
+					<h3 class="small-6 medium-7 large-9 columns handle">
 						Mes règles
 					</h3>
 					<div class="small-6 medium-5 large-3 columns">
@@ -107,13 +129,17 @@
 						<li><a href="{{ path('rule_by_id', {'id': rule.id}) }}">{{ rule }}</a></li>
 					{% endfor %}
 				</ul>
+        <div class="resize-control">
+          <a href="#" onclick="event.preventDefault(); resize('my-rules', 'larger','{{path('size_update')}}')">+</a>
+          <a href="#" onclick="event.preventDefault(); resize('my-rules', 'smaller','{{path('size_update')}}')">-</a>
+        </div>
 			</div>
 		</div>
 
-		<div class="small-12 medium-6 xlarge-3 columns">
-			<div class="card" id="my-skills" data-equalizer-watch>
+		<div class="small-12 medium-{{app.user.setting.skillSize}} xlarge-3 columns home-block" data-size="medium-{{app.user.setting.skillSize}}" html-data-id="7">
+			<div id="my-skills" class="card" data-equalizer-watch>
 				<div class="header row">
-					<h3 class="small-6 medium-7 large-9 columns">
+					<h3 class="small-6 medium-7 large-9 columns handle">
 						Mes compétences
 					</h3>
 					<div class="small-6 medium-5 large-3 columns">
@@ -127,13 +153,17 @@
 						<li><a href="{{ path('skill_by_id', {'id': skill.id}) }}">{{ skill }}</a></li>
 					{% endfor %}
 				</ul>
+        <div class="resize-control">
+          <a href="#" onclick="event.preventDefault(); resize('my-skills', 'larger','{{path('size_update')}}')">+</a>
+          <a href="#" onclick="event.preventDefault(); resize('my-skills', 'smaller','{{path('size_update')}}')">-</a>
+        </div>
 			</div>
 		</div>
 
-		<div class="small-12 medium-6 xlarge-3 columns end">
-			<div class="card" id="my-tasks" data-equalizer-watch>
+		<div class="small-12 medium-{{app.user.setting.taskSize}} xlarge-3 columns home-block end" data-size="medium-{{app.user.setting.taskSize}}" html-data-id="8">
+			<div id="my-tasks" class="card" data-equalizer-watch>
 				<div class="header row">
-					<h3 class="small-6 medium-7 large-9 columns">
+					<h3 class="small-6 medium-7 large-9 columns handle">
 						Mes taches
 					</h3>
 					<div class="small-6 medium-5 large-3 columns">
@@ -147,6 +177,10 @@
 						<li data-id="{{task.id}}" data-url="{{ path('complete_task', {id: task.id}) }}"><a href="#">{% if task.isDone == false %}<i class="fa fa-square-o"></i>{% else %}<i class="fa fa-check-square"></i>{% endif %} {{ task }}</a></li>
 					{% endfor %}
 				</ul>
+        <div class="resize-control">
+          <a href="#" onclick="event.preventDefault(); resize('my-tasks', 'larger','{{path('size_update')}}')">+</a>
+          <a href="#" onclick="event.preventDefault(); resize('my-tasks', 'smaller','{{path('size_update')}}')">-</a>
+        </div>
 			</div>
 		</div>
 

@@ -34,6 +34,42 @@ function createTask(url) {
   
 }
 
+function resize(id, action, url) {
+  var blockToResize = $('#'+id).parent();
+  var oldSize = blockToResize.attr('data-size');
+  var newSize = blockToResize.attr('data-size');
+  switch(oldSize) {
+    case 'medium-12':
+        newSize = (action == 'larger') ? 'medium-12' : 'medium-10'
+        break;
+    case 'medium-10':
+        newSize = (action == 'larger') ? 'medium-12' : 'medium-9'
+        break;
+    case 'medium-9':
+        newSize = (action == 'larger') ? 'medium-10' : 'medium-6'
+        break;
+    case 'medium-6':
+        newSize = (action == 'larger') ? 'medium-9' : 'medium-4'
+        break;
+    case 'medium-4':
+        newSize = (action == 'larger') ? 'medium-6' : 'medium-3'
+        break;
+    case 'medium-3':
+        newSize = (action == 'larger') ? 'medium-4' : 'medium-2'
+        break;
+    case 'medium-2':
+        newSize = (action == 'larger') ? 'medium-3' : 'medium-2'
+        break;
+  }
+  blockToResize.attr('data-size', newSize);
+  blockToResize.removeClass(oldSize).addClass(newSize);
+  $(document).foundation('equalizer', 'reflow');
+  $.ajax({
+    url: url,
+    data: {block: id, size: newSize.replace('medium-', '')},
+  })
+}
+
 $(document).ready(function() {
 
   $('#urbicande_persobundle_groupetype_members').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');

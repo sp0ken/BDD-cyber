@@ -150,6 +150,12 @@ label.required::after {
 .home-block { min-height: 330px; }
   .home-block ul { margin-bottom: 0; }
   .home-block .card { min-height: 330px; }
+  .home-block .card .resize-control { 
+    position: absolute; 
+    bottom: 1rem;
+    right: 1.5rem; 
+    opacity: 0.3;}
+    .home-block:hover .card .resize-control { opacity: 1;}
 #rpg h4 {margin-top: 0; }
 .xp-bar .level { line-height: 25px; font-size: 25px; }
 .xp-bar .level:first-child { color: gray; }
