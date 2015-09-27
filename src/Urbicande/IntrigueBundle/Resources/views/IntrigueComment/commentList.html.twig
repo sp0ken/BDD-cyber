@@ -1,44 +1,44 @@
 <div class="comments hide-for-small">
-	{% for comment in intrigue.comments %}
-			{% if(intrigue.writer != comment.user) %}
-			<div class="comment-box">
-				<div class="row">
-					<div class="left">
-						Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
-					</div>
-					<div class="left" style="margin-left:10px;">
-						{% if(app.user == comment.user) %}
-							<a class="green-font" href="{{ path('intrigue_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
-							<a class="red-font" href="{{ path('intrigue_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
-						{% endif %}
-					</div>
-				</div>
-				<div class="row">
-					{% autoescape false %}
-						<div class="small-7 columns columns comment">{{ comment.comment}}</div>
-					{% endautoescape %}
-				</div>
-			</div>
-			{% else %}
-				<div class="comment-box">
-					<div class="row">
-						<div class="right" style="margin-left:10px;">
-							Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
-						</div>
-						<div class="right">
-							{% if(app.user == comment.user) %}
-								<a class="green-font" href="{{ path('intrigue_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
-								<a class="red-font" href="{{ path('intrigue_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
-							{% endif %}
-						</div>
-					</div>
-					<div class="row">
-						{% autoescape false %}
-							<div class="push-5 small-7 columns comment author">{{ comment.comment}}</div>
-						{% endautoescape %}
-					</div>
-				</div>
-			{% endif %}
-	{% endfor %}
-	<div class="spacer"></div>
+  {% for comment in intrigue.comments %}
+      {% if(intrigue.writer != comment.user) %}
+        <div class="comment-box">
+          <div class="row">
+            <div class="left">
+              Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
+            </div>
+            <div class="left" style="margin-left:10px;">
+              {% if(app.user == comment.user) %}
+                <a class="green-font" href="{{ path('intrigue_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
+                <a class="red-font" href="{{ path('intrigue_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            {% autoescape false %}
+              <div class="small-7 columns columns comment">{{ comment.comment}}</div>
+            {% endautoescape %}
+          </div>
+        </div>
+      {% else %}
+        <div class="comment-box author">
+          <div class="row">
+            <div class="right" style="margin-left:10px;">
+              Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
+            </div>
+            <div class="right">
+              {% if(app.user == comment.user) %}
+                <a class="green-font" href="{{ path('intrigue_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
+                <a class="red-font" href="{{ path('intrigue_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="row">
+            {% autoescape false %}
+              <div class="push-5 small-7 columns comment author">{{ comment.comment}}</div>
+            {% endautoescape %}
+          </div>
+        </div>
+      {% endif %}
+  {% endfor %}
+  <div class="spacer"></div>
 </div>
