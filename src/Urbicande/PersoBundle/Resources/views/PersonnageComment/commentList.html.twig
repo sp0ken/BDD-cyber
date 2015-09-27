@@ -20,7 +20,7 @@
 					</div>
 				</div>
 			{% else %}
-				<div class="comment-box">
+				<div class="comment-box author">
 					<div class="row">
 						<div class="right" style="margin-left:10px;">
 							Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
@@ -34,7 +34,7 @@
 					</div>
 					<div class="row">
 						{% autoescape false %}
-							<div class="push-5 small-7 columns comment author">{{ comment.comment}}</div>
+							<div class="push-5 small-7 columns comment">{{ comment.comment}}</div>
 						{% endautoescape %}
 					</div>
 				</div>

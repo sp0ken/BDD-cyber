@@ -80,17 +80,19 @@
               {% endif %}
             {% endfor %}
           {% endfor %}
-          {% for event in perso.events %}
-            {% for implication in event.intrigues %}
-              {% if implication.description is not empty or implication.objective is not empty %}
-                <h3>{{implication.intrigue}} ({{implication.degree}})</h3>
-                {{implication.description}}
-                {% if(perso.type == 'PNJ') %}
-                  {{implication.objective}}
+          {% if show_event_plot %}
+            {% for event in perso.events %}
+              {% for implication in event.implications %}
+                {% if implication.description is not empty or implication.objective is not empty %}
+                  <h3>{{implication.intrigue}} ({{implication.degree}})</h3>
+                  {{implication.description}}
+                  {% if(perso.type == 'PNJ') %}
+                    {{implication.objective}}
+                  {% endif %}
                 {% endif %}
-              {% endif %}
+              {% endfor %}
             {% endfor %}
-          {% endfor %}
+          {% endif %}
         {% endautoescape %}
       </div>
       <br clear=all style='mso-special-character:line-break;page-break-before:always'>
@@ -109,13 +111,15 @@
               {% endif %}
             {% endfor %}
           {% endfor %}
-          {% for event in perso.events %}
-            {% for implication in event.intrigues %}
-              {% if implication.information is not empty %}
-                  {{implication.information}}
-              {% endif %}
+          {% if show_event_plot %}
+            {% for event in perso.events %}
+              {% for implication in event.implications %}
+                {% if implication.information is not empty %}
+                    {{implication.information}}
+                {% endif %}
+              {% endfor %}
             {% endfor %}
-          {% endfor %}
+          {% endif %}
         {% endautoescape %}
       </div>
 

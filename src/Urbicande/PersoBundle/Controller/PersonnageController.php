@@ -229,7 +229,7 @@ class PersonnageController extends Controller
       $file = $this->get('kernel')->getRootDir() . '/../web/resources/'.$zipName;
       $zip->open($this->get('kernel')->getRootDir() . '/../web/resources/'.$zipName,  \ZipArchive::CREATE);
       foreach ($persos as $perso) {
-        $filename = $this->container->getParameter('export_filename').' '.$perso;
+        $filename = $this->container->getParameter('export_filename').' '.addslashes($perso);
         $zip->addFromString($filename.'.doc',  $this->renderView('UrbicandePersoBundle:Personnage:export.html.twig', array('perso'=>$perso))); 
       }
       $zip->close();
@@ -241,7 +241,7 @@ class PersonnageController extends Controller
       return new Response($content, 200, array(
         'Content-Transfert-encoding: binary',
         'Content-Type' => 'application/zip',
-        'Content-Disposition' => 'attachment; filename="'.$zipName.'"',
+        'Content-Disposition' => 'attachment; filename="'.$zipName,
         'Content-Length: '.filesize($zipName)
       ));
     }
