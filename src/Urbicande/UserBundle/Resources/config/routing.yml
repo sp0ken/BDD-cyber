@@ -1,5 +1,5 @@
 user_by_name:
-    pattern:  /user/{username}
+    pattern:  /user/show/{username}
     defaults: { _controller: UrbicandeUserBundle:User:show }
 
 user_list:
@@ -7,17 +7,13 @@ user_list:
     defaults: { _controller: UrbicandeUserBundle:User:index }
 
 user_edit:
-    pattern:  /user/edit/{id}
+    pattern:  /user/edit
     defaults: { _controller: UrbicandeUserBundle:User:edit }
-    requirements:
-      id:     \d+
 
 user_update:
-    pattern:  /user/update/{id}
-    defaults: { _controller: "UrbicandeUserBundle:User:update" }
+    pattern:  /user/update
+    defaults: { _controller: UrbicandeUserBundle:User:update }
     requirements: { _method: post }
-    requirements:
-      id:     \d+
 
 size_update:
     pattern:  /user/update/size

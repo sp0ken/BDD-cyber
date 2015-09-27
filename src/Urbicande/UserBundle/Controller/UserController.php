@@ -50,12 +50,10 @@ class UserController extends Controller
      * Displays a form to edit an existing User entity.
      *
      */
-    public function editAction($id)
-    {
-        $em = $this->getDoctrine()->getManager();
-
-        $user = $em->getRepository('UrbicandeUserBundle:User')->find($id);
-
+    public function editAction(Request $request)
+    {        
+        $user = $this->getUser();
+        
         if (!$user) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
@@ -72,12 +70,12 @@ class UserController extends Controller
      * Edits an existing User entity.
      *
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request)
     { 
         $userManager = $this->container->get('fos_user.user_manager');
         $em = $this->getDoctrine()->getManager();
 
-        $user = $em->getRepository('UrbicandeUserBundle:User')->find($id);
+        $user = $this->getUser();
         $stat = $user->getStat();
 
         if (!$user) {
