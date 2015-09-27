@@ -205,4 +205,38 @@
       <a class="close-reveal-modal modal-dismiss hide-for-print"><i class="fa fa-minus"></i></a>
     </div>
 	</div>
+  <script src="{{ asset('/js/Sortable.min.js') }}" type="text/javascript"></script>
+  <script type="text/javascript">
+    var el = document.getElementById('sortable');
+    var sort = new Sortable(el, {
+      draggable: ".home-block", // Specifies which items inside the element should be sortable
+      handle: ".handle",
+      scroll: true, // or HTMLElement
+      scrollSensitivity: 30, // px, how near the mouse must be to an edge to start scrolling.
+      scrollSpeed: 10, // px
+      store: {
+        get: function (sortable) {
+          var order = '{{app.user.setting.blockOrder}}';
+          return order ? order.split('|') : [];
+        },
+
+        set: function (sortable) {
+          var order = sortable.toArray().join('|');
+          $.ajax({
+            url: '{{path("order_update")}}',
+            data: {order: order},
+          })
+          .done(function() {
+            console.log("success");
+          })
+          .fail(function() {
+            console.log("error");
+          })
+          .always(function() {
+            console.log("complete");
+          });
+        }
+      }
+    });
+</script> 
 {% endblock %}

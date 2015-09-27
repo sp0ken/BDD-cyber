@@ -129,4 +129,23 @@ class HomeController extends Controller
       }
     }
 
+    public function saveOrderAction(Request $request)
+    {
+      if($request->isXmlHttpRequest())  {
+        $response = new JsonResponse();
+        try {
+          $userManager = $this->container->get('fos_user.user_manager');
+          $user = $this->getUser();
+          $setting = $user->getSetting();
+          $setting->setBlockOrder($request->get('order'));
+
+          $userManager->updateUser($user);
+          $response->setData(array('result' => 'ok'));
+        } catch (Exception $e) {
+          $response->setData(array('result' => $e));
+        }
+
+        return $response;
+      }
+    }
 }

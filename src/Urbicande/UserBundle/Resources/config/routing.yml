@@ -19,3 +19,10 @@ user_update:
     requirements:
       id:     \d+
 
+size_update:
+    pattern:  /user/update/size
+    defaults: { _controller: UrbicandeHomeBundle:Home:saveResize }
+
+order_update:
+    pattern:  /user/update/order
+    defaults: { _controller: UrbicandeHomeBundle:Home:saveOrder }

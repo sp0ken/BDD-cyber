@@ -148,6 +148,9 @@ label.required::after {
 
 /** Home **/
 .home-block { min-height: 330px; }
+  .home-block .handle {
+    cursor: move;
+    cursor: -webkit-grabbing; }
   .home-block ul { margin-bottom: 0; }
   .home-block .card { min-height: 330px; }
   .home-block .card .resize-control { 

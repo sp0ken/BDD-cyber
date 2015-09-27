@@ -108,6 +108,15 @@ class Setting
      * @ORM\Column(name="taskSize", type="integer")
      */
     private $taskSize;
+
+    /**
+     * @var string
+     * Ordre des blocs de la page d'accueil
+     *
+     * @ORM\Column(name="blockOrder", type="string")
+     */
+    private $blockOrder;
+
     public function __construct()
     {
         $this->hasNotification = true;
@@ -120,6 +129,7 @@ class Setting
         $this->ruleSize = 6;
         $this->skillSize = 6;
         $this->taskSize = 6;
+        $this->blockOrder = '1|2|3|4|5|6|7|8';
     }
 
     /**
@@ -383,5 +393,28 @@ class Setting
     public function getTaskSize()
     {
         return $this->taskSize;
+    }
+
+    /**
+     * Set blockOrder
+     *
+     * @param string $blockOrder
+     * @return Setting
+     */
+    public function setBlockOrder($blockOrder)
+    {
+        $this->blockOrder = $blockOrder;
+    
+        return $this;
+    }
+
+    /**
+     * Get blockOrder
+     *
+     * @return string 
+     */
+    public function getBlockOrder()
+    {
+        return $this->blockOrder;
     }
 }
