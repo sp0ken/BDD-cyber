@@ -95,3 +95,11 @@ complete_task:
     defaults: { _controller: UrbicandeHomeBundle:Home:completeTask }
     requirements:
       id:     \d+
+
+about:
+    path: /about
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    UrbicandeMiscBundle:Static:about.html.twig
+        maxAge:       86400
+        sharedAge:    86400

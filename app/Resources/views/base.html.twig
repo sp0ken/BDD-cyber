@@ -131,6 +131,10 @@
 		<div class="row" id="site">
 			{% block body %}
 			{% endblock %}
+			<footer class="small-6 medium-3 large-1 small-centered column">
+				<a href="{{path('about')}}">A propos</a>
+				<a href="mailto:jeff@urbicande.fr?Subject=Feedback%20BDD">Contact</a>
+			</footer>
 		</div>
 
 		{% block javascripts %}
