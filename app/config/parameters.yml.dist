@@ -30,3 +30,4 @@ parameters:
     export_include_groups: true
     export_include_events: true
     export_filename: Fiche de personnage
+    show_event_plot: false

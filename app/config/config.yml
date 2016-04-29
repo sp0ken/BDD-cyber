@@ -29,6 +29,7 @@ twig:
         sexes: %sex%
         export_include_groups: %export_include_groups%
         export_include_events: %export_include_events%
+        show_event_plot: %show_event_plot%
 
 # Assetic Configuration
 assetic:
