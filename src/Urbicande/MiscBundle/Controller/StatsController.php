@@ -116,9 +116,11 @@ class StatsController extends Controller
         }
         foreach ($users as $key => $user) {
             foreach ($types as $key2 => $intrigue) {
-                $types[$key2]['users'][$user->getUsername()] = array();
-                $types[$key2]['users'][$user->getUsername()]['nb_intrigue'] = $user->countIntrigue($key2);
-                $types[$key2]['users'][$user->getUsername()]['name'] = addslashes(html_entity_decode($user->getUsername(), ENT_QUOTES, 'UTF-8'));
+                if($user->countIntrigue($key2) > 0) {
+                    $types[$key2]['users'][$user->getUsername()] = array();
+                    $types[$key2]['users'][$user->getUsername()]['nb_intrigue'] = $user->countIntrigue($key2);
+                    $types[$key2]['users'][$user->getUsername()]['name'] = addslashes(html_entity_decode($user->getUsername(), ENT_QUOTES, 'UTF-8'));
+                }
             }
         }
 
