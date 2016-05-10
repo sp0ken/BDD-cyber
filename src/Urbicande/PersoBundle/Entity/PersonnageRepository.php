@@ -62,7 +62,7 @@ class PersonnageRepository extends EntityRepository
     $query = $this->createQueryBuilder('p');
 
     $query->leftJoin('p.type', 't');
-    $query->where('t.name != :type')
+    $query->where('t.name NOT LIKE :type')
                   ->setParameter('type', $type);
     
     $query->orderBy('p.name', 'ASC');

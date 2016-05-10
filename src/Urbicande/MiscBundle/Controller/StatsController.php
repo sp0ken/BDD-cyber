@@ -110,13 +110,12 @@ class StatsController extends Controller
         $typeArray = $em->getRepository('UrbicandeIntrigueBundle:IntrigueType')->findAll();
         $types = array();
         foreach ($typeArray as $key => $type) {
-            $types[$type->getName()]['persos'] = array();
             $types[$type->getName()]['users'] = array();
             $types[$type->getName()]['name'] = addslashes(html_entity_decode($type->getName(), ENT_QUOTES, 'UTF-8'));
         }
         foreach ($users as $key => $user) {
-            foreach ($types as $key2 => $intrigue) {
-                if($user->countIntrigue($key2) > 0) {
+            if(count($user->getIntrigues()) > 0) {
+                foreach ($types as $key2 => $intrigue) {
                     $types[$key2]['users'][$user->getUsername()] = array();
                     $types[$key2]['users'][$user->getUsername()]['nb_intrigue'] = $user->countIntrigue($key2);
                     $types[$key2]['users'][$user->getUsername()]['name'] = addslashes(html_entity_decode($user->getUsername(), ENT_QUOTES, 'UTF-8'));
