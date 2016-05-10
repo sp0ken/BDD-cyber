@@ -53,13 +53,19 @@
 				</div>
 				<div class="row">
 					<div class="small-12 columns">
-							{{form_row(form.description)}}
+						{{ form_label(form.description)}} <i class="fa fa-question-circle" title="Ce sont des recommandations de rédaction. Elles ne devront pas apparaître littéralement dans la fiche, mais influeront sur sa rédaction. Il s’agit à la fois ce qui relève de l’état d’esprit inconscient du personnage ou bien de ce qu’il ignore encore, qu’il découvrira en cours de jeu et qui devrait permettre une rédaction de fiche en connaissance de cause"></i>
+						{{ form_errors(form.description)}}
+						{{ form_widget(form.description)}}
 					</div>
 					<div class="small-12 columns">
-							{{form_row(form.information)}}
+						{{ form_label(form.information)}} <i class="fa fa-question-circle" title="Ses objectifs, ce dont il a conscience et tout ce qu’il sait ou croit savoir. Stylistiquement, le rédacteur de la fiche doit préempter sur le rédacteur de l’intrigue, ne perdez pas donc votre temps à trop rédiger cette partie."></i>
+						{{ form_errors(form.information)}}
+						{{ form_widget(form.information)}}
 					</div>
 					<div class="small-12 columns">
-							{{form_row(form.objective)}}
+						{{ form_label(form.objective)}} <i class="fa fa-question-circle" title="Ces derniers doivent savoir exactement ce que nous attendons d’eux pour que l’intrigue fonctionne, surtout si ça ne va pas totalement dans le sens de psychologie de leur personnage."></i>
+						{{ form_errors(form.objective)}}
+						{{ form_widget(form.objective)}}
 					</div>
 				</div>
 			</div>

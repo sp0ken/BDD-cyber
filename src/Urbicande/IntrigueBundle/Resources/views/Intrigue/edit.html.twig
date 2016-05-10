@@ -66,12 +66,12 @@
 				</div>
 				<div class="row">
 					<div class="small-12 columns">
-						{{ form_label(form.synopsis.context)}} <i class="icon-question-sign" title="Le contexte général de l’intrigue et les principaux éléments de son background"></i>
+						{{ form_label(form.synopsis.context)}} <i class="fa fa-question-circle" title="Le contexte général de l’intrigue et les principaux éléments de son background"></i>
 						{{ form_errors(form.synopsis.context)}}
 						{{ form_widget(form.synopsis.context)}}
 					</div>
 					<div class="small-12 columns">
-						{{ form_label(form.synopsis.ingame) }}  <i class="icon-question-sign" title="Que va-t-il se passer en jeu pour les joueurs impliqués ? C‘est-à-dire, quelles actions vont-ils devoir accomplir, à quels obstacles/dilemmes/émotions/sensations vont-ils se confronter ?"></i>
+						{{ form_label(form.synopsis.ingame) }}  <i class="fa fa-question-circle" title="Que va-t-il se passer en jeu pour les joueurs impliqués ? C‘est-à-dire, quelles actions vont-ils devoir accomplir, à quels obstacles/dilemmes/émotions/sensations vont-ils se confronter ?"></i>
 						{{ form_errors(form.synopsis.ingame) }}
 						{{ form_widget(form.synopsis.ingame) }}
 					</div>
@@ -89,22 +89,22 @@
 				</div>
 				<div class="row">
 					<div class="small-12 medium-6 columns">
-						{{ form_label(form.plot.ingame)}} <i class="icon-question-sign" title="Ce que le héros et les actifs risquent de vivre en jeu grâce à cette intrigue : actions poursuivies, rebondissements provoqués, émotions et sensations dans lesquelles nous allons tenter de les plonger. Autrement dit, le potentiel ludique de l’intrigue."></i>
+						{{ form_label(form.plot.ingame)}} <i class="fa fa-question-circle" title="Ce que le héros et les actifs risquent de vivre en jeu grâce à cette intrigue : actions poursuivies, rebondissements provoqués, émotions et sensations dans lesquelles nous allons tenter de les plonger. Autrement dit, le potentiel ludique de l’intrigue."></i>
 						{{ form_errors(form.plot.ingame)}}
 						{{ form_widget(form.plot.ingame)}}
 					</div>
 					<div class="small-12 medium-6 columns">
-						{{ form_label(form.plot.motive) }} <i class="icon-question-sign" title="Les motivations et intentions préliminaires, qui vont pousser le héros et les actifs à agir, vivre et ressentir des choses grâce à cette intrigue. On peut les diviser en deux grandes catégories : celles contenues dans les fiches de perso, et celles générées par des dilemmes nouveaux auxquels ils vont être confrontés durant la partie (à cause des rebondissements provoqués par nous)"></i>
+						{{ form_label(form.plot.motive) }} <i class="fa fa-question-circle" title="Les motivations et intentions préliminaires, qui vont pousser le héros et les actifs à agir, vivre et ressentir des choses grâce à cette intrigue. On peut les diviser en deux grandes catégories : celles contenues dans les fiches de perso, et celles générées par des dilemmes nouveaux auxquels ils vont être confrontés durant la partie (à cause des rebondissements provoqués par nous)"></i>
 						{{ form_errors(form.plot.motive) }}
 						{{ form_widget(form.plot.motive) }}
 					</div>
 					<div class="small-12 columns">
-						{{form_label(form.plot.resolution)}} <i class="icon-question-sign" title="Lister ici les résolutions possibles qui vous viennent à l’esprit. Plus une intrigue semble offrir d’alternatives de résolution plus elle sera intéressante pour ses protagonistes. Cette partie ne doit pas décrire un univers clos au sens mathématique. Les résolutions sont là pour s‘assurer que l‘intrigue peut se résoudre, sans exclure d‘autres fins/résolutions que celles que nous sommes capables d‘imaginer. Tout faire pour que l’intrigue fonctionne avec le moins d’intervention et de régulation possible de la part des organisateurs durant la partie : au besoin, les PNJ sont là pour ça. Tout faire (moralement, physiquement, matériellement, temporellement) pour éviter la mort d’un personnage joueur avant les dernières heures du jeu"></i>
+						{{form_label(form.plot.resolution)}} <i class="fa fa-question-circle" title="Lister ici les résolutions possibles qui vous viennent à l’esprit. Plus une intrigue semble offrir d’alternatives de résolution plus elle sera intéressante pour ses protagonistes. Cette partie ne doit pas décrire un univers clos au sens mathématique. Les résolutions sont là pour s‘assurer que l‘intrigue peut se résoudre, sans exclure d‘autres fins/résolutions que celles que nous sommes capables d‘imaginer. Tout faire pour que l’intrigue fonctionne avec le moins d’intervention et de régulation possible de la part des organisateurs durant la partie : au besoin, les PNJ sont là pour ça. Tout faire (moralement, physiquement, matériellement, temporellement) pour éviter la mort d’un personnage joueur avant les dernières heures du jeu"></i>
 						{{form_errors(form.plot.resolution)}}
 						{{form_widget(form.plot.resolution)}}
 					</div>
 					<div class="small-12 columns">
-						{{form_label(form.plot.description)}} <i class="icon-question-sign" title="Narration complète des tenants et aboutissants de l’intrigue, c‘est-à-dire l’ensemble des éléments ayant conduits à la situation du début de jeu, en précisant le positionnement de tous les personnages impliqués par rapport à cette situation . Généralement, un pavé d’au moins une demi-page"></i>
+						{{form_label(form.plot.description)}} <i class="fa fa-question-circle" title="Narration complète des tenants et aboutissants de l’intrigue, c‘est-à-dire l’ensemble des éléments ayant conduits à la situation du début de jeu, en précisant le positionnement de tous les personnages impliqués par rapport à cette situation . Généralement, un pavé d’au moins une demi-page"></i>
 						{{form_errors(form.plot.description)}}
 						{{form_widget(form.plot.description)}}
 					</div>
@@ -191,7 +191,7 @@
 		<div class="small-12 columns">
 			<div class="card">
 				<div class="header row">
-					<h3 class="small-12 columns">Regles</h3>
+					<h3 class="small-12 columns">Règles</h3>
 				</div>
 				<div class="row">
 					<div class="small-12 columns rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">

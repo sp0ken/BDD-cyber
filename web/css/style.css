@@ -252,6 +252,8 @@ span.form_text {
 .plot { word-wrap: break-word;}
 .avatar img { width: 100%; }
 
+.fa.fa-question-circle { cursor: help;}
+
 /** Mobile css specific **/
 @media only screen and (max-width: 40em) {
   #site { padding: 0.5rem; }
