@@ -90,7 +90,7 @@ class Event
      * @var Urbicande\IntrigueBundle\Entity\Implication $implication
      * Les implications dans des intrigues
      * 
-     * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="event", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="event", cascade={"persist"})
      */
     private $implications;
 

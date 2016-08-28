@@ -102,7 +102,7 @@ class Intrigue
     /**
      * Régles spécifiques à cette intrigue
      *
-     * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Rule", mappedBy="intrigue", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Rule", mappedBy="intrigue", cascade={"persist"})
      */
     private $rules;
 

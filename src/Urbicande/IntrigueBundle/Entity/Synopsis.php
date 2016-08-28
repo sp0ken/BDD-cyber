@@ -47,7 +47,7 @@ class Synopsis
      *  Intrigue parente
      *
      * @Gedmo\Versioned
-     * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", mappedBy="synopsis", cascade={"remove", "persist"})
+     * @ORM\OneToOne(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", mappedBy="synopsis", cascade={"persist"})
      */
     private $intrigue;
 

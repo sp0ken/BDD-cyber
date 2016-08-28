@@ -73,7 +73,7 @@ class Groupe
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Implication $intrigues
      * Les intrigues liées à ce groupe
      * 
-     * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="groupe", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Implication", mappedBy="groupe", cascade={"persist"})
      */
     private $intrigues;
     

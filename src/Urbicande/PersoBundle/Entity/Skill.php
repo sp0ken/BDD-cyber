@@ -65,7 +65,7 @@ class Skill
      * @var ArrayCollection Urbicande\PersoBundle\Entity\Personnage $players
      * Les personnages ayant la compétence
      *
-     * @ORM\ManyToMany(targetEntity="Urbicande\PersoBundle\Entity\Personnage", mappedBy="skills", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Urbicande\PersoBundle\Entity\Personnage", mappedBy="skills", cascade={"persist"})
      */
     private $players;
 
@@ -73,7 +73,7 @@ class Skill
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Intrigue $intrigues
      * Les intrigues nécessitant la compétence
      * 
-     * @ORM\ManyToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="skills", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Intrigue", inversedBy="skills", cascade={"persist"})
      * @ORM\JoinTable(name="cyber_intrigue_skill")
      * @ORM\OrderBy({"name" = "ASC"})
      */

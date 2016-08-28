@@ -69,7 +69,7 @@ class Sceno
     /**
      *  Horaire(s) de l'évènement
      *  
-     * @ORM\OneToMany(targetEntity="Urbicande\ChronoBundle\Entity\Timing", mappedBy="sceno", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="Urbicande\ChronoBundle\Entity\Timing", mappedBy="sceno", cascade={"persist"})
      */
     private $timings;
 

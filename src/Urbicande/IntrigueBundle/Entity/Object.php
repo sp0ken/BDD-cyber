@@ -119,7 +119,7 @@ class Object
      * @var ArrayCollection Urbicande\IntrigueBundle\Entity\Data $datas
      * Les données contenues par l'objet
      * 
-     * @ORM\ManyToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Data", inversedBy="documents", cascade={"persist", "remove"})
+     * @ORM\ManyToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Data", inversedBy="documents", cascade={"persist"})
      * @ORM\JoinTable(name="cyber_data_object")
      */
     private $datas;
