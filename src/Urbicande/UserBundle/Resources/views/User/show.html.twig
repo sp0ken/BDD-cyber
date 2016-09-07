@@ -4,83 +4,119 @@
 
 {% block body %}
 	<h1>Le boulot de {{ user|title}} <small>(<a href="mailto:{{user.email}}?subject=La%20BDD">{{user.email}}</a>)</small></h1>
-
-	<div id="rpg">
-		<div class="card">
-			<h3>Son perso</h3>
-			{% include 'UrbicandeHomeBundle:Home:rpg.html.twig' with {'user': user} %}
-		</div>
-	</div>
-
-<div class="row" id="my-objects">
-	<!-- Intrigues -->
-	<div class="small-12 medium-6 xlarge-3 columns">
-		<div class="card">
-			<div class="header row">
-				<h3 class="small-12 columns">Ses intrigues</h3>
+	<div id="sortable" class="row" data-equalizer>
+		{% if user.setting.hasRpg %}
+			<div class="hide-for-small medium-{{user.setting.rpgSize}} columns home-block" data-size="medium-{{user.setting.rpgSize}}" data-id="1">
+				<div id="rpg" class="card" data-equalizer-watch>
+					<h3 class="">Mon perso</h3>
+					{% include 'UrbicandeHomeBundle:Home:rpg.html.twig' with {'user': user} %}
+				</div>
 			</div>
-			<ul class="no-bullet">
-				{% for intrigue in user.intrigues %}
-					<li><a href="{{ path('intrigue_by_id', {'id': intrigue.id}) }}">{{ intrigue }}</a></li>
-				{% endfor %}
-			</ul>
-		</div>
-	</div>
+		{% endif %}
 
-	<!-- Personnages -->
-	<div class="small-12 medium-6 xlarge-3 columns">
-		<div class="card">
-			<div class="header row">
-				<h3 class="small-12 columns">Ses personnages</h3>
+		<div class="small-12 medium-{{user.setting.plotSize}} xlarge-3 columns home-block" data-size="medium-{{user.setting.plotSize}}" data-id="3">
+			<div id="my-plots" class="card" data-equalizer-watch>
+				<div class="header row">
+					<h3 class="small-6 medium-7 large-9 columns ">
+						Mes intrigues
+					</h3>
+				</div>
+				<ul class="no-bullet">
+					{% for intrigue in user.intrigues %}
+						<li><a href="{{ path('intrigue_by_id', {'id': intrigue.id}) }}">{{ intrigue }}</a></li>
+					{% endfor %}
+				</ul>
 			</div>
-			<ul class="no-bullet">
-				{% for perso in user.persos %}
-					<li><a href="{{ path('perso_by_id', {'id': perso.id}) }}">{{ perso }}</a></li>
-				{% endfor %}
-			</ul>
 		</div>
-	</div>
 
-	<!-- Groupes -->
-	<div class="small-12 medium-6 xlarge-3 columns">
-		<div class="card">
-			<div class="header row">
-				<h3 class="small-12 columns">Ses groupes</h3>
+		<div class="small-12 medium-{{user.setting.persoSize}} xlarge-3 columns home-block" data-size="medium-{{user.setting.persoSize}}" data-id="4">
+			<div id="my-players" class="card" data-equalizer-watch>
+				<div class="header row">
+					<h3 class="small-6 medium-7 large-9 columns ">
+						Mes personnages
+					</h3>
+				</div>
+				<ul class="no-bullet">
+					{% for perso in user.persos %}
+						<li><a href="{{ path('perso_by_id', {'id': perso.id}) }}">{{ perso }}</a></li>
+					{% endfor %}
+				</ul>
 			</div>
-			<ul class="no-bullet">
-				{% for groupe in user.groupes %}
-					<li><a href="{{ path('groupe_by_id', {'id': groupe.id}) }}">{{ groupe }}</a></li>
-				{% endfor %}
-			</ul>
 		</div>
-	</div>
 
-	<!-- Règles -->
-	<div class="small-12 medium-6 xlarge-3 columns">
-		<div class="card">
-			<div class="header row">
-				<h3 class="small-12 columns">Ses règles</h3>
+		<div class="small-12 medium-{{user.setting.groupeSize}} xlarge-3 columns home-block" data-size="medium-{{user.setting.groupeSize}}" data-id="5">
+			<div id="my-groups" class="card" data-equalizer-watch>
+				<div class="header row">
+					<h3 class="small-6 medium-7 large-9 columns ">
+						Mes groupes
+					</h3>
+				</div>
+				<ul class="no-bullet">
+					{% for groupe in user.groupes %}
+						<li><a href="{{ path('groupe_by_id', {'id': groupe.id}) }}">{{ groupe }}</a></li>
+					{% endfor %}
+				</ul>
 			</div>
-			<ul class="no-bullet">
-				{% for rule in user.rules %}
-					<li><a href="{{ path('rule_by_id', {'id': rule.id}) }}">{{ rule }}</a></li>
-				{% endfor %}
-			</ul>
 		</div>
-	</div>
 
-
-	<div class="small-12 medium-6 xlarge-3 columns end">
-		<div class="card">
-			<div class="header row">
-				<h3 class="small-12 columns">Ses compétences</h3>
+		<div class="small-12 medium-{{user.setting.ruleSize}} xlarge-3 columns home-block" data-size="medium-{{user.setting.ruleSize}}" data-id="6">
+			<div id="my-rules" class="card" data-equalizer-watch>
+				<div class="header row">
+					<h3 class="small-6 medium-7 large-9 columns ">
+						Mes règles
+					</h3>
+				</div>
+				<ul class="no-bullet">
+					{% for rule in user.rules %}
+						<li><a href="{{ path('rule_by_id', {'id': rule.id}) }}">{{ rule }}</a></li>
+					{% endfor %}
+				</ul>
 			</div>
-			<ul class="no-bullet">
-				{% for skill in user.skills %}
-					<li><a href="{{ path('skill_by_id', {'id': skill.id}) }}">{{ skill }}</a></li>
-				{% endfor %}
-			</ul>
+		</div>
+
+		<div class="small-12 medium-{{user.setting.skillSize}} xlarge-3 columns home-block" data-size="medium-{{user.setting.skillSize}}" data-id="7">
+			<div id="my-skills" class="card" data-equalizer-watch>
+				<div class="header row">
+					<h3 class="small-6 medium-7 large-9 columns ">
+						Mes compétences
+					</h3>
+				</div>
+				<ul class="no-bullet">
+					{% for skill in user.skills %}
+						<li><a href="{{ path('skill_by_id', {'id': skill.id}) }}">{{ skill }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+
+		<div class="small-12 medium-{{user.setting.taskSize}} xlarge-3 columns home-block end" data-size="medium-{{user.setting.taskSize}}" data-id="8">
+			<div id="my-tasks" class="card" data-equalizer-watch>
+				<div class="header row">
+					<h3 class="small-6 medium-7 large-9 columns ">
+						Mes taches
+					</h3>
+				</div>
+				<ul class="no-bullet">
+					{% for task in user.tasks %}
+						<li>{% if task.isDone == false %}<i class="fa fa-square-o"></i>{% else %}<i class="fa fa-check-square"></i>{% endif %} {{ task }}</li>
+					{% endfor %}
+				</ul>
+			</div>
 		</div>
 	</div>
-</div>
+	<script src="{{ asset('js/Sortable.min.js') }}" type="text/javascript"></script>
+	<script type="text/javascript">
+		var el = document.getElementById('sortable');
+		var sort = new Sortable(el, {
+			scroll: true, // or HTMLElement
+			scrollSensitivity: 30, // px, how near the mouse must be to an edge to start scrolling.
+			scrollSpeed: 10, // px
+			store: {
+				get: function (sortable) {
+					var order = '{{user.setting.blockOrder}}';
+					return order ? order.split('|') : [];
+				}
+			}
+		});
+	</script> 
 {% endblock %}
