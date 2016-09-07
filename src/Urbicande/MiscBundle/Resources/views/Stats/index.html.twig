@@ -13,7 +13,7 @@
 <div class="row">
 	<div id="genderChart" class="small-12 medium-6 large-4 column semi chart"></div>
 	<div id="statusChart" class="small-12 medium-6 large-4 column semi chart"></div>
-	<div id="groupChart" class="small-12 medium-6 large-4 column semi chart"></div>
+	<div id="plotChart" class="small-12 medium-6 large-4 column semi chart"></div>
 
 	<div id="intriguePersoChart" class="small-12 column full chart"></div>
 	<div id="intrigueUserChart" class="small-12 column semi chart"></div>
@@ -50,11 +50,11 @@
 			 ]
 		});
 
-		{% set fullStatus = {'C': statuses.C, 'S': statuses.S, 'D': statuses.D, 'R': statuses.R} %}
+		{% set fullStatus = {'C': perso_statuses.C, 'S': perso_statuses.S, 'D': perso_statuses.D, 'R': perso_statuses.R} %}
 		var statusChart = new CanvasJS.Chart("statusChart", {
 				theme: "theme2",
 				title:{
-					text: "Répartition des status d'écriture"
+					text: "Répartition des status d'écriture des personnages"
 				},
 				legend:{
 					verticalAlign: "bottom",
@@ -72,19 +72,11 @@
 				 }
 			 ]
 		});
-
-		var groupChart = new CanvasJS.Chart("groupChart", {
+		{% set fullStatus = {'C': plot_statuses.C, 'S': plot_statuses.S, 'D': plot_statuses.D, 'R': plot_statuses.R} %}
+		var plotChart = new CanvasJS.Chart("plotChart", {
 				theme: "theme2",
 				title:{
-					text: "Répartition des personnages par groupe",
-					fontSize: 30
-				},     
-				toolTip:{             
-					content: function(e){
-						var content;
-						content = e.entries[0].dataPoint.indexLabel + " : "+e.entries[0].dataPoint.y + " membre(s)"  ;
-						return content;
-					}
+					text: "Répartition des status d'écriture des intrigues"
 				},
 				legend:{
 					verticalAlign: "bottom",
@@ -92,12 +84,11 @@
 				},
 				data: [
 					{       
-						type: "doughnut",
-						indexLabelFontSize: 20,
-						showInLegend: false,
-						dataPoints: [
-						{% for groupe in groupChart %}
-								{  y: {{groupe['nb_members']}}, indexLabel: '{{groupe["name"]}}' }, 
+					 type: "pie",
+					 showInLegend: false,
+					 dataPoints: [
+						{% for statut in plotChart %}
+								{  y: {{statut['nb_status']}}, indexLabel: "{{fullStatus[statut['status']]}}", legendText:"{{fullStatus[statut['status']]}}"},
 						{% endfor %}
 					 ]
 				 }
@@ -190,7 +181,7 @@
 
 		genderChart.render();
 		statusChart.render();
-		groupChart.render();
+		plotChart.render();
 		intriguePersoChart.render();
 		intrigueUserChart.render();
 	}

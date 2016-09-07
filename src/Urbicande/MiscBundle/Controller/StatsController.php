@@ -25,14 +25,15 @@ class StatsController extends Controller
 
         $genderChart = $em->getRepository('UrbicandePersoBundle:Personnage')->countGender($includePNJ, $pnjName);
         $statusChart = $em->getRepository('UrbicandePersoBundle:Personnage')->countStatus($includePNJ, $pnjName);
-        $groupChart = $this->countGroupMember($em);
+        $plotChart = $em->getRepository('UrbicandeIntrigueBundle:Intrigue')->countStatus();
+        //$groupChart = $this->countGroupMember($em);
         $persoChart = $this->countPersoIntrigue($em);
         $userChart = $this->countUserIntrigue($em);
 
         return $this->render('UrbicandeMiscBundle:Stats:index.html.twig', array(
             'genderChart' => $genderChart,
             'statusChart' => $statusChart,
-            'groupChart' => $groupChart,
+            'plotChart' => $plotChart,
             'persoChart' => $persoChart,
             'userChart' => $userChart
         ));

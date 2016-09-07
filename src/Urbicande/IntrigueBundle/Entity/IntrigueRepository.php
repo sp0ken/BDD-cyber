@@ -29,6 +29,21 @@ class IntrigueRepository extends EntityRepository
 
     return $query->getQuery()->getResult();
   }
+    /**
+   * Compte le nombre d'intrigue par statut 
+   * @return Array
+   */
+  public function countStatus()
+  {
+    $em = $this->getEntityManager();
+    $query = $em->createQuery('SELECT i.status, COUNT(i.id) AS nb_status FROM Urbicande\IntrigueBundle\Entity\Intrigue i GROUP BY i.status ORDER BY i.status DESC');
+    
+    $query->useResultCache(true);
+    $query->setResultCacheLifetime(3600);
+
+    $results = $query->getResult();
+    return $results;
+  }
 
   /**
    * Compte le nombre d'intrigue pour un perso et un type donné

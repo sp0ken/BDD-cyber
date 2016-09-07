@@ -16,11 +16,16 @@ parameters:
     xp_small: 5
     xp_minor: 10
     xp_major: 25
-    status:
+    perso_status:
         C: Créé
         D: Développé
         R: Relu
         S: Pitché
+    plot_status:
+        C: Créée
+        D: Développée
+        R: Relue
+        S: Pitchée
     sex:
         H: Homme
         F: Femme
