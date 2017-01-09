@@ -83,7 +83,7 @@ class User extends BaseUser
      * Tache qu'il a à faire
      *
      * @ORM\OneToMany(targetEntity="Urbicande\MiscBundle\Entity\Task", mappedBy="writer")
-     * @ORM\OrderBy({"endDate" = "DESC"})
+     * @ORM\OrderBy({"endDate" = "ASC"})
      */
     private $tasks;
 
