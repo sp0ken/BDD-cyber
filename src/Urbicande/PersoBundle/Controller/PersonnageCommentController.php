@@ -45,6 +45,27 @@ class PersonnageCommentController extends Controller
         ));
     }
 
+    public function createAJAXAction(Request $request)
+    {
+      if($request->isXmlHttpRequest())  {
+        $userManager = $this->container->get('fos_user.user_manager');
+        
+        $comment  = new PersonnageComment();
+        $comment->setComment($request->get('comment'));
+        $comment->setPerso($request->get('persoId'));
+        $comment->setUser($this->getUser());
+
+        $comment_manager = $this->get('urbicande.personnagecomment_manager');
+        $comment_manager->savePersonnageComment($comment);
+         //
+        $response = new JsonResponse();
+        $response->setData(array('comment' => $comment->__toString()));
+        return $response;
+      } else {
+        return $this->redirect($this->generateUrl('Home'));
+      }
+    }
+
     /**
      * Displays a form to edit an existing PersonnageComment entity.
      *

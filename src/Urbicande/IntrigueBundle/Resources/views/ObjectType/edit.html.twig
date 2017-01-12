@@ -4,17 +4,7 @@
 
 {% block body %}
 
-<h1>Éditer le type "{{type.name}}" <small>(revenir à la version du : 
-	 <form id="revert" action="{{ path('object_type_revert', { 'id': type.id }) }}" method="post" {{ form_enctype(form) }}>
-		<select name="version">
-			{% for log in logs %}
-					<option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
-			{% endfor %}
-		</select>
-		 <input class="button flat green" type="submit" name="revert" value="Restaurer">
-		 )
-	</form>
-</small></h1>
+<h1>Éditer le type "{{type.name}}"</h1>
 
 <form action="{{ path('object_type_update', { 'id': type.id }) }}" method="post" {{ form_enctype(form) }}>
 	<div class="row">
@@ -36,7 +26,31 @@
 	</div>
 
 	{{ form_row(form._token) }}
-	<input class="button flat green" type="submit" value="Éditer"/>
+	<button class="button green" type="submit"><i class="fa fa-save"></i> Éditer</button>
+</form>
+
+<form id="revert" action="{{ path('object_type_revert', { 'id': type.id }) }}" method="post" {{ form_enctype(form) }}>
+	<!-- Historique -->
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Historique</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						Revenir à la version du :
+						<select name="version">
+							{% for log in logs %}
+									<option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ 	<button class="button gray" type="submit"><i class="fa fa-history"></i> Restaurer</button>
 </form>
 
 {% endblock %}

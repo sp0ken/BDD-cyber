@@ -41,7 +41,7 @@
 		{{ groupe.name }}
 	</h1>
 	<div class="small-6 medium-3 columns">
-		<a class="button flat green"  href="{{ path('groupe_edit', {'id': groupe.id}) }}">Modifier</a>
+		<a class="button flat green"  href="{{ path('groupe_edit', {'id': groupe.id}) }}"><i class="fa fa-edit"></i> Modifier</a>
 	</div>
 </div>
 
@@ -86,8 +86,8 @@
 					Chronologie
 				</h3>
 				<div class="small-6 medium-3 columns">
-					<a class="button flat blue"  href="{{path('create_event', {'groupe': groupe.id})}}">
-						Créer
+					<a class="button outline blue right" href="{{path('create_event', {'groupe': groupe.id})}}">
+						<i class="fa fa-plus"></i> Créer
 					</a>
 				</div>
 			</div>

@@ -40,14 +40,14 @@
 		{{ intrigue }} <small>assigné à {{intrigue.writer.username}}</small>
 	</h1>
 	<div class="small-6 medium-3 columns">
-		<a class="button flat green"  href="{{ path('intrigue_edit', {'id': intrigue.id}) }}">Modifier</a>
+		<a class="button flat green"  href="{{ path('intrigue_edit', {'id': intrigue.id}) }}"><i class="fa fa-edit"></i> Modifier</a>
 	</div>
 </div>
 
 <div class="row page-header hide-for-small">
 	<h3 class="small-6 medium-9 columns">Commentaires</h3>
 	<div class="small-6 medium-3 columns">
-		<a class="button flat blue" href="{{ path('create_intrigue_comment', {'intrigueId': intrigue.id}) }}">Ajouter un commentaire</a>
+		<a class="button flat blue" href="{{ path('create_intrigue_comment', {'intrigueId': intrigue.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
 	</div>
 </div>
 {{ include('UrbicandeIntrigueBundle:IntrigueComment:commentList.html.twig') }}
@@ -161,8 +161,8 @@
 			<div class="header row">
 				<h3 class="small-6 medium-8 large-10 columns">Chronologie</h3>
 				<div class="small-6 medium-4 large-2 columns">
-					<a class="button flat blue"  href="{{path('create_event', {'intrigue': intrigue.id})}}">
-						Créer
+					<a class="button outline blue right" href="{{path('create_event', {'intrigue': intrigue.id})}}">
+						<i class="fa fa-plus"></i> Créer
 					</a>
 				</div>
 			</div>
@@ -226,7 +226,7 @@
 			<div class="header row">
 				<h3 class="small-6 medium-8 large-10 columns">Scénographie</h3>
 				<div class="small-6 medium-4 large-2 columns">
-					<a class="button flat blue" href="{{path('create_sceno', {'intrigue': intrigue.id})}}">Créer</a>
+					<a class="button outline blue right" href="{{path('create_sceno', {'intrigue': intrigue.id})}}"><i class="fa fa-plus"></i> Créer</a>
 				</div>
 			</div>
 			<div class="row">
