@@ -23,9 +23,9 @@ class TaskController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entities = $em->getRepository('UrbicandeMiscBundle:task')->findAll();
+        $entities = $em->getRepository('UrbicandeMiscBundle:Task')->findAll();
 
-        return $this->render('UrbicandeMiscBundle:task:index.html.twig', array(
+        return $this->render('UrbicandeMiscBundle:Task:index.html.twig', array(
             'tasks' => $entities,
         ));
     }
@@ -38,13 +38,13 @@ class TaskController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('UrbicandeMiscBundle:task')->find($id);
+        $entity = $em->getRepository('UrbicandeMiscBundle:Task')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find task entity.');
         }
 
-        return $this->render('UrbicandeMiscBundle:task:show.html.twig', array(
+        return $this->render('UrbicandeMiscBundle:Task:show.html.twig', array(
             'task'      => $entity,
         ));
     }
@@ -69,7 +69,7 @@ class TaskController extends Controller
             return $this->redirect($this->generateUrl('task_list'));
         }
 
-        return $this->render('UrbicandeMiscBundle:task:new.html.twig', array(
+        return $this->render('UrbicandeMiscBundle:Task:new.html.twig', array(
             'task' => $task,
             'form'   => $form->createView(),
         ));
@@ -130,7 +130,7 @@ class TaskController extends Controller
 
         $editForm = $this->createForm(new taskType(), $task);
 
-        return $this->render('UrbicandeMiscBundle:task:edit.html.twig', array(
+        return $this->render('UrbicandeMiscBundle:Task:edit.html.twig', array(
             'task'      => $task,
             'logs'         => $logs,
             'form'   => $editForm->createView(),
@@ -182,7 +182,7 @@ class TaskController extends Controller
             return $this->redirect($this->generateUrl('task_list'));
         }
 
-        return $this->render('UrbicandeMiscBundle:task:edit.html.twig', array(
+        return $this->render('UrbicandeMiscBundle:Task:edit.html.twig', array(
             'task'      => $entity,
             'form'   => $editForm->createView(),
         ));
