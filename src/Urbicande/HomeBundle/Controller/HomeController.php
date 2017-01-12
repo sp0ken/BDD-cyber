@@ -46,43 +46,6 @@ class HomeController extends Controller
       ));
     }
 
-    public function createTaskAction(Request $request)
-    {
-      if($request->isXmlHttpRequest())  {
-        $userManager = $this->container->get('fos_user.user_manager');
-
-        $endDate = \DateTime::createFromFormat('d m Y', $request->get('endDay').' '.$request->get('endMonth').' '.$request->get('endYear'));
-        $user = $userManager->findUserBy(array('id' => $request->get('writer')));
-        
-        $task = new Task();
-        $task->setWriter($user);
-        $task->setText($request->get('text'));
-        $task->setEndDate($endDate);
-        $task->setIsDone(false);
-
-        $task_manager = $this->get('urbicande.task_manager');
-        $task_manager->saveTask($task);
-         //
-        $response = new JsonResponse();
-        $response->setData(array('tache' => $task->__toString()));
-        return $response;
-      } else {
-        return $this->redirect($this->generateUrl('Home'));
-      }
-    }
-
-    public function completeTaskAction($id)
-    {
-      $task_manager = $this->get('urbicande.task_manager');
-      $task = $task_manager->loadTask($id);
-      $task->setIsDone(true);
-      $task_manager->saveTask($task);
-
-      $response = new JsonResponse();
-      $response->setData(array('result' => 'ok'));
-      return $response;
-    }
-
     public function saveResizeAction(Request $request)
     {
       if($request->isXmlHttpRequest())  {

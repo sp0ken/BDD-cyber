@@ -12,7 +12,8 @@ class TaskType extends AbstractType
     {
         $builder
             ->add('text', null, array('label' => 'Tache'))
-            ->add('writer', null, array('label' => 'Asigner à'))
+            ->add('writer', null, array('label' => 'Assigner à'))
+            ->add('isDone', 'choice', array('choices' => array(false => 'En attente', true => 'Terminée') ,'label' => 'Complétion'))
             ->add('endDate', 'date', array(
                 'label' => 'Date de fin',
                 'required' => false,

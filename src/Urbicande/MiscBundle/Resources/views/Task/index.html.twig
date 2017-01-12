@@ -1,0 +1,53 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Taches {% endblock %}
+
+{% block body %}
+
+<div class="row page-header">
+  <h1 class="small-12 medium-8 columns">
+    Les taches
+  </h1>
+  <div class="medium-4 hide-for-small columns">
+    <a class="button blue flat" href="{{ path('create_task') }}"><i class="fa fa-plus"></i> Créer une tache</a>
+  </div>
+</div>
+
+<table class="records_list datatable">
+  <thead>
+    <tr>
+      <th>Numéro</th>
+      <th>Scénariste</th>
+      <th>Descriptif</th>
+      <th>Date d'échéance</th>
+      <th>Complétion</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for task in tasks %}
+      <tr>
+        <td>{{ task.id }}</td>
+        <td><a title="Voir" href="{{ path('user_by_name', { 'username': task.writer.username }) }}">{{ task.writer }}</a></td>
+        <td>{{ task.text }}</td>
+        <td data-order="{{ task.endDate|date('U')}}">{{ task.endDate|date('d/M/Y') }}</td>
+        <td>
+          {% if task.isDone %}
+            <i class="fa fa-check-square-o"></i>
+          {% else %}
+            <i class="fa fa-square-o"></i>
+          {% endif %}
+        </td>
+        <td>
+          <button href="#" data-dropdown="drop-actions-{{task.id}}" aria-controls="drop-actions-{{task.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+          <ul id="drop-actions-{{task.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+            <li><a class="green-font" title="Éditer" href="{{ path('task_edit', { 'id': task.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+            <li><a class="red-font" title="Supprimer" href="{{ path('task_delete', { 'id': task.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock body %}
