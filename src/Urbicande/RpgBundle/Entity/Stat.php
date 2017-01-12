@@ -339,7 +339,9 @@ class Stat
      */
     public function getTitle()
     {
-        if($this->level <= 20) {
+        if($this->level == 0) {
+            return $this->titles[$this->level];
+        } else if($this->level <= 20) {
             return $this->titles[$this->level-1];
         } else {
             return 'Exploiteur de bug';
