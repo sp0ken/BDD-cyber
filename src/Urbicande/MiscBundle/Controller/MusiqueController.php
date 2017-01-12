@@ -156,22 +156,15 @@ class MusiqueController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        $form = $this->createDeleteForm($id);
-        $form->bind($request);
+        $back = $this->get('urbicande.musique_manager')->loadMusique($id);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('UrbicandeMiscBundle:Musique')->find($id);
-
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Musique entity.');
-            }
-
-            $em->remove($entity);
-            $em->flush();
+        if (!$back) {
+          throw $this->createNotFoundException('Unable to find musique entity.');
         }
 
-        $this->get('session')->getFlashBag()->add('update', 'La musique a été supprimée');
+        $this->get('urbicande.musique_manager')->removeMusique($back);
+
+        $this->get('session')->getFlashBag()->add('delete', 'La musique a été supprimée');
         return $this->redirect($this->generateUrl('musique_list'));
     }
 
