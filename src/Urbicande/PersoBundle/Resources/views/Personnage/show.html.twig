@@ -176,13 +176,13 @@
 				{% endfor %}
 				{% for groupe in perso.groupes %}
 					{% for implication in groupe.intrigues %}
-						<li><i class="fa fa-users" title="Groupe"></i> <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
+						<li><i class="fa fa-users" title="Groupe"></i> <em>{{groupe}}</em> - <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
 					{% endfor %}
 				{% endfor %}
 				{% if show_event_plot %}
 					{% for event in perso.events %}
 						{% for implication in event.implications %}
-							<li><i class="fa fa-calendar" title="Evènement"></i> <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
+							<li><i class="fa fa-calendar" title="Evènement"></i> <em>{{event}}</em> - <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
 						{% endfor %}
 					{% endfor %}
 				{% endif %}
@@ -241,7 +241,7 @@
 							<div class="card plot">
 								<div class="header row">
 									<h4 class="small-6 medium-8 columns">
-										<i class="fa fa-users"></i> <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
+										<i class="fa fa-users"></i> <em>{{groupe}}</em> - <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
 									</h4>
 								</div>
 								<div>
@@ -275,7 +275,7 @@
 								<div class="card plot">
 									<div class="header row">
 										<h4 class="small-6 medium-8 columns">
-											<i class="fa fa-calendar"></i> <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
+											<i class="fa fa-calendar"></i> <em>{{event}}</em> - <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
 										</h4>
 									</div>
 									<div>
