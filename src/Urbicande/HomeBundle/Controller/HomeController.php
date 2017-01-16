@@ -69,7 +69,7 @@ class HomeController extends Controller
               $setting->setPersoSize($request->get('size'));
               break;
             case 'my-groups':
-              $setting->setGroupSize($request->get('size'));
+              $setting->setGroupeSize($request->get('size'));
               break;
             case 'my-rules':
               $setting->setRuleSize($request->get('size'));
