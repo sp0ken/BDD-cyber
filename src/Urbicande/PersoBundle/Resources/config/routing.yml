@@ -147,6 +147,17 @@ create_perso_comment:
     requirements:
       persoId:     \d+    
 
+create_ajax_perso_comment:
+    pattern:  /perso/comment/create
+    defaults: { _controller: "UrbicandePersoBundle:PersonnageComment:createAJAX" }
+
+perso_comment_respond:
+    pattern:  /perso/{persoId}/{commentId}/comment/respond
+    defaults: { _controller: "UrbicandePersoBundle:PersonnageComment:respond" }
+    requirements:
+      persoId:     \d+    
+      commentId:     \d+    
+
 perso_comment_edit:
     pattern:  /perso/comment/edit/{id}
     defaults: { _controller: UrbicandePersoBundle:PersonnageComment:edit }

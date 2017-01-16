@@ -29,10 +29,11 @@ class PersonnageCommentManager extends BaseManager
      * @param Personnage $perso
      * @param User $user
      */
-    public function savePersonnageComment(\Urbicande\PersoBundle\Entity\PersonnageComment $persoComment, \Urbicande\PersoBundle\Entity\Personnage $perso = null, \Urbicande\UserBundle\Entity\User $user = null)
+    public function savePersonnageComment(\Urbicande\PersoBundle\Entity\PersonnageComment $persoComment, \Urbicande\PersoBundle\Entity\Personnage $perso = null, \Urbicande\PersoBundle\Entity\PersonnageComment $comment = null, \Urbicande\UserBundle\Entity\User $user = null)
     {
         if($perso) $persoComment->setPerso($perso);
         if($user) $persoComment->setUser($user);
+        if($comment) $persoComment->setParentComment($comment);
 
         $this->persistAndFlush($persoComment);
     }

@@ -1,0 +1,15 @@
+<html>
+  <head></head>
+  <body>
+    Salut {{commentee}},
+
+    {{commenter}} vient de répondre à votre commentaire sur <a href="{{url('perso_by_id', {'id': comment.perso.id})}}">{{comment.perso}}</a>.<br><br>
+    <blockquote>
+      {% autoescape false %}
+        {{comment.comment}}
+      {% endautoescape %}
+    </blockquote>
+
+    Signé Le Robot de Jeff,
+  </body>
+</html>
