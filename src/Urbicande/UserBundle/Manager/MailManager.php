@@ -67,6 +67,31 @@ class MailManager extends BaseManager
       }
     }
 
+    public function sendIntrigueCommentResponseMail(\Urbicande\UserBundle\Entity\User $commenter, \Urbicande\UserBundle\Entity\User $commentee, $comment)
+    {
+      if ($commentee != $commenter) {
+        $message = \Swift_Message::newInstance()
+          ->setSubject('[cyber] '.$commenter. ' a répondu à votre commentaire')
+          ->setFrom('noreply@urbicande.fr')
+          ->setTo($commentee->getEmail())
+          ->setBody(
+            $this->templating->render(
+              'UrbicandeIntrigueBundle:Email:response.html.twig',
+              array(
+                'commenter' => $commenter,
+                'commentee' => $commentee,
+                'comment' => $comment,
+              )
+          ))
+          ->setContentType("text/html");
+        if($commentee->getSetting()->getHasNotification()){
+          return $this->mailer->send($message);
+        } else {
+          return false;
+        }
+      }
+    }
+
     public function sendAlertMail(\Urbicande\UserBundle\Entity\User $author, $action, $recipient)
     {
       $message = \Swift_Message::newInstance()

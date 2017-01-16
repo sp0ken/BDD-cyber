@@ -27,11 +27,13 @@ class IntrigueCommentManager extends BaseManager
      *
      * @param IntrigueComment $intrigueComment
      * @param Intrigue $intrigue
+     * @param IntrigueComment $comment
      * @param User $user
      */
-    public function saveIntrigueComment(\Urbicande\IntrigueBundle\Entity\IntrigueComment $intrigueComment, \Urbicande\IntrigueBundle\Entity\Intrigue $intrigue = null, \Urbicande\UserBundle\Entity\User $user = null)
+    public function saveIntrigueComment(\Urbicande\IntrigueBundle\Entity\IntrigueComment $intrigueComment, \Urbicande\IntrigueBundle\Entity\Intrigue $intrigue = null, \Urbicande\IntrigueBundle\Entity\IntrigueComment $comment = null, \Urbicande\UserBundle\Entity\User $user = null)
     {
         if($intrigue) $intrigueComment->setIntrigue($intrigue);
+        if($comment) $intrigueComment->setParentComment($comment);
         if($user) $intrigueComment->setUser($user);
 
         $this->persistAndFlush($intrigueComment);

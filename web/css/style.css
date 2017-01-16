@@ -292,6 +292,10 @@ span.form_text {
   margin-bottom: 0;
 }
 
+.comment-box .actions {
+  margin: 0 10px;
+}
+
 .comment-box p{
   text-align: left;
 }
