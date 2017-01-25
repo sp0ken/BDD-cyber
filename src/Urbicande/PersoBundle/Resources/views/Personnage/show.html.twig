@@ -79,9 +79,8 @@
 <div class="row page-header hide-for-small">
 	<h3 class="small-6 medium-7 columns">Commentaires</h3>
 	<div class="small-6 medium-5 columns">
-			<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}" data-reveal-id="persoComment" data-reveal-ajax="true"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
-{# 		<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
- #}	</div>
+		<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
+	</div>
 </div>
 {{ include('UrbicandePersoBundle:PersonnageComment:commentList.html.twig') }}
 
