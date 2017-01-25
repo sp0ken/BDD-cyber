@@ -10,11 +10,7 @@
 			<link href="{{ asset('css/font-awesome.min.css') }}" type="text/css" rel="stylesheet" />
 			<link href="{{ asset('css/style.css') }}" type="text/css" rel="stylesheet" />
 			<link href="{{ asset('css/chosen.min.css') }}" type="text/css" rel="stylesheet" />
-			<link href="{{ asset('css/jquery.dataTables.min.css') }}" type="text/css" rel="stylesheet" />
-			<link href="{{ asset('css/dataTables.colReorder.min.css') }}" type="text/css" rel="stylesheet" />
-			<link href="{{ asset('css/dataTables.tableTools.min.css') }}" type="text/css" rel="stylesheet" />
-			<link href="{{ asset('css/dataTables.responsive.css') }}" type="text/css" rel="stylesheet" />
-			<link href="{{ asset('css/dataTables.foundation.css') }}" type="text/css" rel="stylesheet" />
+			<link href="{{ asset('css/datatables.min.css') }}" type="text/css" rel="stylesheet" />
 			<link href="{{ asset('css/timeline.css') }}" type="text/css" rel="stylesheet" />
 			<link href="{{ asset('css/fullcalendar.min.css') }}" type="text/css" rel="stylesheet" />
 			<link href="{{ asset('css/redactor.css') }}" type="text/css" rel="stylesheet" />
@@ -146,11 +142,9 @@
 			<script src="{{ asset('js/vendor/jquery.js') }}" type="text/javascript"></script>
 			<script src="{{ asset('js/vendor/moment.min.js') }}" type="text/javascript"></script>
 			<script src="{{ asset('js/foundation.min.js') }}" type="text/javascript"></script>
+			<script src="{{ asset('js/foundation.min.js') }}" type="text/javascript"></script>
 			<script src="{{ asset('js/chosen.jquery.min.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('js/dataTables.colReorder.min.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('js/dataTables.tableTools.min.js') }}" type="text/javascript"></script>
-			<script src="{{ asset('js/dataTables.responsive.min.js') }}" type="text/javascript"></script>
+			<script src="{{ asset('js/datatables.min.js') }}" type="text/javascript"></script>
 			<script src="{{ asset('js/timeline.min.js') }}" type="text/javascript"></script>    
 			<script src="{{ asset('js/timeline.locales.js') }}" type="text/javascript"></script>    
 			<script src="{{ asset('js/fullcalendar.min.js') }}" type="text/javascript"></script>    
@@ -170,7 +164,8 @@
 					equalizer : {
 						// Specify if Equalizer should make elements equal height once they become stacked.
 						equalize_on_stack: true
-					}
+					},
+					reveal: {}
 				});
 			</script>
 		{% endblock %}

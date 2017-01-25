@@ -216,6 +216,23 @@ button, .button, input.button {
     right: 0.9375rem; }
 
 button.DTTT_button, div.DTTT_button, a.DTTT_button { display: inline-block !important ;}
+.dt-buttons.button-group { 
+  float: left; 
+  margin-top: 30px; }
+.dt-buttons.button-group .button { 
+  background-color: #B8B8B8;
+  color: #FFF;
+  padding: 0 1rem;
+  border-radius: 0;
+  box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.20); }
+  .dt-buttons.button-group .button:hover { 
+    background-color: #8f8f8f; }
+  .dt-buttons.button-group .button:first-of-type {
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px; }
+  .dt-buttons.button-group .button:last-of-type {
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px; }
 
 /** Template **/
 .sticky.contain-to-grid { box-shadow: 0 0 5px; background: #F09C38;}
