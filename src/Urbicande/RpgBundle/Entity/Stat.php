@@ -396,6 +396,10 @@ class Stat
      */
     public function getFullAvatar()
     {
-        return 'bundles/urbicanderpg/images/portraits/'.$this->avatar.'.jpg';
+        if($this->avatar) {
+            return 'bundles/urbicanderpg/images/portraits/'.$this->avatar.'.jpg';
+        } else {
+            return 'bundles/urbicanderpg/images/portraits/blank.png';
+        }
     }
 }
