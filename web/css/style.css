@@ -1,5 +1,5 @@
 body {
-  background: url('/images/pattern.png');
+  background: url('../images/pattern.png');
   padding-bottom: 12px;
   font-family: 'Lato', sans-serif;
   font-weight: 300;}
@@ -184,6 +184,21 @@ button, .button, input.button {
   border-radius: 5px;}
   .card h3 { margin-top: 0; }
 
+.avatar img { 
+  border-radius: 50%;
+  border-width: 2px;
+  border-color: #FFF; 
+  border-style: solid;
+  box-shadow: 0px 2px 5px 0px rgba(50, 50, 50, 0.20); }
+  .records_list .avatar img {
+    height: 35px;
+    width: 35px;}
+  .page-header .avatar img {
+    height: 35px;
+    width: 35px;
+    margin-left: 10px;
+    margin-top: -5px;}
+
 .alert-box { 
   padding: 0.5rem; 
   font-size: 0.9rem; }
@@ -296,6 +311,12 @@ span.form_text {
   margin: 0 10px;
 }
 
+.comment-box .avatar img {
+  margin-top: 10px;
+  height: 50px;
+  width: 50px;
+}
+
 .comment-box p{
   text-align: left;
 }
@@ -311,6 +332,7 @@ span.form_text {
   -webkit-border-image: url('/images/chat-bubble-left.png') 92 80 83 171 repeat;
   -o-border-image: url('/images/chat-bubble-left.png') 92 80 83 171 repeat;
   border-image: url('/images/chat-bubble-left.png') 92 80 83 171 fill repeat;
+  min-height: 65px;
 }
 
 .comment-box.author .comment{
@@ -334,7 +356,6 @@ span.form_text {
   border-radius: 0;
   border-bottom: 2px dashed #F09C38;}
 .plot { word-wrap: break-word;}
-.avatar img { width: 100%; }
 
 .fa.fa-question-circle { cursor: help;}
 

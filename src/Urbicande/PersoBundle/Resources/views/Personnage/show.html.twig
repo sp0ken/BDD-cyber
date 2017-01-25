@@ -51,7 +51,7 @@
 
 <div class="row page-header">
 	<h1 class="small-6 medium-9 columns">
-		{{ perso.name }} ({{perso.type.name}} {{perso.number}}) <small>assigné à {{perso.writer.username}}</small>
+		{{ perso.name }} ({{perso.type.name}} {{perso.number}}) <small>assigné à {{perso.writer.username}}<span class="avatar hide-for-small"><img src="{{asset(perso.writer.stat.fullAvatar)}}" /></span></small>
 	</h1>
 	<div class="small-6 medium-3 columns">
 		<ul class="button-group">
@@ -79,9 +79,9 @@
 <div class="row page-header hide-for-small">
 	<h3 class="small-6 medium-7 columns">Commentaires</h3>
 	<div class="small-6 medium-5 columns">
-			{# <a class="button flat blue" href="#" data-reveal-id="persoComment" onclick="event.preventDefault();"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a> #}
-		<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
-	</div>
+			<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}" data-reveal-id="persoComment" data-reveal-ajax="true"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
+{# 		<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
+ #}	</div>
 </div>
 {{ include('UrbicandePersoBundle:PersonnageComment:commentList.html.twig') }}
 
@@ -190,7 +190,6 @@
 		</div>
 	</div>
 </div>
-
 
 <!-- Implication et relation -->
 <div class="row">
