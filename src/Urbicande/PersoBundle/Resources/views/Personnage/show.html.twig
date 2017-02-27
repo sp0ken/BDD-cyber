@@ -310,7 +310,7 @@
 					Particularités
 				</h3>
 			</div>
-			{% for groupe in perso.groupes if groupe.particularity != null %}
+			{% for groupe in perso.groupes if groupe.particularity != null and groupe.particularity != '<p><br></p>' %}
 				<div class="row">
 					<div class="small-12 column">
 						<div class="card particularity">
