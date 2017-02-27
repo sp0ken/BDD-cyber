@@ -42,11 +42,13 @@
 					<h3 class="small-12 columns">Les détails</h3>
 				</div>
 				<div class="row">
-					<div class="six mobile-two columns">
+					<div class="small-12 medium-6 columns">
 						{{ form_row(form.description) }}
 					</div>
-					<div class="six mobile-two columns">
-						{{ form_row(form.particularity) }}
+					<div class="small-12 medium-6 columns">
+						{{ form_label(form.particularity)}} <i class="fa fa-question-circle" title="Les particularités du groupe : signe de reconnaissance, rites d'accession par exemple"></i>
+						{{ form_errors(form.particularity)}}
+						{{ form_widget(form.particularity)}}
 					</div>
 				</div>
 			</div>

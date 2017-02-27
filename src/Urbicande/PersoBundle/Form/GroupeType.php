@@ -20,7 +20,7 @@ class GroupeType extends AbstractType
             ->add('particularity', null, array(
                 'label' => 'Particularités', 
                 'required' => false,
-                'attr' => array('placeholder' => 'Les particularités du groupe, signe de reconnaissance par exemple', 'class' => 'rte')
+                'attr' => array('placeholder' => 'Les particularités du groupe, signe de reconnaissance, rites d\'accession par exemple', 'class' => 'rte')
             ))
             ->add('writer', null, array('label' => 'Scénariste référent'))
             ->add('members', 'entity', array(

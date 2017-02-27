@@ -35,7 +35,9 @@
 						{{ form_row(form.description) }}
 					</div>
 					<div class="small-12 medium-6 columns">
-						{{ form_row(form.particularity) }}
+						{{ form_label(form.particularity)}} <i class="fa fa-question-circle" title="Les particularités du groupe : signe de reconnaissance, rites d'accession par exemple"></i>
+						{{ form_errors(form.particularity)}}
+						{{ form_widget(form.particularity)}}
 					</div>
 				</div>
 			</div>
