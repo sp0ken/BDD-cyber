@@ -304,6 +304,32 @@
 	</div>
 
 	<div class="small-12 medium-6 columns">
+		<div id="particularities">
+			<div class="header row">
+				<h3 class="small-6 medium-8 columns">
+					Particularités
+				</h3>
+			</div>
+			{% for groupe in perso.groupes if groupe.particularity != null %}
+				<div class="row">
+					<div class="small-12 column">
+						<div class="card particularity">
+							<div class="header row">
+								<h4 class="small-6 medium-8 columns">
+									<i class="fa fa-address-book-o"></i> <a href="{{ path('groupe_by_id', {'id': groupe.id}) }}">{{ groupe }}</a>
+								</h4>
+							</div>
+							{% autoescape false %}
+							<div>
+								{{groupe.particularity}}<br>
+							</div>
+							{% endautoescape %}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+
 		<div id="relations">
 			<div class="header row">
 				<h3 class="small-6 medium-8 columns">
