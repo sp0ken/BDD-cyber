@@ -1,0 +1,63 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Edition de la tache n°{{task.Id}} {% endblock %}
+
+{% block body %}
+
+<h1>Edition de la tache n°{{task.Id}}</h1>
+
+<form action="{{path('task_update', {'id': task.id}) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="card">
+        <div class="header row">
+          <h3 class="small-12 columns">La base</h3>
+        </div>
+        <div class="row">
+          <div class="small-12 medium-3 columns">
+            {{ form_row(form.writer)}}
+          </div>
+          <div class="small-12 medium-3 columns">
+            {{ form_row(form.text) }}
+          </div>
+          <div class="small-12 medium-3 columns">
+            {{ form_row(form.endDate) }}
+          </div>
+          <div class="small-12 medium-3 columns">
+            {{ form_row(form.isDone) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <button class="button green" type="submit"><i class="fa fa-save"></i> Éditer</button>
+</form>
+
+<form id="revert" action="{{ path('task_revert', { 'id': task.id }) }}" method="post" {{ form_enctype(form) }}>
+  <!-- Historique -->
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="card">
+        <div class="header row">
+          <h3 class="small-12 columns">Historique</h3>
+        </div>
+        <div class="row">
+          <div class="small-12 columns">
+            Revenir à la version du :
+            <select name="version">
+              {% for log in logs %}
+                  <option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="button gray" type="submit"><i class="fa fa-history"></i> Restaurer</button>
+</form>
+
+
+{% endblock %}

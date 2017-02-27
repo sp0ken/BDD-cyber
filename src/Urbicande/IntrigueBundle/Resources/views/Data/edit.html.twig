@@ -4,17 +4,7 @@
 
 {% block body %}
 
-<h1>Éditer une donnée <small>(revenir à la version du : 
-	 <form id="revert" action="{{ path('data_revert', { 'id': data.id }) }}" method="post" {{ form_enctype(form) }}>
-		<select name="version">
-			{% for log in logs %}
-					<option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
-			{% endfor %}
-		</select>
-		 <input class="button green" type="submit" name="revert" value="Restaurer">
-		 )
-	</form>
-</small></h1>
+<h1>Éditer une donnée</h1>
 
 <form action="{{ path('data_update', { 'id': data.id }) }}" method="post" {{ form_enctype(form) }}>
 	<div class="row">
@@ -56,7 +46,31 @@
 	<div style="display:none">
 		{{ form_rest(form) }}
 	</div>
-	<input class="button flat green" type="submit" value="Éditer"/>
+	<button class="button flat green" type="submit"><i class="fa fa-save"></i> Éditer</button>
+</form>
+
+<form id="revert" action="{{ path('data_revert', { 'id': data.id }) }}" method="post" {{ form_enctype(form) }}>
+	<!-- Historique -->
+	<div class="row">
+		<div class="small-12 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Historique</h3>
+				</div>
+				<div class="row">
+					<div class="small-12 columns">
+						Revenir à la version du :
+						<select name="version">
+							{% for log in logs %}
+									<option value="{{log.version}}">{{log.loggedAt.date|date("d/m/Y H:i")}}</option>}
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+ 	<button class="button gray" type="submit" name="revert"> <i class="fa fa-history"></i> Restaurer</button>
 </form>
 
 {% endblock %}

@@ -32,7 +32,7 @@ class IntrigueCommentController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $this->get('urbicande.intriguecomment_manager')->saveIntrigueComment($comment, $intrigue, $this->getUser());
+            $this->get('urbicande.intriguecomment_manager')->saveIntrigueComment($comment, $intrigue, null, $this->getUser());
 
             $this->get('urbicande.mail_manager')->sendIntrigueCommentMail($this->getUser(), $comment->getIntrigue()->getWriter(), $comment);
             $this->get('session')->getFlashBag()->add('create', 'Le commentaire a été posté');
@@ -42,6 +42,43 @@ class IntrigueCommentController extends Controller
         return $this->render('UrbicandeIntrigueBundle:IntrigueComment:new.html.twig', array(
             'entity' => $comment,
             'intrigue' => $intrigue,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    /**
+     * Creates a new IntrigueComment entity responding to an existing one.
+     *
+     */
+    public function respondAction(Request $request, $intrigueId, $commentId)
+    {   
+        $intrigue = $this->get('urbicande.intrigue_manager')->loadIntrigue($intrigueId);
+        $parentComment = $this->get('urbicande.intriguecomment_manager')->loadIntrigueComment($commentId);
+
+        if (!$intrigue) {
+            throw $this->createNotFoundException('Unable to find Intrigue entity.');
+        }
+        if (!$parentComment) {
+            throw $this->createNotFoundException('Unable to find IntrigueComment entity.');
+        }
+
+        $comment  = new IntrigueComment();
+        $form = $this->createForm(new IntrigueCommentType(), $comment);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $this->get('urbicande.intriguecomment_manager')->saveIntrigueComment($comment, $intrigue, $parentComment, $this->getUser());
+
+            $this->get('urbicande.mail_manager')->sendIntrigueCommentMail($this->getUser(), $intrigue->getWriter(), $comment);
+            $this->get('urbicande.mail_manager')->sendIntrigueCommentResponseMail($this->getUser(), $parentComment->getUser(), $comment);
+            $this->get('session')->getFlashBag()->add('create', 'Le commentaire a été posté');
+            return $this->redirect($this->generateUrl('intrigue_by_id', array('id' => $intrigue->getId())));
+        }
+
+        return $this->render('UrbicandeIntrigueBundle:IntrigueComment:response.html.twig', array(
+            'entity' => $comment,
+            'intrigue' => $intrigue,
+            'parentComment' => $parentComment,
             'form'   => $form->createView(),
         ));
     }

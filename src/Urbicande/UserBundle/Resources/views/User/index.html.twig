@@ -13,6 +13,7 @@
 <table class="records_list datatable">
 	<thead>
 		<tr>
+			<th></th>
 			<th>Nom</th>
 			<th>Niveau</th>
 			<th>Titre</th>
@@ -25,6 +26,7 @@
 	<tbody>
 		{% for user in users %}
 			<tr>
+				<td class="avatar"><img src="{{asset(user.stat.fullAvatar)}}" /></td>
 				<td><a title="Voir" href="{{ path('user_by_name', { 'username': user.username }) }}">{{ user }}</a></td>
 				<td>{{ user.stat.level }}</td>
 				<td>{{ user.stat.title }}</td>

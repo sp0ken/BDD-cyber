@@ -1,41 +1,63 @@
 <div class="comments hide-for-small">
 	{% for comment in perso.comments %}
 			{% if comment.user != perso.writer %}
-				<div class="comment-box">
+				<div id="comment-{{comment.id}}" class="comment-box">
 					<div class="row">
-						<div class="left">
-							Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
+						<div class="hide-for-small medium-1 column avatar">
+							&nbsp;
 						</div>
-						<div class="left" style="margin-left:10px;">
-							{% if(app.user == comment.user) %}
-								<a class="green-font" href="{{ path('perso_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
-								<a class="red-font" href="{{ path('perso_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
-							{% endif %}
+						<div class="small-7 columns end">
+							<div class="left actions">
+								{% if(app.user == comment.user) %}
+									<a class="green-font" href="{{ path('perso_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
+									<a class="red-font" href="{{ path('perso_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
+								{% else %}
+									<a class="gray-font" href="{{ path('perso_comment_respond', {'persoId': perso.Id,'commentId': comment.id}) }}"><i class="fa fa-share"></i></a>
+								{% endif %}
+							</div>
+							<div class="left">
+								Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}}
+								{% if comment.parentComment is not null %} 
+									en réponse à <a href="#comment-{{comment.parentComment.id}}">{{comment.parentComment.user}}</a>
+								{% endif %} :
+							</div>
 						</div>
 					</div>
 					<div class="row">
+						<div class="hide-for-small medium-1 column avatar">
+							<img class="right" src="{{asset(comment.user.stat.fullAvatar)}}" alt="Avatar du commentateur" title="{{comment.user}}" />
+						</div>
 						{% autoescape false %}
-							<div class="small-7 columns comment">{{ comment.comment}}</div>
+							<div class="small-7 columns comment end">
+								{{ comment.comment}}</div>
 						{% endautoescape %}
 					</div>
 				</div>
 			{% else %}
-				<div class="comment-box author">
+				<div id="comment-{{comment.id}}" class="comment-box author">
 					<div class="row">
 						<div class="right" style="margin-left:10px;">
-							Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}} :
+							Par <b>{{comment.user}}</b> le {{comment.createdAt|date('d M Y')}}
+							{% if comment.parentComment is not null %} 
+								en réponse à <a href="#comment-{{comment.parentComment.id}}">{{comment.parentComment.user}}</a>
+							{% endif %} :
 						</div>
 						<div class="right">
 							{% if(app.user == comment.user) %}
 								<a class="green-font" href="{{ path('perso_comment_edit', {'id': comment.id}) }}"><i class="fa fa-edit"></i></a>
 								<a class="red-font" href="{{ path('perso_comment_delete', {'id': comment.id}) }}"><i class="fa fa-times-circle"></i></a>
+							{% else %}
+								<a class="gray-font" href="{{ path('perso_comment_respond', {'persoId': perso.Id,'commentId': comment.id}) }}"><i class="fa fa-share"></i></a>
 							{% endif %}
 						</div>
 					</div>
 					<div class="row">
 						{% autoescape false %}
-							<div class="push-5 small-7 columns comment">{{ comment.comment}}</div>
+							<div class="push-4 small-7 columns comment">{{ comment.comment}}</div>
 						{% endautoescape %}
+						<div class="hide-for-small medium-1 column avatar">
+							<img class="left" src="{{asset(comment.user.stat.fullAvatar)}}" alt="Avatar du commentateur" title="{{comment.user}}" />
+						</div>
 					</div>
 				</div>
 			{% endif %}

@@ -31,7 +31,7 @@ class PersonnageCommentController extends Controller
         $form->bind($request);
 
         if ($form->isValid()) {
-            $this->get('urbicande.personnagecomment_manager')->savePersonnageComment($comment, $perso, $this->getUser());
+            $this->get('urbicande.personnagecomment_manager')->savePersonnageComment($comment, $perso, null, $this->getUser());
 
             $this->get('urbicande.mail_manager')->sendPersoCommentMail($this->getUser(), $perso->getWriter(), $comment);
             $this->get('session')->getFlashBag()->add('create', 'Le commentaire a été posté');
@@ -41,6 +41,64 @@ class PersonnageCommentController extends Controller
         return $this->render('UrbicandePersoBundle:PersonnageComment:new.html.twig', array(
             'entity' => $comment,
             'perso' => $perso,
+            'form'   => $form->createView(),
+        ));
+    }
+
+    public function createAJAXAction(Request $request)
+    {
+      if($request->isXmlHttpRequest())  {
+        $userManager = $this->container->get('fos_user.user_manager');
+        
+        $comment  = new PersonnageComment();
+        $comment->setComment($request->get('comment'));
+        $comment->setPerso($request->get('persoId'));
+        $comment->setUser($this->getUser());
+
+        $comment_manager = $this->get('urbicande.personnagecomment_manager');
+        $comment_manager->savePersonnageComment($comment);
+         //
+        $response = new JsonResponse();
+        $response->setData(array('comment' => $comment->__toString()));
+        return $response;
+      } else {
+        return $this->redirect($this->generateUrl('Home'));
+      }
+    }
+
+    /**
+     * Creates a new PersonnageComment entity responding to an existing one.
+     *
+     */
+    public function respondAction(Request $request, $persoId, $commentId)
+    {   
+        $perso = $this->get('urbicande.perso_manager')->loadPerso($persoId);
+        $parentComment = $this->get('urbicande.personnagecomment_manager')->loadPersonnageComment($commentId);
+
+        if (!$perso) {
+            throw $this->createNotFoundException('Unable to find Personnage entity.');
+        }
+        if (!$parentComment) {
+            throw $this->createNotFoundException('Unable to find PersonnageComment entity.');
+        }
+
+        $comment  = new PersonnageComment();
+        $form = $this->createForm(new PersonnageCommentType(), $comment);
+        $form->bind($request);
+
+        if ($form->isValid()) {
+            $this->get('urbicande.personnagecomment_manager')->savePersonnageComment($comment, $perso, $parentComment, $this->getUser());
+
+            $this->get('urbicande.mail_manager')->sendPersoCommentMail($this->getUser(), $perso->getWriter(), $comment);
+            $this->get('urbicande.mail_manager')->sendPersoCommentResponseMail($this->getUser(), $parentComment->getUser(), $comment);
+            $this->get('session')->getFlashBag()->add('create', 'Le commentaire a été posté');
+            return $this->redirect($this->generateUrl('perso_by_id', array('id' => $perso->getId())));
+        }
+
+        return $this->render('UrbicandePersoBundle:PersonnageComment:response.html.twig', array(
+            'entity' => $comment,
+            'perso' => $perso,
+            'parentComment' => $parentComment,
             'form'   => $form->createView(),
         ));
     }

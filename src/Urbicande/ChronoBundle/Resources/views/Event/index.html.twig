@@ -43,7 +43,7 @@
 		Les évènements
 	</h1>
 	<div class="medium-4 hide-for-small columns">
-		<a class="button blue flat" href="{{ path('create_event') }}">Créer un évènement</a>
+		<a class="button blue flat" href="{{ path('create_event') }}"><i class="fa fa-plus"></i> Créer un évènement</a>
 	</div>
 </div>
 
@@ -86,7 +86,7 @@
 						{% for event in events %}
 								<tr>
 									<td><a title="Voir" href="{{ path('event_by_id', { 'id': event.id }) }}">{{ event.name }}</a></td>
-									<td>
+									<td data-order="{{event.startDate|date('U')}}">
 										{% if (event.endDate) and (event.endDate|date('Y-m-d') != '-0001-11-30') %} {# Quand le cas où la valeur sql est 0000-00-00#}
 											{{event.startDate|date('d M Y')}} - {{event.endDate|date('d M Y')}}
 										{% else %}

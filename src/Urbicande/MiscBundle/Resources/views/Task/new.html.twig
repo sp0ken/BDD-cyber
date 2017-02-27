@@ -1,0 +1,35 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Nouvelle tache {% endblock %}
+
+{% block body %}
+
+<h1>Créer une nouvelle tache</h1>
+
+<form method="post" {{ form_enctype(form) }}>
+  <div class="row">
+    <div class="small-12 columns">
+      <div class="card">
+        <div class="header row">
+          <h3 class="small-12 columns">La base</h3>
+        </div>
+        <div class="row">
+          <div class="small-12 medium-4 columns">
+            {{ form_row(form.writer)}}
+          </div>
+          <div class="small-12 medium-4 columns">
+            {{ form_row(form.text) }}
+          </div>
+          <div class="small-12 medium-4 columns">
+            {{ form_row(form.endDate) }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {{ form_row(form._token) }}
+  <button class="button green" type="submit"><i class="fa fa-plus"></i> Créer</button>
+</form>
+
+{% endblock %}

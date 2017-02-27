@@ -89,6 +89,13 @@ create_intrigue_comment:
     requirements:
       intrigueId:     \d+
 
+intrigue_comment_respond:
+    pattern:  /intrigue/{intrigueId}/{commentId}/comment/respond
+    defaults: { _controller: UrbicandeIntrigueBundle:IntrigueComment:respond }
+    requirements:
+      intrigueId:     \d+
+      commentId:     \d+
+
 intrigue_comment_edit:
     pattern:  /intrigue/comment/edit/{id}
     defaults: { _controller: UrbicandeIntrigueBundle:IntrigueComment:edit }

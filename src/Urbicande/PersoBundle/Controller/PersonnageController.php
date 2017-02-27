@@ -12,6 +12,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Urbicande\PersoBundle\Entity\Personnage;
 use Urbicande\ChronoBundle\Entity\Chronology;
 use Urbicande\PersoBundle\Form\PersonnageType;
+use Urbicande\PersoBundle\Entity\PersonnageComment;
+use Urbicande\PersoBundle\Form\PersonnageCommentType;
 use ZipArchive;
 
 /**
@@ -45,8 +47,12 @@ class PersonnageController extends Controller
             throw $this->createNotFoundException('Unable to find Personnage entity.');
         }
 
+        $comment  = new PersonnageComment();
+        $persoCommentForm = $this->createForm(new PersonnageCommentType(), $comment);
+
         return $this->render('UrbicandePersoBundle:Personnage:show.html.twig', array(
             'perso'      => $perso,
+            'commentForm'      => $persoCommentForm
         ));
     }
 

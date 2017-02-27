@@ -150,11 +150,11 @@ class Stat
      */
     public function getRelativeXp()
     {
-        $currentLevel = pow($this->level, 2)*100;
-        $nextLevel = pow($this->level+1, 2)*100;
+        $currentLevel = pow($this->level-1, 2)*100;
+        $nextLevel = pow($this->level, 2)*100;
         $distance = $nextLevel - $currentLevel;
 
-        return $this->xp*100/$distance;
+        return (($this->xp - $currentLevel) / $distance)*100;
     }
 
     /**
@@ -339,7 +339,9 @@ class Stat
      */
     public function getTitle()
     {
-        if($this->level <= 20) {
+        if($this->level == 0) {
+            return $this->titles[$this->level];
+        } else if($this->level <= 20) {
             return $this->titles[$this->level-1];
         } else {
             return 'Exploiteur de bug';
@@ -394,6 +396,10 @@ class Stat
      */
     public function getFullAvatar()
     {
-        return 'bundles/urbicanderpg/images/portraits/'.$this->avatar.'.jpg';
+        if($this->avatar) {
+            return 'bundles/urbicanderpg/images/portraits/'.$this->avatar.'.jpg';
+        } else {
+            return 'bundles/urbicanderpg/images/portraits/blank.png';
+        }
     }
 }

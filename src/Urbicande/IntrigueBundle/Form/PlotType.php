@@ -12,7 +12,7 @@ class PlotType extends AbstractType
     {
         $builder
             ->add('ingame', null, array(
-                'label' => 'Ouverture de jeu (5 lignes)',
+                'label' => 'Événements et rebondissements (5 lignes)',
                 'required' => false,
                 'attr' => array('placeholder' => 'Ce que le héros et les actifs risquent de vivre en jeu grâce à cette intrigue : actions poursuivies, rebondissements provoqués, émotions et sensations dans lesquelles nous allons tenter de les plonger. Autrement dit, le potentiel ludique de l’intrigue.', 'class' => 'rte')
             ))

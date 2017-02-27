@@ -51,12 +51,12 @@
 
 <div class="row page-header">
 	<h1 class="small-6 medium-9 columns">
-		{{ perso.name }} ({{perso.type.name}} {{perso.number}}) <small>assigné à {{perso.writer.username}}</small>
+		{{ perso.name }} ({{perso.type.name}} {{perso.number}}) <small>assigné à {{perso.writer.username}}<span class="avatar hide-for-small"><img src="{{asset(perso.writer.stat.fullAvatar)}}" /></span></small>
 	</h1>
 	<div class="small-6 medium-3 columns">
 		<ul class="button-group">
-			<li><a class="button flat green" href="{{ path('perso_edit', {'id': perso.id}) }}">Modifier</a></li>
-			<li><a class="button flat gray hide-for-medium-down" href="{{ path('perso_export', {'id': perso.id}) }}">Exporter</a></li>
+			<li><a class="button flat green" href="{{ path('perso_edit', {'id': perso.id}) }}"><i class="fa fa-edit"></i> Modifier</a></li>
+			<li><a class="button flat gray hide-for-medium-down" href="{{ path('perso_export', {'id': perso.id}) }}"><i class="fa fa-download"></i> Exporter</a></li>
 		</ul>
 	</div>
 </div>
@@ -79,7 +79,7 @@
 <div class="row page-header hide-for-small">
 	<h3 class="small-6 medium-7 columns">Commentaires</h3>
 	<div class="small-6 medium-5 columns">
-			<a class="button flat blue popup" onclick="event.preventDefault(); window.open(this.href, 'Nouveau commentaire', 'height=450,width=450,location=no');" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}">Ajouter un commentaire</a>
+		<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
 	</div>
 </div>
 {{ include('UrbicandePersoBundle:PersonnageComment:commentList.html.twig') }}
@@ -105,8 +105,8 @@
 			<div class="header row">
 				<h3 class="small-6 medium-7 large-10 columns">Chronologie</h3>
 				<div class="small-6 medium-5 large-2 columns">
-					<a class="button flat blue"  href="{{path('create_event', {'perso': perso.id})}}">
-						Créer
+					<a class="button outline blue right"  href="{{path('create_event', {'perso': perso.id})}}">
+						<i class="fa fa-plus"></i> Créer
 					</a>
 				</div>
 			</div>
@@ -124,8 +124,8 @@
 					Compétences
 				</h3>
 				<div class="small-6 medium-5 columns">
-					<a class="button flat blue"  href="{{ path('create_skill') }}">
-						Créer
+					<a class="button outline blue right"  href="{{ path('create_skill') }}">
+						<i class="fa fa-plus"></i> Créer
 					</a>
 				</div>
 			</div>
@@ -144,8 +144,8 @@
 					Groupes
 				</h3>
 				<div class="small-6 medium-5 columns">
-					<a class="button flat blue" href="{{path('create_groupe', {'perso': perso.id})}}">
-						Créer
+					<a class="button outline blue right" href="{{path('create_groupe', {'perso': perso.id})}}">
+						<i class="fa fa-plus"></i> Créer
 					</a>
 				</div>
 			</div>
@@ -164,8 +164,8 @@
 					Intrigues
 				</h3>
 				<div class="small-6 medium-5 columns">
-					<a class="button flat blue" href="{{path('create_intrigue', {'perso': perso.id})}}">
-						Créer
+					<a class="button outline blue right" href="{{path('create_intrigue', {'perso': perso.id})}}">
+						<i class="fa fa-plus"></i> Créer
 					</a>
 				</div>
 			</div>
@@ -175,13 +175,13 @@
 				{% endfor %}
 				{% for groupe in perso.groupes %}
 					{% for implication in groupe.intrigues %}
-						<li><i class="fa fa-users" title="Groupe"></i> <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
+						<li><i class="fa fa-users" title="Groupe"></i> <em>{{groupe}}</em> - <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
 					{% endfor %}
 				{% endfor %}
 				{% if show_event_plot %}
 					{% for event in perso.events %}
 						{% for implication in event.implications %}
-							<li><i class="fa fa-calendar" title="Evènement"></i> <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
+							<li><i class="fa fa-calendar" title="Evènement"></i> <em>{{event}}</em> - <a href="{{ path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{ implication.intrigue }} ({{implication.degree}})</a></li>
 						{% endfor %}
 					{% endfor %}
 				{% endif %}
@@ -189,7 +189,6 @@
 		</div>
 	</div>
 </div>
-
 
 <!-- Implication et relation -->
 <div class="row">
@@ -240,7 +239,7 @@
 							<div class="card plot">
 								<div class="header row">
 									<h4 class="small-6 medium-8 columns">
-										<i class="fa fa-users"></i> <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
+										<i class="fa fa-users"></i> <em>{{groupe}}</em> - <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
 									</h4>
 								</div>
 								<div>
@@ -274,7 +273,7 @@
 								<div class="card plot">
 									<div class="header row">
 										<h4 class="small-6 medium-8 columns">
-											<i class="fa fa-calendar"></i> <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
+											<i class="fa fa-calendar"></i> <em>{{event}}</em> - <a href="{{path('intrigue_by_id', {'id': implication.intrigue.id}) }}">{{implication.intrigue}} ({{implication.degree}})</a>
 										</h4>
 									</div>
 									<div>
@@ -370,8 +369,8 @@
 								{% endfor %}
 							</td>
 							<td>
-								<button href="#" data-dropdown="drop-actions-{{data.id}}" aria-controls="drop-actions-{{data.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
-								<ul id="drop-actions-{{data.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+								<button href="#" data-dropdown="drop-actions-data-{{data.id}}" aria-controls="drop-actions-data-{{data.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+								<ul id="drop-actions-data-{{data.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
 									<li><a class="green-font" title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
 									<li><a class="red-font" title="Supprimer" href="{{ path('data_delete', { 'id': data.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 								</ul>
@@ -383,5 +382,4 @@
 		</div>
 	</div>
 </div>
-
 {% endblock body %}

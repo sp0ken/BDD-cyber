@@ -86,13 +86,46 @@ musique_by_id:
     requirements:
       id:     \d+
 
+task_list:
+    pattern:  /task
+    defaults: { _controller: UrbicandeMiscBundle:Task:index }
+
 create_task:
     pattern:  /task/create
-    defaults: { _controller: UrbicandeHomeBundle:Home:createTask }
+    defaults: { _controller: UrbicandeMiscBundle:Task:create }
+
+create_ajax_task:
+    pattern:  /task/createAJAX
+    defaults: { _controller: UrbicandeMiscBundle:Task:createAJAXTask }
+
+task_edit:
+    pattern:  /task/edit/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Task:edit }
+    requirements:
+      id:     \d+
+
+task_revert:
+    pattern:  /task/revert/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Task:revert }
+    requirements:
+      id:     \d+
+
+task_delete:
+    pattern:  /task/delete/{id}
+    defaults: { _controller: UrbicandeMiscBundle:Task:delete }
+    requirements:
+      id:     \d+
+
+task_update:
+    pattern:  /task/update/{id}
+    defaults: { _controller: "UrbicandeMiscBundle:Task:update" }
+    requirements: { _method: post }
+    requirements:
+      id:     \d+
 
 complete_task:
     pattern:  /task/complete/{id}
-    defaults: { _controller: UrbicandeHomeBundle:Home:completeTask }
+    defaults: { _controller: UrbicandeMiscBundle:Task:completeTask }
     requirements:
       id:     \d+
 

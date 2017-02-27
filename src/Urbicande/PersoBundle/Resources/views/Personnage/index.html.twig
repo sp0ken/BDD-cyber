@@ -9,8 +9,10 @@
 		Les personnages
 	</h1>
 	<div class="medium-4 hide-for-small columns">
-		<a class="button gray flat" href="{{ path('perso_export_all') }}">Exporter</a>
-		<a class="button blue flat" href="{{ path('create_perso') }}">Créer un personnage</a>
+		<ul class="button-group">
+			<li><a class="button blue flat" href="{{ path('create_perso') }}"><i class="fa fa-plus"></i> Créer un personnage</a></li>
+			<li><a class="button gray flat" href="{{ path('perso_export_all') }}"><i class="fa fa-download"></i> Exporter</a></li>
+		</ul>
 	</div>
 </div>
 

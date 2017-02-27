@@ -52,6 +52,22 @@ class PersonnageComment
     private $perso;
 
     /**
+     * @var  PersonnageComment $parent_comment
+     * PersonnageComment commenté
+     * 
+     * @ORM\ManyToOne(targetEntity="PersonnageComment", inversedBy="answers")
+     */
+    private $parent_comment;
+
+    /**
+     * @var  PersonnageComment $answers
+     * PersonnageComment commenté
+     * 
+     * @ORM\OneToMany(targetEntity="PersonnageComment", mappedBy="parent_comment")
+     */
+    private $answers;
+
+    /**
      * 
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
@@ -206,5 +222,68 @@ class PersonnageComment
     public function getParent()
     {
         return $this->perso;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->answers = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Set parent_comment
+     *
+     * @param \Urbicande\PersoBundle\Entity\PersonnageComment $parentComment
+     * @return PersonnageComment
+     */
+    public function setParentComment(\Urbicande\PersoBundle\Entity\PersonnageComment $parentComment = null)
+    {
+        $this->parent_comment = $parentComment;
+    
+        return $this;
+    }
+
+    /**
+     * Get parent_comment
+     *
+     * @return \Urbicande\PersoBundle\Entity\PersonnageComment 
+     */
+    public function getParentComment()
+    {
+        return $this->parent_comment;
+    }
+
+    /**
+     * Add answers
+     *
+     * @param \Urbicande\PersoBundle\Entity\PersonnageComment $answers
+     * @return PersonnageComment
+     */
+    public function addAnswer(\Urbicande\PersoBundle\Entity\PersonnageComment $answers)
+    {
+        $this->answers[] = $answers;
+    
+        return $this;
+    }
+
+    /**
+     * Remove answers
+     *
+     * @param \Urbicande\PersoBundle\Entity\PersonnageComment $answers
+     */
+    public function removeAnswer(\Urbicande\PersoBundle\Entity\PersonnageComment $answers)
+    {
+        $this->answers->removeElement($answers);
+    }
+
+    /**
+     * Get answers
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getAnswers()
+    {
+        return $this->answers;
     }
 }

@@ -95,20 +95,6 @@ $(document).ready(function() {
   })
 
   //jQuery datatables initialization
-  TableTools.DEFAULTS.aButtons = [
-    { 
-      "sExtends": "print", 
-      "sButtonText": "Imprimer",
-      "sButtonClass": "hide-for-medium-down"
-    }, 
-    {
-      "sExtends": "collection", 
-      "sButtonText": "Sauvegarder", 
-      "sButtonClass": "hide-for-medium-down",
-      "aButtons":    [ "csv", "xls", "pdf" ]
-    }
-  ];
-  TableTools.DEFAULTS.sSwfPath = "/swf/copy_csv_xls_pdf.swf";
 
   $('.datatable').DataTable({
     "responsive": true,
@@ -120,7 +106,34 @@ $(document).ready(function() {
     "info": false,
     "lengthChange": false,
     "autoWidth": false,
-    "dom": '<"left hide-for-small"T>Rl<f>rtip',
+    "dom": 'Bfrtip>',
+    buttons: [
+        {
+            extend:    'copy',
+            text:      '<i class="fa fa-files-o"></i>',
+            titleAttr: 'Copier'
+        },
+        {
+            extend:    'excel',
+            text:      '<i class="fa fa-file-excel-o"></i>',
+            titleAttr: 'Excel'
+        },
+        {
+            extend:    'csv',
+            text:      '<i class="fa fa-file-text-o"></i>',
+            titleAttr: 'CSV'
+        },
+        {
+            extend:    'pdf',
+            text:      '<i class="fa fa-file-pdf-o"></i>',
+            titleAttr: 'PDF'
+        },
+        {
+            extend:    'print',
+            text:      '<i class="fa fa-print"></i>',
+            titleAttr: 'Imprimer'
+        }
+    ],
     "language": {
       "processing":     "Traitement en cours...",
       "search":         "Rechercher&nbsp;:",
@@ -141,6 +154,10 @@ $(document).ready(function() {
       "aria": {
           "sortAscending":  ": activer pour trier la colonne par ordre croissant",
           "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+      },
+      fixedHeader: {
+        header: true,
+        footer: false
       }
     },
   });

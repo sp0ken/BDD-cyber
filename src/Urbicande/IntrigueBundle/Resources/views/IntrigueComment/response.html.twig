@@ -1,0 +1,20 @@
+{% extends '::base.html.twig' %}
+
+{% block title %} {{ parent() }} - Nouveau commentaire réponse{% endblock %}
+
+{% block body %}
+
+<h1>Nouveau commentaire pour {{intrigue.name}} en réponse à {{parentComment.user}}</h1>
+
+<form action="{{ path('intrigue_comment_respond', {'intrigueId': intrigue.id, 'commentId': parentComment.Id}) }}" method="post" {{ form_enctype(form) }}>
+  <div class="row">
+      <div class="small-12 columns">{{ form_row(form.comment, {'label': 'Commentaire'}) }}</div>
+  </div>
+
+  <div style="display:none">
+    {{ form_rest(form) }}
+  </div>
+  <button class="button green" type="submit"><i class="fa fa-plus"></i> Créer</button>
+</form>
+
+{% endblock %}
