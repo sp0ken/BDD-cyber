@@ -27,7 +27,7 @@
 					<button href="#" data-dropdown="drop-actions-data-{{data.id}}" aria-controls="drop-actions-data-{{data.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
 					<ul id="drop-actions-data-{{data.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
 						<li><a class="green-font" title="Éditer" href="{{ path('data_edit', { 'id': data.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
-						<li><a class="red-font" title="Supprimer" href="{{ path('data_delete', { 'id': implication.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
+						<li><a class="red-font" title="Supprimer" href="{{ path('data_delete', { 'id': data.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
 					</ul>
 				</td>
 			</tr>
