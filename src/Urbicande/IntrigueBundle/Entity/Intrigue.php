@@ -53,7 +53,7 @@ class Intrigue
 
     /**
      * @var string $status
-     * Statut de l'écriture 
+     * Statut de l'écriture
      * A customiser dans ../Form/IntrigueType.php, app/config/parameters.yml et app/config/config.yml
      *
      * @Gedmo\Versioned
@@ -93,7 +93,7 @@ class Intrigue
 
     /**
      * Objets liés à l'intrigue
-     * 
+     *
      * @ORM\ManyToMany(targetEntity="Urbicande\IntrigueBundle\Entity\Object", cascade={"persist"})
      * @ORM\JoinTable(name="cyber_intrigue_object")
      */
@@ -116,7 +116,7 @@ class Intrigue
     /**
      * @var ArrayCollection Urbicande\ChronoBundle\Entity\Event $events
      * Les évènements liés à cette intrigue
-     * 
+     *
      * @ORM\ManyToMany(targetEntity="Urbicande\ChronoBundle\Entity\Event", mappedBy="intrigues", cascade={"persist"})
      */
     private $events;
@@ -124,7 +124,7 @@ class Intrigue
     /**
      * @var ArrayCollection Urbicande\PersoBundle\Entity\Skill $skills
      * Les compétences nécessaire à cette intrigue
-     * 
+     *
      * @ORM\ManyToMany(targetEntity="Urbicande\PersoBundle\Entity\Skill", mappedBy="intrigues", cascade={"persist"})
      */
     private $skills;
@@ -149,7 +149,7 @@ class Intrigue
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -165,7 +165,7 @@ class Intrigue
     public function setWriter(\Urbicande\UserBundle\Entity\User $writer)
     {
         $this->writer = $writer;
-    
+
         return $this;
     }
 
@@ -186,9 +186,9 @@ class Intrigue
      * @return Intrigue
      */
     public function setSynopsis(\Urbicande\IntrigueBundle\Entity\Synopsis $synopsis)
-    {   
+    {
         $this->synopsis = $synopsis;
-    
+
         return $this;
     }
 
@@ -212,7 +212,7 @@ class Intrigue
     {
         $plot->setIntrigue($this);
         $this->plot = $plot;
-    
+
         return $this;
     }
 
@@ -234,7 +234,7 @@ class Intrigue
         $this->objects = new \Doctrine\Common\Collections\ArrayCollection();
         $this->rules = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Set type
      *
@@ -244,14 +244,14 @@ class Intrigue
     public function setType(\Urbicande\IntrigueBundle\Entity\IntrigueType $type)
     {
         $this->type = $type;
-    
+
         return $this;
     }
 
     /**
      * Get type
      *
-     * @return Urbicande\IntrigueBundle\Entity\IntrigueType 
+     * @return Urbicande\IntrigueBundle\Entity\IntrigueType
      */
     public function getType()
     {
@@ -267,7 +267,7 @@ class Intrigue
     public function addObject(\Urbicande\IntrigueBundle\Entity\Object $objects)
     {
         $this->objects[] = $objects;
-    
+
         return $this;
     }
 
@@ -291,7 +291,7 @@ class Intrigue
     {
         $rule->setIntrigue($this);
         $this->rules[] = $rule;
-    
+
         return $this;
     }
 
@@ -308,7 +308,7 @@ class Intrigue
     /**
      * Get objects
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getObjects()
     {
@@ -318,7 +318,7 @@ class Intrigue
     /**
      * Get rules
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getRules()
     {
@@ -334,14 +334,14 @@ class Intrigue
     public function setName($name)
     {
         $this->name = $name;
-    
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -357,14 +357,14 @@ class Intrigue
     public function setNumber($number)
     {
         $this->number = $number;
-    
+
         return $this;
     }
 
     /**
      * Get number
      *
-     * @return integer 
+     * @return integer
      */
     public function getNumber()
     {
@@ -380,14 +380,14 @@ class Intrigue
     public function setStatus($status)
     {
         $this->status = $status;
-    
+
         return $this;
     }
 
     /**
      * Get status
      *
-     * @return string 
+     * @return string
      */
     public function getStatus()
     {
@@ -397,7 +397,7 @@ class Intrigue
     /**
      * Get status in full word
      *
-     * @return string 
+     * @return string
      */
     public function getFullStatus()
     {
@@ -414,9 +414,9 @@ class Intrigue
         case 'R':
           return 'Relu';
           break;
-       } 
+       }
     }
-    
+
     /**
      * Overrides default toString behaviour
      */
@@ -435,7 +435,7 @@ class Intrigue
     {
         $implication->setIntrigue($this);
         $this->implications[] = $implication;
-    
+
         return $this;
     }
 
@@ -452,11 +452,58 @@ class Intrigue
     /**
      * Get implications
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getImplications()
     {
         return $this->implications;
+    }
+
+    /**
+     * Get implication active count
+     *
+     * @return Integer
+     */
+    public function getInvolvedPlayers()
+    {
+        $involvedPlayers = array();
+        foreach ($this->implications as $key => $implication) {
+            if($implication->getDegree() == 'Figurant' || $implication->getDegree() == 'Renfort') continue;
+            if($implication->getPlayer()) {
+                $id = $implication->getPlayer()->getId();
+                $involvedPlayers[$id] = true;
+            } else if($implication->getGroupe()) {
+                $players = $implication->getGroupe()->getMembers();
+                foreach ($players as $key => $player) {
+                    $id = $player->getId();
+                    $involvedPlayers[$id] = true;
+                }
+            }
+        }
+        return $involvedPlayers;
+    }
+
+    /**
+     * Get implication active count
+     *
+     * @return Integer
+     */
+    public function getAllPlayers()
+    {
+        $involvedPlayers = array();
+        foreach ($this->implications as $key => $implication) {
+            if($implication->getPlayer()) {
+                $id = $implication->getPlayer()->getId();
+                $involvedPlayers[$id] = true;
+            } else if($implication->getGroupe()) {
+                $players = $implication->getGroupe()->getMembers();
+                foreach ($players as $key => $player) {
+                    $id = $player->getId();
+                    $involvedPlayers[$id] = true;
+                }
+            }
+        }
+        return $involvedPlayers;
     }
 
     /**
@@ -468,7 +515,7 @@ class Intrigue
     public function addEvent(\Urbicande\ChronoBundle\Entity\Event $event)
     {
         $this->events[] = $event;
-    
+
         return $this;
     }
 
@@ -485,7 +532,7 @@ class Intrigue
     /**
      * Get events
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getEvents()
     {
@@ -505,7 +552,7 @@ class Intrigue
               $event->getIntrigues()->removeElement($this);
           }
         }
-      }   
+      }
 
       if($events) {
         foreach ($events as $key => $event) {
@@ -525,7 +572,7 @@ class Intrigue
     public function addComment(\Urbicande\IntrigueBundle\Entity\IntrigueComment $comment)
     {
         $this->comments[] = $comment;
-    
+
         return $this;
     }
 
@@ -542,7 +589,7 @@ class Intrigue
     /**
      * Get comments
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getComments()
     {
@@ -559,7 +606,7 @@ class Intrigue
     public function addSkill(\Urbicande\PersoBundle\Entity\Skill $skills)
     {
         $this->skills[] = $skills;
-    
+
         return $this;
     }
 
@@ -576,7 +623,7 @@ class Intrigue
     /**
      * Get skills
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getSkills()
     {
@@ -592,7 +639,7 @@ class Intrigue
     public function addSceno(\Urbicande\ChronoBundle\Entity\Sceno $scenos)
     {
         $this->scenos[] = $scenos;
-    
+
         return $this;
     }
 
@@ -609,7 +656,7 @@ class Intrigue
     /**
      * Get scenos
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getScenos()
     {

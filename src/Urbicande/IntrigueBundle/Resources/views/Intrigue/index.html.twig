@@ -16,13 +16,17 @@
 <table class="records_list datatable">
 	<thead>
 		<tr>
-			<th>Type</th>
-			<th>Numéro</th>
-			<th>Nom</th>
-			<th>Nombre d'implications</th>
-			<th>Statut</th>
-			<th>Scénariste</th>
-			<th>Actions</th>
+			<th rowspan="2">Type</th>
+			<th rowspan="2">Numéro</th>
+			<th rowspan="2">Nom</th>
+			<th colspan="2">Nombre d'implications</th>
+			<th rowspan="2">Statut</th>
+			<th rowspan="2">Scénariste</th>
+			<th rowspan="2">Actions</th>
+		</tr>
+		<tr>
+			<th>Toutes</th>
+			<th>Actives</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -31,7 +35,8 @@
 				<td><a title="Voir" href="{{ path('intrigue_type_by_id', { 'id': intrigue.type.id }) }}">{{ intrigue.type }}</a></td>
 				<td>{{ intrigue.number }}</td>
 				<td><a title="Voir" href="{{ path('intrigue_by_id', { 'id': intrigue.id }) }}">{{ intrigue.name }}</a></td>
-				<td>{{ intrigue.implications|length }}</td>
+				<td>{{ intrigue.allPlayers|length }}</td>
+				<td>{{ intrigue.involvedPlayers|length }}</td>
 				<td>{{ intrigue.fullStatus }}</td>
 				<td><a title="Voir" href="{{ path('user_by_name', { 'username': intrigue.writer.username }) }}">{{ intrigue.writer }}</a></td>
 				<td>
