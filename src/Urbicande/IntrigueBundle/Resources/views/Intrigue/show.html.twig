@@ -26,7 +26,7 @@
 			"style": "box", // optional
 			"showCurrentTime": "false",
 			"showNavigation": "true",
-		}; 
+		};
 		// Instantiate our timeline object.
 		var timeline = new links.Timeline(document.getElementById('event-timeline'));
 
@@ -143,7 +143,7 @@
 					<div class="small-12 columns">
 						<b>Informations de rédaction</b> : <p>{{implication.description}}</p>
 						<b>Informations pour le personnage</b> : <p>{{implication.information}}</p>
-						{% if implication.player and implication.player.type.name == 'PNJ' %}
+						{% if implication.player and implication.player.type.name starts with 'PNJ' %}
 							<b>Objectifs PNJ</b> :<p> {{implication.objective}}</p>
 						{% endif %}
 					</div>

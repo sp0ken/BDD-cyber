@@ -55,7 +55,7 @@
 	</div>
 </div>
 
-{% if implication.player and implication.player.type.name == 'PNJ' %}
+{% if implication.player and implication.player.type.name starts with 'PNJ' %}
 	<!--- PNJ -->
 	<div class="row">
 		<div class="small-12 columns">
