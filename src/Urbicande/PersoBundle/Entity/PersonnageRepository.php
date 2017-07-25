@@ -41,12 +41,12 @@ class PersonnageRepository extends EntityRepository
 
     $query->leftJoin('p.type', 't');
     $query->where('t.id IS NOT NULL');
-    
+
     foreach ($types as $key => $type) {
       $query->andWhere('t.name = :type')
             ->setParameter('type', $type);
     }
-    
+
     $query->orderBy('p.name', 'ASC');
 
     return $query->getQuery()->getResult();
@@ -63,8 +63,8 @@ class PersonnageRepository extends EntityRepository
 
     $query->leftJoin('p.type', 't');
     $query->where('t.name NOT LIKE :type')
-                  ->setParameter('type', $type);
-    
+                  ->setParameter('type', $type.'%');
+
     $query->orderBy('p.name', 'ASC');
 
     return $query->getQuery()->getResult();
@@ -80,9 +80,9 @@ class PersonnageRepository extends EntityRepository
     if ($includePNJ) {
       $query = $em->createQuery('SELECT p.sex, COUNT(p.id) AS nb_sex FROM Urbicande\PersoBundle\Entity\Personnage p GROUP BY p.sex ORDER BY p.sex DESC');
     } else {
-      $query = $em->createQuery('SELECT p.sex, COUNT(p.id) AS nb_sex FROM Urbicande\PersoBundle\Entity\Personnage p LEFT JOIN p.type t WHERE t.name != \''.$pnjName.'\' GROUP BY p.sex ORDER BY p.sex DESC');
+      $query = $em->createQuery('SELECT p.sex, COUNT(p.id) AS nb_sex FROM Urbicande\PersoBundle\Entity\Personnage p LEFT JOIN p.type t WHERE t.name NOT LIKE \''.$pnjName.'%\' GROUP BY p.sex ORDER BY p.sex DESC');
     }
-    
+
     $query->useResultCache(true);
     $query->setResultCacheLifetime(3600);
 
@@ -91,7 +91,7 @@ class PersonnageRepository extends EntityRepository
   }
 
   /**
-   * Compte le nombre de personnage par statut 
+   * Compte le nombre de personnage par statut
    * @return Array
    */
   public function countStatus($includePNJ, $pnjName)
@@ -100,9 +100,9 @@ class PersonnageRepository extends EntityRepository
     if ($includePNJ) {
     $query = $em->createQuery('SELECT p.status, COUNT(p.id) AS nb_status FROM Urbicande\PersoBundle\Entity\Personnage p GROUP BY p.status ORDER BY p.status DESC');
     } else {
-      $query = $em->createQuery('SELECT p.status, COUNT(p.id) AS nb_status FROM Urbicande\PersoBundle\Entity\Personnage p LEFT JOIN p.type t WHERE t.name != \''.$pnjName.'\' GROUP BY p.status ORDER BY p.status DESC');
+      $query = $em->createQuery('SELECT p.status, COUNT(p.id) AS nb_status FROM Urbicande\PersoBundle\Entity\Personnage p LEFT JOIN p.type t WHERE t.name NOT LIKE \''.$pnjName.'%\' GROUP BY p.status ORDER BY p.status DESC');
     }
-    
+
     $query->useResultCache(true);
     $query->setResultCacheLifetime(3600);
 
