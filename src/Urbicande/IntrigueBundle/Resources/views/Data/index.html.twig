@@ -25,7 +25,7 @@
 		{% for data in datas %}
 			<tr>
 				<td>{{data.number}}</td>
-				<td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
+				<td><a href="{{path('data_by_id', {'id': data.id})}}">{% autoescape false%}{{data.information| truncate(150, true, '.......') }}{% endautoescape %}</a></td>
 				<td><a href="{{path('intrigue_by_id', {'id': data.plot.intrigue.id})}}">{{data.plot.intrigue}}</a></td>
 				<td> {{data.knowers|length}}</td>
 				<td>

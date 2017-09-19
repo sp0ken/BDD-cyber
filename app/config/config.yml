@@ -91,3 +91,9 @@ stof_doctrine_extensions:
             timestampable: true
             sluggable: true
             loggable: true
+
+services:
+ twig.extension.text:
+     class: Twig_Extensions_Extension_Text
+     tags:
+         - { name: twig.extension }

@@ -12,7 +12,7 @@
 		{% for data in intrigue.plot.datas %}
 			<tr>
 				<td>{{data.number}}</td>
-				<td><a href="{{path('data_by_id', {'id': data.id})}}">{{data.information}}</a></td>
+				<td><a href="{{path('data_by_id', {'id': data.id})}}">{% autoescape false%}{{data.information| truncate(50, true, '.......') }}{% endautoescape %}</a></td>
 				<td>
 					{% for perso in data.knowers %}
 						<a href="{{path('perso_by_id', {'id': perso.id}) }}">{{perso.name}}</a>/
