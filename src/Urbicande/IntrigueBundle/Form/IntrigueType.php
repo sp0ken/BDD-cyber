@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Urbicande\ChronoBundle\Form\ChronologyType;
+use Urbicande\PersoBundle\Form\SkillType;
 
 class IntrigueType extends AbstractType
 {
@@ -40,6 +41,12 @@ class IntrigueType extends AbstractType
                 'multiple' => true,   // Multiple selection allowed
                 'class'    => 'Urbicande\IntrigueBundle\Entity\Object',
                 'required' => false,
+            ))
+            ->add('skills', 'collection', array(
+                'type' => new SkillType(),
+                'allow_add' => true,
+                'by_reference' => false,
+                'label' => 'Compétences'
             ))
             ->add('rules', 'collection', array(
                 'type' => new RuleType(),

@@ -1,0 +1,26 @@
+<table class="records_list datatable">
+  <thead>
+    <tr>
+      <th>Numéro</th>
+      <th>Nom</th>
+      <th>Points de création</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for skill in intrigue.skills %}
+      <tr>
+        <td>{{skill.id}}</td>
+        <td><a title="Voir" href="{{ path('skill_by_id', { 'id': skill.id }) }}">{{skill.name}}</a></td>
+        <td>{{skill.creationPoint}}</td>
+        <td>
+          <button href="#" data-dropdown="drop-actions-skill-{{skill.id}}" aria-controls="drop-actions-skill-{{skill.id}}" aria-expanded="false" class="button dropdown orange">Actions</button><br>
+          <ul id="drop-actions-skill-{{skill.id}}" data-dropdown-content class="f-dropdown" aria-hidden="true">
+            <li><a class="green-font" title="Éditer" href="{{ path('skill_edit', { 'id': skill.id }) }}"><i class="fa fa-edit"></i> Éditer</a></li>
+            <li><a class="red-font" title="Supprimer" href="{{ path('skill_delete', { 'id': skill.id }) }}"><i class="fa fa-times-circle"></i> Supprimer</a></li>
+          </ul>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

@@ -173,7 +173,7 @@
 
 <!-- Données -->
 <div class="row">
-	<div class="small-12 columns">
+	<div class="small-12 large-6 columns">
 		<div id="description" class="card">
 			<div class="header row">
 				<h3 class="small-6 medium-8 large-9 columns">Données objectives</h3>
@@ -185,11 +185,9 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<!-- Objets -->
-<div class="row">
-	<div class="small-12 columns">
+	<!-- Objets -->
+	<div class="small-12 large-6 columns">
 		<div id="description" class="card">
 			<div class="header row">
 				<h3 class="small-6 medium-8 large-9 columns">Objets</h3>
@@ -205,7 +203,7 @@
 
 <!-- Règles -->
 <div class="row">
-	<div class="small-12 columns">
+	<div class="small-12 large-6 columns">
 		<div id="description" class="card">
 			<div class="header row">
 				<h3 class="small-6 medium-8 large-9 columns">Règles</h3>
@@ -213,6 +211,20 @@
 			<div class="row">
 				<div class="small-12 columns">
 					{% include 'UrbicandeIntrigueBundle:Intrigue:ruleTable.html.twig' %}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Compétences -->
+	<div class="small-12 large-6 columns">
+		<div id="description" class="card">
+			<div class="header row">
+				<h3 class="small-6 medium-8 large-9 columns">Compétences</h3>
+			</div>
+			<div class="row">
+				<div class="small-12 columns">
+					{% include 'UrbicandeIntrigueBundle:Intrigue:skillTable.html.twig' %}
 				</div>
 			</div>
 		</div>

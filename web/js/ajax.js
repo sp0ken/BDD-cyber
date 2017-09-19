@@ -223,31 +223,35 @@ $(document).ready(function() {
       console.log("error");
       console.log(data);
     });
-    
+
   });
 
   var dataHolder = $('div.datas');
   var ruleHolder = $('div.rules');
+  var skillHolder = $('div.skills');
   var timingHolder = $('div.timings');
   var implicationHolder = $('div.implications');
 
   // setup an "add a..." link
   var $addDataLink = $('<a href="#" class="add_data_link">Ajouter une donnée objective</a>');
-  var $addRuleLink = $('<a href="#" class="add_implication_link">Ajouter une règle</a>');
+  var $addRuleLink = $('<a href="#" class="add_rule_link">Ajouter une règle</a>');
+  var $addSkillLink = $('<a href="#" class="add_skill_link">Ajouter une compétence</a>');
   var $addTimingLink = $('<a href="#" class="add_timing_link">Ajouter un timing</a>');
   var $addImplicationLink = $('<a href="#" class="add_implication_link" data-urbi-perso="'+getParameterByName('perso')+'">Ajouter une implication</a>');
   var $newDataLink = $('<div class=""></div>').append($addDataLink);
   var $newRuleLink = $('<div class=""></div>').append($addRuleLink);
+  var $newSkillLink = $('<div class=""></div>').append($addSkillLink);
   var $newTimingLink = $('<div class=""></div>').append($addTimingLink);
   var $newImplicationLink = $('<div class=""></div>').append($addImplicationLink);
-  
+
 
   // add the "add a" anchor and li to the tags ul
   dataHolder.append($newDataLink);
   ruleHolder.append($newRuleLink);
+  skillHolder.append($newSkillLink);
   timingHolder.append($newTimingLink);
   implicationHolder.append($newImplicationLink);
-  
+
   $addDataLink.on('click', function(e) {
       // prevent the link from creating a "#" on the URL
       e.preventDefault();
@@ -326,6 +330,19 @@ $(document).ready(function() {
         'controls': {
           html: { visible: true }
         }
+      });
+  });
+
+  $addSkillLink.on('click', function(e) {
+      // prevent the link from creating a "#" on the URL
+      e.preventDefault();
+
+      // add a new tag form (see next code block)
+      addTagForm(skillHolder, $newSkillLink);
+      $('select[multiple="multiple"]').chosen({
+        placeholder_text_multiple: 'Selectionner des options',
+        disable_search_threshold: 8,
+        no_results_text: 'Pas de résultat'
       });
   });
 
