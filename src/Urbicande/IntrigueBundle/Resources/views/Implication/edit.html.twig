@@ -65,7 +65,7 @@
 	<div style="display:none">
 		{{ form_rest(form) }}
 	</div>
-	<button class="button green" type="submit"><i class="fa fa-save"></i> Éditer</button>
+	<button class="button flat green" type="submit"><i class="fa fa-save"></i> Éditer</button>
 </form>
 
 <form id="revert" action="{{ path('implication_revert', { 'id': implication.id }) }}" method="post" {{ form_enctype(form) }}>
@@ -89,7 +89,7 @@
 			</div>
 		</div>
 	</div>
- 	<button class="button gray" type="submit"><i class="fa fa-history"></i> Restaurer</button>
+ 	<button class="button flat gray" type="submit"><i class="fa fa-history"></i> Restaurer</button>
 </form>
 
 {% endblock %}
