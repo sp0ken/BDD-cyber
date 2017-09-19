@@ -181,7 +181,9 @@
 					<h3 class="small-12 columns">Compétences</h3>
 				</div>
 				<div class="row">
-					<div class="small-12 columns skills" data-prototype="{{ form_widget(form.skills.vars.prototype)|e }}"></div>
+					<div class="small-12 columns">
+						{{ form_row(form.skills)}}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -193,12 +195,8 @@
 					<h3 class="small-12 columns">Règles</h3>
 				</div>
 				<div class="row">
-					<div class="small-12 columns rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}">
-						{% for rule in form.rules %}
-							<div class="small-12 columns">
-								{{form_row(rule)}}
-							</div>
-						{% endfor %}
+					<div class="small-12 columns">
+						{{ form_row(form.rules)}}
 					</div>
 				</div>
 			</div>

@@ -117,20 +117,6 @@
 		</div>
 	</div>
 
-	<!-- Données -->
-	<div class="row">
-		<div class="small-12 columns">
-			<div class="card">
-				<div class="header row">
-					<h3 class="small-12 columns">Données objectives</h3>
-				</div>
-				<div class="row">
-					<div class="datas small-12 columns" data-prototype="{{ form_widget(form.plot.datas.vars.prototype)|e }}"></div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 	<!-- Chronologie -->
 	<div class="row">
 		<div class="small-12 columns">
@@ -147,9 +133,21 @@
 		</div>
 	</div>
 
-	<!-- Objets -->
+	<!-- Données -->
 	<div class="row">
-		<div class="small-12 columns">
+		<div class="small-12 large-6 columns">
+			<div class="card">
+				<div class="header row">
+					<h3 class="small-12 columns">Données objectives</h3>
+				</div>
+				<div class="row">
+					<div class="datas small-12 columns" data-prototype="{{ form_widget(form.plot.datas.vars.prototype)|e }}"></div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Objets -->
+		<div class="small-12 large-6 columns">
 			<div class="card">
 				<div class="header row">
 					<h3 class="small-12 columns">Objets</h3>
@@ -163,29 +161,31 @@
 		</div>
 	</div>
 
-	<!-- Regles -->
+	<!-- Compétences -->
 	<div class="row">
-		<div class="small-12 columns">
+		<div class="small-12 large-6 columns">
 			<div class="card">
 				<div class="header row">
 					<h3 class="small-12 columns">Compétences</h3>
 				</div>
 				<div class="row">
-					<div class="small-12 columns skills" data-prototype="{{ form_widget(form.skills.vars.prototype)|e }}"></div>
+					<div class="small-12 columns">
+						{{ form_row(form.skills)}}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<!-- Regles -->
-	<div class="row">
-		<div class="small-12 columns">
+		<!-- Regles -->
+		<div class="small-12 large-6 columns">
 			<div class="card">
 				<div class="header row">
-					<h3 class="small-12 columns">Regles</h3>
+					<h3 class="small-12 columns">Règles</h3>
 				</div>
 				<div class="row">
-					<div class="small-12 columns rules" data-prototype="{{ form_widget(form.rules.vars.prototype)|e }}"></div>
+					<div class="small-12 columns">
+						{{ form_row(form.rules)}}
+					</div>
 				</div>
 			</div>
 		</div>

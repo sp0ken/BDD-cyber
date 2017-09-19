@@ -42,17 +42,17 @@ class IntrigueType extends AbstractType
                 'class'    => 'Urbicande\IntrigueBundle\Entity\Object',
                 'required' => false,
             ))
-            ->add('skills', 'collection', array(
-                'type' => new SkillType(),
-                'allow_add' => true,
-                'by_reference' => false,
-                'label' => 'Compétences'
+            ->add('skills', 'entity', array(
+                'label' => 'Compétences requises pour cette intrigue',
+                'multiple' => true,   // Multiple selection allowed
+                'class'    => 'Urbicande\PersoBundle\Entity\Skill',
+                'required' => false,
             ))
-            ->add('rules', 'collection', array(
-                'type' => new RuleType(),
-                'allow_add' => true,
-                'by_reference' => false,
-                'label' => 'Règles'
+            ->add('rules', 'entity', array(
+                'label' => 'Règles requises pour cette intrigue',
+                'multiple' => true,   // Multiple selection allowed
+                'class'    => 'Urbicande\IntrigueBundle\Entity\Rule',
+                'required' => false,
             ))
         ;
     }
