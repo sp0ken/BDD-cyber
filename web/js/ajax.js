@@ -22,8 +22,6 @@ function createTask(url) {
     data: {writer: writer.value, text: text.value, endDay: endDay.value, endMonth: endMonth.value, endYear: endYear.value},
   })
   .done(function(data, textStatus, xhr) {
-    console.log("success");
-    console.log(data);
     $('#my-tasks ul').append('<li><a href="#"><i class="fa fa-square-o"></i> '+data.tache+' </a></li>')
     $('#task').foundation('reveal', 'close');
   })
@@ -31,7 +29,7 @@ function createTask(url) {
     console.log("error");
     console.log(data);
   });
-  
+
 }
 
 function resize(id, action, url) {
@@ -75,14 +73,14 @@ $(document).ready(function() {
   $('#urbicande_persobundle_groupetype_members').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');
   $('#urbicande_chronobundle_eventtype_players').children('option[value="'+getParameterByName('perso')+'"]').attr('selected', 'selected');
 
-  $('.button:not(.popup):not(input[type="submit"]):not([href="#"])').on('click', function(){
+  $('.button:not(.popup):not([type="submit"]):not([href="#"])').on('click', function(){
     window.location = $(this).find('a').attr('href');
   });
 
   //Activating rich text editor
   $('.rte').redactor({
     lang: 'fr',
-    plugins: ['fullscreen'], 
+    plugins: ['fullscreen'],
   });
 
   $('.rte').sisyphus();
@@ -206,7 +204,7 @@ $(document).ready(function() {
         //called when there is an error
       }
     });
-    
+
   });
 
   $('#my-tasks ul').on('click', 'li', function(event) {
@@ -263,7 +261,7 @@ $(document).ready(function() {
         disable_search_threshold: 8,
         no_results_text: 'Pas de résultat'
       })
-      
+
       $('.rte').wysiwyg({
         'initialContent': 'À toi de le remplir',
         'resizeOptions': {},
@@ -360,4 +358,14 @@ function addTagForm(collectionHolder, $newLinkLi) {
     // Display the form in the page in an li, before the "Add a tag" link li
     var $newFormLi = $('<div class="twelve columns block"></div>').append(newForm);
     $newLinkLi.before($newFormLi);
+}
+
+function fold(div) {
+  if($('.'+div).attr('data-fold') == 'false') {
+    $('.'+div).addClass('folded');
+    $('.'+div).attr('data-fold', 'true')
+  } else {
+    $('.'+div).removeClass('folded');
+    $('.'+div).attr('data-fold', 'false')
+  }
 }

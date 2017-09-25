@@ -76,13 +76,16 @@
 	</div>
 </div>
 
-<div class="row page-header hide-for-small">
-	<h3 class="small-6 medium-7 columns">Commentaires</h3>
-	<div class="small-6 medium-5 columns">
-		<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
+<div id="comments-container">
+	<div class="row page-header hide-for-small">
+		<h3 class="small-6 medium-7 columns"><a href="#" onclick="event.preventDefault(); fold('comments')">Commentaires</a></h3>
+		<div class="small-6 medium-5 columns">
+			<a class="button flat blue" href="{{ path('create_perso_comment', {'persoId': perso.id}) }}"><i class="fa fa-comment-o"></i> Ajouter un commentaire</a>
+		</div>
 	</div>
+
+	{{ include('UrbicandePersoBundle:PersonnageComment:commentList.html.twig') }}
 </div>
-{{ include('UrbicandePersoBundle:PersonnageComment:commentList.html.twig') }}
 
 <!-- Description -->
 <div class="row">

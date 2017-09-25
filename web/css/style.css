@@ -30,6 +30,8 @@ input[type="checkbox"] { margin: 0 10px 12px 0; }
   padding: 12px;
   border-radius: 0 0 3px 3px;
 }
+div.folded {
+  display: none !important }
 
 .flash {
   padding: 0.5rem 1.5rem; }
@@ -325,6 +327,8 @@ span.form_text {
     line-height: 32px;
     font-size: 25px; }
 
+#comments-container { margin-top: 10px; }
+.comments { transition: height 0.500ms ease-out; }
 .comment p {
   margin-bottom: 0;
 }
