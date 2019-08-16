@@ -1,0 +1,4 @@
+app/cache
+parameters.yml
+vendor
+composer.lock
