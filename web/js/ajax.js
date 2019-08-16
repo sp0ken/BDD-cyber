@@ -93,7 +93,6 @@ $(document).ready(function() {
   })
 
   //jQuery datatables initialization
-
   $('.datatable').DataTable({
     "responsive": true,
     "searching": true,
@@ -104,7 +103,9 @@ $(document).ready(function() {
     "info": false,
     "lengthChange": false,
     "autoWidth": false,
-    "dom": 'Bfrtip>',
+    "dom": "<Bfr>"+
+      "t"+
+      "<'row'<'small-6 columns'i><'small-6 columns'p>>",
     buttons: [
         {
             extend:    'copy',
@@ -157,8 +158,8 @@ $(document).ready(function() {
         header: true,
         footer: false
       }
-    },
-  });
+    }
+  })
 
   //jQuery fullcalendar initialization
   $('#calendar').fullCalendar({
@@ -344,7 +345,7 @@ $(document).ready(function() {
       });
   });
 
-  drawVisualization();
+  //drawVisualization();
 });
 
 function addTagForm(collectionHolder, $newLinkLi) {

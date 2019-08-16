@@ -240,6 +240,10 @@ button.DTTT_button, div.DTTT_button, a.DTTT_button { display: inline-block !impo
   .dt-buttons.button-group .button:last-of-type {
     border-top-right-radius: 3px;
     border-bottom-right-radius: 3px; }
+.dataTables_filter {
+  float: right;
+  text-align: right;
+  margin-top: 30px; }
 
 /** Template **/
 .sticky.contain-to-grid { box-shadow: 0 0 5px; background: #F09C38;}
